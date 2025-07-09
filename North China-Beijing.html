@@ -16,6 +16,7 @@
             color: #333;
             padding: 20px;
             line-height: 1.6;
+            position: relative; /* 为返回按钮定位提供参考 */
         }
         .container {
             max-width: 1200px;
@@ -24,12 +25,14 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             overflow: hidden;
+            position: relative;
         }
         header {
             background: linear-gradient(90deg, #c53030, #b71c1c);
             color: white;
             text-align: center;
             padding: 30px 20px;
+            position: relative; /* 为返回按钮提供定位上下文 */
         }
         h1 {
             font-size: 2.5rem;
@@ -107,6 +110,65 @@
             padding: 15px;
             background-color: #f9f9f9;
         }
+        
+        /* 新增：返回首页按钮样式 */
+        .back-to-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #c53030;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .back-to-home:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .back-to-home i {
+            margin-right: 5px;
+        }
+        
+        /* 新增：回到顶部按钮样式 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #c53030;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(100px);
+            border: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: #b71c1c;
+            transform: scale(1.1);
+        }
+        
         @media (max-width: 768px) {
             th, td {
                 padding: 8px 10px;
@@ -115,10 +177,29 @@
             .section {
                 padding: 15px;
             }
+            .back-to-home {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
+    <!-- 引入Font Awesome图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- 新增：返回首页按钮 -->
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-home"></i> 返回首页
+    </a>
+    
     <div class="container">
         <header>
             <h1>北京4天3晚旅游攻略</h1>
@@ -478,10 +559,15 @@
         </div>
         
         <footer>
-            <p>© 2025 北京旅游攻略 | 地铁+网约车高效交通方案</p>
-            <p> 如有侵权mao.sun@foxmail.com</p>
+            <p>© 2023 北京旅游攻略 | 地铁+网约车高效交通方案</p>
+            <p>温馨提示：景点预约使用官方公众号，周一多数博物馆闭馆</p>
         </footer>
     </div>
+    
+    <!-- 新增：回到顶部按钮 -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     
     <script>
         // 确保DOM完全加载后再执行
@@ -490,8 +576,9 @@
             const toggleLink = document.getElementById('reservation-toggle');
             const details = document.getElementById('reservation-details');
             const note = document.getElementById('preparation-note');
+            const backToTopBtn = document.getElementById('backToTop');
             
-            // 添加点击事件
+            // 添加预约详情切换事件
             if (toggleLink && details && note) {
                 toggleLink.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -507,6 +594,26 @@
                 });
             } else {
                 console.error("无法找到必要的DOM元素");
+            }
+            
+            // 添加回到顶部功能
+            if (backToTopBtn) {
+                // 滚动时显示/隐藏回到顶部按钮
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 500) {
+                        backToTopBtn.classList.add('visible');
+                    } else {
+                        backToTopBtn.classList.remove('visible');
+                    }
+                });
+                
+                // 点击回到顶部
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
             }
         });
     </script>
