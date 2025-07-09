@@ -94,6 +94,7 @@
             color: #c53030;
             text-decoration: none;
             font-weight: bold;
+            cursor: pointer;
         }
         .reservation-link:hover {
             text-decoration: underline;
@@ -184,11 +185,11 @@
                 <tr>
                     <td>预约类</td>
                     <td>景点预约</td>
-                    <td><a href="#reservation-details" class="reservation-link">详情</a></td>
+                    <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
                 </tr>
             </table>
             
-            <div class="note">
+            <div id="preparation-note" class="note">
                 <strong>注意：</strong> 所有景点需提前1-7天预约
             </div>
             
@@ -418,7 +419,7 @@
                     <td>14:00</td>
                     <td>颐和园</td>
                     <td>游湖+长廊</td>
-                    <td>地铁2号线(雍和宫→西直门)换4号线(北宫门站) 6元</td>
+                    <td>地铁2号线(雍and宫→西直门)换4号线(北宫门站) 6元</td>
                     <td>45分钟</td>
                 </tr>
                 <tr>
@@ -477,17 +478,36 @@
         </div>
         
         <footer>
-            <p>© 2023 北京旅游攻略 | 地铁+网约车高效交通方案</p>
-            <p>温馨提示：景点预约使用官方公众号，周一多数博物馆闭馆</p>
+            <p>© 2025 北京旅游攻略 | 地铁+网约车高效交通方案</p>
+            <p> 如有侵权mao.sun@foxmail.com</p>
         </footer>
     </div>
     
     <script>
-        // 显示/隐藏预约详情功能
-        document.querySelector('.reservation-link').addEventListener('click', function(e) {
-            e.preventDefault();
+        // 确保DOM完全加载后再执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取元素
+            const toggleLink = document.getElementById('reservation-toggle');
             const details = document.getElementById('reservation-details');
-            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            const note = document.getElementById('preparation-note');
+            
+            // 添加点击事件
+            if (toggleLink && details && note) {
+                toggleLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 切换详情显示状态
+                    if(details.style.display === 'block') {
+                        details.style.display = 'none';
+                        note.style.display = 'block';
+                    } else {
+                        details.style.display = 'block';
+                        note.style.display = 'none';
+                    }
+                });
+            } else {
+                console.error("无法找到必要的DOM元素");
+            }
         });
     </script>
 </body>
