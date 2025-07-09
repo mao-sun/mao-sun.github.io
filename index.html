@@ -701,7 +701,14 @@ function initPage() {
                     item.innerHTML = `<a href="North China-Beijing.html" style="text-decoration: none; color: inherit;">
                         <span>${province}</span>
                     </a>`;
-                } else {
+                } 
+               // 处理香港特别行政区
+		else if (province === "香港特别行政区") {
+                    item.innerHTML = `<a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
+                        <span>${province}</span>
+                    </a>`;
+                }
+		else {
                     item.innerHTML = `<span>${province}</span>`;
                 }
                 
@@ -718,10 +725,22 @@ function initPage() {
             countries[continent].forEach(country => {
                 const countryElement = document.createElement('div');
                 countryElement.className = 'area-item';
-                countryElement.innerHTML = `
-                    <span class="country-name">${country.name}</span>
-                    <span class="country-en">${country.en}</span>
-                `;
+
+		// 处理中国香港
+                if (country.name === "中国香港") {
+                    countryElement.innerHTML = `
+                        <a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
+                            <span class="country-name">${country.name}</span>
+                            <span class="country-en">${country.en}</span>
+                         </a>
+                    `;
+                } else {
+                    countryElement.innerHTML = `
+                        <span class="country-name">${country.name}</span>
+                        <span class="country-en">${country.en}</span>
+                    `;
+                }
+                
                 countryElement.dataset.name = `${country.name}|${country.en}`;
                 contentElement.appendChild(countryElement);
             });
