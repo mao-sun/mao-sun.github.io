@@ -726,27 +726,37 @@ function initPage() {
                 const countryElement = document.createElement('div');
                 countryElement.className = 'area-item';
 
-		// 处理中国香港
-                if (country.name === "中国香港") {
-                    countryElement.innerHTML = `
-                        <a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
-                            <span class="country-name">${country.name}</span>
-                            <span class="country-en">${country.en}</span>
-                         </a>
-                    `;
-                } else {
-                    countryElement.innerHTML = `
+            // 处理日本
+            if (country.name === "日本") {
+                countryElement.innerHTML = `
+                    <a href="Asia-Japan.html" style="text-decoration: none; color: inherit;">
                         <span class="country-name">${country.name}</span>
                         <span class="country-en">${country.en}</span>
-                    `;
-                }
-                
-                countryElement.dataset.name = `${country.name}|${country.en}`;
-                contentElement.appendChild(countryElement);
-            });
-        }
+                    </a>
+                `;
+            } 
+            // 处理中国香港
+            else if (country.name === "中国香港") {
+                countryElement.innerHTML = `
+                    <a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
+                        <span class="country-name">${country.name}</span>
+                        <span class="country-en">${country.en}</span>
+                    </a>
+                `;
+            } 
+            else {
+                countryElement.innerHTML = `
+                    <span class="country-name">${country.name}</span>
+                    <span class="country-en">${country.en}</span>
+                `;
+            }
+            
+            countryElement.dataset.name = `${country.name}|${country.en}`;
+            contentElement.appendChild(countryElement);
+        });
     }
-    
+}
+
     // 添加点击事件
     addEventListeners();
     
