@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本关西4天3晚旅游攻略</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Hiragino Sans GB', 'Yu Gothic', sans-serif;
+        }
+        
+        /* 京都配色 */
+        :root {
+            --kyoto-deep-gray: rgb(74, 71, 68);
+            --kyoto-paper-white: rgb(245, 242, 235);
+            --kyoto-torii-red: rgb(188, 45, 41);
+            --kyoto-red-hover: rgba(188, 45, 41, 0.85);
+        }
+        
+        /* 大阪配色 */
+        :root {
+            --osaka-neon-gray: rgb(238, 238, 238);
+            --osaka-night-blue: rgb(25, 35, 45);
+            --osaka-jr-red: rgb(230, 0, 18);
+            --osaka-gold: rgb(255, 215, 0);
+        }
+        
+        body {
+            background: var(--kyoto-paper-white);
+            color: #333;
+            padding: 20px;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f9f5eb 0%, #f0e6d2 100%);
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(74, 71, 68, 0.1);
+        }
+        
+        .back-home {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            z-index: 11;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .back-home:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .back-home {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+                left: 15px;
+                top: 15px;
+            }
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 C40,0 60,0 80,20 C100,40 100,60 80,80 C60,100 40,100 20,80 C0,60 0,40 20,20 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 120px;
+            opacity: 0.3;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 15px;
+        }
+        
+        .intro-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .intro-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        h2 {
+            color: var(--kyoto-torii-red);
+            margin: 30px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid rgba(188, 45, 41, 0.3);
+            position: relative;
+            font-size: 1.8rem;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--kyoto-torii-red);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #f1f1f1;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.05rem;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #fff3f3;
+            transition: background 0.3s ease;
+        }
+        
+        .section {
+            padding: 30px;
+            position: relative;
+        }
+        
+        .note {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 18px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight {
+            background: #ffebee;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            display: inline-block;
+            margin: 2px 0;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: var(--osaka-night-blue);
+            color: #ddd;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: var(--kyoto-torii-red);
+        }
+        
+        .day-header {
+            color: white;
+            padding: 15px 30px;
+            margin: 0 -30px 25px -30px;
+            border-radius: 0 0 8px 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .kyoto-day {
+            background: linear-gradient(to right, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+        }
+        
+        .osaka-day {
+            background: linear-gradient(to right, var(--osaka-night-blue), var(--osaka-jr-red));
+        }
+        
+        .day-icon {
+            font-size: 1.8rem;
+            margin-right: 12px;
+        }
+        
+        .day-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+        
+        .budget {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        .important-note {
+            background: #ffebee;
+            border-left: 4px solid var(--kyoto-torii-red);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px 12px;
+                font-size: 0.92rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .day-title {
+                font-size: 1.4rem;
+            }
+        }
+        
+        .prohibited-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .prohibited-box {
+            flex: 1;
+            min-width: 280px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .prohibited-title {
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(188, 45, 41, 0.3);
+        }
+        
+        .prohibited-item {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .prohibited-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--kyoto-torii-red);
+            font-weight: bold;
+        }
+        
+        /* 交通图标样式 */
+        .transport-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--kyoto-torii-red);
+            color: white;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        .transport-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .transport-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        
+        .transport-label {
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            margin-right: 8px;
+            min-width: 60px;
+        }
+        
+        .transport-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .transport-card {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            background: rgba(188, 45, 41, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .transport-card i {
+            margin-right: 5px;
+            color: var(--kyoto-torii-red);
+        }
+        
+        /* 关西介绍模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalopen 0.5s;
+        }
+        
+        @keyframes modalopen {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background: linear-gradient(90deg, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .modal-header h2::after {
+            display: none;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-body p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .modal-body img {
+            width: 100%;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .facts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .fact-box {
+            flex: 1;
+            min-width: 200px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        
+        .fact-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            margin-bottom: 10px;
+        }
+        
+        .fact-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--kyoto-torii-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(188, 45, 41, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #c62828;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(188, 45, 41, 0.6);
+        }
+        
+        .back-to-top i {
+            font-size: 1.5rem;
+        }
+        
+        /* 大阪特色样式 */
+        .osaka-highlight {
+            background: linear-gradient(45deg, var(--osaka-jr-red), var(--osaka-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .gold-border {
+            border: 1px solid var(--osaka-gold);
+            border-radius: 5px;
+            padding: 3px 8px;
+            display: inline-block;
+            margin: 2px 0;
+        }
+        
+        .culture-section {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .culture-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .culture-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .culture-header {
+            padding: 15px;
+            background: var(--kyoto-deep-gray);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .culture-body {
+            padding: 20px;
+        }
+        
+        .culture-body ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .kyoto-card .culture-header {
+            background: linear-gradient(to right, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+        }
+        
+        .osaka-card .culture-header {
+            background: linear-gradient(to right, var(--osaka-night-blue), var(--osaka-jr-red));
+        }
+        
+        /* 交通卡片 */
+        .transport-section {
+            padding: 20px;
+            background: var(--kyoto-paper-white);
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid var(--kyoto-torii-red);
+        }
+        
+        .transport-section h3 {
+            color: var(--kyoto-torii-red);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .transport-section h3 i {
+            margin-right: 10px;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .transport-card-lg {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--kyoto-torii-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+        
+        .card-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .card-content {
+            flex-grow: 1;
+        }
+        
+        .card-content ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .card-content li {
+            margin-bottom: 8px;
+        }
+        
+        .card-footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* 修改：为所有卡片添加顶部色条 */
+        .kyoto-card-lg {
+            border-top: 4px solid var(--kyoto-torii-red);
+        }
+        
+        .osaka-card-lg {
+            border-top: 4px solid var(--osaka-jr-red);
+        }
+        
+        /* 新增：大阪周游卡顶部色条 */
+        .osaka-pass-card {
+            border-top: 4px solid var(--osaka-jr-red);
+        }
+    </style>
+</head>
+<body>
+    <!-- 关西介绍模态框 -->
+    <div id="kansaiModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>日本关西地区介绍</h2>
+                <div class="close-btn">&times;</div>
+            </div>
+            <div class="modal-body">
+                <p>关西地区位于日本本州岛中部，是日本历史与现代交融的核心区域，包括京都、大阪、奈良、神户等著名城市。这里是日本文化的发源地，也是现代商业和美食的天堂。</p>
+                
+                <div class="facts-container">
+                    <div class="fact-box">
+                        <div class="fact-number">1400年</div>
+                        <div class="fact-title">京都历史</div>
+                        <div>日本千年古都</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-number">17处</div>
+                        <div class="fact-title">世界遗产</div>
+                        <div>京都拥有17处联合国世界遗产</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-number">270万</div>
+                        <div class="fact-title">大阪人口</div>
+                        <div>日本第三大城市</div>
+                    </div>
+                    <div class="fact-box">
+                        <div class="fact-number">1600+</div>
+                        <div class="fact-title">神社寺庙</div>
+                        <div>关西地区神社寺庙数量</div>
+                    </div>
+                </div>
+                
+                <div class="culture-section">
+                    <div class="culture-card kyoto-card">
+                        <div class="culture-header">京都文化</div>
+                        <div class="culture-body">
+                            <p>作为日本千年古都，京都保存着最完整的日本传统文化：</p>
+                            <ul>
+                                <li>17处联合国教科文组织世界遗产</li>
+                                <li>2000多座寺庙和神社</li>
+                                <li>传统艺能：茶道、花道、能乐</li>
+                                <li>四季分明的庭院美学</li>
+                                <li>祇园祭等传统祭典</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-card osaka-card">
+                        <div class="culture-header">大阪特色</div>
+                        <div class="culture-body">
+                            <p>大阪是日本商业和美食中心，充满活力：</p>
+                            <ul>
+                                <li>日本厨房：道顿堀美食街</li>
+                                <li>购物天堂：心斋桥、梅田商圈</li>
+                                <li>现代娱乐：环球影城日本</li>
+                                <li>水都风情：大阪城、运河游船</li>
+                                <li>热情幽默的关西方言</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3>关西必游景点</h3>
+                <p>关西地区拥有众多世界级景点：</p>
+                <ul style="padding-left: 25px; margin-bottom: 20px;">
+                    <li><strong>京都</strong>：伏见稻荷大社千本鸟居、金阁寺、清水寺、岚山竹林</li>
+                    <li><strong>大阪</strong>：大阪城、环球影城、道顿堀、梅田蓝天大厦</li>
+                    <li><strong>奈良</strong>：东大寺、奈良公园（与鹿共游）</li>
+                    <li><strong>神户</strong>：神户港、有马温泉、北野异人馆</li>
+                </ul>
+                
+                <h3>美食天堂</h3>
+                <p>关西被誉为"日本的厨房"，必尝美食包括：</p>
+                <ul style="padding-left: 25px; margin-bottom: 20px;">
+                    <li><span class="osaka-highlight">大阪烧</span> - 大阪的灵魂美食</li>
+                    <li>章鱼烧 - 大阪街头小吃代表</li>
+                    <li>京都怀石料理 - 精致的传统料理</li>
+                    <li>神户牛肉 - 世界顶级和牛</li>
+                    <li>宇治抹茶甜品 - 京都特色</li>
+                    <li>河豚料理 - 下关特产</li>
+                </ul>
+                
+                <h3>特色体验</h3>
+                <p>在关西不可错过的独特体验：</p>
+                <ul style="padding-left: 25px;">
+                    <li>穿着和服漫步京都古街</li>
+                    <li>在伏见稻荷大社穿越千本鸟居</li>
+                    <li>大阪环球影城体验哈利波特魔法世界</li>
+                    <li>奈良公园喂食小鹿</li>
+                    <li>神户港夜景与温泉体验</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-home">
+                <i class="fas fa-home"></i> 返回首页
+            </a>
+            <h1>日本关西4天3晚旅游攻略</h1>
+            <p class="subtitle">千年古都京都 | 美食之都大阪 | 深度文化体验</p>
+            <div class="intro-toggle" id="introBtn">点击了解关西</div>
+        </header>
+        
+        <!-- 新增交通卡部分 -->
+        <div class="section">
+            <div class="section-header">
+                <div class="icon">🚆</div>
+                <h2>关西交通指南</h2>
+            </div>
+            
+            <div class="transport-section">
+                <h3><i class="fas fa-ticket-alt"></i> 推荐交通卡</h3>
+                <div class="card-container">
+                    <div class="transport-card-lg kyoto-card-lg">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <div class="card-title">ICOCA卡</div>
+                        </div>
+                        <div class="card-content">
+                            <p>关西地区通用的交通卡，适用于：</p>
+                            <ul>
+                                <li>JR西日本所有线路</li>
+                                <li>大阪地铁、京都巴士</li>
+                                <li>便利店、自动贩卖机</li>
+                                <li>部分餐厅和商店</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 2000JPY（含500押金和1500可用余额）
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card-lg osaka-card-lg">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-bus"></i>
+                            </div>
+                            <div class="card-title">京都巴士一日券</div>
+                        </div>
+                        <div class="card-content">
+                            <p>非常适合京都观光：</p>
+                            <ul>
+                                <li>无限次乘坐京都巴士</li>
+                                <li>覆盖所有主要景点</li>
+                                <li>可在巴士上直接购买</li>
+                                <li>经济实惠的选择</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 700JPY/天
+                        </div>
+                    </div>
+                    
+                    <!-- 修改：为大阪周游卡添加顶部色条 -->
+                    <div class="transport-card-lg osaka-pass-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-subway"></i>
+                            </div>
+                            <div class="card-title">大阪周游卡</div>
+                        </div>
+                        <div class="card-content">
+                            <p>大阪旅游最佳选择：</p>
+                            <ul>
+                                <li>无限次乘坐大阪地铁和巴士</li>
+                                <li>免费进入28个景点</li>
+                                <li>包含大阪城、通天阁等</li>
+                                <li>购物和餐饮折扣</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 2700JPY（1日券）| 3600JPY（2日券）
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <strong>交通提示：</strong> 
+                <ul style="padding-left: 25px; margin-top: 10px;">
+                    <li>机场到市区：关西机场到京都推荐乘坐Haruka特急列车（约75分钟）</li>
+                    <li>京都到大阪：JR京都线快速列车约30分钟，费用560JPY</li>
+                    <li>地铁运营时间：5:30-24:00，末班车约23:30</li>
+                    <li>出租车：起步价约600JPY（2公里），之后每公里约300JPY</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="icon">📋</div>
+                <h2>准备事项</h2>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>类别</th>
+                    <th>物品</th>
+                    <th>说明/注意事项</th>
+                </tr>
+                <tr>
+                    <td>背包</td>
+                    <td>双肩包、胸包</td>
+                    <td>轻便出行，防盗设计</td>
+                </tr>
+                <tr>
+                    <td>行李箱</td>
+                    <td>20寸登机箱</td>
+                    <td>符合航空尺寸要求</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">证件类</td>
+                    <td>护照</td>
+                    <td>含日本签证</td>
+                </tr>
+                <tr>
+                    <td>身份证</td>
+                    <td>大陆身份证明</td>
+                </tr>
+                <tr>
+                    <td>银行卡</td>
+                    <td>银联、VISA/万事达（需提前报备境外行程）</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">电子类</td>
+                    <td>充电宝</td>
+                    <td>≤100Wh（民航规定）</td>
+                </tr>
+                <tr>
+                    <td>转换插头</td>
+                    <td>日本双孔转换插头</td>
+                </tr>
+                <tr>
+                    <td>日本流量</td>
+                    <td>共享WIFI或日本电话卡</td>
+                </tr>
+                <tr>
+                    <td>充电器</td>
+                    <td>多设备充电线</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">日用类</td>
+                    <td>外套</td>
+                    <td>日本室内外温差大</td>
+                </tr>
+                <tr>
+                    <td>雨伞</td>
+                    <td>折叠伞</td>
+                </tr>
+                <tr>
+                    <td>水杯</td>
+                    <td>便携水杯</td>
+                </tr>
+                <tr>
+                    <td>现金</td>
+                    <td>10000-15000JPY</td>
+                </tr>
+            </table>
+            
+            <div class="important-note">
+                <strong>重要提示：</strong> 日本和中国出入境有严格规定，请务必遵守以下要求
+            </div>
+            
+            <div class="prohibited-container">
+                <div class="prohibited-box">
+                    <div class="prohibited-title">中国→日本 禁止携带</div>
+                    <div class="prohibited-item">生鲜食品及动物制品</div>
+                    <div class="prohibited-item">处方药品（需医生证明）</div>
+                    <div class="prohibited-item">名贵药材（如人参、鹿茸等）</div>
+                    <div class="prohibited-item">超过规定数量的烟酒</div>
+                </div>
+                
+                <div class="prohibited-box">
+                    <div class="prohibited-title">日本→中国 禁止携带</div>
+                    <div class="prohibited-item">生鲜水果及动物制品</div>
+                    <div class="prohibited-item">未申报的奢侈品（超过5000元需申报）</div>
+                    <div class="prohibited-item">超过规定数量的烟酒</div>
+                    <div class="prohibited-item">超过限额的现金（超过2万需申报）</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="day-header kyoto-day">
+                <div class="day-icon">✈️</div>
+                <div class="day-title">DAY1 抵达京都</div>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>时间</th>
+                    <th>地点</th>
+                    <th>活动内容/预算</th>
+                    <th>交通方式/费用</th>
+                    <th>交通耗时</th>
+                </tr>
+                <tr>
+                    <td>10:20</td>
+                    <td>杭州萧山国际机场T4航站楼</td>
+                    <td>出发</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>10:20-16:30</td>
+                    <td>杭州→大阪</td>
+                    <td>飞行行程</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-plane"></i></span>
+                                GJ8077航班
+                            </div>
+                        </div>
+                    </td>
+                    <td>约3小时</td>
+                </tr>
+                <tr>
+                    <td>16:30</td>
+                    <td>大阪关西国际机场</td>
+                    <td>通关（约1小时）</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>17:30-18:00</td>
+                    <td>关西机场→京都站</td>
+                    <td>前往京都</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-train"></i></span>
+                                JR特急Haruka列车
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 3600JPY</span>
+                                <span class="transport-card"><i class="fas fa-clock"></i> 75分钟</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>约75分钟</td>
+                </tr>
+                <tr>
+                    <td>18:10</td>
+                    <td>京都天妇罗 天天天</td>
+                    <td>晚餐<br><span class="highlight">预算3000JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-map-marker-alt"></i> 距离300米</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>5分钟</td>
+                </tr>
+                <tr>
+                    <td>19:00</td>
+                    <td>酒店</td>
+                    <td>办理入住<br>DoubleTree by Hilton</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                京都地铁乌丸线
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 210JPY</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+                <tr>
+                    <td>19:30</td>
+                    <td>伏见稻荷大社</td>
+                    <td>夜游千本鸟居<br><span class="highlight">免费</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-train"></i></span>
+                                JR奈良线
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 150JPY</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+                <tr>
+                    <td>21:00</td>
+                    <td>酒店</td>
+                    <td>返回休息</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-train"></i></span>
+                                JR奈良线
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+            </table>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 从关西机场到京都最便捷的方式是乘坐Haruka特急列车，可使用ICOCA卡+Haruka折扣券
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="day-header kyoto-day">
+                <div class="day-icon">🏯</div>
+                <div class="day-title">DAY2 京都古都巡礼</div>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>时间</th>
+                    <th>地点</th>
+                    <th>活动内容/预算</th>
+                    <th>交通方式/费用</th>
+                    <th>交通耗时</th>
+                </tr>
+                <tr>
+                    <td>10:00</td>
+                    <td>酒店（京都站）</td>
+                    <td>起床+早餐</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>10:30</td>
+                    <td>金阁寺</td>
+                    <td>游览1小时<br><span class="highlight">门票400JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-bus"></i></span>
+                                京都巴士101路
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 230JPY</span>
+                                <span class="transport-card"><i class="fas fa-map-marker-alt"></i> 直达</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>40分钟</td>
+                </tr>
+                <tr>
+                    <td>11:40</td>
+                    <td>平安神宫</td>
+                    <td>游览1小时<br><span class="highlight">门票600JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-bus"></i></span>
+                                京都巴士102路
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+                <tr>
+                    <td>13:00</td>
+                    <td>清水寺</td>
+                    <td>游览1小时<br><span class="highlight">门票400JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                地铁东西线
+                            </div>
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-bus"></i></span>
+                                巴士206路
+                            </div>
+                        </div>
+                    </td>
+                    <td>30分钟</td>
+                </tr>
+                <tr>
+                    <td>14:30</td>
+                    <td>三年坂二年坂</td>
+                    <td>古街漫步、购物<br><span class="highlight">预算5000JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                        </div>
+                    </td>
+                    <td>10分钟</td>
+                </tr>
+                <tr>
+                    <td>15:00</td>
+                    <td>八坂神社</td>
+                    <td>游览1小时<br><span class="highlight">免费</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+                <tr>
+                    <td>16:30</td>
+                    <td>鸭川纳凉床</td>
+                    <td>休憩、下午茶</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                        </div>
+                    </td>
+                    <td>10分钟</td>
+                </tr>
+                <tr>
+                    <td>17:00</td>
+                    <td>河原町</td>
+                    <td>晚餐+购物<br>本格烧肉、优衣库<br><span class="highlight">预算8000JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                        </div>
+                    </td>
+                    <td>10分钟</td>
+                </tr>
+                <tr>
+                    <td>21:00</td>
+                    <td>酒店</td>
+                    <td>返回休息</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                地铁乌丸线
+                            </div>
+                        </div>
+                    </td>
+                    <td>25分钟</td>
+                </tr>
+            </table>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 推荐购买京都巴士一日券(700JPY)，一天乘坐3次以上即划算
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="day-header osaka-day">
+                <div class="day-icon">🏙️</div>
+                <div class="day-title">DAY3 大阪都市探索</div>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>时间</th>
+                    <th>地点</th>
+                    <th>活动内容/预算</th>
+                    <th>交通方式/费用</th>
+                    <th>交通耗时</th>
+                </tr>
+                <tr>
+                    <td>10:00</td>
+                    <td>京都酒店</td>
+                    <td>起床+早餐+退房</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>11:30</td>
+                    <td>大阪酒店（动物园前站）</td>
+                    <td>寄存行李</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-train"></i></span>
+                                JR京都线新快速
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 560JPY</span>
+                                <span class="transport-card"><i class="fas fa-clock"></i> 30分钟</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>30分钟</td>
+                </tr>
+                <tr>
+                    <td>12:00</td>
+                    <td>大阪城天守阁</td>
+                    <td>游览1小时<br><span class="highlight">门票600JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                大阪地铁中央线
+                            </div>
+                        </div>
+                    </td>
+                    <td>30分钟</td>
+                </tr>
+                <tr>
+                    <td>12:30</td>
+                    <td>梅田</td>
+                    <td>
+                        购物：阪急百货、友都八喜<br>
+                        <span class="gold-border">限时优惠</span> 电器免税+折扣
+                    </td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                大阪地铁谷町线
+                            </div>
+                        </div>
+                    </td>
+                    <td>30分钟</td>
+                </tr>
+                <tr>
+                    <td>18:00</td>
+                    <td>道顿堀</td>
+                    <td>
+                        格力高广告牌拍照<br>
+                        美食探索：章鱼烧、大阪烧
+                    </td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                大阪地铁御堂筋线
+                            </div>
+                        </div>
+                    </td>
+                    <td>10分钟</td>
+                </tr>
+                <tr>
+                    <td>19:00</td>
+                    <td>难波</td>
+                    <td>晚餐+药妆店购物<br><span class="highlight">预算10000JPY</span></td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-walking"></i></span>
+                                步行
+                            </div>
+                        </div>
+                    </td>
+                    <td>10分钟</td>
+                </tr>
+                <tr>
+                    <td>21:00</td>
+                    <td>酒店</td>
+                    <td>返回休息</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-subway"></i></span>
+                                大阪地铁堺筋线
+                            </div>
+                        </div>
+                    </td>
+                    <td>30分钟</td>
+                </tr>
+            </table>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 大阪市内推荐购买大阪周游卡，包含无限次地铁和多个景点门票
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="day-header osaka-day">
+                <div class="day-icon">🛍️</div>
+                <div class="day-title">DAY4 奥特莱斯与返程</div>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>时间</th>
+                    <th>地点</th>
+                    <th>活动内容/预算</th>
+                    <th>交通方式/费用</th>
+                    <th>交通耗时</th>
+                </tr>
+                <tr>
+                    <td>10:00</td>
+                    <td>酒店</td>
+                    <td>起床+早餐+退房</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>10:30</td>
+                    <td>临空奥特莱斯</td>
+                    <td>
+                        购物：NIKE、北面等品牌<br>
+                        午餐<br>
+                        <span class="highlight">预算20000JPY</span>
+                    </td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-train"></i></span>
+                                JR关空快速线
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 480JPY</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>25分钟</td>
+                </tr>
+                <tr>
+                    <td>17:00</td>
+                    <td>关西国际机场</td>
+                    <td>办理登机手续</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-bus"></i></span>
+                                机场穿梭巴士
+                            </div>
+                            <div class="transport-detail">
+                                <span class="transport-card"><i class="fas fa-ticket-alt"></i> 200JPY</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>20分钟</td>
+                </tr>
+                <tr>
+                    <td>17:30</td>
+                    <td>机场免税店</td>
+                    <td>
+                        购物：生巧、白色恋人、烟酒<br>
+                        <span class="highlight">预算15000JPY</span>
+                    </td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>19:50</td>
+                    <td>杭州萧山机场</td>
+                    <td>抵达</td>
+                    <td>
+                        <div class="transport-info">
+                            <div class="transport-line">
+                                <span class="transport-icon"><i class="fas fa-plane"></i></span>
+                                GJ8078航班
+                            </div>
+                        </div>
+                    </td>
+                    <td>约3小时</td>
+                </tr>
+            </table>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 从临空奥特莱斯到机场有免费穿梭巴士，约10分钟一班
+            </div>
+        </div>
+        
+        <!-- 修改后的页脚 -->
+        <footer>
+            <p>© 2025 日本关西旅游攻略 | 千年古都与现代都市的完美融合</p>
+            <p>公共交通复杂，请注意站台与车次</p>
+            <p>©攻略均为旅游后整理，具体请以实际为准 | 如有侵权电邮 mao.sun@foxmail.com</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 确保DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 关西介绍模态框控制
+            const modal = document.getElementById('kansaiModal');
+            const introBtn = document.getElementById('introBtn');
+            const closeBtn = document.querySelector('.close-btn');
+            
+            // 修复按钮点击事件
+            if (introBtn) {
+                introBtn.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // 点击模态框背景关闭
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // 返回顶部按钮功能
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            // 返回顶部功能
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
