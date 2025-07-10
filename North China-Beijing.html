@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>北京4天3晚旅游攻略</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,13 +12,15 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', sans-serif;
         }
+        
         body {
             background: #f8f9fa;
             color: #333;
             padding: 20px;
             line-height: 1.6;
-            position: relative; /* 为返回按钮定位提供参考 */
+            position: relative;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -27,47 +30,66 @@
             overflow: hidden;
             position: relative;
         }
+        
         header {
             background: linear-gradient(90deg, #c53030, #b71c1c);
             color: white;
             text-align: center;
             padding: 30px 20px;
-            position: relative; /* 为返回按钮提供定位上下文 */
+            position: relative;
         }
+        
         h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
             margin-bottom: 10px;
         }
+        
         h2 {
             color: #c53030;
             margin: 25px 0 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #ffcdd2;
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        
+        .section {
+            padding: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
             margin: 20px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-radius: 5px;
         }
+        
+        table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+        }
+        
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
         }
+        
         th {
             background: #f1f1f1;
             font-weight: bold;
+            white-space: nowrap;
         }
+        
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        
         tr:hover {
             background-color: #fff3f3;
         }
-        .section {
-            padding: 25px;
-        }
+        
         .note {
             background: #fff8e1;
             border-left: 4px solid #ffc107;
@@ -75,6 +97,7 @@
             margin: 20px 0;
             border-radius: 0 5px 5px 0;
         }
+        
         .highlight {
             background: #ffebee;
             padding: 2px 6px;
@@ -82,6 +105,7 @@
             font-weight: bold;
             color: #c53030;
         }
+        
         footer {
             text-align: center;
             padding: 20px;
@@ -89,19 +113,18 @@
             color: #666;
             font-size: 0.9rem;
         }
-        .reservation-table th, 
-        .reservation-table td {
-            padding: 10px 12px;
-        }
+        
         .reservation-link {
             color: #c53030;
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
         }
+        
         .reservation-link:hover {
             text-decoration: underline;
         }
+        
         .reservation-details {
             display: none;
             margin-top: 20px;
@@ -111,12 +134,11 @@
             background-color: #f9f9f9;
         }
         
-        /* 新增：返回首页按钮样式 */
         .back-to-home {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.9);
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
             color: #c53030;
             border: none;
             padding: 8px 15px;
@@ -127,27 +149,28 @@
             z-index: 100;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
+        
         .back-to-home:hover {
             background: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
+        
         .back-to-home i {
             margin-right: 5px;
         }
         
-        /* 新增：回到顶部按钮样式 */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 25px;
+            right: 25px;
             background: #c53030;
             color: white;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -160,44 +183,100 @@
             transform: translateY(100px);
             border: none;
         }
+        
         .back-to-top.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        
         .back-to-top:hover {
             background: #b71c1c;
             transform: scale(1.1);
         }
         
-        @media (max-width: 768px) {
-            th, td {
-                padding: 8px 10px;
-                font-size: 0.9rem;
+        .mobile-day-nav {
+            display: none;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+        
+        .day-btn {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .day-btn.active {
+            background: #c53030;
+            color: white;
+        }
+        
+        @media (max-width: 900px) {
+            .mobile-day-nav {
+                display: flex;
             }
+            
+            .day-section {
+                display: none;
+            }
+            
+            .day-section.active {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 25px 15px;
+            }
+            
             .section {
                 padding: 15px;
             }
+            
+            th, td {
+                padding: 10px 12px;
+            }
+            
             .back-to-home {
                 top: 10px;
                 left: 10px;
                 padding: 6px 12px;
                 font-size: 0.9rem;
             }
+            
             .back-to-top {
                 bottom: 20px;
                 right: 20px;
-                width: 45px;
-                height: 45px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .back-to-home span {
+                display: none;
+            }
+            
+            .back-to-home i {
+                margin-right: 0;
             }
         }
     </style>
-    <!-- 引入Font Awesome图标 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- 新增：返回首页按钮 -->
     <a href="index.html" class="back-to-home">
-        <i class="fas fa-home"></i> 返回首页
+        <i class="fas fa-home"></i> <span>返回首页</span>
     </a>
     
     <div class="container">
@@ -208,67 +287,69 @@
         
         <div class="section">
             <h2>📋 准备事项</h2>
-            <table>
-                <tr>
-                    <th>类别</th>
-                    <th>事项</th>
-                    <th>说明/注意事项</th>
-                </tr>
-                <tr>
-                    <td>背包</td>
-                    <td>双肩包</td>
-                    <td>轻便出行，装随身物品</td>
-                </tr>
-                <tr>
-                    <td>行李箱</td>
-                    <td>20寸登机箱</td>
-                    <td>符合航空尺寸要求</td>
-                </tr>
-                <tr>
-                    <td rowspan="2">证件类</td>
-                    <td>身份证</td>
-                    <td>必备</td>
-                </tr>
-                <tr>
-                    <td>银行卡</td>
-                    <td>带银联信用卡</td>
-                </tr>
-                <tr>
-                    <td rowspan="3">电子类</td>
-                    <td>充电宝</td>
-                    <td>≤100Wh（民航规定）</td>
-                </tr>
-                <tr>
-                    <td>充电器</td>
-                    <td>带Type-C接口</td>
-                </tr>
-                <tr>
-                    <td>耳机</td>
-                    <td>地铁/博物馆使用</td>
-                </tr>
-                <tr>
-                    <td rowspan="4">日用类</td>
-                    <td>薄外套</td>
-                    <td>9-10月北京早晚温差大</td>
-                </tr>
-                <tr>
-                    <td>折叠伞</td>
-                    <td>防雨防晒</td>
-                </tr>
-                <tr>
-                    <td>运动鞋</td>
-                    <td>日均步数1.5万+</td>
-                </tr>
-                <tr>
-                    <td>现金</td>
-                    <td>300-500元（小额支付）</td>
-                </tr>
-                <tr>
-                    <td>预约类</td>
-                    <td>景点预约</td>
-                    <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>类别</th>
+                        <th>事项</th>
+                        <th>说明/注意事项</th>
+                    </tr>
+                    <tr>
+                        <td>背包</td>
+                        <td>双肩包</td>
+                        <td>轻便出行，装随身物品</td>
+                    </tr>
+                    <tr>
+                        <td>行李箱</td>
+                        <td>20寸登机箱</td>
+                        <td>符合航空尺寸要求</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">证件类</td>
+                        <td>身份证</td>
+                        <td>必备</td>
+                    </tr>
+                    <tr>
+                        <td>银行卡</td>
+                        <td>带银联信用卡</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">电子类</td>
+                        <td>充电宝</td>
+                        <td>≤100Wh（民航规定）</td>
+                    </tr>
+                    <tr>
+                        <td>充电器</td>
+                        <td>带Type-C接口</td>
+                    </tr>
+                    <tr>
+                        <td>耳机</td>
+                        <td>地铁/博物馆使用</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">日用类</td>
+                        <td>薄外套</td>
+                        <td>9-10月北京早晚温差大</td>
+                    </tr>
+                    <tr>
+                        <td>折叠伞</td>
+                        <td>防雨防晒</td>
+                    </tr>
+                    <tr>
+                        <td>运动鞋</td>
+                        <td>日均步数1.5万+</td>
+                    </tr>
+                    <tr>
+                        <td>现金</td>
+                        <td>300-500元（小额支付）</td>
+                    </tr>
+                    <tr>
+                        <td>预约类</td>
+                        <td>景点预约</td>
+                        <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
+                    </tr>
+                </table>
+            </div>
             
             <div id="preparation-note" class="note">
                 <strong>注意：</strong> 所有景点需提前1-7天预约
@@ -276,286 +357,303 @@
             
             <div id="reservation-details" class="reservation-details">
                 <h2>景点预约详情</h2>
-                <table class="reservation-table">
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>景点名称</th>
+                            <th>门票价格</th>
+                            <th>预约要求</th>
+                            <th>预约路径</th>
+                            <th>闭馆/闭园时间</th>
+                        </tr>
+                        <tr>
+                            <td>天安门广场</td>
+                            <td>免费</td>
+                            <td>提前1天预约</td>
+                            <td>"天安门广场预约参观"小程序</td>
+                            <td>无闭馆时间</td>
+                        </tr>
+                        <tr>
+                            <td>毛主席纪念堂</td>
+                            <td>免费</td>
+                            <td>提前1-6天预约</td>
+                            <td>"毛主席纪念堂"公众号</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>故宫博物院</td>
+                            <td>旺季60元<br>淡季40元<br>珍宝馆10元</td>
+                            <td>提前7天20:00开放预约</td>
+                            <td>"故宫博物院"公众号/官网</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>中国国家博物馆</td>
+                            <td>免费</td>
+                            <td>提前1-7天预约</td>
+                            <td>"国家博物馆"公众号/官网</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>天坛公园</td>
+                            <td>大门票10元<br>联票28元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"天坛公园官方购票平台"公众号</td>
+                            <td>园中园17:30关闭</td>
+                        </tr>
+                        <tr>
+                            <td>雍和宫</td>
+                            <td>25元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"雍和宫游客信众服务"公众号</td>
+                            <td>16:30停止入场</td>
+                        </tr>
+                        <tr>
+                            <td>颐和园</td>
+                            <td>旺季30元<br>淡季20元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"颐和园"公众号</td>
+                            <td>园中园17:00关闭</td>
+                        </tr>
+                        <tr>
+                            <td>孔庙和国子监</td>
+                            <td>30元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"孔庙和国子监博物馆"公众号</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mobile-day-nav">
+            <button class="day-btn active" data-day="1">DAY 1</button>
+            <button class="day-btn" data-day="2">DAY 2</button>
+            <button class="day-btn" data-day="3">DAY 3</button>
+            <button class="day-btn" data-day="4">DAY 4</button>
+        </div>
+        
+        <div class="section day-section active" id="day1-section">
+            <h2>🗓️ DAY1 行程表</h2>
+            <div class="table-container">
+                <table>
                     <tr>
-                        <th>景点名称</th>
-                        <th>门票价格</th>
-                        <th>预约要求</th>
-                        <th>预约路径</th>
-                        <th>闭馆/闭园时间</th>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
                     </tr>
                     <tr>
+                        <td>19:36（DAY-1）</td>
+                        <td>杭州站</td>
+                        <td>乘坐D12次列车前往北京</td>
+                        <td>D12次高铁</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:30</td>
+                        <td>北京站</td>
+                        <td>抵达北京</td>
+                        <td>地铁2号线(北京站→王府井) 3元</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td>酒店(初定王府井)</td>
+                        <td>寄存行李、外卖进行午餐</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
                         <td>天安门广场</td>
-                        <td>免费</td>
-                        <td>提前1天预约</td>
-                        <td>"天安门广场预约参观"小程序</td>
-                        <td>无闭馆时间</td>
+                        <td>参观人民英雄纪念碑</td>
+                        <td>地铁2号线(北京站→王府井) 3元</td>
+                        <td>10分钟</td>
                     </tr>
                     <tr>
+                        <td>14:30</td>
                         <td>毛主席纪念堂</td>
-                        <td>免费</td>
-                        <td>提前1-6天预约</td>
-                        <td>"毛主席纪念堂"公众号</td>
-                        <td>周一闭馆</td>
+                        <td>瞻仰（需提前预约）</td>
+                        <td>步行</td>
+                        <td>5分钟</td>
                     </tr>
                     <tr>
+                        <td>15:30</td>
                         <td>故宫博物院</td>
-                        <td>旺季60元<br>淡季40元<br>珍宝馆10元</td>
-                        <td>提前7天20:00开放预约</td>
-                        <td>"故宫博物院"公众号/官网</td>
-                        <td>周一闭馆</td>
+                        <td>中轴线+珍宝馆深度游（4小时）</td>
+                        <td>网约车(纪念堂→东华门) 12元</td>
+                        <td>8分钟</td>
                     </tr>
                     <tr>
-                        <td>中国国家博物馆</td>
-                        <td>免费</td>
-                        <td>提前1-7天预约</td>
-                        <td>"国家博物馆"公众号/官网</td>
-                        <td>周一闭馆</td>
+                        <td>18:30</td>
+                        <td>四季民福（故宫店）</td>
+                        <td>北京烤鸭晚餐</td>
+                        <td>地铁1号线(天安门东→王府井) 3元</td>
+                        <td>15分钟</td>
                     </tr>
                     <tr>
-                        <td>天坛公园</td>
-                        <td>大门票10元<br>联票28元</td>
-                        <td>提前1-7天预约</td>
-                        <td>"天坛公园官方购票平台"公众号</td>
-                        <td>园中园17:30关闭</td>
-                    </tr>
-                    <tr>
-                        <td>雍和宫</td>
-                        <td>25元</td>
-                        <td>提前1-7天预约</td>
-                        <td>"雍和宫游客信众服务"公众号</td>
-                        <td>16:30停止入场</td>
-                    </tr>
-                    <tr>
-                        <td>颐和园</td>
-                        <td>旺季30元<br>淡季20元</td>
-                        <td>提前1-7天预约</td>
-                        <td>"颐和园"公众号</td>
-                        <td>园中园17:00关闭</td>
-                    </tr>
-                    <tr>
-                        <td>孔庙和国子监</td>
-                        <td>30元</td>
-                        <td>提前1-7天预约</td>
-                        <td>"孔庙和国子监博物馆"公众号</td>
-                        <td>周一闭馆</td>
+                        <td>20:00</td>
+                        <td>王府井</td>
+                        <td>逛王府井</td>
+                        <td>步行</td>
+                        <td>7分钟</td>
                     </tr>
                 </table>
             </div>
         </div>
         
-        <div class="section">
-            <h2>🗓️ DAY1 行程表</h2>
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>19:36（DAY-1）</td>
-                    <td>杭州站</td>
-                    <td>乘坐D12次列车前往北京</td>
-                    <td>D12次高铁</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>10:30</td>
-                    <td>北京站</td>
-                    <td>抵达北京</td>
-                    <td>地铁2号线(北京站→王府井) 3元</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>11:30</td>
-                    <td>酒店(初定王府井)</td>
-                    <td>寄存行李、外卖进行午餐</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>14:00</td>
-                    <td>天安门广场</td>
-                    <td>参观人民英雄纪念碑</td>
-                    <td>地铁2号线(北京站→王府井) 3元</td>
-                    <td>10分钟</td>
-                </tr>
-                <tr>
-                    <td>14:30</td>
-                    <td>毛主席纪念堂</td>
-                    <td>瞻仰（需提前预约）</td>
-                    <td>步行</td>
-                    <td>5分钟</td>
-                </tr>
-                <tr>
-                    <td>15:30</td>
-                    <td>故宫博物院</td>
-                    <td>中轴线+珍宝馆深度游（4小时）</td>
-                    <td>网约车(纪念堂→东华门) 12元</td>
-                    <td>8分钟</td>
-                </tr>
-                <tr>
-                    <td>18:30</td>
-                    <td>四季民福（故宫店）</td>
-                    <td>北京烤鸭晚餐</td>
-                    <td>地铁1号线(天安门东→王府井) 3元</td>
-                    <td>15分钟</td>
-                </tr>
-                <tr>
-                    <td>20:00</td>
-                    <td>王府井</td>
-                    <td>逛王府井</td>
-                    <td>步行</td>
-                    <td>7分钟</td>
-                </tr>
-            </table>
-        </div>
-        
-        <div class="section">
+        <div class="section day-section" id="day2-section">
             <h2>🗓️ DAY2 行程表</h2>
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>09:00</td>
-                    <td>中国国家博物馆</td>
-                    <td>重点参观：B1《古代中国》、3F《盛世修典》</td>
-                    <td>地铁1号线(王府井→天安门东) 3元</td>
-                    <td>5分钟</td>
-                </tr>
-                <tr>
-                    <td>13:00</td>
-                    <td>国博咖啡厅</td>
-                    <td>午餐+航天主题甜品</td>
-                    <td>馆内步行</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>14:30</td>
-                    <td>天坛公园</td>
-                    <td>路线：东门→祈年殿→回音壁→圜丘</td>
-                    <td>地铁8号线(天安门东→天桥站) 4元</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>17:00</td>
-                    <td>南门涮肉</td>
-                    <td>铜锅涮肉火烧晚餐</td>
-                    <td>天坛内步行</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>19:30</td>
-                    <td>前门大街</td>
-                    <td>采购伴手礼：张一元茶叶、六必居酱菜</td>
-                    <td>地铁8号线(天桥→前门站) 4元</td>
-                    <td>15分钟</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>中国国家博物馆</td>
+                        <td>重点参观：B1《古代中国》、3F《盛世修典》</td>
+                        <td>地铁1号线(王府井→天安门东) 3元</td>
+                        <td>5分钟</td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>国博咖啡厅</td>
+                        <td>午餐+航天主题甜品</td>
+                        <td>馆内步行</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>14:30</td>
+                        <td>天坛公园</td>
+                        <td>路线：东门→祈年殿→回音壁→圜丘</td>
+                        <td>地铁8号线(天安门东→天桥站) 4元</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>南门涮肉</td>
+                        <td>铜锅涮肉火烧晚餐</td>
+                        <td>天坛内步行</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>19:30</td>
+                        <td>前门大街</td>
+                        <td>采购伴手礼：张一元茶叶、六必居酱菜</td>
+                        <td>地铁8号线(天桥→前门站) 4元</td>
+                        <td>15分钟</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="note">
                 <strong>天坛路线：</strong> 东门进→祈年殿→丹陛桥→回音壁→圜丘→南门出（南门涮肉就在南门附近）
             </div>
         </div>
         
-        <div class="section">
+        <div class="section day-section" id="day3-section">
             <h2>🗓️ DAY3 行程表</h2>
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>09:30</td>
-                    <td>雍和宫</td>
-                    <td>参拜+请手串（1.5小时）</td>
-                    <td>地铁5号线(东单→雍和宫) 3元</td>
-                    <td>25分钟</td>
-                </tr>
-                <tr>
-                    <td>11:00</td>
-                    <td>吴裕泰茶庄</td>
-                    <td>花茶冰淇淋体验</td>
-                    <td>步行(雍和宫→国子监街)</td>
-                    <td>3分钟</td>
-                </tr>
-                <tr>
-                    <td>12:00</td>
-                    <td>五道营胡同</td>
-                    <td>午餐+文艺探店</td>
-                    <td>网约车(国子监→五道营) 8元</td>
-                    <td>6分钟</td>
-                </tr>
-                <tr>
-                    <td>14:00</td>
-                    <td>颐和园</td>
-                    <td>游湖+长廊</td>
-                    <td>地铁2号线(雍and宫→西直门)换4号线(北宫门站) 6元</td>
-                    <td>45分钟</td>
-                </tr>
-                <tr>
-                    <td>18:00</td>
-                    <td>小吊梨汤</td>
-                    <td>晚餐</td>
-                    <td>网约车(颐和园东门→新奥店) 25元</td>
-                    <td>20分钟</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td>雍和宫</td>
+                        <td>参拜+请手串（1.5小时）</td>
+                        <td>地铁5号线(东单→雍和宫) 3元</td>
+                        <td>25分钟</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>吴裕泰茶庄</td>
+                        <td>花茶冰淇淋体验</td>
+                        <td>步行(雍和宫→国子监街)</td>
+                        <td>3分钟</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td>五道营胡同</td>
+                        <td>午餐+文艺探店</td>
+                        <td>网约车(国子监→五道营) 8元</td>
+                        <td>6分钟</td>
+                    </tr>
+                    <tr>
+                        <td>14:00</td>
+                        <td>颐和园</td>
+                        <td>游湖+长廊</td>
+                        <td>地铁2号线(雍and宫→西直门)换4号线(北宫门站) 6元</td>
+                        <td>45分钟</td>
+                    </tr>
+                    <tr>
+                        <td>18:00</td>
+                        <td>小吊梨汤</td>
+                        <td>晚餐</td>
+                        <td>网约车(颐和园东门→新奥店) 25元</td>
+                        <td>20分钟</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="note">
                 <strong>颐和园建议：</strong> 从新建宫门进，乘船到石舫（单程船票40元/人），减少步行距离
             </div>
         </div>
         
-        <div class="section">
+        <div class="section day-section" id="day4-section">
             <h2>🗓️ DAY4 行程表</h2>
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>09:00</td>
-                    <td>孔庙和国子监</td>
-                    <td>参观进士碑林</td>
-                    <td>地铁5号线(东单→雍和宫) 3元</td>
-                    <td>25分钟</td>
-                </tr>
-                <tr>
-                    <td>11:00</td>
-                    <td>簋街</td>
-                    <td>采购特产</td>
-                    <td>网约车(国子监→簋街) 10元</td>
-                    <td>10分钟</td>
-                </tr>
-                <tr>
-                    <td>12:30</td>
-                    <td>酒店</td>
-                    <td>取行李</td>
-                    <td>地铁5号线(北新桥→东单) 3元</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>13:00</td>
-                    <td>首都国际机场</td>
-                    <td>返程</td>
-                    <td>机场快线(东直门→T3航站楼) 25元</td>
-                    <td>-</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>09:00</td>
+                        <td>孔庙和国子监</td>
+                        <td>参观进士碑林</td>
+                        <td>地铁5号线(东单→雍和宫) 3元</td>
+                        <td>25分钟</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>簋街</td>
+                        <td>采购特产</td>
+                        <td>网约车(国子监→簋街) 10元</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td>12:30</td>
+                        <td>酒店</td>
+                        <td>取行李</td>
+                        <td>地铁5号线(北新桥→东单) 3元</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>13:00</td>
+                        <td>首都国际机场</td>
+                        <td>返程</td>
+                        <td>机场快线(东直门→T3航站楼) 25元</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         
         <footer>
@@ -564,54 +662,56 @@
         </footer>
     </div>
     
-    <!-- 新增：回到顶部按钮 -->
     <button class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </button>
     
     <script>
-        // 确保DOM完全加载后再执行
         document.addEventListener('DOMContentLoaded', function() {
-            // 获取元素
+            // 预约详情切换
             const toggleLink = document.getElementById('reservation-toggle');
             const details = document.getElementById('reservation-details');
             const note = document.getElementById('preparation-note');
-            const backToTopBtn = document.getElementById('backToTop');
             
-            // 添加预约详情切换事件
             if (toggleLink && details && note) {
                 toggleLink.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
-                    // 切换详情显示状态
-                    if(details.style.display === 'block') {
-                        details.style.display = 'none';
-                        note.style.display = 'block';
-                    } else {
-                        details.style.display = 'block';
-                        note.style.display = 'none';
-                    }
+                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                    note.style.display = details.style.display === 'block' ? 'none' : 'block';
                 });
-            } else {
-                console.error("无法找到必要的DOM元素");
             }
             
-            // 添加回到顶部功能
+            // 回到顶部功能
+            const backToTopBtn = document.getElementById('backToTop');
             if (backToTopBtn) {
-                // 滚动时显示/隐藏回到顶部按钮
                 window.addEventListener('scroll', function() {
-                    if (window.scrollY > 500) {
-                        backToTopBtn.classList.add('visible');
-                    } else {
-                        backToTopBtn.classList.remove('visible');
-                    }
+                    backToTopBtn.classList.toggle('visible', window.scrollY > 500);
                 });
                 
-                // 点击回到顶部
                 backToTopBtn.addEventListener('click', function() {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // 移动端日期导航
+            const dayBtns = document.querySelectorAll('.day-btn');
+            const daySections = document.querySelectorAll('.day-section');
+            
+            if (dayBtns.length && daySections.length) {
+                dayBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 更新按钮状态
+                        dayBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 显示对应日期内容
+                        const day = this.dataset.day;
+                        daySections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === `day${day}-section`) {
+                                section.classList.add('active');
+                            }
+                        });
                     });
                 });
             }
