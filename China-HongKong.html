@@ -465,10 +465,6 @@
                 top: 10px;
             }
             
-            .back-home span {
-                display: none;
-            }
-            
             .section {
                 padding: 15px;
             }
@@ -509,6 +505,67 @@
                 width: 30px;
                 height: 30px;
                 font-size: 1.5rem;
+            }
+        }
+        
+        /* 新增：移动端日期导航 */
+        .mobile-day-nav {
+            display: none;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 0 10px;
+        }
+        
+        .day-btn {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .day-btn.active {
+            background: #e53935;
+            color: white;
+        }
+        
+        .day-section {
+            display: block;
+        }
+        
+        /* 在窄屏时隐藏所有日程，只显示当前激活的日程 */
+        @media (max-width: 900px) {
+            .mobile-day-nav {
+                display: flex;
+            }
+            
+            .day-section {
+                display: none;
+            }
+            
+            .day-section.active {
+                display: block;
+            }
+            
+            .preparation-section {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .day-btn {
+                font-size: 0.8rem;
+                padding: 8px 5px;
+            }
+            
+            .back-home span {
+                display: none;
             }
         }
     </style>
@@ -604,7 +661,8 @@
             <div class="intro-toggle" id="introBtn">点击了解香港</div>
         </header>
         
-        <div class="section">
+        <!-- 准备事项部分（始终显示） -->
+        <div class="section preparation-section">
             <div class="section-header">
                 <div class="icon">📋</div>
                 <h2>准备事项</h2>
@@ -700,7 +758,16 @@
             </div>
         </div>
         
-        <div class="section">
+        <!-- 移动端日期导航 -->
+        <div class="mobile-day-nav">
+            <button class="day-btn active" data-day="1">出发行程</button>
+            <button class="day-btn" data-day="2">DAY 1</button>
+            <button class="day-btn" data-day="3">DAY 2</button>
+            <button class="day-btn" data-day="4">DAY 3</button>
+        </div>
+        
+        <!-- 出发行程 -->
+        <div class="section day-section active" id="day1-section">
             <div class="day-header">
                 <div class="day-icon">🚂</div>
                 <div class="day-title">出发行程 (10月12日 DAY-1)</div>
@@ -745,7 +812,10 @@
                     </tr>
                 </table>
             </div>
-            
+        </div>
+        
+        <!-- DAY1 香港初体验 -->
+        <div class="section day-section" id="day2-section">
             <div class="day-header" style="margin-top: 30px;">
                 <div class="day-icon">🌉</div>
                 <div class="day-title">DAY1 香港初体验 (10月13日 周日)</div>
@@ -877,7 +947,8 @@
             </div>
         </div>
         
-        <div class="section">
+        <!-- DAY2 都市探索 -->
+        <div class="section day-section" id="day3-section">
             <div class="day-header">
                 <div class="day-icon">🏙️</div>
                 <div class="day-title">DAY2 都市探索 (10月14日 周一)</div>
@@ -977,7 +1048,8 @@
             </div>
         </div>
         
-        <div class="section">
+        <!-- DAY3 离岛之旅 -->
+        <div class="section day-section" id="day4-section">
             <div class="day-header">
                 <div class="day-icon">🚠</div>
                 <div class="day-title">DAY3 离岛之旅 (10月15日 周二)</div>
@@ -1108,6 +1180,29 @@
                     behavior: 'smooth'
                 });
             });
+            
+            // 移动端日期导航功能
+            const dayBtns = document.querySelectorAll('.day-btn');
+            const daySections = document.querySelectorAll('.day-section');
+            
+            if (dayBtns.length && daySections.length) {
+                dayBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 更新按钮状态
+                        dayBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 显示对应日期内容
+                        const day = this.dataset.day;
+                        daySections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === `day${day}-section`) {
+                                section.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
         });
     </script>
 </body>
