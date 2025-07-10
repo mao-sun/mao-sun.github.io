@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中国香港3天2晚旅游攻略</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,14 +12,15 @@
             box-sizing: border-box;
             font-family: 'Microsoft YaHei', sans-serif;
         }
+        
         body {
-            background: #f8f9fa;
-            color: #333;
-            padding: 20px;
-            line-height: 1.6;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            padding: 15px;
+            line-height: 1.6;
             position: relative;
         }
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -28,37 +30,29 @@
             overflow: hidden;
             position: relative;
         }
-.back-home {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  color: white;
-  text-decoration: none;
-  padding: 8px 15px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 30px;
-  z-index: 11;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-}
-
-.back-home:hover {
-  background: rgba(0,0,0,0.4);
-  transform: translateY(-2px);
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-  .back-home {
-    font-size: 0.8rem;
-    padding: 6px 12px;
-    left: 15px;
-    top: 15px;
-  }
-}
+        
+        .back-home {
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 30px;
+            z-index: 11;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .back-home:hover {
+            background: rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+        }
+        
         header {
             background: linear-gradient(90deg, #e53935, #e35d5b);
             color: white;
@@ -67,6 +61,7 @@
             position: relative;
             overflow: hidden;
         }
+        
         header::before {
             content: "";
             position: absolute;
@@ -78,15 +73,17 @@
             background-size: 120px;
             opacity: 0.3;
         }
+        
         h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin: 20px 0 10px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
             position: relative;
             z-index: 2;
         }
+        
         .subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             opacity: 0.9;
             max-width: 800px;
             margin: 0 auto;
@@ -94,13 +91,14 @@
             z-index: 2;
             margin-bottom: 15px;
         }
+        
         .intro-toggle {
             background: rgba(255,255,255,0.2);
             color: white;
             border: 1px solid rgba(255,255,255,0.5);
             padding: 8px 20px;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
             cursor: pointer;
             transition: all 0.3s;
             display: inline-block;
@@ -108,18 +106,21 @@
             z-index: 10;
             position: relative;
         }
+        
         .intro-toggle:hover {
             background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
         }
+        
         h2 {
             color: #e53935;
-            margin: 30px 0 20px;
-            padding-bottom: 12px;
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
             border-bottom: 3px solid #ffcdd2;
             position: relative;
-            font-size: 1.8rem;
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
         }
+        
         h2::after {
             content: "";
             position: absolute;
@@ -129,98 +130,117 @@
             height: 3px;
             background: #e53935;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             border-radius: 8px;
-            overflow: hidden;
         }
+        
+        table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: collapse;
+        }
+        
         th, td {
-            padding: 14px 18px;
+            padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
         }
+        
         th {
             background: #f1f1f1;
             font-weight: bold;
             color: #333;
-            font-size: 1.05rem;
         }
+        
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        
         tr:hover {
             background-color: #fff3f3;
-            transition: background 0.3s ease;
         }
+        
         .section {
-            padding: 30px;
+            padding: 20px;
             position: relative;
         }
+        
         .note {
             background: #fff8e1;
             border-left: 4px solid #ffc107;
-            padding: 18px;
-            margin: 25px 0;
+            padding: 15px;
+            margin: 20px 0;
             border-radius: 0 8px 8px 0;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
+        
         .highlight {
             background: #ffebee;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 5px;
             font-weight: bold;
             color: #e53935;
             display: inline-block;
             margin: 2px 0;
         }
+        
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 20px;
             background: #f1f1f1;
             color: #666;
             font-size: 0.95rem;
             border-top: 1px solid #eee;
         }
+        
         .section-header {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
         }
+        
         .icon {
-            font-size: 2rem;
-            margin-right: 15px;
+            font-size: 1.8rem;
+            margin-right: 12px;
             color: #e53935;
         }
+        
         .day-header {
             background: linear-gradient(to right, #e53935, #e35d5b);
             color: white;
-            padding: 15px 30px;
-            margin: 0 -30px 25px -30px;
+            padding: 12px 20px;
+            margin: 0 -20px 20px -20px;
             border-radius: 0 0 8px 8px;
             display: flex;
             align-items: center;
         }
+        
         .day-icon {
-            font-size: 1.8rem;
-            margin-right: 12px;
+            font-size: 1.5rem;
+            margin-right: 10px;
         }
+        
         .day-title {
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
             font-weight: bold;
         }
+        
         .budget {
             display: inline-block;
             background: #e8f5e9;
             color: #2e7d32;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 20px;
-            font-size: 0.9rem;
-            margin-left: 10px;
+            font-size: 0.85rem;
+            margin-left: 8px;
             font-weight: bold;
         }
+        
         .important-note {
             background: #ffebee;
             border-left: 4px solid #e53935;
@@ -228,48 +248,39 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
         }
-        @media (max-width: 768px) {
-            th, td {
-                padding: 10px 12px;
-                font-size: 0.92rem;
-            }
-            .section {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 2.2rem;
-            }
-            .day-title {
-                font-size: 1.4rem;
-            }
-        }
+        
         .prohibited-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
             margin-top: 20px;
         }
+        
         .prohibited-box {
             flex: 1;
             min-width: 280px;
             border: 1px solid #eee;
             border-radius: 8px;
-            padding: 20px;
+            padding: 15px;
             background: white;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
+        
         .prohibited-title {
             font-weight: bold;
             color: #e53935;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
             border-bottom: 2px solid #ffcdd2;
+            font-size: 1.1rem;
         }
+        
         .prohibited-item {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             padding-left: 20px;
             position: relative;
         }
+        
         .prohibited-item::before {
             content: "•";
             position: absolute;
@@ -277,6 +288,7 @@
             color: #e53935;
             font-weight: bold;
         }
+        
         /* 香港介绍模态框 */
         .modal {
             display: none;
@@ -289,7 +301,9 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            overflow: auto;
         }
+        
         .modal-content {
             background: white;
             width: 90%;
@@ -298,95 +312,111 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
-            animation: modalopen 0.5s;
+            animation: modalopen 0.4s;
         }
+        
         @keyframes modalopen {
             from {opacity: 0; transform: translateY(-50px);}
             to {opacity: 1; transform: translateY(0);}
         }
+        
         .modal-header {
             background: linear-gradient(90deg, #e53935, #e35d5b);
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
             position: relative;
         }
+        
         .modal-header h2 {
             color: white;
             border: none;
             margin: 0;
             padding: 0;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
         }
+        
         .modal-header h2::after {
             display: none;
         }
+        
         .close-btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             font-size: 1.8rem;
             cursor: pointer;
             color: white;
             background: rgba(0,0,0,0.2);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
         }
+        
         .close-btn:hover {
             background: rgba(0,0,0,0.3);
             transform: rotate(90deg);
         }
+        
         .modal-body {
-            padding: 30px;
-            max-height: 70vh;
+            padding: 20px;
+            max-height: 80vh;
             overflow-y: auto;
         }
+        
         .modal-body p {
             margin-bottom: 15px;
             line-height: 1.8;
         }
+        
         .modal-body img {
             width: 100%;
             border-radius: 10px;
-            margin: 20px 0;
+            margin: 15px 0;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
+        
         .facts-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 25px 0;
+            gap: 12px;
+            margin: 20px 0;
         }
+        
         .fact-box {
             flex: 1;
-            min-width: 200px;
+            min-width: 150px;
             background: #f9f9f9;
             border-radius: 10px;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             border: 1px solid #eee;
         }
+        
         .fact-number {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #e53935;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
+        
         .fact-title {
             font-weight: bold;
             margin-bottom: 5px;
+            font-size: 1rem;
         }
+        
         /* 返回顶部按钮 */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
             background: #e53935;
             color: white;
             border-radius: 50%;
@@ -401,21 +431,87 @@
             transform: translateY(20px);
             visibility: hidden;
         }
+        
         .back-to-top.show {
             opacity: 1;
             transform: translateY(0);
             visibility: visible;
         }
+        
         .back-to-top:hover {
             background: #c62828;
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(229, 57, 53, 0.6);
         }
+        
         .back-to-top i {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            header {
+                padding: 30px 15px;
+            }
+            
+            .back-home {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+                left: 10px;
+                top: 10px;
+            }
+            
+            .back-home span {
+                display: none;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .day-header {
+                padding: 10px 15px;
+                margin: 0 -15px 15px -15px;
+            }
+            
+            .prohibited-box {
+                min-width: 100%;
+            }
+            
+            .facts-container {
+                gap: 10px;
+            }
+            
+            .fact-box {
+                min-width: calc(50% - 10px);
+            }
+            
+            .modal-body {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .fact-box {
+                min-width: 100%;
+            text-align: left;
+            display: flex;
+                flex-direction: column;
+            }
+            
+            .close-btn {
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                font-size: 1.5rem;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- 香港介绍模态框 -->
@@ -451,16 +547,16 @@
                     </div>
                 </div>
                 
-		<img src="https://s3.bmp.ovh/imgs/2025/07/10/ea1c086dbb0ca9b1.jpg" 
-     			alt="香港文化特色" 
-     			style="width:100%; border-radius:10px; margin:20px 0;">
+                <img src="https://s3.bmp.ovh/imgs/2025/07/10/ea1c086dbb0ca9b1.jpg" 
+                     alt="香港文化特色" 
+                     style="width:100%; border-radius:10px; margin:20px 0;">
 
                 <h3>文化与特色</h3>
                 <p>香港以其独特的文化和历史背景，融合了东西方文化，形成了独特的港式风情。这里既有现代化的摩天大楼，也有传统的庙宇和街市；既有米其林星级餐厅，也有地道的街头小吃。</p>
                 
                 <h3>著名景点</h3>
                 <p>香港拥有众多世界级景点：</p>
-                <ul style="padding-left: 25px; margin-bottom: 20px;">
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
                     <li>维多利亚港 - 世界三大天然良港之一</li>
                     <li>太平山顶 - 俯瞰香港全景的最佳地点</li>
                     <li>香港迪士尼乐园 - 亚洲第二座迪士尼乐园</li>
@@ -471,7 +567,7 @@
                 
                 <h3>美食天堂</h3>
                 <p>香港被誉为"美食天堂"，拥有超过15,000家餐厅，从街头小吃到米其林星级餐厅应有尽有。必尝美食包括：</p>
-                <ul style="padding-left: 25px; margin-bottom: 20px;">
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
                     <li>港式点心（虾饺、烧卖、叉烧包）</li>
                     <li>港式奶茶和菠萝油</li>
                     <li>云吞面</li>
@@ -482,7 +578,7 @@
                 
                 <h3>购物天堂</h3>
                 <p>香港是名副其实的购物天堂，从奢侈品到平价商品应有尽有：</p>
-                <ul style="padding-left: 25px;">
+                <ul style="padding-left: 20px;">
                     <li>尖沙咀海港城 - 香港最大购物中心</li>
                     <li>铜锣湾时代广场 - 潮流时尚聚集地</li>
                     <li>旺角女人街 - 平价商品和纪念品</li>
@@ -500,9 +596,9 @@
 
     <div class="container">
         <header>
-	<a href="index.html" class="back-home">
-  	<i class="fas fa-home"></i> 返回首页
-	</a>
+            <a href="index.html" class="back-home">
+                <i class="fas fa-home"></i> <span>返回首页</span>
+            </a>
             <h1>中国香港3天2晚旅游攻略</h1>
             <p class="subtitle">深度体验香港文化 | 经典景点全覆盖 | 美食购物全攻略</p>
             <div class="intro-toggle" id="introBtn">点击了解香港</div>
@@ -514,70 +610,72 @@
                 <h2>准备事项</h2>
             </div>
             
-            <table>
-                <tr>
-                    <th>类别</th>
-                    <th>物品</th>
-                    <th>说明/注意事项</th>
-                </tr>
-                <tr>
-                    <td>背包</td>
-                    <td>双肩包、胸包</td>
-                    <td>轻便出行，防盗设计</td>
-                </tr>
-                <tr>
-                    <td>行李箱</td>
-                    <td>20寸登机箱</td>
-                    <td>符合航空尺寸要求</td>
-                </tr>
-                <tr>
-                    <td rowspan="3">证件类</td>
-                    <td>港澳通行证</td>
-                    <td>有效签注（大陆出发必备）</td>
-                </tr>
-                <tr>
-                    <td>身份证</td>
-                    <td>大陆身份证明</td>
-                </tr>
-                <tr>
-                    <td>银行卡</td>
-                    <td>银联、VISA/万事达（需提前报备境外行程）</td>
-                </tr>
-                <tr>
-                    <td rowspan="4">电子类</td>
-                    <td>充电宝</td>
-                    <td>≤100Wh（民航规定）</td>
-                </tr>
-                <tr>
-                    <td>转换插头</td>
-                    <td>英标三孔转换插头</td>
-                </tr>
-                <tr>
-                    <td>香港流量</td>
-                    <td>跨境流量包或香港电话卡</td>
-                </tr>
-                <tr>
-                    <td>充电器</td>
-                    <td>多设备充电线</td>
-                </tr>
-                <tr>
-                    <td rowspan="4">日用类</td>
-                    <td>外套</td>
-                    <td>香港室内冷气较足</td>
-                </tr>
-                <tr>
-                    <td>雨伞</td>
-                    <td>折叠伞，香港多阵雨</td>
-                </tr>
-                <tr>
-                    <td>水杯</td>
-                    <td>便携水杯</td>
-                </tr>
-                <tr>
-                    <td>现金</td>
-                    <td>500-1000HKD（小额支付）</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>类别</th>
+                        <th>物品</th>
+                        <th>说明/注意事项</th>
+                    </tr>
+                    <tr>
+                        <td>背包</td>
+                        <td>双肩包、胸包</td>
+                        <td>轻便出行，防盗设计</td>
+                    </tr>
+                    <tr>
+                        <td>行李箱</td>
+                        <td>20寸登机箱</td>
+                        <td>符合航空尺寸要求</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">证件类</td>
+                        <td>港澳通行证</td>
+                        <td>有效签注（大陆出发必备）</td>
+                    </tr>
+                    <tr>
+                        <td>身份证</td>
+                        <td>大陆身份证明</td>
+                    </tr>
+                    <tr>
+                        <td>银行卡</td>
+                        <td>银联、VISA/万事达（需提前报备境外行程）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">电子类</td>
+                        <td>充电宝</td>
+                        <td>≤100Wh（民航规定）</td>
+                    </tr>
+                    <tr>
+                        <td>转换插头</td>
+                        <td>英标三孔转换插头</td>
+                    </tr>
+                    <tr>
+                        <td>香港流量</td>
+                        <td>跨境流量包或香港电话卡</td>
+                    </tr>
+                    <tr>
+                        <td>充电器</td>
+                        <td>多设备充电线</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">日用类</td>
+                        <td>外套</td>
+                        <td>香港室内冷气较足</td>
+                    </tr>
+                    <tr>
+                        <td>雨伞</td>
+                        <td>折叠伞，香港多阵雨</td>
+                    </tr>
+                    <tr>
+                        <td>水杯</td>
+                        <td>便携水杯</td>
+                    </tr>
+                    <tr>
+                        <td>现金</td>
+                        <td>500-1000HKD（小额支付）</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="important-note">
                 <strong>重要提示：</strong> 香港和大陆出入境有严格规定，请务必遵守以下要求
@@ -608,167 +706,171 @@
                 <div class="day-title">出发行程 (10月12日 DAY-1)</div>
             </div>
             
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容/预算</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>15:25</td>
-                    <td>义乌站</td>
-                    <td>出发</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>15:25-15:41</td>
-                    <td>义乌→金华</td>
-                    <td>高铁行程</td>
-                    <td>G2141次高铁</td>
-                    <td>16分钟</td>
-                </tr>
-                <tr>
-                    <td>16:30</td>
-                    <td>金华站</td>
-                    <td>中转</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>17:02-次日7:27</td>
-                    <td>金华→深圳东站</td>
-                    <td>夜班火车</td>
-                    <td>T101次列车</td>
-                    <td>14小时25分钟</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>15:25</td>
+                        <td>义乌站</td>
+                        <td>出发</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>15:25-15:41</td>
+                        <td>义乌→金华</td>
+                        <td>高铁行程</td>
+                        <td>G2141次高铁</td>
+                        <td>16分钟</td>
+                    </tr>
+                    <tr>
+                        <td>16:30</td>
+                        <td>金华站</td>
+                        <td>中转</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>17:02-次日7:27</td>
+                        <td>金华→深圳东站</td>
+                        <td>夜班火车</td>
+                        <td>T101次列车</td>
+                        <td>14小时25分钟</td>
+                    </tr>
+                </table>
+            </div>
             
-            <div class="day-header" style="margin-top: 40px;">
+            <div class="day-header" style="margin-top: 30px;">
                 <div class="day-icon">🌉</div>
                 <div class="day-title">DAY1 香港初体验 (10月13日 周日)</div>
             </div>
             
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容/预算</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>07:30</td>
-                    <td>深圳东站</td>
-                    <td>抵达深圳</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>07:30-08:00</td>
-                    <td>深圳东站→罗湖口岸</td>
-                    <td>前往通关口岸</td>
-                    <td>
-                        二选一<br>
-                        1. 地铁（首班8点）<br>
-                        2. 滴滴
-                    </td>
-                    <td>
-                        1. 40分钟<br>
-                        2. 20分钟
-                    </td>
-                </tr>
-                <tr>
-                    <td>08:00</td>
-                    <td>罗湖口岸</td>
-                    <td>通关（预估30分钟）<br><strong>通关小票需保留</strong></td>
-                    <td>-</td>
-                    <td>30分钟</td>
-                </tr>
-                <tr>
-                    <td>08:30</td>
-                    <td>罗湖站</td>
-                    <td>乘港铁前往酒店</td>
-                    <td>港铁</td>
-                    <td>约60分钟</td>
-                </tr>
-                <tr>
-                    <td>09:30</td>
-                    <td>酒店</td>
-                    <td>入住/寄存行李</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>10:00</td>
-                    <td>酒店</td>
-                    <td>休整</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>10:30</td>
-                    <td>旺角红茶冰室</td>
-                    <td>午餐<br><span class="highlight">预算200HKD</span></td>
-                    <td>地铁</td>
-                    <td>25分钟</td>
-                </tr>
-                <tr>
-                    <td>11:30</td>
-                    <td>旺角区域</td>
-                    <td>游览：通菜街、金鱼街、女人街、信和中心</td>
-                    <td>步行</td>
-                    <td>2小时</td>
-                </tr>
-                <tr>
-                    <td>13:30</td>
-                    <td>油麻地</td>
-                    <td>油麻地果栏、油麻地警署</td>
-                    <td>地铁</td>
-                    <td>15分钟</td>
-                </tr>
-                <tr>
-                    <td>14:40</td>
-                    <td>黄大仙祠</td>
-                    <td>游览<br><span class="highlight">免费</span></td>
-                    <td>地铁</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>16:00</td>
-                    <td>尖沙咀</td>
-                    <td>
-                        彩星中心、K11 Art Mall、K11 MUSEA、星光大道<br>
-                        <strong>推荐：珍妮小熊曲奇饼</strong><br>
-                        <span class="highlight">预算600HKD</span>
-                    </td>
-                    <td>地铁</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>18:30</td>
-                    <td>维多利亚港</td>
-                    <td>漫步天星码头，乘坐天星小轮<br><span class="highlight">10HKD</span></td>
-                    <td>步行</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>19:00</td>
-                    <td>中环</td>
-                    <td>中环摩天轮、中环街市（SOWLOOD）<br><span class="highlight">预算200HKD</span></td>
-                    <td>天星小轮</td>
-                    <td>10分钟</td>
-                </tr>
-                <tr>
-                    <td>21:00</td>
-                    <td>酒店</td>
-                    <td>返回休息</td>
-                    <td>地铁</td>
-                    <td>25分钟</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>07:30</td>
+                        <td>深圳东站</td>
+                        <td>抵达深圳</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>07:30-08:00</td>
+                        <td>深圳东站→罗湖口岸</td>
+                        <td>前往通关口岸</td>
+                        <td>
+                            二选一<br>
+                            1. 地铁（首班8点）<br>
+                            2. 滴滴
+                        </td>
+                        <td>
+                            1. 40分钟<br>
+                            2. 20分钟
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>08:00</td>
+                        <td>罗湖口岸</td>
+                        <td>通关（预估30分钟）<br><strong>通关小票需保留</strong></td>
+                        <td>-</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td>08:30</td>
+                        <td>罗湖站</td>
+                        <td>乘港铁前往酒店</td>
+                        <td>港铁</td>
+                        <td>约60分钟</td>
+                    </tr>
+                    <tr>
+                        <td>09:30</td>
+                        <td>酒店</td>
+                        <td>入住/寄存行李</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td>酒店</td>
+                        <td>休整</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:30</td>
+                        <td>旺角红茶冰室</td>
+                        <td>午餐<br><span class="highlight">预算200HKD</span></td>
+                        <td>地铁</td>
+                        <td>25分钟</td>
+                    </tr>
+                    <tr>
+                        <td>11:30</td>
+                        <td>旺角区域</td>
+                        <td>游览：通菜街、金鱼街、女人街、信和中心</td>
+                        <td>步行</td>
+                        <td>2小时</td>
+                    </tr>
+                    <tr>
+                        <td>13:30</td>
+                        <td>油麻地</td>
+                        <td>油麻地果栏、油麻地警署</td>
+                        <td>地铁</td>
+                        <td>15分钟</td>
+                    </tr>
+                    <tr>
+                        <td>14:40</td>
+                        <td>黄大仙祠</td>
+                        <td>游览<br><span class="highlight">免费</span></td>
+                        <td>地铁</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td>尖沙咀</td>
+                        <td>
+                            彩星中心、K11 Art Mall、K11 MUSEA、星光大道<br>
+                            <strong>推荐：珍妮小熊曲奇饼</strong><br>
+                            <span class="highlight">预算600HKD</span>
+                        </td>
+                        <td>地铁</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>18:30</td>
+                        <td>维多利亚港</td>
+                        <td>漫步天星码头，乘坐天星小轮<br><span class="highlight">10HKD</span></td>
+                        <td>步行</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>19:00</td>
+                        <td>中环</td>
+                        <td>中环摩天轮、中环街市（SOWLOOD）<br><span class="highlight">预算200HKD</span></td>
+                        <td>天星小轮</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td>21:00</td>
+                        <td>酒店</td>
+                        <td>返回休息</td>
+                        <td>地铁</td>
+                        <td>25分钟</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="note">
                 <strong>美食推荐：</strong> 旺角红茶冰室的港式奶茶和菠萝油必尝，尖沙咀的珍妮小熊曲奇是著名伴手礼
@@ -781,92 +883,94 @@
                 <div class="day-title">DAY2 都市探索 (10月14日 周一)</div>
             </div>
             
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容/预算</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>10:00</td>
-                    <td>酒店</td>
-                    <td>起床+早餐</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>10:20</td>
-                    <td>维多利亚铜像</td>
-                    <td>参观拍照</td>
-                    <td>地铁+步行</td>
-                    <td>20分钟</td>
-                </tr>
-                <tr>
-                    <td>10:40</td>
-                    <td>铜锣湾</td>
-                    <td>
-                        崇光广场、皇家堡<br>
-                        <strong>推荐：Fujifilm Studio, Habibi Arabian Perfumes</strong>
-                    </td>
-                    <td>步行</td>
-                    <td>5分钟</td>
-                </tr>
-                <tr>
-                    <td>12:30</td>
-                    <td>荣记粉面/钟厨</td>
-                    <td>午餐<br><span class="highlight">100HKD</span></td>
-                    <td>步行</td>
-                    <td>15分钟</td>
-                </tr>
-                <tr>
-                    <td>13:30</td>
-                    <td>金紫荆广场</td>
-                    <td>香港回归纪念地标</td>
-                    <td>步行</td>
-                    <td>5分钟</td>
-                </tr>
-                <tr>
-                    <td>14:30</td>
-                    <td>海港城</td>
-                    <td>购物天堂，品牌集中地</td>
-                    <td>地铁</td>
-                    <td>30分钟</td>
-                </tr>
-                <tr>
-                    <td>15:00</td>
-                    <td>故宫博物馆</td>
-                    <td>西九龙文化区，了解香港历史<br><span class="highlight">50HKD</span></td>
-                    <td>公交</td>
-                    <td>30分钟</td>
-                </tr>
-                <tr>
-                    <td>17:00</td>
-                    <td>太平山顶</td>
-                    <td>
-                        缆车登山，俯瞰香港全景<br>
-                        <strong>最佳观景时间：黄昏</strong><br>
-                        <span class="highlight">缆车88HKD</span>
-                    </td>
-                    <td>地铁+步行+缆车</td>
-                    <td>60分钟</td>
-                </tr>
-                <tr>
-                    <td>19:30</td>
-                    <td>山顶餐厅</td>
-                    <td>晚餐欣赏夜景<br><span class="highlight">预算300HKD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>21:00</td>
-                    <td>酒店</td>
-                    <td>返回休息</td>
-                    <td>地铁</td>
-                    <td>25分钟</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td>酒店</td>
+                        <td>起床+早餐</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>10:20</td>
+                        <td>维多利亚铜像</td>
+                        <td>参观拍照</td>
+                        <td>地铁+步行</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td>10:40</td>
+                        <td>铜锣湾</td>
+                        <td>
+                            崇光广场、皇家堡<br>
+                            <strong>推荐：Fujifilm Studio, Habibi Arabian Perfumes</strong>
+                        </td>
+                        <td>步行</td>
+                        <td>5分钟</td>
+                    </tr>
+                    <tr>
+                        <td>12:30</td>
+                        <td>荣记粉面/钟厨</td>
+                        <td>午餐<br><span class="highlight">100HKD</span></td>
+                        <td>步行</td>
+                        <td>15分钟</td>
+                    </tr>
+                    <tr>
+                        <td>13:30</td>
+                        <td>金紫荆广场</td>
+                        <td>香港回归纪念地标</td>
+                        <td>步行</td>
+                        <td>5分钟</td>
+                    </tr>
+                    <tr>
+                        <td>14:30</td>
+                        <td>海港城</td>
+                        <td>购物天堂，品牌集中地</td>
+                        <td>地铁</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td>15:00</td>
+                        <td>故宫博物馆</td>
+                        <td>西九龙文化区，了解香港历史<br><span class="highlight">50HKD</span></td>
+                        <td>公交</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td>17:00</td>
+                        <td>太平山顶</td>
+                        <td>
+                            缆车登山，俯瞰香港全景<br>
+                            <strong>最佳观景时间：黄昏</strong><br>
+                            <span class="highlight">缆车88HKD</span>
+                        </td>
+                        <td>地铁+步行+缆车</td>
+                        <td>60分钟</td>
+                    </tr>
+                    <tr>
+                        <td>19:30</td>
+                        <td>山顶餐厅</td>
+                        <td>晚餐欣赏夜景<br><span class="highlight">预算300HKD</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>21:00</td>
+                        <td>酒店</td>
+                        <td>返回休息</td>
+                        <td>地铁</td>
+                        <td>25分钟</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="note">
                 <strong>山顶缆车提示：</strong> 建议提前在官网预订缆车票避免排队，黄昏时段可同时欣赏日景和夜景
@@ -879,71 +983,73 @@
                 <div class="day-title">DAY3 离岛之旅 (10月15日 周二)</div>
             </div>
             
-            <table>
-                <tr>
-                    <th>时间</th>
-                    <th>地点</th>
-                    <th>活动内容/预算</th>
-                    <th>交通方式/费用</th>
-                    <th>交通耗时</th>
-                </tr>
-                <tr>
-                    <td>10:00</td>
-                    <td>酒店</td>
-                    <td>起床+早餐+退房</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-                <tr>
-                    <td>11:00</td>
-                    <td>昂坪360缆车站</td>
-                    <td>乘坐水晶缆车<br><span class="highlight">单程160HKD</span></td>
-                    <td>地铁</td>
-                    <td>60分钟</td>
-                </tr>
-                <tr>
-                    <td>11:10</td>
-                    <td>昂坪市集</td>
-                    <td>游览+午餐<br><span class="highlight">预算150HKD</span></td>
-                    <td>缆车</td>
-                    <td>10分钟</td>
-                </tr>
-                <tr>
-                    <td>12:30</td>
-                    <td>天坛大佛</td>
-                    <td>参观世界最高户外青铜坐佛<br><span class="highlight">免费</span></td>
-                    <td>步行</td>
-                    <td>15分钟</td>
-                </tr>
-                <tr>
-                    <td>13:30</td>
-                    <td>宝莲禅寺</td>
-                    <td>香港重要佛教圣地</td>
-                    <td>步行</td>
-                    <td>5分钟</td>
-                </tr>
-                <tr>
-                    <td>14:30</td>
-                    <td>东荟城</td>
-                    <td>奥特莱斯购物<br><span class="highlight">预算3000HKD</span></td>
-                    <td>公交（S1线）</td>
-                    <td>10分钟</td>
-                </tr>
-                <tr>
-                    <td>17:30</td>
-                    <td>香港国际机场</td>
-                    <td>办理登机手续</td>
-                    <td>机场快线</td>
-                    <td>30分钟</td>
-                </tr>
-                <tr>
-                    <td>18:30</td>
-                    <td>机场免税店</td>
-                    <td>购物、晚餐<br><span class="highlight">预算500HKD</span></td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
-            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td>10:00</td>
+                        <td>酒店</td>
+                        <td>起床+早餐+退房</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>昂坪360缆车站</td>
+                        <td>乘坐水晶缆车<br><span class="highlight">单程160HKD</span></td>
+                        <td>地铁</td>
+                        <td>60分钟</td>
+                    </tr>
+                    <tr>
+                        <td>11:10</td>
+                        <td>昂坪市集</td>
+                        <td>游览+午餐<br><span class="highlight">预算150HKD</span></td>
+                        <td>缆车</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td>12:30</td>
+                        <td>天坛大佛</td>
+                        <td>参观世界最高户外青铜坐佛<br><span class="highlight">免费</span></td>
+                        <td>步行</td>
+                        <td>15分钟</td>
+                    </tr>
+                    <tr>
+                        <td>13:30</td>
+                        <td>宝莲禅寺</td>
+                        <td>香港重要佛教圣地</td>
+                        <td>步行</td>
+                        <td>5分钟</td>
+                    </tr>
+                    <tr>
+                        <td>14:30</td>
+                        <td>东荟城</td>
+                        <td>奥特莱斯购物<br><span class="highlight">预算3000HKD</span></td>
+                        <td>公交（S1线）</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td>17:30</td>
+                        <td>香港国际机场</td>
+                        <td>办理登机手续</td>
+                        <td>机场快线</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td>18:30</td>
+                        <td>机场免税店</td>
+                        <td>购物、晚餐<br><span class="highlight">预算500HKD</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
             
             <div class="note">
                 <strong>购物提示：</strong> 东荟城是香港最大的奥特莱斯，品牌折扣店集中，建议预留充足时间
@@ -951,32 +1057,31 @@
         </div>
         
         <footer>
-            <p>© 2024 中国香港旅游攻略 | 深度文化体验 | 美食购物全指南</p>
+            <p>© 2023 中国香港旅游攻略 | 深度文化体验 | 美食购物全指南</p>
             <p>温馨提示：香港地铁四通八达，建议购买八达通卡方便出行</p>
-	    <p>©攻略均为旅游后整理，具体请以实际为准 | 如有侵权电邮 mao.sun@foxmail.com</p>
         </footer>
     </div>
     
     <script>
-        // 确保DOM加载完成
         document.addEventListener('DOMContentLoaded', function() {
             // 香港介绍模态框控制
             const modal = document.getElementById('hkModal');
             const introBtn = document.getElementById('introBtn');
             const closeBtn = document.querySelector('.close-btn');
             
-            // 修复按钮点击事件
+            // 打开模态框
             if (introBtn) {
                 introBtn.addEventListener('click', function() {
                     modal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // 防止背景滚动
+                    document.body.style.overflow = 'hidden';
                 });
             }
             
+            // 关闭模态框
             if (closeBtn) {
                 closeBtn.addEventListener('click', function() {
                     modal.style.display = 'none';
-                    document.body.style.overflow = ''; // 恢复滚动
+                    document.body.style.overflow = '';
                 });
             }
             
@@ -993,11 +1098,7 @@
             
             // 监听滚动事件
             window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopBtn.classList.add('show');
-                } else {
-                    backToTopBtn.classList.remove('show');
-                }
+                backToTopBtn.classList.toggle('show', window.scrollY > 300);
             });
             
             // 返回顶部功能
