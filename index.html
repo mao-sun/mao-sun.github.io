@@ -196,50 +196,131 @@
         
         /* 移动设备优化 */
         @media (max-width: 768px) {
-            body { padding: 10px; }
-            h1 { font-size: 2rem; }
-            .subtitle { font-size: 1.05rem; padding: 0 10px; }
-            .search-box { padding: 14px 50px 14px 45px; font-size: 1rem; height: 50px; }
-            .card-header { font-size: 1.5rem; padding: 20px; }
-            .search-icon { left: 18px; font-size: 1.2rem; }
-            .search-btn { width: 38px; height: 38px; right: 8px; font-size: 0.9rem; }
-            .card-content { padding: 20px 15px; }
-            h3 { font-size: 1.25rem; margin-bottom: 15px; }
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-            .area-item { padding: 12px; min-height: 60px; }
-            .area-item span { font-size: 1rem; }
-            .country-name { font-size: 1rem; }
-            .country-en { font-size: 0.8rem; }
-            .region-header { padding: 12px 16px; font-size: 1.1rem; }
-            .region-intro { font-size: 0.95rem; margin-bottom: 20px; }
-            .map-icon { font-size: 2rem; }
-            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; font-size: 0.9rem; }
-            footer { padding: 20px; font-size: 0.9rem; }
-            .suggestion-item { padding: 10px 15px; flex-direction: column; align-items: flex-start; }
-            .suggestion-en { margin-top: 5px; font-size: 0.85rem; }
+            body { padding: 8px; }
+            h1 { font-size: 1.8rem; margin-bottom: 8px; }
+            .subtitle { font-size: 0.95rem; padding: 0 8px; }
+            .search-container { margin: 18px auto 25px; }
+            .search-box { padding: 12px 50px 12px 45px; font-size: 0.95rem; height: 48px; }
+            .card-header { font-size: 1.4rem; padding: 18px; }
+            .search-icon { left: 18px; font-size: 1.1rem; }
+            .search-btn { width: 36px; height: 36px; right: 8px; font-size: 0.85rem; }
+            .card-content { padding: 18px 12px; }
+            h3 { font-size: 1.15rem; margin-bottom: 15px; padding-bottom: 8px; }
+            
+            /* 减少区域间距 */
+            .region-section { margin-bottom: 35px; }
+            .region-intro { font-size: 0.9rem; margin-bottom: 18px; }
+            .map-icon { font-size: 1.8rem; margin-bottom: 12px; }
+            
+            /* 调整区域标题样式 */
+            .region-header { 
+                padding: 10px 14px; 
+                font-size: 1.05rem; 
+                margin-top: 18px;
+                margin-bottom: 8px;
+            }
+            
+            .area-grid, .region-content { 
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+                gap: 12px; 
+            }
+            
+            .area-item { 
+                padding: 10px; 
+                min-height: 60px; 
+                font-size: 0.95rem;
+            }
+            
+            .area-item span { font-size: 0.95rem; }
+            .country-name { font-size: 0.95rem; }
+            .country-en { font-size: 0.75rem; }
+            
+            .back-to-top { 
+                bottom: 15px; right: 15px; 
+                width: 38px; height: 38px; 
+                font-size: 0.85rem; 
+            }
+            
+            footer { 
+                padding: 18px; 
+                font-size: 0.85rem; 
+                margin-top: 18px;
+            }
+            
+            .suggestion-item { 
+                padding: 10px 15px; 
+                flex-direction: column; 
+                align-items: flex-start; 
+            }
+            
+            .suggestion-en { 
+                margin-top: 5px; 
+                font-size: 0.8rem; 
+            }
+            
+            /* 减小垂直区域列表间距 */
+            .vertical-region-list { gap: 8px; }
         }
         
         @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            .subtitle { font-size: 0.95rem; }
-            .search-container { margin: 20px auto 30px; }
-            .search-box { padding: 12px 45px 12px 40px; height: 48px; font-size: 0.95rem; }
-            .search-icon { left: 15px; font-size: 1.1rem; }
-            .card-header { font-size: 1.4rem; padding: 18px; }
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-            .area-item { padding: 10px 8px; min-height: 55px; }
-            .area-item span { font-size: 0.95rem; }
-            .region-header { padding: 10px 14px; font-size: 1rem; }
-            h3 { font-size: 1.15rem; }
-            .country-name { font-size: 0.95rem; }
-            .country-en { font-size: 0.75rem; }
-            .region-intro { font-size: 0.9rem; margin-bottom: 15px; }
-            footer { padding: 15px; font-size: 0.85rem; }
+            h1 { font-size: 1.6rem; }
+            .subtitle { font-size: 0.9rem; }
+            .search-container { margin: 15px auto 20px; }
+            .search-box { padding: 10px 45px 10px 40px; height: 46px; font-size: 0.9rem; }
+            .card-header { font-size: 1.3rem; padding: 16px; }
+            
+            /* 进一步减小区域间距 */
+            .region-section { margin-bottom: 28px; }
+            .region-intro { font-size: 0.85rem; margin-bottom: 15px; }
+            .map-icon { font-size: 1.6rem; }
+            
+            /* 调整区域标题样式 */
+            .region-header { 
+                padding: 8px 12px; 
+                font-size: 0.95rem; 
+                margin-top: 15px;
+            }
+            
+            .area-grid, .region-content { 
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+                gap: 10px; 
+            }
+            
+            .area-item { 
+                padding: 8px; 
+                min-height: 55px; 
+                font-size: 0.9rem;
+            }
+            
+            h3 { font-size: 1.05rem; margin-bottom: 12px; }
+            .country-name { font-size: 0.9rem; }
+            .country-en { font-size: 0.7rem; }
+            footer { padding: 15px; font-size: 0.8rem; }
+            
+            /* 减小垂直区域列表间距 */
+            .vertical-region-list { gap: 6px; }
         }
         
         @media (max-width: 360px) {
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-            .search-box { padding: 10px 40px 10px 35px; height: 46px; font-size: 0.9rem; }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+            .search-box { padding: 8px 40px 8px 35px; height: 44px; font-size: 0.85rem; }
+            
+            /* 进一步减小区域间距 */
+            .region-section { margin-bottom: 22px; }
+            .region-intro { font-size: 0.8rem; margin-bottom: 12px; }
+            
+            /* 调整区域标题样式 */
+            .region-header { 
+                padding: 7px 10px; 
+                font-size: 0.9rem; 
+                margin-top: 12px;
+            }
+            
+            .area-item { 
+                padding: 6px 5px; 
+                min-height: 50px; 
+                font-size: 0.85rem;
+            }
         }
         
         /* 触摸屏优化 */
