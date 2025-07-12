@@ -144,6 +144,15 @@
         .btn-outline:hover {
             background: rgba(2, 136, 209, 0.08);
         }
+
+        .btn-suggestion {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+        
+        .btn-suggestion:hover {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
         
         .gratitude {
             margin-top: 30px;
@@ -152,6 +161,14 @@
             color: #78909c;
             font-size: 0.95rem;
             line-height: 1.6;
+        }
+
+        .contact-email {
+            display: block;
+            margin-top: 15px;
+            color: #0288d1;
+            font-weight: 500;
+            font-size: 1.05rem;
         }
         
         /* 支持模态框 */
@@ -166,6 +183,7 @@
             z-index: 1000;
             align-items: center;
             justify-content: center;
+            overflow-y: auto; /* 添加滚动功能 */
         }
         
         .modal-content {
@@ -177,6 +195,8 @@
             text-align: center;
             position: relative;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            max-height: 90vh; /* 添加最大高度 */
+            overflow-y: auto; /* 添加滚动功能 */
         }
         
         .close-modal {
@@ -239,6 +259,118 @@
             color: #90a4ae;
             margin-top: 15px;
             font-style: italic;
+        }
+
+        /* 目的地推荐表单样式 */
+        .suggestion-form {
+            margin: 30px 0 20px;
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a6572;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dce6ed;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #f9fbfd;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            color: #2c3e50;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #0288d1;
+            box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.15);
+            background: white;
+        }
+        
+        .form-input::placeholder {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+        
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .suggestion-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #bdc3c7, transparent);
+            margin: 20px 0;
         }
         
         /* 动画效果 */
@@ -321,6 +453,16 @@
                 width: 160px;
                 height: 160px;
             }
+
+            .form-input {
+                padding: 12px 14px;
+                font-size: 0.9rem;
+            }
+            
+            .submit-btn {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -354,6 +496,19 @@
             .qr-placeholder {
                 width: 140px;
                 height: 140px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            .form-input {
+                padding: 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -392,11 +547,16 @@
             <button class="travel-btn" id="supportButton" style="background: linear-gradient(135deg, #ff9800, #f57c00);">
                 <i class="material-icons">favorite</i> 支持我的旅程
             </button>
+            <!-- 新增的推荐按钮 -->
+            <button class="travel-btn btn-suggestion" id="suggestionButton">
+                <i class="material-icons">location_on</i> 推荐下一站
+            </button>
         </div>
         
         <p class="gratitude">
-            感谢您与我同行在这探索世界的旅途上。<br>
-            每一双注视远方的眼睛，都让风景有了新的意义。
+            感谢您与我同行在这探索世界的旅途上<br>
+            每一双注视远方的眼睛，都让风景有了新的意义<br>
+            <span class="contact-email">如有宝贵意见或侵权行为，请联系：mao.sun@foxmail.com</span>
         </p>
     </div>
     
@@ -414,8 +574,75 @@
                     <i class="material-icons">qr_code_2</i>
                 </div>
             </div>
+            <!-- 添加标注 -->
             <p class="support-note">
-                扫码支持我的旅行创作 | 每一份心意都将成为下段旅程的星光
+                扫码支持我的旅行创作 | 赞赏/支持，非商品交易 | 每一份心意都将成为下段旅程的星光
+            </p>
+        </div>
+    </div>
+
+    <!-- 新增的目的地推荐模态框 -->
+    <div class="modal" id="suggestionModal">
+        <div class="modal-content">
+            <span class="close-modal material-icons" id="closeSuggestionModal">close</span>
+            <h2 class="support-title">为我推荐下一站</h2>
+            <p class="support-text">
+                您的建议将指引我探索新的天地，<br>
+                分享您心中的理想目的地，或许下一段旅程就从这里开始
+            </p>
+            
+            <div class="divider"></div>
+            
+            <div class="suggestion-form">
+                <div class="form-group">
+                    <label for="destination">
+                        您推荐的目的地（Your recommended destinations）
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" id="destination" class="form-input" 
+                           placeholder="例：冰岛雷克雅未克、中国香港（Examples: Reykjavik, Iceland, Hong Kong, China）" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reason">
+                        推荐理由（可选）（Reason for recommendation, Optional）
+                    </label>
+                    <input type="text" id="reason" class="form-input" 
+                           placeholder="为什么我应该去这个地方？（Why should I go to this place？）">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">
+                        您的联系方式（Your contact details）
+                    </label>
+                    <input type="text" id="contact" class="form-input" 
+                           placeholder="电子邮箱或者电话号码（E-mail address or phone number）">
+                </div>
+                
+                <button class="submit-btn" id="submitSuggestion">
+                    <i class="material-icons">send</i> 提交建议
+                </button>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="material-icons">check_circle</i> 
+                    感谢您的推荐！您的建议已成功提交，将指引我未来的旅程。
+                </div>
+            </div>
+            
+            <p class="suggestion-text">
+                您的每个建议都是宝贵的旅行灵感，我会认真考虑每个推荐的目的地。
+            </p>
+            
+            <div class="divider"></div>
+            
+            <div class="qr-container">
+                <div class="qr-placeholder">
+                    <i class="material-icons">qr_code_2</i>
+                </div>
+            </div>
+            <!-- 添加标注 -->
+            <p class="support-note">
+                扫码支持我的旅行创作 | 赞赏/支持，非商品交易 | 让更多目的地成为可能
             </p>
         </div>
     </div>
@@ -559,16 +786,19 @@
         
         supportButton.addEventListener('click', function() {
             supportModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         });
         
         closeModal.addEventListener('click', function() {
             supportModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         });
         
         // 点击模态框外部关闭
         window.addEventListener('click', function(event) {
             if (event.target === supportModal) {
                 supportModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
         
@@ -589,6 +819,79 @@
         
         // 绑定探索按钮
         document.getElementById('exploreButton').addEventListener('click', exploreRandomDestination);
+
+        // 新增的推荐模态框功能
+        const suggestionModal = document.getElementById('suggestionModal');
+        const suggestionButton = document.getElementById('suggestionButton');
+        const closeSuggestionModal = document.getElementById('closeSuggestionModal');
+        const submitSuggestion = document.getElementById('submitSuggestion');
+        const successMessage = document.getElementById('successMessage');
+        
+        // 打开推荐模态框
+        suggestionButton.addEventListener('click', function() {
+            // 重置表单状态
+            document.getElementById('destination').value = '';
+            document.getElementById('reason').value = '';
+            document.getElementById('contact').value = '';
+            successMessage.style.display = 'none';
+            submitSuggestion.style.display = 'flex';
+            suggestionModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // 关闭推荐模态框
+        closeSuggestionModal.addEventListener('click', function() {
+            suggestionModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            if (event.target === suggestionModal) {
+                suggestionModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // 提交建议功能
+        submitSuggestion.addEventListener('click', function() {
+            const destination = document.getElementById('destination').value;
+            const reason = document.getElementById('reason').value;
+            const contact = document.getElementById('contact').value;
+            
+            if (!destination) {
+                alert('请填写您推荐的目的地');
+                return;
+            }
+            
+            // 显示加载状态
+            submitSuggestion.disabled = true;
+            submitSuggestion.innerHTML = '<i class="material-icons">hourglass_empty</i> 提交中...';
+            
+            // 模拟提交过程
+            setTimeout(() => {
+                // 显示成功消息
+                successMessage.style.display = 'block';
+                submitSuggestion.style.display = 'none';
+                
+                // 在控制台记录提交内容
+                console.log('目的地推荐：', destination);
+                console.log('推荐理由：', reason || '未提供理由');
+                console.log('联系方式：', contact || '未提供联系方式');
+                
+                // 3秒后重置表单
+                setTimeout(() => {
+                    submitSuggestion.disabled = false;
+                    submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
+                    submitSuggestion.style.display = 'flex';
+                    successMessage.style.display = 'none';
+                    
+                    // 关闭模态框
+                    suggestionModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 3000);
+            }, 1500);
+        });
     </script>
 </body>
 </html>
