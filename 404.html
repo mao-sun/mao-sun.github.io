@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅途中的风景 | 旅行手记</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 背景旅行图标 */
+        .travel-icon {
+            position: absolute;
+            opacity: 0.08;
+            font-size: 8rem;
+            z-index: 0;
+        }
+        
+        .compass { top: 10%; left: 5%; transform: rotate(25deg); }
+        .mountain { top: 15%; right: 8%; transform: rotate(-15deg); }
+        .camera { bottom: 20%; left: 7%; transform: rotate(10deg); }
+        .map { bottom: 15%; right: 10%; transform: rotate(-5deg); }
+        
+        /* 主内容卡片 */
+        .container {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(41, 128, 185, 0.15);
+            padding: 35px 30px;
+            text-align: center;
+            max-width: 700px;
+            width: 95%;
+            z-index: 10;
+            position: relative;
+            border: 1px solid rgba(179, 229, 252, 0.5);
+            margin: 0 auto;
+        }
+        
+        /* 主题图标 */
+        .journey-icon {
+            font-size: 4rem;
+            color: #0288d1;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        h1 {
+            color: #01579b;
+            font-size: 2.4rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .poetic-subtitle {
+            color: #78909c;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+        
+        .poetic-text {
+            font-size: 1.6rem;
+            color: #00838f;
+            line-height: 1.5;
+            margin: 25px 0;
+            font-style: italic;
+            font-weight: 300;
+        }
+        
+        .message {
+            color: #546e7a;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 20px 0 30px;
+        }
+        
+        .highlight {
+            background: linear-gradient(to right, #80deea, #4fc3f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 500;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+        
+        .travel-btn {
+            background: linear-gradient(to right, #0288d1, #0277bd);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(2, 119, 189, 0.2);
+            flex: 1;
+            min-width: 160px;
+            justify-content: center;
+        }
+        
+        .travel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(2, 119, 189, 0.3);
+            background: linear-gradient(to right, #039be5, #0288d1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #0288d1;
+            color: #0277bd;
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(2, 136, 209, 0.08);
+        }
+        
+        .gratitude {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e1f5fe;
+            color: #78909c;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* 支持模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #78909c;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: #0288d1;
+            transform: rotate(90deg);
+        }
+        
+        .support-title {
+            color: #0277bd;
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            font-weight: 400;
+        }
+        
+        .support-text {
+            color: #546e7a;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 12px 0 20px;
+        }
+        
+        .qr-container {
+            margin: 15px auto;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f4ff 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 2px dashed #81d4fa;
+        }
+        
+        .qr-placeholder .material-icons {
+            font-size: 2.5rem;
+            color: #4fc3f7;
+        }
+        
+        .support-note {
+            font-size: 0.85rem;
+            color: #90a4ae;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
+        .delay-3 { animation-delay: 1.5s; }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .travel-icon {
+                font-size: 6rem;
+            }
+            
+            .container {
+                padding: 25px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .poetic-subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+            
+            .poetic-text {
+                font-size: 1.4rem;
+                margin: 20px 0;
+            }
+            
+            .message {
+                font-size: 1rem;
+                margin: 15px 0 25px;
+            }
+            
+            .btn-group {
+                gap: 10px;
+            }
+            
+            .travel-btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                min-width: 140px;
+            }
+            
+            .gratitude {
+                font-size: 0.9rem;
+                margin-top: 25px;
+                padding-top: 15px;
+            }
+            
+            .modal-content {
+                padding: 25px 15px;
+            }
+            
+            .support-title {
+                font-size: 1.4rem;
+            }
+            
+            .support-text {
+                font-size: 0.95rem;
+            }
+            
+            .qr-placeholder {
+                width: 160px;
+                height: 160px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .travel-icon {
+                font-size: 4rem;
+            }
+            
+            .journey-icon {
+                font-size: 3.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .poetic-text {
+                font-size: 1.2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .travel-btn {
+                width: 100%;
+                max-width: 280px;
+                min-width: 0;
+            }
+            
+            .qr-placeholder {
+                width: 140px;
+                height: 140px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景装饰元素 -->
+    <div class="travel-icon compass floating">🌎</div>
+    <div class="travel-icon mountain floating delay-1">⛰️</div>
+    <div class="travel-icon camera floating delay-2">📷</div>
+    <div class="travel-icon map floating delay-3">🗺️</div>
+    
+    <div class="container">
+        <div class="journey-icon">✈️</div>
+        
+        <h1>足迹未至的远方</h1>
+        <p class="poetic-subtitle">只因行囊未及，非是风景不美</p>
+        
+        <p class="poetic-text">
+            那片土地的风声还未掠过耳畔<br>
+            待我采撷过晨雾与星辉<br>
+            定将途中所见悉数献予知音
+        </p>
+        
+        <p class="message">
+            您寻找的<span class="highlight">旅行手记</span>尚未落笔成章<br>
+            或许在另一片土地，我们能相遇在同一片星空下
+        </p>
+        
+        <div class="btn-group">
+            <button class="travel-btn" onclick="window.location.href='index.html'">
+                <i class="material-icons">home</i> 返回驿站
+            </button>
+            <button class="travel-btn btn-outline" id="exploreButton">
+                <i class="material-icons">map</i> 探索已至之地
+            </button>
+            <button class="travel-btn" id="supportButton" style="background: linear-gradient(135deg, #ff9800, #f57c00);">
+                <i class="material-icons">favorite</i> 支持我的旅程
+            </button>
+        </div>
+        
+        <p class="gratitude">
+            感谢您与我同行在这探索世界的旅途上。<br>
+            每一双注视远方的眼睛，都让风景有了新的意义。
+        </p>
+    </div>
+    
+    <!-- 支持模态框 -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <span class="close-modal material-icons" id="closeModal">close</span>
+            <h2 class="support-title">旅途中的相遇</h2>
+            <p class="support-text">
+                感谢您愿意支持一个同在路上的人。您的善意将化作旅程中的一缕清风，<br>
+                让更多风景能被记录与分享。这不仅是物质上的支持，更是对共同热爱旅行的一种珍贵回应。
+            </p>
+            <div class="qr-container">
+                <div class="qr-placeholder">
+                    <i class="material-icons">qr_code_2</i>
+                </div>
+            </div>
+            <p class="support-note">
+                扫码支持我的旅行创作 | 每一份心意都将成为下段旅程的星光
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 目的地链接池（已去目的地取消注释）
+        const travelDestinations = [
+            // 热门城市
+            '/beijing.html',     // 北京·故宫红墙
+            '/kyoto.html',       // 京都·樱花隧道
+            // '/paris.html',    // 巴黎（待解锁）
+            // '/santorini.html',// 圣托里尼（待解锁）
+            '/bali.html',        // 巴厘岛·神庙日落
+            '/lisbon.html',      // 里斯本·电车海岸
+            
+            // 中国省份
+            // 华北地区
+            '/NorthChina-Beijing.html',        // 北京
+            '/NorthChina-Tianjin.html',        // 天津
+            // '/NorthChina-Hebei.html',       // 河北（待解锁）
+            // '/NorthChina-Shanxi.html',      // 山西（待解锁）
+            // '/NorthChina-InnerMongolia.html' // 内蒙古（待解锁）
+            
+            // 东北地区
+            // '/NortheastChina-Liaoning.html',
+            // '/NortheastChina-Jilin.html',
+            // '/NortheastChina-Heilongjiang.html',
+            
+            // 华东地区
+            '/EastChina-Shanghai.html',        // 上海
+            '/EastChina-Jiangsu.html',         // 江苏
+            // '/EastChina-Zhejiang.html',      // 浙江（待解锁）
+            // '/EastChina-Anhui.html',         // 安徽（待解锁）
+            // '/EastChina-Fujian.html',        // 福建（待解锁）
+            // '/EastChina-Jiangxi.html',       // 江西（待解锁）
+            '/EastChina-Shandong.html',        // 山东
+            
+            // 华中地区
+            // '/CentralChina-Henan.html',      // 河南（待解锁）
+            // '/CentralChina-Hubei.html',      // 湖北（待解锁）
+            // '/CentralChina-Hunan.html',      // 湖南（待解锁）
+            
+            // 华南地区
+            // '/SouthChina-Guangdong.html',    // 广东（待解锁）
+            // '/SouthChina-Guangxi.html',       // 广西（待解锁）
+            // '/SouthChina-Hainan.html',        // 海南（待解锁）
+            
+            // 西南地区
+            '/SouthwestChina-Chongqing.html',  // 重庆
+            // '/SouthwestChina-Sichuan.html',   // 四川（待解锁）
+            // '/SouthwestChina-Guizhou.html',   // 贵州（待解锁）
+            // '/SouthwestChina-Yunnan.html',    // 云南（待解锁）
+            // '/SouthwestChina-Tibet.html',     // 西藏（待解锁）
+            
+            // 西北地区
+            // '/NorthwestChina-Shaanxi.html',   // 陕西（待解锁）
+            // '/NorthwestChina-Gansu.html',     // 甘肃（待解锁）
+            // '/NorthwestChina-Qinghai.html',    // 青海（待解锁）
+            // '/NorthwestChina-Ningxia.html',   // 宁夏（待解锁）
+            // '/NorthwestChina-Xinjiang.html',  // 新疆（待解锁）
+            
+            // 港澳台地区
+            '/China-HongKong.html',            // 香港
+            // '/China-Macau.html',              // 澳门（待解锁）
+            // '/China-Taiwan.html',             // 台湾（待解锁）
+            
+            // 国际地区
+            // 亚洲
+            // '/Asia-Japan.html',              // 日本（待解锁）
+            '/Asia-South-Korea.html',          // 韩国
+            // '/Asia-Vietnam.html',             // 越南（待解锁）
+            // '/Asia-Thailand.html',            // 泰国（待解锁）
+            // '/Asia-Singapore.html',           // 新加坡（待解锁）
+            // '/Asia-Malaysia.html',            // 马来西亚（待解锁）
+            // '/Asia-Indonesia.html',           // 印度尼西亚（待解锁）
+            // '/Asia-Philippines.html',         // 菲律宾（待解锁）
+            // '/Asia-Cambodia.html',            // 柬埔寨（待解锁）
+            // '/Asia-Laos.html',                // 老挝（待解锁）
+            // '/Asia-Myanmar.html',             // 缅甸（待解锁）
+            // '/Asia-India.html',               // 印度（待解锁）
+            // '/Asia-Nepal.html',               // 尼泊尔（待解锁）
+            // '/Asia-Sri-Lanka.html',           // 斯里兰卡（待解锁）
+            // '/Asia-Maldives.html',            // 马尔代夫（待解锁）
+            // '/Asia-United-Arab-Emirates.html',// 阿联酋（待解锁）
+            // '/Asia-Turkey.html',              // 土耳其（待解锁）
+            
+            // 欧洲
+            // '/Europe-United-Kingdom.html',   // 英国（待解锁）
+            '/Europe-France.html',             // 法国
+            // '/Europe-Germany.html',           // 德国（待解锁）
+            // '/Europe-Italy.html',             // 意大利（待解锁）
+            // '/Europe-Spain.html',             // 西班牙（待解锁）
+            // '/Europe-Portugal.html',          // 葡萄牙（待解锁）
+            // '/Europe-Netherlands.html',       // 荷兰（待解锁）
+            // '/Europe-Belgium.html',           // 比利时（待解锁）
+            // '/Europe-Switzerland.html',       // 瑞士（待解锁）
+            // '/Europe-Austria.html',           // 奥地利（待解锁）
+            // '/Europe-Greece.html',            // 希腊（待解锁）
+            // '/Europe-Iceland.html',           // 冰岛（待解锁）
+            // '/Europe-Norway.html',           // 挪威（待解锁）
+            // '/Europe-Sweden.html',            // 瑞典（待解锁）
+            // '/Europe-Denmark.html',           // 丹麦（待解锁）
+            // '/Europe-Finland.html',           // 芬兰（待解锁）
+            // '/Europe-Russia.html',            // 俄罗斯（待解锁）
+            // '/Europe-Czech-Republic.html',    // 捷克（待解锁）
+            // '/Europe-Hungary.html',           // 匈牙利（待解锁）
+            // '/Europe-Poland.html',            // 波兰（待解锁）
+            
+            // 北美洲
+            // '/NorthAmerica-United-States.html', // 美国（待解锁）
+            // '/NorthAmerica-Canada.html',       // 加拿大（待解锁）
+            // '/NorthAmerica-Mexico.html',      // 墨西哥（待解锁）
+            // '/NorthAmerica-Cuba.html',        // 古巴（待解锁）
+            // '/NorthAmerica-Costa-Rica.html',  // 哥斯达黎加（待解锁）
+            // '/NorthAmerica-Panama.html',      // 巴拿马（待解锁）
+            
+            // 南美洲
+            // '/SouthAmerica-Brazil.html',      // 巴西（待解锁）
+            // '/SouthAmerica-Argentina.html',   // 阿根廷（待解锁）
+            // '/SouthAmerica-Chile.html',       // 智利（待解锁）
+            // '/SouthAmerica-Peru.html',        // 秘鲁（待解锁）
+            // '/SouthAmerica-Colombia.html',    // 哥伦比亚（待解锁）
+            // '/SouthAmerica-Ecuador.html',     // 厄瓜多尔（待解锁）
+            // '/SouthAmerica-Bolivia.html',     // 玻利维亚（待解锁）
+            // '/SouthAmerica-Uruguay.html',     // 乌拉圭（待解锁）
+            // '/SouthAmerica-Paraguay.html',    // 巴拉圭（待解锁）
+            // '/SouthAmerica-Venezuela.html',   // 委内瑞拉（待解锁）
+            
+            // 大洋洲
+            // '/Oceania-Australia.html',        // 澳大利亚（待解锁）
+            // '/Oceania-New-Zealand.html',      // 新西兰（待解锁）
+            // '/Oceania-Fiji.html',              // 斐济（待解锁）
+            // '/Oceania-Samoa.html',             // 萨摩亚（待解锁）
+            // '/Oceania-Tonga.html',             // 汤加（待解锁）
+            
+            // 非洲
+            // '/Africa-Egypt.html',              // 埃及（待解锁）
+            // '/Africa-South-Africa.html',       // 南非（待解锁）
+            // '/Africa-Kenya.html',              // 肯尼亚（待解锁）
+            // '/Africa-Morocco.html',            // 摩洛哥（待解锁）
+            // '/Africa-Tanzania.html'            // 坦桑尼亚（待解锁）
+        ];
+        
+        // 支持模态框交互
+        const supportModal = document.getElementById('supportModal');
+        const supportButton = document.getElementById('supportButton');
+        const closeModal = document.getElementById('closeModal');
+        
+        supportButton.addEventListener('click', function() {
+            supportModal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', function() {
+            supportModal.style.display = 'none';
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            if (event.target === supportModal) {
+                supportModal.style.display = 'none';
+            }
+        });
+        
+        // 探索已至之地功能
+        function exploreRandomDestination() {
+            // 筛选已解锁目的地（过滤注释项）
+            const unlocked = travelDestinations.filter(url => !url.startsWith('//'));
+            
+            if(unlocked.length > 0) {
+                // 随机选择已解锁目的地
+                const randomURL = unlocked[Math.floor(Math.random() * unlocked.length)];
+                window.location.href = randomURL;
+            } else {
+                // 友好提示替代报错
+                alert('我的旅行地图正在绘制中，请先解锁任意目的地！');
+            }
+        }
+        
+        // 绑定探索按钮
+        document.getElementById('exploreButton').addEventListener('click', exploreRandomDestination);
+    </script>
+</body>
+</html>
