@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的旅行攻略 - @Mao </title>
+    <title>Mao的旅行攻略</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
         
         body { 
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%); 
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%); 
             color: #333; line-height: 1.6; padding: 15px; min-height: 100vh; 
         }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 10px; }
         
         header { 
-            text-align: center; padding: 30px 15px; margin-bottom: 30px; 
-            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%); 
+            text-align: center; padding: 30px 15px; 
+            background: linear-gradient(135deg, #4b6cb7 0%, #2a5298 100%); 
             color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
             position: relative; overflow: hidden; 
             animation: gradientShift 12s ease infinite; background-size: 200% 200%; 
+            margin-bottom: 25px;
         }
         
         @keyframes gradientShift { 
@@ -29,7 +30,10 @@
             100% { background-position: 0% 50%; } 
         }
         
-        h1 { font-size: 2.5rem; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }
+        h1 { 
+            font-size: 2.5rem; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+        }
         .subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
         
         .search-container { 
@@ -49,7 +53,7 @@
         
         .search-icon { 
             position: absolute; left: 22px; top: 50%; transform: translateY(-50%); 
-            color: #6c757d; font-size: 1.3rem; 
+            color: #4b6cb7; font-size: 1.3rem; 
         }
         
         .search-btn { 
@@ -78,9 +82,24 @@
             background-color: #ffeaa7; color: #d35400; padding: 0 2px; border-radius: 3px; 
         }
         
+        /* 新的双栏布局 */
+        .two-columns {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .two-columns > div {
+            flex: 1;
+        }
+        
         .region-section { 
-            margin-bottom: 50px; background: white; border-radius: 18px; overflow: hidden; 
+            margin-bottom: 0;
+            background: white; border-radius: 18px; overflow: hidden; 
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; width: 100%; 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .region-section:hover { 
@@ -88,15 +107,41 @@
         }
         
         .card-header { 
-            padding: 25px; color: white; text-align: center; font-size: 1.8rem; 
-            display: flex; justify-content: center; 
+            padding: 25px; color: white; text-align: center; 
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
         }
         
-        .card-header h2 { width: 100%; text-align: center; }
-        .china-header { background: linear-gradient(135deg, #e44d26 0%, #f16529 100%); }
-        .international-header { background: linear-gradient(135deg, #2193b0 0%, #6dd5ed 100%); }
+        .card-header h2 { 
+            width: 100%; text-align: center; 
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
         
-        .card-content { padding: 25px 20px; }
+        .map-icon {
+            font-size: 2.2rem;
+            color: #ffd43b;
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 212, 59, 0.3);
+        }
+        
+        .china-header { 
+            background: linear-gradient(135deg, #3a5795 0%, #2a5298 100%); 
+        }
+        .international-header { 
+            background: linear-gradient(135deg, #2a5298 0%, #1a4288 100%); 
+        }
+        
+        .card-content { padding: 25px 20px; flex: 1; }
         h3 { 
             margin-bottom: 20px; font-size: 1.4rem; color: #2c3e50; border-bottom: 2px solid #f0f3f5; 
             padding-bottom: 10px; display: flex; align-items: center; 
@@ -110,20 +155,21 @@
         }
         
         .area-item { 
-            padding: 14px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); 
+            padding: 14px; 
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%); 
             border-radius: 10px; cursor: pointer; transition: all 0.25s ease; 
             display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-            border: 1px solid #eaeaea; height: 100%; justify-content: center; align-items: center; 
+            border: 1px solid #d0e0ff; height: 100%; justify-content: center; align-items: center; 
             text-align: center; min-height: 65px; 
         }
         
         .area-item:hover { 
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); 
+            background: linear-gradient(135deg, #e6f0ff 0%, #d0e0ff 100%); 
             transform: translateY(-4px); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); 
         }
         
         .area-item span { font-size: 1.1rem; }
-        .country-name { font-weight: 700; color: #2980b9; }
+        .country-name { font-weight: 700; color: #2a5298; }
         .country-en { font-size: 0.9rem; color: #6c757d; font-style: italic; margin-top: 4px; }
         
         /* 确保所有国家/地区的中英文分行显示 */
@@ -138,9 +184,10 @@
         
         .region-header { 
             background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 14px 18px; 
-            border-radius: 10px; margin-top: 25px; margin-bottom: 12px; font-weight: bold; 
+            border-radius: 10px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; 
             display: flex; align-items: center; cursor: pointer; transition: all 0.25s ease; 
             font-size: 1.2rem; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04); 
+            border: 1px solid #c5dbfa;
         }
         
         .region-header:hover { 
@@ -155,6 +202,7 @@
             text-align: center; padding: 25px; color: #6c757d; font-size: 0.95rem; margin-top: 25px; 
             background: rgba(255, 255, 255, 0.8); border-radius: 18px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); 
             max-width: 1200px; margin-left: auto; margin-right: auto; 
+            border: 1px solid #e0e9ff;
         }
         
         .highlight { 
@@ -180,7 +228,6 @@
             font-size: 1rem; color: #495057; line-height: 1.7; 
         }
         
-        .map-icon { font-size: 2.5rem; margin-bottom: 15px; color: #ff6b6b; }
         .vertical-region-list { display: flex; flex-direction: column; gap: 12px; }
         
         .back-to-top { 
@@ -196,131 +243,82 @@
         
         /* 移动设备优化 */
         @media (max-width: 768px) {
-            body { padding: 8px; }
-            h1 { font-size: 1.8rem; margin-bottom: 8px; }
-            .subtitle { font-size: 0.95rem; padding: 0 8px; }
-            .search-container { margin: 18px auto 25px; }
-            .search-box { padding: 12px 50px 12px 45px; font-size: 0.95rem; height: 48px; }
-            .card-header { font-size: 1.4rem; padding: 18px; }
-            .search-icon { left: 18px; font-size: 1.1rem; }
-            .search-btn { width: 36px; height: 36px; right: 8px; font-size: 0.85rem; }
-            .card-content { padding: 18px 12px; }
-            h3 { font-size: 1.15rem; margin-bottom: 15px; padding-bottom: 8px; }
+            .two-columns {
+                flex-direction: column;
+                gap: 20px;
+            }
             
-            /* 减少区域间距 */
-            .region-section { margin-bottom: 35px; }
-            .region-intro { font-size: 0.9rem; margin-bottom: 18px; }
-            .map-icon { font-size: 1.8rem; margin-bottom: 12px; }
-            
-            /* 调整区域标题样式 */
+            body { padding: 10px; }
+            h1 { 
+                font-size: 2rem; 
+                flex-direction: column;
+                gap: 10px;
+            }
+            .subtitle { font-size: 1.05rem; padding: 0 10px; }
+            .search-box { padding: 14px 50px 14px 45px; font-size: 1rem; height: 50px; }
+            .card-header { padding: 20px; }
+            .card-header h2 { 
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .map-icon {
+                font-size: 1.8rem;
+                width: 50px;
+                height: 50px;
+            }
+            .search-icon { left: 18px; font-size: 1.2rem; }
+            .search-btn { width: 38px; height: 38px; right: 8px; font-size: 0.9rem; }
+            .card-content { padding: 20px 15px; }
+            h3 { 
+                font-size: 1.25rem; 
+                margin-bottom: 15px; 
+            }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+            .area-item { padding: 12px; min-height: 60px; }
+            .area-item span { font-size: 1rem; }
+            .country-name { font-size: 1rem; }
+            .country-en { font-size: 0.8rem; }
             .region-header { 
-                padding: 10px 14px; 
-                font-size: 1.05rem; 
-                margin-top: 18px;
+                padding: 12px 16px; 
+                font-size: 1.1rem; 
+                margin-top: 15px;
                 margin-bottom: 8px;
             }
-            
-            .area-grid, .region-content { 
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
-                gap: 12px; 
-            }
-            
-            .area-item { 
-                padding: 10px; 
-                min-height: 60px; 
-                font-size: 0.95rem;
-            }
-            
-            .area-item span { font-size: 0.95rem; }
-            .country-name { font-size: 0.95rem; }
-            .country-en { font-size: 0.75rem; }
-            
-            .back-to-top { 
-                bottom: 15px; right: 15px; 
-                width: 38px; height: 38px; 
-                font-size: 0.85rem; 
-            }
-            
-            footer { 
-                padding: 18px; 
-                font-size: 0.85rem; 
-                margin-top: 18px;
-            }
-            
-            .suggestion-item { 
-                padding: 10px 15px; 
-                flex-direction: column; 
-                align-items: flex-start; 
-            }
-            
-            .suggestion-en { 
-                margin-top: 5px; 
-                font-size: 0.8rem; 
-            }
-            
-            /* 减小垂直区域列表间距 */
-            .vertical-region-list { gap: 8px; }
+            .region-intro { font-size: 0.95rem; margin-bottom: 20px; }
+            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; font-size: 0.9rem; }
+            footer { padding: 20px; font-size: 0.9rem; }
+            .suggestion-item { padding: 10px 15px; flex-direction: column; align-items: flex-start; }
+            .suggestion-en { margin-top: 5px; font-size: 0.85rem; }
         }
         
         @media (max-width: 480px) {
-            h1 { font-size: 1.6rem; }
-            .subtitle { font-size: 0.9rem; }
-            .search-container { margin: 15px auto 20px; }
-            .search-box { padding: 10px 45px 10px 40px; height: 46px; font-size: 0.9rem; }
-            .card-header { font-size: 1.3rem; padding: 16px; }
-            
-            /* 进一步减小区域间距 */
-            .region-section { margin-bottom: 28px; }
-            .region-intro { font-size: 0.85rem; margin-bottom: 15px; }
-            .map-icon { font-size: 1.6rem; }
-            
-            /* 调整区域标题样式 */
+            h1 { font-size: 1.8rem; }
+            .subtitle { font-size: 0.95rem; }
+            .search-container { margin: 20px auto 30px; }
+            .search-box { padding: 12px 45px 12px 40px; height: 48px; font-size: 0.95rem; }
+            .search-icon { left: 15px; font-size: 1.1rem; }
+            .card-header { padding: 18px; }
+            .card-header h2 { font-size: 1.4rem; }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+            .area-item { padding: 10px 8px; min-height: 55px; }
+            .area-item span { font-size: 0.95rem; }
             .region-header { 
-                padding: 8px 12px; 
-                font-size: 0.95rem; 
-                margin-top: 15px;
+                padding: 10px 14px; 
+                font-size: 1rem; 
+                margin-top: 12px;
+                margin-bottom: 6px;
             }
-            
-            .area-grid, .region-content { 
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
-                gap: 10px; 
-            }
-            
-            .area-item { 
-                padding: 8px; 
-                min-height: 55px; 
-                font-size: 0.9rem;
-            }
-            
-            h3 { font-size: 1.05rem; margin-bottom: 12px; }
-            .country-name { font-size: 0.9rem; }
-            .country-en { font-size: 0.7rem; }
-            footer { padding: 15px; font-size: 0.8rem; }
-            
-            /* 减小垂直区域列表间距 */
-            .vertical-region-list { gap: 6px; }
+            h3 { font-size: 1.15rem; }
+            .country-name { font-size: 0.95rem; }
+            .country-en { font-size: 0.75rem; }
+            .region-intro { font-size: 0.9rem; margin-bottom: 15px; }
+            footer { padding: 15px; font-size: 0.85rem; }
         }
         
         @media (max-width: 360px) {
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
-            .search-box { padding: 8px 40px 8px 35px; height: 44px; font-size: 0.85rem; }
-            
-            /* 进一步减小区域间距 */
-            .region-section { margin-bottom: 22px; }
-            .region-intro { font-size: 0.8rem; margin-bottom: 12px; }
-            
-            /* 调整区域标题样式 */
-            .region-header { 
-                padding: 7px 10px; 
-                font-size: 0.9rem; 
-                margin-top: 12px;
-            }
-            
-            .area-item { 
-                padding: 6px 5px; 
-                min-height: 50px; 
-                font-size: 0.85rem;
-            }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            .search-box { padding: 10px 40px 10px 35px; height: 46px; font-size: 0.9rem; }
         }
         
         /* 触摸屏优化 */
@@ -344,126 +342,126 @@
             <div class="suggestions-container" id="suggestionsContainer"></div>
         </div>
         
-        <!-- 中国区域部分 -->
-        <div class="region-section">
-            <div class="card-header china-header">
-                <h2>中国</h2>
-            </div>
-            <div class="card-content">
-                <div class="region-intro">
-                    <div class="map-icon">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <p>中国拥有丰富的自然景观和悠久的历史文化，从壮丽的山河到现代化的都市，从古老的文明到多元的民族风情，探索这片神奇的土地，开启一段难忘的旅程。</p>
+        <!-- 双栏布局容器 -->
+        <div class="two-columns">
+            <!-- 中国区域部分 -->
+            <div class="region-section">
+                <div class="card-header china-header">
+                    <h2>
+                        <div class="map-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        中国
+                    </h2>
                 </div>
-                
-                <h3><i class="fas fa-layer-group"></i> 按区域浏览</h3>
-                
-                <div class="vertical-region-list">
-                    <!-- 地区列表 -->
-                    <div class="region-header" data-region="northChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>华北地区</span>
+                <div class="card-content">
+                    <div class="region-intro">
+                        <p>中国拥有丰富的自然景观和悠久的历史文化，从壮丽山河到现代都市，从古老文明到多元风情，探索这片神奇的土地，开启一段难忘的旅程</p>
                     </div>
-                    <div class="region-content" id="northChinaContent"></div>
                     
-                    <div class="region-header" data-region="northeastChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>东北地区</span>
-                    </div>
-                    <div class="region-content" id="northeastChinaContent"></div>
+                    <h3><i class="fas fa-layer-group"></i> 按区域浏览</h3>
                     
-                    <div class="region-header" data-region="eastChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>华东地区</span>
+                    <div class="vertical-region-list">
+                        <!-- 合并的华北-东北地区 -->
+                        <div class="region-header" data-region="northNortheastChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>华北-东北地区</span>
+                        </div>
+                        <div class="region-content" id="northNortheastChinaContent"></div>
+                        
+                        <!-- 华东地区 -->
+                        <div class="region-header" data-region="eastChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>华东地区</span>
+                        </div>
+                        <div class="region-content" id="eastChinaContent"></div>
+                        
+                        <!-- 合并的华中-华南地区 -->
+                        <div class="region-header" data-region="centralSouthChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>华中-华南地区</span>
+                        </div>
+                        <div class="region-content" id="centralSouthChinaContent"></div>
+                        
+                        <!-- 西南地区 -->
+                        <div class="region-header" data-region="southwestChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>西南地区</span>
+                        </div>
+                        <div class="region-content" id="southwestChinaContent"></div>
+                        
+                        <!-- 西北地区 -->
+                        <div class="region-header" data-region="northwestChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>西北地区</span>
+                        </div>
+                        <div class="region-content" id="northwestChinaContent"></div>
+                        
+                        <!-- 港澳台地区 -->
+                        <div class="region-header" data-region="hmtChina">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>港澳台地区</span>
+                        </div>
+                        <div class="region-content" id="hmtChinaContent"></div>
                     </div>
-                    <div class="region-content" id="eastChinaContent"></div>
-                    
-                    <div class="region-header" data-region="centralChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>华中地区</span>
-                    </div>
-                    <div class="region-content" id="centralChinaContent"></div>
-                    
-                    <div class="region-header" data-region="southChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>华南地区</span>
-                    </div>
-                    <div class="region-content" id="southChinaContent"></div>
-                    
-                    <div class="region-header" data-region="southwestChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>西南地区</span>
-                    </div>
-                    <div class="region-content" id="southwestChinaContent"></div>
-                    
-                    <div class="region-header" data-region="northwestChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>西北地区</span>
-                    </div>
-                    <div class="region-content" id="northwestChinaContent"></div>
-                    
-                    <div class="region-header" data-region="hmtChina">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>港澳台地区</span>
-                    </div>
-                    <div class="region-content" id="hmtChinaContent"></div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 境外区域部分 -->
-        <div class="region-section">
-            <div class="card-header international-header">
-                <h2>境外及港澳台</h2>
-            </div>
-            <div class="card-content">
-                <div class="region-intro">
-                    <div class="map-icon">
-                        <i class="fas fa-passport"></i>
-                    </div>
-                    <p>探索世界各地的异国风情，从古老的历史遗迹到现代都市风光，从热带雨林到极地冰川，让每一次旅行都成为一次难忘的冒险。</p>
+            
+            <!-- 境外区域部分 -->
+            <div class="region-section">
+                <div class="card-header international-header">
+                    <h2>
+                        <div class="map-icon">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        境外及港澳台
+                    </h2>
                 </div>
-                
-                <h3><i class="fas fa-globe"></i> 按大洲浏览（仅展示部分国家和地区）</h3>
-                
-                <div class="vertical-region-list">
-                    <!-- 大洲列表 -->
-                    <div class="region-header" data-region="asia">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>亚洲 (Asia)</span>
+                <div class="card-content">
+                    <div class="region-intro">
+                        <p>探索世界各地的异国风情，从古老的历史遗迹到现代都市风光，从热带雨林到极地冰川，让每一次旅行都成为一次难忘的冒险</p>
                     </div>
-                    <div class="region-content" id="asiaContent"></div>
                     
-                    <div class="region-header" data-region="europe">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>欧洲 (Europe)</span>
-                    </div>
-                    <div class="region-content" id="europeContent"></div>
+                    <h3><i class="fas fa-globe"></i> 按大洲浏览（仅展示部分国家和地区）</h3>
                     
-                    <div class="region-header" data-region="northAmerica">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>北美洲 (North America)</span>
+                    <div class="vertical-region-list">
+                        <!-- 大洲列表 -->
+                        <div class="region-header" data-region="asia">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>亚洲 (Asia)</span>
+                        </div>
+                        <div class="region-content" id="asiaContent"></div>
+                        
+                        <div class="region-header" data-region="europe">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>欧洲 (Europe)</span>
+                        </div>
+                        <div class="region-content" id="europeContent"></div>
+                        
+                        <div class="region-header" data-region="northAmerica">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>北美洲 (North America)</span>
+                        </div>
+                        <div class="region-content" id="northAmericaContent"></div>
+                        
+                        <div class="region-header" data-region="southAmerica">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>南美洲 (South America)</span>
+                        </div>
+                        <div class="region-content" id="southAmericaContent"></div>
+                        
+                        <div class="region-header" data-region="oceania">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>大洋洲 (Oceania)</span>
+                        </div>
+                        <div class="region-content" id="oceaniaContent"></div>
+                        
+                        <div class="region-header" data-region="africa">
+                            <i class="fas fa-chevron-down"></i>
+                            <span>非洲 (Africa)</span>
+                        </div>
+                        <div class="region-content" id="africaContent"></div>
                     </div>
-                    <div class="region-content" id="northAmericaContent"></div>
-                    
-                    <div class="region-header" data-region="southAmerica">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>南美洲 (South America)</span>
-                    </div>
-                    <div class="region-content" id="southAmericaContent"></div>
-                    
-                    <div class="region-header" data-region="oceania">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>大洋洲 (Oceania)</span>
-                    </div>
-                    <div class="region-content" id="oceaniaContent"></div>
-                    
-                    <div class="region-header" data-region="africa">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>非洲 (Africa)</span>
-                    </div>
-                    <div class="region-content" id="africaContent"></div>
                 </div>
             </div>
         </div>
@@ -481,13 +479,11 @@
     </div>
 
     <script>
-        // 中国省份按区域划分
+        // 中国省份按区域划分（已合并区域）
         const chinaRegions = {
-            northChina: ["北京市", "天津市", "河北省", "山西省", "内蒙古自治区"],
-            northeastChina: ["辽宁省", "吉林省", "黑龙江省"],
+            northNortheastChina: ["北京市", "天津市", "河北省", "山西省", "内蒙古自治区", "辽宁省", "吉林省", "黑龙江省"],
             eastChina: ["上海市", "江苏省", "浙江省", "安徽省", "福建省", "江西省", "山东省"],
-            centralChina: ["河南省", "湖北省", "湖南省"],
-            southChina: ["广东省", "广西壮族自治区", "海南省"],
+            centralSouthChina: ["河南省", "湖北省", "湖南省", "广东省", "广西壮族自治区", "海南省"],
             southwestChina: ["重庆市", "四川省", "贵州省", "云南省", "西藏自治区"],
             northwestChina: ["陕西省", "甘肃省", "青海省", "宁夏回族自治区", "新疆维吾尔自治区"],
             hmtChina: ["香港特别行政区", "澳门特别行政区", "台湾省"]
@@ -578,66 +574,6 @@
         // 所有目的地数据集合（用于搜索建议）
         let allDestinations = [];
         
-        // 省份中文名到英文名的映射
-        const provinceMap = {
-            "北京市": "Beijing",
-            "天津市": "Tianjin",
-            "河北省": "Hebei",
-            "山西省": "Shanxi",
-            "内蒙古自治区": "InnerMongolia",
-            "辽宁省": "Liaoning",
-            "吉林省": "Jilin",
-            "黑龙江省": "Heilongjiang",
-            "上海市": "Shanghai",
-            "江苏省": "Jiangsu",
-            "浙江省": "Zhejiang",
-            "安徽省": "Anhui",
-            "福建省": "Fujian",
-            "江西省": "Jiangxi",
-            "山东省": "Shandong",
-            "河南省": "Henan",
-            "湖北省": "Hubei",
-            "湖南省": "Hunan",
-            "广东省": "Guangdong",
-            "广西壮族自治区": "Guangxi",
-            "海南省": "Hainan",
-            "重庆市": "Chongqing",
-            "四川省": "Sichuan",
-            "贵州省": "Guizhou",
-            "云南省": "Yunnan",
-            "西藏自治区": "Tibet",
-            "陕西省": "Shaanxi",
-            "甘肃省": "Gansu",
-            "青海省": "Qinghai",
-            "宁夏回族自治区": "Ningxia",
-            "新疆维吾尔自治区": "Xinjiang",
-            "香港特别行政区": "HongKong",
-            "澳门特别行政区": "Macao",
-            "台湾省": "Taiwan"
-        };
-
-        // 中国区域ID到英文名的映射
-        const regionMap = {
-            northChina: "NorthChina",
-            northeastChina: "NortheastChina",
-            eastChina: "EastChina",
-            centralChina: "CentralChina",
-            southChina: "SouthChina",
-            southwestChina: "SouthwestChina",
-            northwestChina: "NorthwestChina",
-            hmtChina: "China"  // 港澳台特殊处理
-        };
-
-        // 大洲ID到英文名的映射
-        const continentMap = {
-            asia: "Asia",
-            europe: "Europe",
-            northAmerica: "NorthAmerica",
-            southAmerica: "SouthAmerica",
-            oceania: "Oceania",
-            africa: "Africa"
-        };
-
         // 高亮匹配文本
         function highlightMatch(text, query) {
             if (!query) return text;
@@ -655,21 +591,15 @@
                         const item = document.createElement('div');
                         item.className = 'area-item';
                         
-                        // 获取省份英文名
-                        const provinceEn = provinceMap[province] || province.replace(/\s+/g, '');
-                        
-                        // 确定链接
-                        let link;
-                        if (region === "hmtChina") {
-                            // 港澳台地区
-                            link = `China-${provinceEn}.html`;
+                        // 特别处理链接
+                        if (province === "北京市") {
+                            item.innerHTML = `<a href="North China-Beijing.html" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
+                        } else if (province === "香港特别行政区") {
+                            item.innerHTML = `<a href="China-HongKong.html" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
                         } else {
-                            // 国内其他省份
-                            link = `${regionMap[region]}-${provinceEn}.html`;
+                            item.innerHTML = `<span>${province}</span>`;
                         }
                         
-                        // 创建链接
-                        item.innerHTML = `<a href="${link}" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
                         item.dataset.name = province;
                         contentElement.appendChild(item);
                         
@@ -694,29 +624,29 @@
                         const countryElement = document.createElement('div');
                         countryElement.className = 'area-item';
 
-                        // 确定链接
-                        let link;
-                        let countryEnName;
-                        
-                        // 处理港澳台地区
-                        if (["中国香港", "中国澳门", "中国台湾"].includes(country.name)) {
-                            countryEnName = country.name.replace("中国", "").trim();
-                            link = `China-${countryEnName.replace(/\s+/g, '')}.html`;
-                        } else {
-                            // 处理其他国家
-                            countryEnName = country.en.replace(/,/g, '').replace(/\s+/g, '-');
-                            link = `${continentMap[continent]}-${countryEnName}.html`;
-                        }
-                        
-                        // 创建国家/地区HTML
+                        // 通用模板（所有国家/地区使用相同的分行结构）
                         const countryHtml = `
-                            <a href="${link}" style="text-decoration: none; color: inherit;">
-                                <span class="country-name">${country.name}</span>
-                                <span class="country-en">${country.en}</span>
-                            </a>
+                            <span class="country-name">${country.name}</span>
+                            <span class="country-en">${country.en}</span>
                         `;
                         
-                        countryElement.innerHTML = countryHtml;
+                        // 特殊处理带链接的国家/地区
+                        if (country.name === "日本") {
+                            countryElement.innerHTML = `
+                                <a href="Asia-Japan.html" style="text-decoration: none; color: inherit;">
+                                    ${countryHtml}
+                                </a>
+                            `;
+                        } else if (country.name === "中国香港") {
+                            countryElement.innerHTML = `
+                                <a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
+                                    ${countryHtml}
+                                </a>
+                            `;
+                        } else {
+                            countryElement.innerHTML = countryHtml;
+                        }
+                        
                         countryElement.dataset.name = `${country.name}|${country.en}`;
                         contentElement.appendChild(countryElement);
                         
