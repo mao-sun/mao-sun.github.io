@@ -854,44 +854,45 @@
         });
         
         // 提交建议功能
-        submitSuggestion.addEventListener('click', function() {
-            const destination = document.getElementById('destination').value;
-            const reason = document.getElementById('reason').value;
-            const contact = document.getElementById('contact').value;
-            
-            if (!destination) {
-                alert('请填写您推荐的目的地');
-                return;
-            }
-            
-            // 显示加载状态
-            submitSuggestion.disabled = true;
-            submitSuggestion.innerHTML = '<i class="material-icons">hourglass_empty</i> 提交中...';
-            
-            // 模拟提交过程
-            setTimeout(() => {
-                // 显示成功消息
-                successMessage.style.display = 'block';
-                submitSuggestion.style.display = 'none';
-                
-                // 在控制台记录提交内容
-                console.log('目的地推荐：', destination);
-                console.log('推荐理由：', reason || '未提供理由');
-                console.log('联系方式：', contact || '未提供联系方式');
-                
-                // 3秒后重置表单
-                setTimeout(() => {
-                    submitSuggestion.disabled = false;
-                    submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
-                    submitSuggestion.style.display = 'flex';
-                    successMessage.style.display = 'none';
-                    
-                    // 关闭模态框
-                    suggestionModal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }, 3000);
-            }, 1500);
-        });
+submitSuggestion.addEventListener('click', function () {
+    const destination = document.getElementById('destination').value;
+    const reason = document.getElementById('reason').value;
+    const contact = document.getElementById('contact').value;
+
+    if (!destination) {
+        alert('请填写您推荐的目的地');
+        return;
+    }
+
+    submitSuggestion.disabled = true;
+    submitSuggestion.innerHTML = '<i class="material-icons">hourglass_empty</i> 提交中...';
+
+    const formData = new FormData();
+    formData.append('entry.536063245', destination);
+    formData.append('entry.26587422', reason);
+    formData.append('entry.1802850522', contact);
+
+    fetch('https://docs.google.com/forms/d/e/1FAIpQLSf5BI-fri18G9rmFqUjTdYJ9cO19T4C9OmYjzyuzVL82MIaOQ/formResponse', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+    }).then(() => {
+        successMessage.style.display = 'block';
+        submitSuggestion.style.display = 'none';
+
+        setTimeout(() => {
+            submitSuggestion.disabled = false;
+            submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
+            submitSuggestion.style.display = 'flex';
+            successMessage.style.display = 'none';
+            suggestionModal.style.display = 'none';
+        }, 3000);
+    }).catch(() => {
+        alert('提交失败，请稍后再试');
+        submitSuggestion.disabled = false;
+        submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
+    });
+}););
     </script>
 </body>
 </html>
