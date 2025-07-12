@@ -6,49 +6,67 @@
     <title>Mao的旅行攻略</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            -webkit-user-select: none; /* 禁止文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* 允许输入框和按钮文本选择 */
+        input, button, textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+        }
         
         body { 
-            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%); 
-            color: #333; line-height: 1.6; padding: 15px; min-height: 100vh; 
+            background: linear-gradient(135deg, #e6f0ff 0%, #d9e7ff 100%); 
+            color: #333; line-height: 1.6; min-height: 100vh; 
         }
         
         .container { max-width: 1200px; margin: 0 auto; padding: 0 10px; }
         
+        /* 扁平化头部 */
         header { 
             text-align: center; padding: 30px 15px; 
-            background: linear-gradient(135deg, #4b6cb7 0%, #2a5298 100%); 
-            color: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); 
-            position: relative; overflow: hidden; 
-            animation: gradientShift 12s ease infinite; background-size: 200% 200%; 
-            margin-bottom: 25px;
-        }
-        
-        @keyframes gradientShift { 
-            0% { background-position: 0% 50%; } 
-            50% { background-position: 100% 50%; } 
-            100% { background-position: 0% 50%; } 
+            background: #4b6cb7; 
+            color: white; 
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         h1 { 
-            font-size: 2.5rem; margin-bottom: 12px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
-            display: flex; align-items: center; justify-content: center; gap: 15px;
+            font-size: 2.5rem; margin-bottom: 12px; 
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        .subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+        .subtitle { 
+            font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; 
+            font-weight: 300;
+        }
         
         .search-container { 
-            max-width: 700px; margin: 25px auto 40px; position: relative; 
+            max-width: 700px; margin: 0 auto; position: relative; 
             display: flex; align-items: center; 
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
         }
         
         .search-box { 
-            width: 100%; padding: 16px 60px 16px 55px; border: none; border-radius: 50px; 
-            font-size: 1.1rem; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12); transition: all 0.3s ease; 
-            background: rgba(255, 255, 255, 0.95); height: 55px; 
+            width: 100%; padding: 16px 60px 16px 55px; border: none; 
+            font-size: 1.1rem; transition: all 0.3s ease; 
+            background: white; height: 55px; 
+            border-radius: 0 0 10px 10px;
         }
         
         .search-box:focus { 
-            outline: none; box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2); transform: scale(1.02); 
+            outline: none; 
+            background: #f8faff;
         }
         
         .search-icon { 
@@ -60,14 +78,17 @@
             position: absolute; right: 12px; background: #4b6cb7; color: white; border: none; 
             border-radius: 50%; width: 42px; height: 42px; cursor: pointer; transition: all 0.3s ease; 
             display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
         
         .search-btn:hover { background: #3a5ba0; transform: scale(1.1); }
         
         .suggestions-container { 
             position: absolute; top: 100%; left: 0; right: 0; background: white; 
-            border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
-            max-height: 300px; overflow-y: auto; z-index: 1000; margin-top: 5px; display: none; 
+            border-radius: 0 0 10px 10px; 
+            max-height: 300px; overflow-y: auto; z-index: 1000; margin-top: 0; display: none; 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid #f0f0f0;
         }
         
         .suggestion-item { 
@@ -87,6 +108,7 @@
             display: flex;
             gap: 25px;
             margin-bottom: 30px;
+            margin-top: 25px;
         }
         
         .two-columns > div {
@@ -94,16 +116,10 @@
         }
         
         .region-section { 
-            margin-bottom: 0;
-            background: white; border-radius: 18px; overflow: hidden; 
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease; width: 100%; 
-            height: 100%;
+            background: white; border-radius: 10px; overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
             display: flex;
             flex-direction: column;
-        }
-        
-        .region-section:hover { 
-            transform: translateY(-5px); box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15); 
         }
         
         .card-header { 
@@ -119,32 +135,27 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            font-weight: 600;
         }
         
         .map-icon {
             font-size: 2.2rem;
             color: #ffd43b;
-            background: rgba(255, 255, 255, 0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 15px rgba(255, 212, 59, 0.3);
         }
         
         .china-header { 
-            background: linear-gradient(135deg, #3a5795 0%, #2a5298 100%); 
+            background: #3a5795; 
         }
         .international-header { 
-            background: linear-gradient(135deg, #2a5298 0%, #1a4288 100%); 
+            background: #2a5298; 
         }
         
         .card-content { padding: 25px 20px; flex: 1; }
         h3 { 
-            margin-bottom: 20px; font-size: 1.4rem; color: #2c3e50; border-bottom: 2px solid #f0f3f5; 
+            margin-bottom: 20px; font-size: 1.4rem; color: #2c3e50; 
             padding-bottom: 10px; display: flex; align-items: center; 
+            border-bottom: 2px solid #f0f3f5;
+            font-weight: 600;
         }
         
         h3 i { margin-right: 12px; color: #3498db; }
@@ -156,16 +167,17 @@
         
         .area-item { 
             padding: 14px; 
-            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%); 
-            border-radius: 10px; cursor: pointer; transition: all 0.25s ease; 
-            display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-            border: 1px solid #d0e0ff; height: 100%; justify-content: center; align-items: center; 
+            background: #f8faff; 
+            border-radius: 8px; cursor: pointer; transition: all 0.25s ease; 
+            display: flex; flex-direction: column; 
+            border: 1px solid #e0e9ff; height: 100%; justify-content: center; align-items: center; 
             text-align: center; min-height: 65px; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
         }
         
         .area-item:hover { 
-            background: linear-gradient(135deg, #e6f0ff 0%, #d0e0ff 100%); 
-            transform: translateY(-4px); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); 
+            background: #eef4ff; 
+            transform: translateY(-3px); 
         }
         
         .area-item span { font-size: 1.1rem; }
@@ -183,43 +195,42 @@
         }
         
         .region-header { 
-            background: linear-gradient(135deg, #e3f2fd 0%, #d1e7ff 100%); padding: 14px 18px; 
-            border-radius: 10px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; 
+            background: #f0f5ff; padding: 14px 18px; 
+            border-radius: 8px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; 
             display: flex; align-items: center; cursor: pointer; transition: all 0.25s ease; 
-            font-size: 1.2rem; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04); 
-            border: 1px solid #c5dbfa;
+            font-size: 1.2rem; 
+            border: 1px solid #d0e0ff;
         }
         
         .region-header:hover { 
-            background: linear-gradient(135deg, #bbdefb 0%, #a6d4fa 100%); transform: translateX(4px); 
+            background: #e6f0ff; 
         }
         
-        .region-header i { margin-right: 12px; transition: transform 0.3s ease; }
+        .region-header i { margin-right: 12px; transition: transform 0.3s ease; color: #4b6cb7; }
         .region-header.collapsed i { transform: rotate(-90deg); }
         .region-content.collapsed { display: none; }
         
         footer { 
-            text-align: center; padding: 25px; color: #6c757d; font-size: 0.95rem; margin-top: 25px; 
-            background: rgba(255, 255, 255, 0.8); border-radius: 18px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04); 
-            max-width: 1200px; margin-left: auto; margin-right: auto; 
+            text-align: center; padding: 25px; color: #6c757d; font-size: 0.95rem; 
+            background: white; border-radius: 10px; 
+            max-width: 1200px; margin: 25px auto; 
             border: 1px solid #e0e9ff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
         .highlight { 
-            background: linear-gradient(135deg, #ffeaa7 0%, #ffd43b 100%) !important; 
-            box-shadow: 0 0 12px rgba(255, 212, 59, 0.7) !important; 
-            animation: pulse 1.5s 3; border: 1px solid #ffd43b; 
+            background: #fff8e1 !important; 
+            animation: pulse 1.5s 3; border: 2px solid #ffd43b !important; 
         }
         
         .match-highlight {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%) !important;
-            box-shadow: 0 0 8px rgba(59, 130, 246, 0.4) !important;
-            border: 1px solid #3b82f6;
+            background: #e3f2fd !important;
+            border: 2px solid #3b82f6 !important;
         }
         
         @keyframes pulse { 
             0% { transform: scale(1); } 
-            50% { transform: scale(1.03); } 
+            50% { transform: scale(1.02); } 
             100% { transform: scale(1); } 
         }
         
@@ -241,95 +252,250 @@
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
         .back-to-top:hover { background: #3a5ba0; transform: scale(1.1); }
         
-        /* 移动设备优化 */
+        /* 移动设备优化 - 紧凑布局 */
         @media (max-width: 768px) {
-            .two-columns {
-                flex-direction: column;
-                gap: 20px;
+            body {
+                padding: 0;
             }
             
-            body { padding: 10px; }
-            h1 { 
-                font-size: 2rem; 
-                flex-direction: column;
-                gap: 10px;
+            .container {
+                padding: 0;
             }
-            .subtitle { font-size: 1.05rem; padding: 0 10px; }
-            .search-box { padding: 14px 50px 14px 45px; font-size: 1rem; height: 50px; }
-            .card-header { padding: 20px; }
+            
+            header {
+                padding: 20px 15px;
+                border-radius: 0;
+                box-shadow: none;
+                margin-bottom: 0;
+            }
+            
+            .search-container {
+                max-width: 100%;
+                border-radius: 0;
+                box-shadow: none;
+                border-top: 1px solid #e0e9ff;
+                border-bottom: 1px solid #e0e9ff;
+            }
+            
+            .search-box {
+                border-radius: 0;
+                padding: 14px 50px 14px 45px;
+            }
+            
+            .two-columns {
+                flex-direction: column;
+                gap: 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            
+            .region-section {
+                border-radius: 0;
+                box-shadow: none;
+                border-bottom: 1px solid #e0e9ff;
+                border-top: none;
+            }
+            
+            .region-section:first-child {
+                border-top: none;
+            }
+            
+            .region-section:last-child {
+                border-bottom: none;
+            }
+            
+            .card-header {
+                padding: 20px 15px;
+            }
+            
+            .card-content {
+                padding: 20px 15px;
+            }
+            
+            h1 { 
+                font-size: 1.8rem;
+            }
+            
+            .subtitle { 
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .search-box { 
+                font-size: 1rem; 
+                height: 50px; 
+            }
+            
             .card-header h2 { 
                 font-size: 1.5rem;
-                flex-direction: column;
-                gap: 10px;
             }
+            
             .map-icon {
                 font-size: 1.8rem;
-                width: 50px;
-                height: 50px;
             }
-            .search-icon { left: 18px; font-size: 1.2rem; }
-            .search-btn { width: 38px; height: 38px; right: 8px; font-size: 0.9rem; }
-            .card-content { padding: 20px 15px; }
+            
+            .search-icon { 
+                left: 18px; 
+                font-size: 1.2rem; 
+            }
+            
+            .search-btn { 
+                width: 38px; 
+                height: 38px; 
+                right: 8px; 
+                font-size: 0.9rem; 
+            }
+            
             h3 { 
                 font-size: 1.25rem; 
                 margin-bottom: 15px; 
             }
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-            .area-item { padding: 12px; min-height: 60px; }
-            .area-item span { font-size: 1rem; }
-            .country-name { font-size: 1rem; }
-            .country-en { font-size: 0.8rem; }
+            
+            .area-grid, .region-content { 
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); 
+                gap: 12px; 
+            }
+            
+            .area-item { 
+                padding: 12px; 
+                min-height: 60px; 
+            }
+            
+            .area-item span { 
+                font-size: 1rem; 
+            }
+            
+            .country-name { 
+                font-size: 1rem; 
+            }
+            
+            .country-en { 
+                font-size: 0.8rem; 
+            }
+            
             .region-header { 
                 padding: 12px 16px; 
                 font-size: 1.1rem; 
                 margin-top: 15px;
                 margin-bottom: 8px;
             }
-            .region-intro { font-size: 0.95rem; margin-bottom: 20px; }
-            .back-to-top { bottom: 15px; right: 15px; width: 40px; height: 40px; font-size: 0.9rem; }
-            footer { padding: 20px; font-size: 0.9rem; }
-            .suggestion-item { padding: 10px 15px; flex-direction: column; align-items: flex-start; }
-            .suggestion-en { margin-top: 5px; font-size: 0.85rem; }
+            
+            .region-intro { 
+                font-size: 0.95rem; 
+                margin-bottom: 20px; 
+            }
+            
+            .back-to-top { 
+                bottom: 15px; 
+                right: 15px; 
+                width: 40px; 
+                height: 40px; 
+                font-size: 0.9rem; 
+            }
+            
+            footer { 
+                padding: 20px 15px; 
+                font-size: 0.9rem; 
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+                border-top: 1px solid #e0e9ff;
+            }
+            
+            .suggestion-item { 
+                padding: 10px 15px; 
+            }
+            
+            .suggestion-en { 
+                margin-top: 5px; 
+                font-size: 0.85rem; 
+            }
         }
         
         @media (max-width: 480px) {
-            h1 { font-size: 1.8rem; }
-            .subtitle { font-size: 0.95rem; }
-            .search-container { margin: 20px auto 30px; }
-            .search-box { padding: 12px 45px 12px 40px; height: 48px; font-size: 0.95rem; }
-            .search-icon { left: 15px; font-size: 1.1rem; }
-            .card-header { padding: 18px; }
-            .card-header h2 { font-size: 1.4rem; }
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-            .area-item { padding: 10px 8px; min-height: 55px; }
-            .area-item span { font-size: 0.95rem; }
+            h1 { 
+                font-size: 1.6rem; 
+            }
+            
+            .subtitle { 
+                font-size: 0.95rem; 
+            }
+            
+            .search-box { 
+                padding: 12px 45px 12px 40px; 
+                height: 48px; 
+                font-size: 0.95rem; 
+            }
+            
+            .card-header { 
+                padding: 18px 15px; 
+            }
+            
+            .card-header h2 { 
+                font-size: 1.4rem; 
+            }
+            
+            .area-grid, .region-content { 
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+                gap: 10px; 
+            }
+            
+            .area-item { 
+                padding: 10px 8px; 
+                min-height: 55px; 
+            }
+            
+            .area-item span { 
+                font-size: 0.95rem; 
+            }
+            
             .region-header { 
                 padding: 10px 14px; 
                 font-size: 1rem; 
                 margin-top: 12px;
                 margin-bottom: 6px;
             }
-            h3 { font-size: 1.15rem; }
-            .country-name { font-size: 0.95rem; }
-            .country-en { font-size: 0.75rem; }
-            .region-intro { font-size: 0.9rem; margin-bottom: 15px; }
-            footer { padding: 15px; font-size: 0.85rem; }
+            
+            h3 { 
+                font-size: 1.15rem; 
+            }
+            
+            .country-name { 
+                font-size: 0.95rem; 
+            }
+            
+            .country-en { 
+                font-size: 0.75rem; 
+            }
+            
+            .region-intro { 
+                font-size: 0.9rem; 
+                margin-bottom: 15px; 
+            }
+            
+            footer { 
+                padding: 15px; 
+                font-size: 0.85rem; 
+            }
         }
         
         @media (max-width: 360px) {
-            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-            .search-box { padding: 10px 40px 10px 35px; height: 46px; font-size: 0.9rem; }
+            .area-grid, .region-content { 
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); 
+            }
+            
+            .search-box { 
+                padding: 10px 40px 10px 35px; 
+                height: 46px; 
+                font-size: 0.9rem; 
+            }
         }
-        
-        /* 触摸屏优化 */
-        .area-item:active { transform: scale(0.98); }
-        .region-header:active { transform: translateX(4px) scale(0.98); }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-globe-asia"></i> Mao的旅行攻略</h1>
+            <h1>Mao的旅行攻略</h1>
             <p class="subtitle">记录生活 - 定格与你的每段旅程</p>
         </header>
 
