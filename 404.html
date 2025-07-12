@@ -21,7 +21,7 @@
             align-items: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            overflow: auto; /* 修复初始滚动问题 */
         }
         
         /* 背景旅行图标 */
@@ -30,6 +30,7 @@
             opacity: 0.08;
             font-size: 8rem;
             z-index: 0;
+            user-select: none; /* 禁止选择图标文本 */
         }
         
         .compass { top: 10%; left: 5%; transform: rotate(25deg); }
@@ -51,6 +52,7 @@
             position: relative;
             border: 1px solid rgba(179, 229, 252, 0.5);
             margin: 0 auto;
+            user-select: none; /* 禁止选择容器内文本 */
         }
         
         /* 主题图标 */
@@ -59,6 +61,7 @@
             color: #0288d1;
             margin-bottom: 15px;
             animation: float 3s ease-in-out infinite;
+            user-select: none;
         }
         
         h1 {
@@ -262,10 +265,14 @@
             font-style: italic;
         }
 
-        /* 目的地推荐表单样式 */
+        /* 目的地推荐表单样式 - 优化样式 */
         .suggestion-form {
             margin: 30px 0 20px;
             text-align: left;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
         
         .form-group {
@@ -299,6 +306,7 @@
             background: #f9fbfd;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             color: #2c3e50;
+            user-select: text; /* 允许输入框选择文本 */
         }
         
         .form-input:focus {
@@ -471,6 +479,11 @@
                 padding: 12px 20px;
                 font-size: 0.95rem;
             }
+            
+            /* 优化推荐表单在移动端的显示 */
+            .suggestion-form {
+                padding: 15px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -569,6 +582,12 @@
                 padding: 12px 15px;
                 font-size: 0.9rem;
             }
+            
+            /* 进一步优化推荐表单 */
+            .suggestion-form {
+                padding: 12px;
+                margin: 20px 0 10px;
+            }
         }
     </style>
 </head>
@@ -629,16 +648,16 @@
             </p>
             <div class="qr-container">
                 <div class="qr-placeholder">
-                    <img src="https://s3.bmp.ovh/imgs/2025/07/12/be8a315b5d20ef29.jpg" alt="支持二维码">
+                    <img src="https://s3.bmp.ovh/imgs/2025/07/13/d4b3c25812e83267.jpg" alt="支持二维码">
                 </div>
             </div>
             <p class="support-note">
-                扫码支持我的旅行创作 | 赞赏/支持，非商品交易 | 每一份心意都将成为下段旅程的星光
+                扫码支持我的旅行|赞赏/支持(非商品交易)|每一份心意都将成为下段旅程的星光
             </p>
         </div>
     </div>
 
-    <!-- 目的地推荐模态框 -->
+    <!-- 目的地推荐模态框 - 优化后的样式 -->
     <div class="modal" id="suggestionModal">
         <div class="modal-content">
             <span class="close-modal material-icons" id="closeSuggestionModal">close</span>
@@ -694,11 +713,11 @@
             
             <div class="qr-container">
                 <div class="qr-placeholder">
-                    <img src="https://s3.bmp.ovh/imgs/2025/07/12/be8a315b5d20ef29.jpg" alt="支持二维码">
+                    <img src="https://s3.bmp.ovh/imgs/2025/07/13/d4b3c25812e83267.jpg" alt="支持二维码">
                 </div>
             </div>
             <p class="support-note">
-                扫码支持我的旅行创作 | 赞赏/支持，非商品交易 | 让更多目的地成为可能
+                扫码支持我的旅行|(赞赏/支持)非商品交易|让更多目的地成为可能
             </p>
         </div>
     </div>
@@ -941,6 +960,17 @@
                 submitSuggestion.disabled = false;
                 submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
             });
+        });
+        
+        // 禁止复制功能
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('内容受保护，请尊重原创');
+        });
+        
+        // 禁止右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
     </script>
 </body>
