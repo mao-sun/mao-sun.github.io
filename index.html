@@ -740,6 +740,92 @@
         // 所有目的地数据集合（用于搜索建议）
         let allDestinations = [];
         
+        // 省份中文名到英文名的映射
+        const provinceEnMap = {
+            "北京市": "Beijing",
+            "天津市": "Tianjin",
+            "河北省": "Hebei",
+            "山西省": "Shanxi",
+            "内蒙古自治区": "InnerMongolia",
+            "辽宁省": "Liaoning",
+            "吉林省": "Jilin",
+            "黑龙江省": "Heilongjiang",
+            "上海市": "Shanghai",
+            "江苏省": "Jiangsu",
+            "浙江省": "Zhejiang",
+            "安徽省": "Anhui",
+            "福建省": "Fujian",
+            "江西省": "Jiangxi",
+            "山东省": "Shandong",
+            "河南省": "Henan",
+            "湖北省": "Hubei",
+            "湖南省": "Hunan",
+            "广东省": "Guangdong",
+            "广西壮族自治区": "Guangxi",
+            "海南省": "Hainan",
+            "重庆市": "Chongqing",
+            "四川省": "Sichuan",
+            "贵州省": "Guizhou",
+            "云南省": "Yunnan",
+            "西藏自治区": "Tibet",
+            "陕西省": "Shaanxi",
+            "甘肃省": "Gansu",
+            "青海省": "Qinghai",
+            "宁夏回族自治区": "Ningxia",
+            "新疆维吾尔自治区": "Xinjiang",
+            "香港特别行政区": "HongKong",
+            "澳门特别行政区": "Macao",
+            "台湾省": "Taiwan"
+        };
+
+        // 省份到原始区域的映射
+        const provinceRegionMap = {
+            "北京市": "NorthChina",
+            "天津市": "NorthChina",
+            "河北省": "NorthChina",
+            "山西省": "NorthChina",
+            "内蒙古自治区": "NorthChina",
+            "辽宁省": "NortheastChina",
+            "吉林省": "NortheastChina",
+            "黑龙江省": "NortheastChina",
+            "上海市": "EastChina",
+            "江苏省": "EastChina",
+            "浙江省": "EastChina",
+            "安徽省": "EastChina",
+            "福建省": "EastChina",
+            "江西省": "EastChina",
+            "山东省": "EastChina",
+            "河南省": "CentralChina",
+            "湖北省": "CentralChina",
+            "湖南省": "CentralChina",
+            "广东省": "SouthChina",
+            "广西壮族自治区": "SouthChina",
+            "海南省": "SouthChina",
+            "重庆市": "SouthwestChina",
+            "四川省": "SouthwestChina",
+            "贵州省": "SouthwestChina",
+            "云南省": "SouthwestChina",
+            "西藏自治区": "SouthwestChina",
+            "陕西省": "NorthwestChina",
+            "甘肃省": "NorthwestChina",
+            "青海省": "NorthwestChina",
+            "宁夏回族自治区": "NorthwestChina",
+            "新疆维吾尔自治区": "NorthwestChina",
+            "香港特别行政区": "China",
+            "澳门特别行政区": "China",
+            "台湾省": "China"
+        };
+
+        // 大洲ID到英文名的映射
+        const continentMap = {
+            asia: "Asia",
+            europe: "Europe",
+            northAmerica: "NorthAmerica",
+            southAmerica: "SouthAmerica",
+            oceania: "Oceania",
+            africa: "Africa"
+        };
+
         // 高亮匹配文本
         function highlightMatch(text, query) {
             if (!query) return text;
@@ -757,27 +843,25 @@
                         const item = document.createElement('div');
                         item.className = 'area-item';
                         
-                        // 特别处理链接
-                        if (province === "北京市") {
-                            item.innerHTML = `<a href="North China-Beijing.html" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
-                        } else if (province === "香港特别行政区") {
-                            item.innerHTML = `<a href="China-HongKong.html" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
-                        } else {
-                            item.innerHTML = `<span>${province}</span>`;
-                        }
+                        // 获取省份的原始区域和英文名
+                        const regionPrefix = provinceRegionMap[province];
+                        const provinceEn = provinceEnMap[province];
                         
+                        // 生成链接
+                        let link = `${regionPrefix}-${provinceEn}.html`;
+                        
+                        // 创建链接
+                        item.innerHTML = `<a href="${link}" style="text-decoration: none; color: inherit;"><span>${province}</span></a>`;
                         item.dataset.name = province;
                         contentElement.appendChild(item);
                         
-                        // 添加到所有目的地集合（跳过境内港澳台）
-                        if (!["香港特别行政区", "澳门特别行政区", "台湾省"].includes(province)) {
-                            allDestinations.push({
-                                name: province,
-                                en: null,
-                                type: 'china',
-                                element: item
-                            });
-                        }
+                        // 添加到所有目的地集合
+                        allDestinations.push({
+                            name: province,
+                            en: null,
+                            type: 'china',
+                            element: item
+                        });
                     });
                 }
             }
@@ -790,29 +874,30 @@
                         const countryElement = document.createElement('div');
                         countryElement.className = 'area-item';
 
-                        // 通用模板（所有国家/地区使用相同的分行结构）
-                        const countryHtml = `
-                            <span class="country-name">${country.name}</span>
-                            <span class="country-en">${country.en}</span>
-                        `;
+                        // 确定链接
+                        let link;
+                        let countryEnName;
                         
-                        // 特殊处理带链接的国家/地区
-                        if (country.name === "日本") {
-                            countryElement.innerHTML = `
-                                <a href="Asia-Japan.html" style="text-decoration: none; color: inherit;">
-                                    ${countryHtml}
-                                </a>
-                            `;
-                        } else if (country.name === "中国香港") {
-                            countryElement.innerHTML = `
-                                <a href="China-HongKong.html" style="text-decoration: none; color: inherit;">
-                                    ${countryHtml}
-                                </a>
-                            `;
+                        // 处理港澳台地区
+                        if (["中国香港", "中国澳门", "中国台湾"].includes(country.name)) {
+                            const regionName = country.name.replace("中国", "").trim();
+                            countryEnName = provinceEnMap[`${regionName}${regionName === "台湾" ? "省" : "特别行政区"}`];
+                            link = `China-${countryEnName}.html`;
                         } else {
-                            countryElement.innerHTML = countryHtml;
+                            // 处理其他国家
+                            countryEnName = country.en.replace(/,/g, '').replace(/\s+/g, '-');
+                            link = `${continentMap[continent]}-${countryEnName}.html`;
                         }
                         
+                        // 创建国家/地区HTML
+                        const countryHtml = `
+                            <a href="${link}" style="text-decoration: none; color: inherit;">
+                                <span class="country-name">${country.name}</span>
+                                <span class="country-en">${country.en}</span>
+                            </a>
+                        `;
+                        
+                        countryElement.innerHTML = countryHtml;
                         countryElement.dataset.name = `${country.name}|${country.en}`;
                         contentElement.appendChild(countryElement);
                         
