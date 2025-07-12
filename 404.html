@@ -886,13 +886,14 @@ submitSuggestion.addEventListener('click', function () {
             submitSuggestion.style.display = 'flex';
             successMessage.style.display = 'none';
             suggestionModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }, 3000);
     }).catch(() => {
         alert('提交失败，请稍后再试');
         submitSuggestion.disabled = false;
         submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
     });
-}););
+});
     </script>
 </body>
 </html>
