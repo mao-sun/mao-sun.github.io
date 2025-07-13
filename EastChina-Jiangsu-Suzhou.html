@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苏州3天2晚旅游攻略</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 新增预算高亮样式 */
+        .budget-highlight {
+            background-color: #e8f5e9;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-weight: 500;
+            color: #2c7744;
+            margin-left: 4px;
+            display: inline-block;
+        }
+        
+        /* 其他原有样式保持不变... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            background: #f5f2eb;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #00503c, #00382a);
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%),
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.3;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        h2 {
+            color: #00503c;
+            margin: 20px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #c8e6c9;
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            position: relative;
+            font-weight: 600;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: #00382a;
+        }
+        
+        .section {
+            padding: 20px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #e8f5e9;
+        }
+        
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+        }
+        
+        th {
+            background: #e8f5e9;
+            font-weight: 600;
+            color: #00382a;
+            white-space: nowrap;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9fdf7;
+        }
+        
+        tr:hover {
+            background-color: #edf7f0;
+        }
+        
+        .note {
+            background: #e8f5e9;
+            border-left: 3px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+        }
+        
+        .highlight {
+            background: #dcedc8;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #2c7744;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #00503c;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        
+        .reservation-link {
+            color: #bc2d29;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+        }
+        
+        .reservation-link:hover {
+            text-decoration: underline;
+            color: #9c231f;
+        }
+        
+        .reservation-details {
+            display: none;
+            margin-top: 15px;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9fdf7;
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #00503c;
+            border: 2px solid #00503c;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+        }
+        
+        .back-to-home:hover {
+            background: #00503c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #00503c;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(100px);
+            border: none;
+            font-size: 1.2rem;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: #00382a;
+            transform: scale(1.1);
+        }
+        
+        .mobile-day-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            background: #e8f5e9;
+            padding: 8px;
+            border-radius: 8px;
+            position: sticky;
+            top: 10px;
+            z-index: 50;
+        }
+        
+        .day-btn {
+            flex: 1;
+            padding: 10px 5px;
+            margin: 0 5px;
+            background: #f1f8e9;
+            border: 2px solid #c8e6c9;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #00503c;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            text-align: center;
+        }
+        
+        .day-btn.active {
+            background: #00503c;
+            color: white;
+            border-color: #00382a;
+        }
+        
+        .suzhou-pattern {
+            width: 100%;
+            height: 100px;
+            background: 
+                linear-gradient(45deg, #f5f2eb 25%, transparent 25%, transparent 75%, #f5f2eb 75%),
+                linear-gradient(45deg, #f5f2eb 25%, #e8f5e9 25%, #e8f5e9 75%, #f5f2eb 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(245, 242, 235, 0.7), rgba(232, 245, 233, 0.7));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #00503c;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+        }
+        
+        .pattern-overlay i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: #bc2d29;
+        }
+        
+        .itinerary-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .highlight-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border: 1px solid #e8f5e9;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            background: #00503c;
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+            text-align: center;
+            font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-content ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .card-content li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 22px;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+        }
+        
+        .card-content li:before {
+            content: "•";
+            color: #bc2d29;
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+        
+        .icon-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .icon-item {
+            text-align: center;
+            width: 80px;
+        }
+        
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            background: #e8f5e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 1.3rem;
+            color: #00503c;
+            border: 2px solid #a8d8b9;
+        }
+        
+        .watermark {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            opacity: 0.05;
+            font-size: 10rem;
+            font-weight: 700;
+            color: #00503c;
+            z-index: 0;
+            pointer-events: none;
+            transform: rotate(-15deg);
+        }
+        
+        .day-section {
+            display: none;
+        }
+        
+        .day-section.active {
+            display: block;
+        }
+        
+        .mobile-compact {
+            margin-top: 5px;
+        }
+        
+        /* 水波纹效果 */
+        .water-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%2300503c" fill-opacity="0.1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,90.7C672,85,768,107,864,128C960,149,1056,171,1152,165.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #78828c, transparent);
+            margin: 20px 0;
+        }
+        
+        /* 桌面端显示优化 - 显示所有行程 */
+        @media (min-width: 769px) {
+            .day-section {
+                display: block !important;
+            }
+            
+            .mobile-day-nav {
+                display: none;
+            }
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            
+            header {
+                padding: 20px 10px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            
+            th {
+                font-size: 0.8rem;
+            }
+            
+            .back-to-home {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .suzhou-pattern {
+                height: 80px;
+                margin: 10px 0;
+            }
+            
+            .pattern-overlay {
+                font-size: 0.9rem;
+                padding: 5px;
+            }
+            
+            .pattern-overlay i {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            
+            .mobile-day-nav {
+                top: 5px;
+                margin: 5px 0 10px;
+            }
+            
+            .day-btn {
+                padding: 8px 4px;
+                font-size: 0.8rem;
+            }
+            
+            .mobile-compact {
+                margin-top: 0;
+            }
+            
+            .card-content li {
+                font-size: 0.85rem;
+            }
+            
+            .note {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+            
+            h2 {
+                margin: 15px 0 10px;
+                font-size: 1.2rem;
+            }
+            
+            .watermark {
+                font-size: 6rem;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .back-to-home span {
+                display: none;
+            }
+            
+            .back-to-home i {
+                margin-right: 0;
+            }
+            
+            .highlight-card {
+                min-width: 100%;
+            }
+            
+            .icon-item {
+                width: 70px;
+            }
+            
+            .icon-circle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .water-wave {
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-home">
+        <i class="fas fa-home"></i> <span>返回首页</span>
+    </a>
+    
+    <div class="container">
+        <div class="water-wave"></div>
+        <header>
+            <h1>苏州3天2晚旅游攻略</h1>
+            <p class="subtitle">体验江南水乡的精致与优雅 | 品味千年姑苏文化</p>
+            <div class="watermark">苏州</div>
+        </header>
+        
+        <div class="section">
+            <h2>📋 准备事项</h2>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>类别</th>
+                        <th>事项</th>
+                        <th>说明/注意事项</th>
+                    </tr>
+                    <tr>
+                        <td>背包</td>
+                        <td>双肩包</td>
+                        <td>轻便出行，装随身物品</td>
+                    </tr>
+                    <tr>
+                        <td>证件类</td>
+                        <td>身份证</td>
+                        <td>必备</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">电子类</td>
+                        <td>充电宝</td>
+                        <td>≤100Wh（民航规定）</td>
+                    </tr>
+                    <tr>
+                        <td>充电器</td>
+                        <td>带Type-C接口</td>
+                    </tr>
+                    <tr>
+                        <td>耳机</td>
+                        <td>地铁/高铁使用</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">日用类</td>
+                        <td>薄外套</td>
+                        <td>苏州昼夜温差较大</td>
+                    </tr>
+                    <tr>
+                        <td>折叠伞</td>
+                        <td>防雨防晒</td>
+                    </tr>
+                    <tr>
+                        <td>舒适鞋</td>
+                        <td>日均步数1.2万+</td>
+                    </tr>
+                    <tr>
+                        <td>现金</td>
+                        <td>200-300元（小额支付）</td>
+                    </tr>
+                    <tr>
+                        <td>预约类</td>
+                        <td>景点预约</td>
+                        <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="preparation-note" class="note">
+                <strong>注意：</strong> 部分景点需提前预约，特别是苏州博物馆需提前1-7天预约
+            </div>
+            
+            <div id="reservation-details" class="reservation-details">
+                <h2>景点预约详情</h2>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>景点名称</th>
+                            <th>门票价格</th>
+                            <th>预约要求</th>
+                            <th>预约路径</th>
+                            <th>闭馆/闭园时间</th>
+                        </tr>
+                        <tr>
+                            <td>七里山塘</td>
+                            <td>免费</td>
+                            <td>无需预约</td>
+                            <td>-</td>
+                            <td>全天开放</td>
+                        </tr>
+                        <tr>
+                            <td>西园寺</td>
+                            <td>5元</td>
+                            <td>无需预约</td>
+                            <td>现场购票</td>
+                            <td>17:00停止入场</td>
+                        </tr>
+                        <tr>
+                            <td>留园</td>
+                            <td>55元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"苏州园林旅游"公众号</td>
+                            <td>17:30停止售票</td>
+                        </tr>
+                        <tr>
+                            <td>寒山寺</td>
+                            <td>20元</td>
+                            <td>提前1-7天预约</td>
+                            <td>"寒山寺"公众号</td>
+                            <td>17:00停止入场</td>
+                        </tr>
+                        <tr>
+                            <td>苏州博物馆</td>
+                            <td>免费</td>
+                            <td>提前1-7天预约</td>
+                            <td>"苏州博物馆"公众号/官网</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>北塔寺</td>
+                            <td>25元(登塔)</td>
+                            <td>无需预约</td>
+                            <td>现场购票</td>
+                            <td>17:00停止售票</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="suzhou-pattern">
+                <div class="pattern-overlay">
+                    <i class="fas fa-leaf"></i>
+                    <div>苏州园林 · 世界文化遗产</div>
+                </div>
+            </div>
+            
+            <!-- 美食推荐、必游景点、交通贴士移动到这里 -->
+            <div class="itinerary-highlight">
+                <div class="highlight-card">
+                    <div class="card-header">美食推荐</div>
+                    <div class="card-content">
+                        <ul>
+                            <li>西园寺素面</li>
+                            <li>松鼠桂鱼</li>
+                            <li>苏式绿豆汤</li>
+                            <li>爆鳝面</li>
+                            <li>蟹黄面</li>
+                            <li>苏式糕点</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="card-header">必游景点</div>
+                    <div class="card-content">
+                        <ul>
+                            <li>七里山塘夜景</li>
+                            <li>西园寺素面与猫猫</li>
+                            <li>留园精致园林</li>
+                            <li>寒山寺钟声</li>
+                            <li>平江路水乡风情</li>
+                            <li>苏州博物馆建筑</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="card-header">交通贴士</div>
+                    <div class="card-content">
+                        <ul>
+                            <li>地铁4号线贯穿主要景点</li>
+                            <li>网约车费用约10-25元/程</li>
+                            <li>景点间距离较近，步行可达</li>
+                            <li>山塘街游船约50元/人</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <div class="mobile-day-nav">
+                <button class="day-btn active" data-day="1">DAY 1</button>
+                <button class="day-btn" data-day="2">DAY 2</button>
+                <button class="day-btn" data-day="3">DAY 3</button>
+            </div>
+            
+            <div class="mobile-compact">
+                <div class="section day-section active" id="day1-section">
+                    <h2>🗓️ DAY1 行程表</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>17:00</td>
+                                <td>苏州站</td>
+                                <td>抵达苏州 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁4号线</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>17:30</td>
+                                <td>酒店</td>
+                                <td>办理入住 <span class="budget-highlight">(免费)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>18:30</td>
+                                <td>七里山塘</td>
+                                <td>夜游体验 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁转线</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>19:00</td>
+                                <td>山塘游船</td>
+                                <td>坐船漫游 <span class="budget-highlight">(50元)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>20:00</td>
+                                <td>山塘街</td>
+                                <td>品尝苏州小吃 <span class="budget-highlight">(50元)</span></td>
+                                <td>步行</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>21:30</td>
+                                <td>酒店</td>
+                                <td>返回休息 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁</td>
+                                <td>25分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>七里山塘攻略：</strong> 建议购买夜游船票（约50元/人），欣赏灯光下的古运河风光。推荐品尝鑫震源生煎、赵元章肉骨烧、糖粥等特色小吃。
+                    </div>
+                </div>
+                
+                <div class="section day-section" id="day2-section">
+                    <h2>🗓️ DAY2 行程表</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>08:00</td>
+                                <td>酒店</td>
+                                <td>早餐 <span class="budget-highlight">(免费)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>西园寺</td>
+                                <td>参观寺庙，品尝素面 <span class="budget-highlight">(15元)</span></td>
+                                <td>网约车</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>11:00</td>
+                                <td>留园</td>
+                                <td>欣赏苏州园林 <span class="budget-highlight">(55元)</span></td>
+                                <td>步行</td>
+                                <td>8分钟</td>
+                            </tr>
+                            <tr>
+                                <td>13:00</td>
+                                <td>寒山寺</td>
+                                <td>游览古寺 <span class="budget-highlight">(20元)</span></td>
+                                <td>网约车</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>15:00</td>
+                                <td>钟书阁</td>
+                                <td>打卡网红书店 <span class="budget-highlight">(免费)</span></td>
+                                <td>网约车</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>16:30</td>
+                                <td>平江路</td>
+                                <td>晚餐：苏帮菜 <span class="budget-highlight">(80元)</span></td>
+                                <td>网约车</td>
+                                <td>18分钟</td>
+                            </tr>
+                            <tr>
+                                <td>18:00</td>
+                                <td>平江路</td>
+                                <td>悠闲散步 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>20:00</td>
+                                <td>酒店</td>
+                                <td>返回休息 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁</td>
+                                <td>25分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>美食推荐：</strong> 西园寺素面不可错过，平江路推荐餐厅：松鹤楼、得月楼。松鼠桂鱼是苏帮菜代表，酸甜酥脆，必尝之选。
+                    </div>
+                </div>
+                
+                <div class="section day-section" id="day3-section">
+                    <h2>🗓️ DAY3 行程表</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>08:30</td>
+                                <td>酒店</td>
+                                <td>退房 <span class="budget-highlight">(免费)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>北塔寺站</td>
+                                <td>拍摄北寺塔 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁4号线</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>09:30</td>
+                                <td>前往苏博</td>
+                                <td>品尝苏式美食 <span class="budget-highlight">(30元)</span></td>
+                                <td>步行</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>10:30</td>
+                                <td>苏州博物馆</td>
+                                <td>参观建筑杰作 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>13:00</td>
+                                <td>苏博咖啡厅</td>
+                                <td>下午茶 <span class="budget-highlight">(40元)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>14:30</td>
+                                <td>苏州站</td>
+                                <td>返程 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁4号线</td>
+                                <td>20分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>苏博攻略：</strong> 苏州博物馆需提前预约（尤其是周末），馆内咖啡厅可欣赏庭院美景。附近面馆推荐：同得兴精品面馆、裕兴记面馆。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 苏州旅游攻略 | 体验江南水乡的精致与优雅</p>
+            <p>温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准</p>
+        </footer>
+    </div>
+    
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 预约详情切换
+            const toggleLink = document.getElementById('reservation-toggle');
+            const details = document.getElementById('reservation-details');
+            const note = document.getElementById('preparation-note');
+            
+            if (toggleLink && details && note) {
+                toggleLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                    note.style.display = details.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // 回到顶部功能
+            const backToTopBtn = document.getElementById('backToTop');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function() {
+                    backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+                });
+                
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // 移动端日期导航
+            const dayBtns = document.querySelectorAll('.day-btn');
+            const daySections = document.querySelectorAll('.day-section');
+            
+            if (dayBtns.length && daySections.length) {
+                dayBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 更新按钮状态
+                        dayBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 显示对应日期内容
+                        const day = this.dataset.day;
+                        daySections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === `day${day}-section`) {
+                                section.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
