@@ -37,6 +37,32 @@
                 radial-gradient(circle at 90% 80%, rgba(188, 45, 41, 0.05) 0%, transparent 20%);
         }
         
+        /* 返回首页按钮 */
+        .home-button {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(2, 119, 189, 0.2);
+            text-decoration: none;
+            z-index: 20;
+        }
+        
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(188, 45, 41, 0.3);
+        }
+        
         /* 背景旅行图标 */
         .travel-icon {
             position: absolute;
@@ -260,8 +286,8 @@
             flex: 1;
             min-width: 300px;
             max-width: 550px;
-            height: 100%;
             display: flex;
+            flex-direction: column;
         }
         
         /* 原404页面样式 */
@@ -279,8 +305,8 @@
             display: flex;
             flex-direction: column;
             transition: all 0.3s ease;
-            min-height: 100%; /* 确保高度与左侧匹配 */
-            overflow: hidden; /* 关键修复：确保顶部色条圆角正确显示 */
+            height: 100%; /* 确保高度填充 */
+            overflow: hidden; /* 确保顶部色条圆角正确显示 */
         }
         
         .container:hover {
@@ -288,7 +314,7 @@
             transform: translateY(-5px);
         }
         
-        /* 修复顶部色条圆角问题 - 最终解决方案 */
+        /* 修复顶部色条圆角问题 */
         .container::before {
             content: "";
             position: absolute;
@@ -551,6 +577,13 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .home-button {
+                top: 20px;
+                left: 20px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -612,6 +645,13 @@
             .city-header {
                 flex-direction: column;
                 gap: 10px;
+            }
+            
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
             }
         }
         
@@ -835,6 +875,11 @@
     </style>
 </head>
 <body>
+    <!-- 返回首页按钮 -->
+    <a href="index.html" class="home-button">
+        <i class="material-icons">home</i> 返回首页
+    </a>
+    
     <!-- 背景装饰元素 -->
     <div class="travel-icon compass floating">🌎</div>
     <div class="travel-icon mountain floating delay-1">⛰️</div>
