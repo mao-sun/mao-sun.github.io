@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>江苏省旅游攻略 | 旅行手记</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 色彩方案 */
+        :root {
+            --blue-tile: rgb(0, 105, 148);    /* 青瓦蓝 */
+            --ink-gray: rgb(120, 130, 140);    /* 水墨灰 */
+            --paper-white: rgb(245, 242, 235); /* 留空白 */
+            --nanking-red: rgb(188, 45, 41);   /* 金陵朱红 */
+            --embroidery-gold: rgb(210, 180, 140); /* 苏绣金 */
+            --light-blue: rgba(0, 105, 148, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Noto Sans SC', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--paper-white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 105, 148, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(188, 45, 41, 0.05) 0%, transparent 20%);
+        }
+        
+        /* 背景旅行图标 */
+        .travel-icon {
+            position: absolute;
+            opacity: 0.08;
+            font-size: 8rem;
+            z-index: 0;
+            user-select: none;
+        }
+        
+        .compass { top: 10%; left: 5%; transform: rotate(25deg); }
+        .mountain { top: 15%; right: 8%; transform: rotate(-15deg); }
+        .camera { bottom: 20%; left: 7%; transform: rotate(10deg); }
+        .map { bottom: 15%; right: 10%; transform: rotate(-5deg); }
+        
+        /* 页面标题区域 */
+        .province-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .province-title {
+            color: var(--blue-tile);
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .province-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--embroidery-gold);
+            border-radius: 3px;
+        }
+        
+        .province-subtitle {
+            color: var(--ink-gray);
+            font-size: 1.2rem;
+            margin: 30px auto 0;
+            line-height: 1.7;
+            max-width: 800px;
+            font-weight: 300;
+        }
+        
+        /* 内容布局 */
+        .transfer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 20px auto 40px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            align-items: stretch; /* 确保子元素高度相等 */
+        }
+        
+        .cities-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* 城市卡片 */
+        .city-card {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(41, 128, 185, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 1px solid rgba(179, 229, 252, 0.3);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .city-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(41, 128, 185, 0.2);
+        }
+        
+        .city-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--blue-tile), var(--embroidery-gold));
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+        }
+        
+        /* 新增城市标题容器样式 */
+        .city-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .city-icon {
+            font-size: 3.5rem;
+            color: var(--blue-tile);
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .city-card:hover .city-icon {
+            transform: scale(1.1);
+            color: var(--nanking-red);
+        }
+        
+        .city-title {
+            color: var(--blue-tile);
+            font-size: 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .city-card:hover .city-title {
+            color: var(--nanking-red);
+        }
+        
+        .city-description {
+            color: var(--ink-gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .city-features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .feature {
+            background: var(--light-blue);
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 0.95rem;
+            color: var(--blue-tile);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 105, 148, 0.1);
+        }
+        
+        .city-card:hover .feature {
+            background: rgba(188, 45, 41, 0.1);
+            color: var(--nanking-red);
+            border-color: rgba(188, 45, 41, 0.1);
+        }
+        
+        .city-btn {
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(2, 119, 189, 0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .city-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--nanking-red), var(--blue-tile));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .city-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(188, 45, 41, 0.3);
+        }
+        
+        .city-btn:hover::before {
+            opacity: 1;
+        }
+        
+        /* 旅行手记模块 */
+        .travel-module {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+            height: 100%;
+            display: flex;
+        }
+        
+        /* 原404页面样式 */
+        .container {
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(41, 128, 185, 0.1);
+            padding: 35px 30px;
+            text-align: center;
+            width: 100%;
+            z-index: 10;
+            position: relative;
+            border: 1px solid rgba(179, 229, 252, 0.3);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            min-height: 100%; /* 确保高度与左侧匹配 */
+            overflow: hidden; /* 关键修复：确保顶部色条圆角正确显示 */
+        }
+        
+        .container:hover {
+            box-shadow: 0 15px 35px rgba(41, 128, 185, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        /* 修复顶部色条圆角问题 - 最终解决方案 */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--blue-tile), var(--embroidery-gold));
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+        }
+        
+        /* 新增：标题与图标容器 */
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .journey-icon {
+            font-size: 4rem;
+            color: var(--blue-tile);
+            animation: float 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        
+        h1 {
+            color: var(--blue-tile);
+            font-size: 2.4rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            letter-spacing: 1px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .poetic-subtitle {
+            color: var(--ink-gray);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+            line-height: 1.4;
+            width: 100%;
+        }
+        
+        .poetic-text {
+            font-size: 1.6rem;
+            color: var(--blue-tile);
+            line-height: 1.5;
+            margin: 25px 0;
+            font-style: italic;
+            font-weight: 300;
+            position: relative;
+            padding: 15px 0;
+        }
+        
+        .poetic-text::before,
+        .poetic-text::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 2px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, var(--embroidery-gold), transparent);
+        }
+        
+        .poetic-text::before {
+            top: 0;
+        }
+        
+        .poetic-text::after {
+            bottom: 0;
+        }
+        
+        .message {
+            color: var(--ink-gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin: 20px 0 30px;
+        }
+        
+        .highlight {
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+            padding: 0 5px;
+        }
+        
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+        
+        .travel-btn {
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(2, 119, 189, 0.2);
+            flex: 1;
+            min-width: 160px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .travel-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--nanking-red), var(--blue-tile));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .travel-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(188, 45, 41, 0.3);
+        }
+        
+        .travel-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-outline {
+            background: linear-gradient(to right, var(--blue-tile), var(--embroidery-gold)) !important;
+            color: white !important;
+            border: none !important;
+        }
+        
+        .btn-outline:hover {
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red)) !important;
+        }
+
+        .btn-suggestion {
+            background: linear-gradient(135deg, var(--blue-tile), var(--nanking-red));
+            color: white;
+        }
+        
+        .gratitude {
+            margin-top: auto; /* 将感谢语推到底部 */
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 105, 148, 0.1);
+            color: var(--ink-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .contact-email {
+            display: block;
+            margin-top: 15px;
+            color: var(--blue-tile);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+        
+        .contact-email:hover {
+            color: var(--nanking-red);
+            text-decoration: underline;
+        }
+        
+        .support-note {
+            font-size: 0.85rem;
+            color: var(--ink-gray);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* 动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
+        .delay-3 { animation-delay: 1.5s; }
+        
+        /* 响应式设计 */
+        @media (max-width: 1100px) {
+            .transfer-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cities-container, .travel-module {
+                max-width: 700px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .province-title {
+                font-size: 2.2rem;
+            }
+            
+            .province-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .city-title {
+                font-size: 1.8rem;
+            }
+            
+            .city-description {
+                font-size: 1rem;
+            }
+            
+            .feature {
+                font-size: 0.9rem;
+                padding: 6px 14px;
+            }
+            
+            .travel-icon {
+                font-size: 5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .poetic-text {
+                font-size: 1.4rem;
+            }
+            
+            .city-header {
+                gap: 15px;
+            }
+            
+            /* 响应式：小屏幕时标题和图标垂直排列 */
+            .title-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .province-title {
+                font-size: 1.8rem;
+            }
+            
+            .province-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .city-card {
+                padding: 20px;
+            }
+            
+            .city-title {
+                font-size: 1.6rem;
+            }
+            
+            .city-description {
+                font-size: 0.95rem;
+            }
+            
+            .city-features {
+                gap: 8px;
+            }
+            
+            .feature {
+                font-size: 0.85rem;
+                padding: 5px 12px;
+            }
+            
+            .travel-icon {
+                font-size: 4rem;
+            }
+            
+            .journey-icon {
+                font-size: 3.5rem;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .poetic-text {
+                font-size: 1.2rem;
+            }
+            
+            .btn-group {
+                gap: 10px;
+            }
+            
+            .travel-btn {
+                min-width: 140px;
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .city-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        /* 支持模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--ink-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--blue-tile);
+            transform: rotate(90deg);
+        }
+        
+        .support-title {
+            color: var(--blue-tile);
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .support-text {
+            color: var(--ink-gray);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 12px 0 20px;
+        }
+        
+        .qr-container {
+            margin: 15px auto;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .suggestion-form {
+            margin: 30px 0 20px;
+            text-align: left;
+            background: var(--paper-white);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--ink-gray);
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group label .required {
+            color: var(--nanking-red);
+            margin-left: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid rgba(120, 130, 140, 0.2);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--ink-gray);
+            user-select: text;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--blue-tile);
+            box-shadow: 0 0 0 3px rgba(0, 105, 148, 0.15);
+        }
+        
+        .form-input::placeholder {
+            color: var(--ink-gray);
+            font-style: italic;
+            opacity: 0.7;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, var(--blue-tile), var(--nanking-red));
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(2, 119, 189, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--nanking-red), var(--blue-tile));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(188, 45, 41, 0.3);
+        }
+        
+        .submit-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-message {
+            background: rgba(212, 237, 218, 0.5);
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .suggestion-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--ink-gray);
+            line-height: 1.6;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--ink-gray), transparent);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景装饰元素 -->
+    <div class="travel-icon compass floating">🌎</div>
+    <div class="travel-icon mountain floating delay-1">⛰️</div>
+    <div class="travel-icon camera floating delay-2">📷</div>
+    <div class="travel-icon map floating delay-3">🗺️</div>
+    
+    <!-- 江苏省标题 -->
+    <div class="province-header">
+        <h1 class="province-title">江苏·行</h1>
+        <p class="province-subtitle">
+            江苏，长江与黄海交汇的明珠，江南水乡的典范。这里自古便是鱼米之乡、富庶之地，
+            集古典园林的精巧、历史名城的厚重与现代都市的繁华于一体。
+        </p>
+    </div>
+    
+    <!-- 中转页主要内容 -->
+    <div class="transfer-container">
+        <!-- 左侧：城市选择区域 -->
+        <div class="cities-container">
+            <!-- 南京市卡片 -->
+            <div class="city-card" onclick="window.location.href='EastChina-Jiangsu-Nanjing.html'">
+                <div class="city-header">
+                    <div class="city-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h2 class="city-title">南京市</h2>
+                </div>
+                <p class="city-description">
+                    六朝古都，十朝都会，南京承载着厚重的历史记忆，中山陵庄严、秦淮河柔美、明城墙雄伟、夫子庙繁华，这是历史与现代完美交融之城。
+                </p>
+                <div class="city-features">
+                    <div class="feature">
+                        <i class="fas fa-landmark"></i> 历史遗迹
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-utensils"></i> 金陵美食
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-water"></i> 秦淮风光
+                    </div>
+                </div>
+                <button class="city-btn">
+                    <i class="fas fa-map-marked-alt"></i> 探索南京
+                </button>
+            </div>
+            
+            <!-- 苏州市卡片 -->
+            <div class="city-card" onclick="window.location.href='EastChina-Jiangsu-Suzhou.html'">
+                <div class="city-header">
+                    <div class="city-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h2 class="city-title">苏州市</h2>
+                </div>
+                <p class="city-description">
+                    苏州以其精致典雅的古典园林、纵横交错的运河网络和温婉的吴侬软语，
+                    勾勒出江南水乡最诗意的画卷，素有"人间天堂"的美誉
+                </p>
+                <div class="city-features">
+                    <div class="feature">
+                        <i class="fas fa-tree"></i> 古典园林
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-archway"></i> 古镇水乡
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-icicles"></i> 苏式糕点
+                    </div>
+                </div>
+                <button class="city-btn">
+                    <i class="fas fa-map-marked-alt"></i> 探索苏州
+                </button>
+            </div>
+        </div>
+        
+        <!-- 右侧：旅行手记模块 -->
+        <div class="travel-module">
+            <div class="container">
+                <!-- 将飞机图标和标题放在同一行 -->
+                <div class="title-container">
+                    <div class="journey-icon">✈️</div>
+                    <h1>足迹未至的远方</h1>
+                </div>
+                
+                <p class="poetic-subtitle">只因行囊未及，非是风景不美</p>
+                
+                <p class="poetic-text">
+                    那片土地的风声还未掠过耳畔<br>
+                    待我采撷撷过晨雾与星辉<br>
+                    定将途中所见悉数献予知音
+                </p>
+                
+                <p class="message">
+                    您寻找的<span class="highlight">旅行手记</span>尚未落笔成章<br>
+                    或许在另一片土地，我们能相遇在同一片星空下
+                </p>
+                
+                <div class="btn-group">
+                    <button class="travel-btn" onclick="window.location.href='index.html'">
+                        <i class="material-icons">home</i> 返回驿站
+                    </button>
+                    <button class="travel-btn btn-outline" id="exploreButton">
+                        <i class="material-icons">map</i> 探索已至之地
+                    </button>
+                    <button class="travel-btn" id="supportButton" style="background: linear-gradient(135deg, var(--blue-tile), var(--embroidery-gold));">
+                        <i class="material-icons">favorite</i> 支持我的旅程
+                    </button>
+                    <button class="travel-btn" id="suggestionButton" style="background: linear-gradient(135deg, var(--nanking-red), var(--embroidery-gold));">
+                        <i class="material-icons">location_on</i> 推荐下一站
+                    </button>
+                </div>
+                
+                <p class="gratitude">
+                    感谢您与我同行在这探索世界的旅途上<br>
+                    每一双注视远方的眼睛，都让风景有了新的意义<br>
+                    <span class="contact-email">如有宝贵意见或侵权行为，请联系：mao.sun@foxmail.com</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 支持模态框 -->
+    <div class="modal" id="supportModal">
+        <div class="modal-content">
+            <span class="close-modal material-icons" id="closeModal">close</span>
+            <h2 class="support-title">旅途中的相遇</h2>
+            <p class="support-text">
+                感谢您愿意支持一个同在路上的人。您的善意将化作旅程中的一缕清风，<br>
+                让更多风景能被记录与分享。
+            </p>
+            <div class="qr-container">
+                <div class="qr-placeholder">
+                    <!-- 这里应该放置二维码图片 -->
+                    <img src="https://s3.bmp.ovh/imgs/2025/07/13/d4b3c25812e83267.jpg" alt="支持二维码">
+                </div>
+            </div>
+            <p class="support-note">
+                扫码支持我的旅行|赞赏/支持(非商品交易)|每一份心意都将成为下段旅程的星光
+            </p>
+        </div>
+    </div>
+
+    <!-- 目的地推荐模态框 -->
+    <div class="modal" id="suggestionModal">
+        <div class="modal-content">
+            <span class="close-modal material-icons" id="closeSuggestionModal">close</span>
+            <h2 class="support-title">为我推荐下一站</h2>
+            <p class="support-text">
+                您的建议将指引我探索新的天地，<br>
+                或许下一段旅程就从这里开始
+            </p>
+            
+            <div class="divider"></div>
+            
+            <div class="suggestion-form">
+                <div class="form-group">
+                    <label for="destination">
+                        推荐的目的地(recommended destinations)
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" id="destination" class="form-input" 
+                           placeholder="中国台湾（Taiwan, China）" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reason">
+                        推荐理由(Reason for recommendatio)
+                    </label>
+                    <input type="text" id="reason" class="form-input" 
+                           placeholder="为什么应该去这个地方？(Why should I go to this place？)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">
+                        您的联系方式(Your contact details)
+                    </label>
+                    <input type="text" id="contact" class="form-input" 
+                           placeholder="电子邮箱或者电话号码(E-mail address or phone number)">
+                </div>
+                
+                <button class="submit-btn" id="submitSuggestion">
+                    <i class="material-icons">send</i> 提交建议
+                </button>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="material-icons">check_circle</i> 
+                    感谢您的推荐！您的建议已成功提交。
+                </div>
+            </div>
+            
+            <p class="suggestion-text">
+                您的建议是宝贵的灵感，会认真考虑每个推荐的目的地
+            </p>
+            
+            <div class="divider"></div>
+            
+            <div class="qr-container">
+                <div class="qr-placeholder">
+                    <!-- 这里应该放置二维码图片 -->
+                    <img src="https://s3.bmp.ovh/imgs/2025/07/13/d4b3c25812e83267.jpg" alt="支持二维码">
+                </div>
+            </div>
+            <p class="support-note">
+                扫码支持我的旅行|(赞赏/支持)非商品交易|让更多目的地成为可能
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 目的地链接池（已去目的地取消注释） - 恢复原始版本
+        const travelDestinations = [
+            
+            // 中国省份
+            // 华北地区
+            '/NorthChina-Beijing.html',        // 北京
+            //'/NorthChina-Tianjin.html',        // 天津（待解锁）
+            // '/NorthChina-Hebei.html',       // 河北（待解锁）
+            //'/NorthChina-Shanxi.html',      // 山西（待解锁）
+            // '/NorthChina-InnerMongolia.html' // 内蒙古（待解锁）
+            
+            // 东北地区
+            // '/NortheastChina-Liaoning.html',
+            // '/NortheastChina-Jilin.html',
+            // '/NortheastChina-Heilongjiang.html',
+            
+            // 华东地区
+            //'/EastChina-Shanghai.html',        // 上海（待解锁）
+            //'/EastChina-Jiangsu.html',         // 江苏（待解锁）
+            // '/EastChina-Zhejiang.html',      // 浙江（待解锁）
+            // '/EastChina-Anhui.html',         // 安徽（待解锁）
+            // '/EastChina-Fujian.html',        // 福建（待解锁）
+            // '/EastChina-Jiangxi.html',       // 江西（待解锁）
+            //'/EastChina-Shandong.html',        // 山东（待解锁）
+            
+            // 华中地区
+            // '/CentralChina-Henan.html',      // 河南（待解锁）
+            // '/CentralChina-Hubei.html',      // 湖北（待解锁）
+            // '/CentralChina-Hunan.html',      // 湖南（待解锁）
+            
+            // 华南地区
+            // '/SouthChina-Guangdong.html',    // 广东（待解锁）
+            // '/SouthChina-Guangxi.html',       // 广西（待解锁）
+            // '/SouthChina-Hainan.html',        // 海南（待解锁）
+            
+            // 西南地区
+            //'/SouthwestChina-Chongqing.html',  // 重庆（待解锁）
+            // '/SouthwestChina-Sichuan.html',   // 四川（待解锁）
+            // '/SouthwestChina-Guizhou.html',   // 贵州（待解锁）
+            // '/SouthwestChina-Yunnan.html',    // 云南（待解锁）
+            // '/SouthwestChina-Tibest.html',     // 西藏（待解锁）
+            
+            // 西北地区
+            // '/NorthwestChina-Shaanxi.html',   // 陕西（待解锁）
+            // '/NorthwestChina-Gansu.html',     // 甘肃（待解锁）
+            // '/NorthwestChina-Qinghai.html',    // 青海（待解锁）
+            // '/NorthwestChina-Ningxia.html',   // 宁夏（待解锁）
+            // '/NorthwestChina-Xinjiang.html',  // 新疆（待解锁）
+            
+            // 港澳台地区
+            '/China-HongKong.html',            // 香港
+            // '/China-Macau.html',              // 澳门（待解锁）
+            // '/China-Taiwan.html',             // 台湾（待解锁）
+            
+            // 国际地区
+            // 亚洲
+            '/Asia-Japan.html',              // 日本
+            //'/Asia-South-Korea.html',          // 韩国（待解锁）
+            '/Asia-Vietnam.html',             // 越南
+            // '/Asia-Thailand.html',            // 泰国（待解锁）
+            // '/Asia-Singapore.html',           // 新加坡（待解锁）
+            // '/Asia-Malaysia.html',            // 马来西亚（待解锁）
+            // '/Asia-Indonesia.html',           // 印度尼西亚（待解锁）
+            // '/Asia-Philippines.html',         // 菲律宾（待解锁）
+            // '/Asia-Cambodia.html',            // 柬埔寨（待解锁）
+            // '/Asia-Laos.html',                // 老挝（待解锁）
+            // '/Asia-Myanmar.html',             // 缅甸（待解锁）
+            // '/Asia-India.html',               // 印度（待解锁）
+            // '/Asia-Nepal.html',               // 尼泊尔（待解锁）
+            // '/Asia-Sri-Lanka.html',           // 斯里兰卡（待解锁）
+            // '/Asia-Maldives.html',            // 马尔代夫（待解锁）
+            // '/Asia-United-Arab-Emirates.html',// 阿联酋（待解锁）
+            // '/Asia-Turkey.html',              // 土耳其（待解锁）
+            
+            // 欧洲
+            // '/Europe-United-Kingdom.html',   // 英国（待解锁）
+            //'/Europe-France.html',             // 法国（待解锁）
+            // '/Europe-Germany.html',           // 德国（待解锁）
+            // '/Europe-Italy.html',             // 意大利（待解锁）
+            // '/Europe-Spain.html',             // 西班牙（待解锁）
+            // '/Europe-Portugal.html',          // 葡萄牙（待解锁）
+            // '/Europe-Netherlands.html',       // 荷兰（待解锁）
+            // '/Europe-Belgium.html',           // 比利时（待解锁）
+            // '/Europe-Switzerland.html',       // 瑞士（待解锁）
+            // '/Europe-Austria.html',           // 奥地利（待解锁）
+            // '/Europe-Greece.html',            // 希腊（待解锁）
+            // '/Europe-Iceland.html',           // 冰岛（待解锁）
+            // '/Europe-Norway.html',           // 挪威（待解锁）
+            // '/Europe-Sweden.html',            // 瑞典（待解锁）
+            // '/Europe-Denmark.html',           // 丹麦（待解锁）
+            // '/Europe-Finland.html',           // 芬兰（待解锁）
+            // '/Europe-Russia.html',            // 俄罗斯（待解锁）
+            // '/Europe-Czech-Republic.html',    // 捷克（待解锁）
+            // '/Europe-Hungary.html',           // 匈牙利（待解锁）
+            // '/Europe-Poland.html',            // 波兰（待解锁）
+            
+            // 北美洲
+            // '/NorthAmerica-United-States.html', // 美国（待解锁）
+            // '/NorthAmerica-Canada.html',       // 加拿大（待解锁）
+            // '/NorthAmerica-Mexico.html',      // 墨西哥（待解锁）
+            // '/NorthAmerica-Cuba.html',        // 古巴（待解锁）
+            // '/NorthAmerica-Costa-Rica.html',  // 哥斯达黎加（待解锁）
+            // '/NorthAmerica-Panama.html',      // 巴拿马（待解锁）
+            
+            // 南美洲
+            // '/SouthAmerica-Brazil.html',      // 巴西（待解锁）
+            // '/SouthAmerica-Argentina.html',   // 阿根廷（待解锁）
+            // '/SouthAmerica-Chile.html',       // 智利（待解锁）
+            // '/SouthAmerica-Peru.html',        // 秘鲁（待解锁）
+            // '/SouthAmerica-Colombia.html',    // 哥伦比亚（待解锁）
+            // '/SouthAmerica-Ecuador.html',     // 厄瓜多尔（待解锁）
+            // '/SouthAmerica-Bolivia.html',     // 玻利维亚（待解锁）
+            // '/SouthAmerica-Uruguay.html',     // 乌拉圭（待解锁）
+            // '/SouthAmerica-Paraguay.html',    // 巴拉圭（待解锁）
+            // '/SouthAmerica-Venezuela.html',   // 委内瑞拉（待解锁）
+            
+            // 大洋洲
+            // '/Oceania-Australia.html',        // 澳大利亚（待解锁）
+            // '/Oceania-New-Zealand.html',      // 新西兰（待解锁）
+            // '/Oceania-Fiji.html',              // 斐济（待解锁）
+            // '/Oceania-Samoa.html',             // 萨摩亚（待解锁）
+            // '/Oceania-Tonga.html',             // 汤加（待解锁）
+            
+            // 非洲
+            // '/Africa-Egypt.html',              // 埃及（待解锁）
+            // '/Africa-South-Africa.html',       // 南非（待解锁）
+            // '/Africa-Kenya.html',              // 肯尼亚（待解锁）
+            // '/Africa-Morocco.html',            // 摩洛哥（待解锁）
+            // '/Africa-Tanzania.html'            // 坦桑尼亚（待解锁）
+        ];
+        
+        // 模态框交互
+        const supportModal = document.getElementById('supportModal');
+        const suggestionModal = document.getElementById('suggestionModal');
+        const supportButton = document.getElementById('supportButton');
+        const suggestionButton = document.getElementById('suggestionButton');
+        const closeModal = document.getElementById('closeModal');
+        const closeSuggestionModal = document.getElementById('closeSuggestionModal');
+        const submitSuggestion = document.getElementById('submitSuggestion');
+        const successMessage = document.getElementById('successMessage');
+        
+        // 打开支持模态框
+        supportButton.addEventListener('click', function() {
+            supportModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // 打开推荐模态框
+        suggestionButton.addEventListener('click', function() {
+            document.getElementById('destination').value = '';
+            document.getElementById('reason').value = '';
+            document.getElementById('contact').value = '';
+            successMessage.style.display = 'none';
+            submitSuggestion.style.display = 'flex';
+            suggestionModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // 关闭支持模态框
+        closeModal.addEventListener('click', function() {
+            supportModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // 关闭推荐模态框
+        closeSuggestionModal.addEventListener('click', function() {
+            suggestionModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            if (event.target === supportModal) {
+                supportModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (event.target === suggestionModal) {
+                suggestionModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // 探索已至之地功能
+        function exploreRandomDestination() {
+            const unlocked = travelDestinations.filter(url => !url.startsWith('//'));
+            
+            if(unlocked.length > 0) {
+                const randomURL = unlocked[Math.floor(Math.random() * unlocked.length)];
+                window.location.href = randomURL;
+            } else {
+                alert('我的旅行地图正在绘制中，请先解锁任意目的地！');
+            }
+        }
+        
+        // 绑定探索按钮
+        document.getElementById('exploreButton').addEventListener('click', exploreRandomDestination);
+        
+        // 提交建议功能
+        submitSuggestion.addEventListener('click', function () {
+            const destination = document.getElementById('destination').value;
+            const reason = document.getElementById('reason').value;
+            const contact = document.getElementById('contact').value;
+            
+            if (!destination) {
+                alert('请填写您推荐的目的地');
+                return;
+            }
+            
+            submitSuggestion.disabled = true;
+            submitSuggestion.innerHTML = '<i class="material-icons">hourglass_empty</i> 提交中...';
+            
+            const formData = new FormData();
+            formData.append('entry.536063245', destination);
+            formData.append('entry.26587422', reason);
+            formData.append('entry.1802850522', contact);
+            
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSf5BI-fri18G9rmFqUjTdYJ9cO19T4C9OmYjzyuzVL82MIaOQ/formResponse', {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                successMessage.style.display = 'block';
+                submitSuggestion.style.display = 'none';
+                
+                setTimeout(() => {
+                    submitSuggestion.disabled = false;
+                    submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
+                    submitSuggestion.style.display = 'flex';
+                    successMessage.style.display = 'none';
+                    suggestionModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 3000);
+            }).catch(() => {
+                alert('提交失败，请稍后再试');
+                submitSuggestion.disabled = false;
+                submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
+            });
+        });
+        
+        // 禁止复制功能
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('内容受保护，请尊重原创');
+        });
+        
+        // 禁止右键菜单
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
