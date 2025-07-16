@@ -502,6 +502,27 @@
                 padding-left: 25px;
                 text-align: left;
             }
+            
+            /* 桌面端卡片布局优化 - 三列等宽 */
+            .itinerary-highlight {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 15px;
+            }
+            
+            .itinerary-highlight .highlight-card {
+                flex: 1;
+                min-width: 0;
+            }
+            
+            /* 移除移动端特定的卡片布局 */
+            .two-cards-row {
+                display: contents !important;
+            }
+            
+            .two-cards-row .highlight-card {
+                min-width: unset !important;
+            }
         }
         
         /* 移动端优化 */
@@ -529,7 +550,6 @@
             .table-container {
                 margin: 10px 0;
                 border-radius: 8px;
-                /* 减少边距 */
                 margin-left: -8px;
                 margin-right: -8px;
                 width: calc(100% + 16px);
@@ -630,31 +650,31 @@
                 bottom: 10px;
             }
             
-            /* 优化移动端卡片布局 - 重新设计 */
+            /* 优化移动端卡片布局 - 完全恢复原始结构 */
             .itinerary-highlight {
-                display: flex;
                 flex-direction: column;
                 gap: 12px;
             }
             
             .highlight-card {
-                width: 100%;
+                min-width: 100%;
             }
             
             /* 第一行：川渝美食卡片 */
             .food-card {
-                width: 100%;
+                flex: 0 0 100%;
+                min-width: auto;
             }
             
             /* 第二行：必游景点和文化体验 */
-            .card-row {
+            .two-cards-row {
                 display: flex;
                 gap: 12px;
                 width: 100%;
                 flex-wrap: nowrap;
             }
             
-            .card-row .highlight-card {
+            .two-cards-row .highlight-card {
                 flex: 1;
                 min-width: calc(50% - 6px);
             }
@@ -707,11 +727,12 @@
             }
             
             /* 480px以下强制两个卡片等宽 */
-            .card-row {
+            .two-cards-row {
+                flex-direction: row;
                 gap: 8px;
             }
             
-            .card-row .highlight-card {
+            .two-cards-row .highlight-card {
                 min-width: calc(50% - 4px);
                 flex: 0 0 calc(50% - 4px);
                 width: auto;
@@ -876,7 +897,7 @@
                 </div>
             </div>
             
-            <!-- 重新设计的卡片布局 -->
+            <!-- 恢复原始移动端卡片布局 -->
             <div class="itinerary-highlight">
                 <!-- 第一行：川渝美食卡片 -->
                 <div class="highlight-card food-card">
@@ -892,7 +913,7 @@
                 </div>
                 
                 <!-- 第二行：必游景点和文化体验 -->
-                <div class="card-row">
+                <div class="two-cards-row">
                     <div class="highlight-card">
                         <div class="card-header">必游景点</div>
                         <div class="card-content">
