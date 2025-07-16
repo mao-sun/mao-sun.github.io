@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重庆四川4天3晚旅游攻略</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --chongqing-red: #d9534f;
+            --chengdu-blue: #5bc0de;
+            --gold-leaf: #f0ad4e;
+            --light-blue: #e6f2f5;
+            --dark-blue: #2a6496;
+            --light-red: #f2dede;
+            --dark-red: #a94442;
+            --soft-yellow: #f8f0d7;
+            --section-bg: #f9fdf7;
+            --table-header: #e8f5e9;
+            --border-color: #c8e6c9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        body {
+            background: #f5f2eb;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--chongqing-red), var(--chengdu-blue));
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%),
+                linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.05) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.3;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        h2 {
+            color: var(--chengdu-blue);
+            margin: 20px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold-leaf);
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            position: relative;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--chongqing-red);
+        }
+        
+        .section {
+            padding: 20px;
+            background-color: var(--section-bg);
+            border-radius: 10px;
+            margin: 15px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        table {
+            width: 100%;
+            min-width: 600px;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+        }
+        
+        th {
+            background: var(--table-header);
+            font-weight: 600;
+            color: #00382a;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+            position: sticky;
+            left: 0;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9fdf7;
+        }
+        
+        tr:hover {
+            background-color: #edf7f0;
+        }
+        
+        .note {
+            background: #e8f5e9;
+            border-left: 3px solid var(--chongqing-red);
+            padding: 16px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+        }
+        
+        .budget-highlight {
+            background-color: var(--soft-yellow);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-weight: 500;
+            color: #5a4a30;
+            margin-left: 4px;
+            display: inline-block;
+            border: 1px solid #e0d3b0;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--dark-red), var(--dark-blue));
+            color: white;
+            font-size: 0.9rem;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .reservation-link {
+            color: var(--gold-leaf);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.9rem, 1.4vw, 1rem);
+            border-bottom: 1px dotted var(--gold-leaf);
+        }
+        
+        .reservation-link:hover {
+            color: var(--chongqing-red);
+            text-decoration: none;
+        }
+        
+        .reservation-details {
+            display: none;
+            margin-top: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9fdf7;
+        }
+        
+        .back-to-home {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--chengdu-blue);
+            border: 2px solid var(--chengdu-blue);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+        }
+        
+        .back-to-home:hover {
+            background: var(--chengdu-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--chongqing-red);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(100px);
+            border: none;
+            font-size: 1.2rem;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: var(--dark-red);
+            transform: scale(1.1);
+        }
+        
+        .mobile-day-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0 15px;
+            background: var(--table-header);
+            padding: 8px;
+            border-radius: 8px;
+            position: sticky;
+            top: 10px;
+            z-index: 50;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .day-btn {
+            flex: 1;
+            padding: 10px 5px;
+            margin: 0 5px;
+            background: #f1f8e9;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-weight: 600;
+            color: #00503c;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            text-align: center;
+        }
+        
+        .day-btn.active {
+            background: #00503c;
+            color: white;
+            border-color: #00382a;
+        }
+        
+        .chongqing-pattern {
+            width: 100%;
+            height: 100px;
+            background: 
+                linear-gradient(45deg, #f5f2eb 25%, transparent 25%, transparent 75%, #f5f2eb 75%),
+                linear-gradient(45deg, #f5f2eb 25%, #e8f5e9 25%, #e8f5e9 75%, #f5f2eb 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(245, 242, 235, 0.7), rgba(232, 245, 233, 0.7));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #00503c;
+            font-weight: 600;
+            text-align: center;
+            padding: 10px;
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+        }
+        
+        .pattern-overlay i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            color: var(--chongqing-red);
+        }
+        
+        .itinerary-highlight {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .highlight-card {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--chongqing-red), var(--chengdu-blue));
+            color: white;
+            padding: 12px;
+            font-weight: 600;
+            text-align: center;
+            font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .card-content ul {
+            padding-left: 20px;
+            list-style-type: none;
+        }
+        
+        .card-content li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 22px;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+            text-align: left;
+        }
+        
+        .card-content li:before {
+            content: "•";
+            color: var(--chongqing-red);
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+            top: -2px;
+        }
+        
+        .watermark {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            opacity: 0.05;
+            font-size: 10rem;
+            font-weight: 700;
+            color: #00503c;
+            z-index: 0;
+            pointer-events: none;
+            transform: rotate(-15deg);
+        }
+        
+        .day-section {
+            display: none;
+        }
+        
+        .day-section.active {
+            display: block;
+        }
+        
+        .mobile-compact {
+            margin-top: 5px;
+        }
+        
+        .water-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23d9534f" fill-opacity="0.1" d="M0,64L48,80C96,96,192,128,288,128C384,128,480,96,576,90.7C672,85,768,107,864,128C960,149,1056,171,1152,165.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #78828c, transparent);
+            margin: 20px 0;
+        }
+        
+        .tips-section {
+            background: linear-gradient(135deg, #f9f9f9, var(--light-blue));
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--chengdu-blue);
+        }
+        
+        .tips-header {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            justify-content: center;
+        }
+        
+        .tips-header i {
+            margin-right: 12px;
+            color: var(--chongqing-red);
+        }
+        
+        .tips-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .tips-content p {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .tips-content p:before {
+            content: "•";
+            color: var(--gold-leaf);
+            position: absolute;
+            left: 0;
+            font-size: 1.8rem;
+            top: -5px;
+        }
+        
+        /* 桌面端显示优化 */
+        @media (min-width: 769px) {
+            .day-section {
+                display: block !important;
+            }
+            
+            .mobile-day-nav {
+                display: none;
+            }
+            
+            .highlight-card .card-content li {
+                padding-left: 25px;
+                text-align: left;
+            }
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            }
+            
+            header {
+                padding: 20px 10px;
+                border-radius: 0;
+            }
+            
+            .section {
+                padding: 12px 8px;
+                margin: 8px;
+                border-radius: 8px;
+            }
+            
+            .table-container {
+                margin: 10px 0;
+                border-radius: 8px;
+                /* 减少边距 */
+                margin-left: -8px;
+                margin-right: -8px;
+                width: calc(100% + 16px);
+            }
+            
+            table {
+                min-width: 100%;
+                width: 100%;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            
+            th {
+                font-size: 0.82rem;
+                padding: 10px 8px;
+            }
+            
+            .back-to-home {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                transition: all 0.3s;
+            }
+            
+            .back-to-home.scrolled span {
+                display: none;
+            }
+            
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .chongqing-pattern {
+                height: 90px;
+                margin: 10px 0;
+            }
+            
+            .pattern-overlay {
+                font-size: 0.9rem;
+                padding: 5px;
+            }
+            
+            .pattern-overlay i {
+                font-size: 1.5rem;
+                margin-bottom: 5px;
+            }
+            
+            .mobile-day-nav {
+                top: 5px;
+                margin: 5px 0 10px;
+                padding: 6px;
+                border-radius: 6px;
+            }
+            
+            .day-btn {
+                padding: 8px 4px;
+                font-size: 0.82rem;
+                min-width: 0;
+                flex: 1 1 auto;
+            }
+            
+            .mobile-compact {
+                margin-top: 0;
+            }
+            
+            .card-content li {
+                font-size: 0.85rem;
+                padding-left: 20px;
+                text-align: left;
+                white-space: normal;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .note {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+            
+            h2 {
+                margin: 15px 0 10px;
+                font-size: 1.25rem;
+                text-align: center;
+            }
+            
+            .watermark {
+                font-size: 6rem;
+                right: 10px;
+                bottom: 10px;
+            }
+            
+            /* 优化移动端卡片布局 - 重新设计 */
+            .itinerary-highlight {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .highlight-card {
+                width: 100%;
+            }
+            
+            /* 第一行：川渝美食卡片 */
+            .food-card {
+                width: 100%;
+            }
+            
+            /* 第二行：必游景点和文化体验 */
+            .card-row {
+                display: flex;
+                gap: 12px;
+                width: 100%;
+                flex-wrap: nowrap;
+            }
+            
+            .card-row .highlight-card {
+                flex: 1;
+                min-width: calc(50% - 6px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 6px;
+            }
+            
+            .section {
+                padding: 10px 6px;
+                margin: 6px;
+            }
+            
+            .back-to-home span {
+                display: inline;
+                transition: opacity 0.3s;
+            }
+            
+            .back-to-home.scrolled span {
+                opacity: 0;
+                width: 0;
+                overflow: hidden;
+                display: inline-block;
+            }
+            
+            .water-wave {
+                height: 60px;
+            }
+            
+            .itinerary-highlight {
+                gap: 10px;
+            }
+            
+            .day-btn {
+                font-size: 0.78rem;
+                padding: 8px 2px;
+            }
+            
+            .section.day-section th,
+            .section.day-section td {
+                font-size: 0.78rem;
+                padding: 8px 6px;
+            }
+            
+            .budget-highlight {
+                font-size: 0.78rem;
+                padding: 1px 5px;
+            }
+            
+            /* 480px以下强制两个卡片等宽 */
+            .card-row {
+                gap: 8px;
+            }
+            
+            .card-row .highlight-card {
+                min-width: calc(50% - 4px);
+                flex: 0 0 calc(50% - 4px);
+                width: auto;
+            }
+            
+            /* 调整卡片内部样式以适应小屏幕 */
+            .card-content {
+                padding: 10px;
+            }
+            
+            .card-content li {
+                font-size: 0.78rem;
+                margin-bottom: 6px;
+                padding-left: 18px;
+                white-space: normal;
+            }
+            
+            .card-content li:before {
+                font-size: 1rem;
+                top: -1px;
+            }
+            
+            .card-header {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            
+            /* 进一步优化表格边距 */
+            .table-container {
+                margin-left: -6px;
+                margin-right: -6px;
+                width: calc(100% + 12px);
+            }
+            
+            th, td {
+                padding: 8px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-to-home" id="backHome">
+        <i class="fas fa-home"></i> <span>返回首页</span>
+    </a>
+    
+    <div class="container">
+        <div class="water-wave"></div>
+        <header>
+            <h1>重庆四川4天3晚旅游攻略</h1>
+            <p class="subtitle">山城魔幻与天府之国的完美融合</p>
+            <div class="watermark">川渝</div>
+        </header>
+        
+        <div class="section">
+            <h2>📋 准备事项</h2>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>类别</th>
+                        <th>事项</th>
+                        <th>说明/注意事项</th>
+                    </tr>
+                    <tr>
+                        <td>背包</td>
+                        <td>双肩包</td>
+                        <td>轻便出行，装随身物品</td>
+                    </tr>
+                    <tr>
+                        <td>证件类</td>
+                        <td>身份证</td>
+                        <td>必备</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">电子类</td>
+                        <td>充电宝</td>
+                        <td>≤100Wh（民航规定）</td>
+                    </tr>
+                    <tr>
+                        <td>充电器</td>
+                        <td>带Type-C接口</td>
+                    </tr>
+                    <tr>
+                        <td>耳机</td>
+                        <td>地铁/高铁使用</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">日用类</td>
+                        <td>薄外套</td>
+                        <td>重庆多雾，成都温差大</td>
+                    </tr>
+                    <tr>
+                        <td>折叠伞</td>
+                        <td>防雨防晒</td>
+                    </tr>
+                    <tr>
+                        <td>舒适鞋</td>
+                        <td>日均步数2万+</td>
+                    </tr>
+                    <tr>
+                        <td>现金</td>
+                        <td>300-500元（小额支付）</td>
+                    </tr>
+                    <tr>
+                        <td>预约类</td>
+                        <td>景点预约</td>
+                        <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="preparation-note" class="note">
+                <strong>注意：</strong> 成都博物馆和武侯祠需提前预约，特别是周末和节假日
+            </div>
+            
+            <div id="reservation-details" class="reservation-details">
+                <h2>景点预约详情</h2>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>景点名称</th>
+                            <th>门票价格</th>
+                            <th>预约要求</th>
+                            <th>预约路径</th>
+                            <th>闭馆/闭园时间</th>
+                        </tr>
+                        <tr>
+                            <td>洪崖洞</td>
+                            <td>免费</td>
+                            <td>现场预约</td>
+                            <td>洪崖洞小程序</td>
+                            <td>23:00关灯</td>
+                        </tr>
+                        <tr>
+                            <td>湖广会馆</td>
+                            <td>25元</td>
+                            <td>当天预约</td>
+                            <td>公众号/现场</td>
+                            <td>18:00闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>武侯祠</td>
+                            <td>50元</td>
+                            <td>提前1-3天预约</td>
+                            <td>"成都武侯祠"公众号</td>
+                            <td>18:00闭馆</td>
+                        </tr>
+                        <tr>
+                            <td>成都博物馆</td>
+                            <td>免费</td>
+                            <td>提前1-7天预约</td>
+                            <td>"成都博物馆"公众号</td>
+                            <td>周一闭馆</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="chongqing-pattern">
+                <div class="pattern-overlay">
+                    <i class="fas fa-mountain"></i>
+                    <div>山城魔幻 · 天府之国</div>
+                </div>
+            </div>
+            
+            <!-- 重新设计的卡片布局 -->
+            <div class="itinerary-highlight">
+                <!-- 第一行：川渝美食卡片 -->
+                <div class="highlight-card food-card">
+                    <div class="card-header">川渝美食</div>
+                    <div class="card-content">
+                        <ul>
+                            <li>重庆火锅、小面、酸辣粉</li>
+                            <li>成都串串香、担担面</li>
+                            <li>特色小吃：毛血旺、兔头</li>
+                            <li>甜品：冰粉、凉糕、糍粑</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- 第二行：必游景点和文化体验 -->
+                <div class="card-row">
+                    <div class="highlight-card">
+                        <div class="card-header">必游景点</div>
+                        <div class="card-content">
+                            <ul>
+                                <li>洪崖洞夜景</li>
+                                <li>解放碑步行街</li>
+                                <li>李子坝轻轨穿楼</li>
+                                <li>宽窄巷子</li>
+                                <li>武侯祠</li>
+                                <li>成都博物馆</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-card">
+                        <div class="card-header">文化体验</div>
+                        <div class="card-content">
+                            <ul>
+                                <li>重庆湖广会馆</li>
+                                <li>成都川剧变脸</li>
+                                <li>青羊宫道教文化</li>
+                                <li>文殊院佛教文化</li>
+                                <li>武侯祠三国文化</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-divider"></div>
+            
+            <!-- 重庆四川旅行小贴士 -->
+            <div class="tips-section">
+                <div class="tips-header">
+                    <i class="fas fa-lightbulb"></i>
+                    <h2>重庆四川旅行小贴士</h2>
+                </div>
+                <div class="tips-content">
+                    <p><strong>最佳旅行时间：</strong> 3月-5月和9月-11月是重庆四川最佳旅游季节，气候宜人。</p>
+                    <p><strong>交通建议：</strong> 重庆推荐使用轻轨+滴滴组合，成都地铁发达，建议下载"天府通"APP扫码乘车。</p>
+                    <p><strong>美食地图：</strong> 重庆推荐解放碑八一路好吃街，成都推荐建设路小吃街和魁星楼美食街。</p>
+                    <p><strong>文化体验：</strong> 重庆可体验长江索道，成都可以观看川剧变脸表演。</p>
+                    <p><strong>防坑提醒：</strong> 景区周边水果摊、特产店价格虚高，建议在超市购买特产。</p>
+                </div>
+            </div>
+            
+            <div class="mobile-day-nav">
+                <button class="day-btn active" data-day="1">DAY 1</button>
+                <button class="day-btn" data-day="2">DAY 2</button>
+                <button class="day-btn" data-day="3">DAY 3</button>
+                <button class="day-btn" data-day="4">DAY 4</button>
+            </div>
+            
+            <div class="mobile-compact">
+                <div class="section day-section active" id="day1-section">
+                    <h2>🗓️ DAY1 行程表 - 山城重庆</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>13:00</td>
+                                <td>重庆北站</td>
+                                <td>抵达重庆 <span class="budget-highlight">(免费)</span></td>
+                                <td>轻轨3号线</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>13:30</td>
+                                <td>重庆工商大学站</td>
+                                <td>酒店办理入住 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>14:30</td>
+                                <td>领事巷</td>
+                                <td>山城步道下行游览 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>16:00</td>
+                                <td>湖广会馆</td>
+                                <td>参观清代会馆建筑群 <span class="budget-highlight">(25元)</span></td>
+                                <td>滴滴约10元</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>17:30</td>
+                                <td>解放碑</td>
+                                <td>逛街购物、拍照打卡 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>19:00</td>
+                                <td>解放碑附近</td>
+                                <td>晚餐：重庆火锅 <span class="budget-highlight">(100元)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>20:30</td>
+                                <td>洪崖洞</td>
+                                <td>欣赏夜景 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>21:30</td>
+                                <td>江滨公园</td>
+                                <td>隔江欣赏洪崖洞全景 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>15分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>山城步道攻略：</strong> 建议从领事巷出发下行，省力且视野好。洪崖洞最佳拍摄点在江滨公园，晚上10点前关灯。
+                    </div>
+                </div>
+                
+                <div class="section day-section" id="day2-section">
+                    <h2>🗓️ DAY2 行程表 - 重庆印象</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>08:00</td>
+                                <td>酒店</td>
+                                <td>早餐 <span class="budget-highlight">(免费)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>鹅岭公园</td>
+                                <td>俯瞰重庆全景 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约20元</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>10:30</td>
+                                <td>鹅岭二厂</td>
+                                <td>文创园区拍照 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td>李子坝</td>
+                                <td>观赏轻轨穿楼奇观 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>13:00</td>
+                                <td>李子坝附近</td>
+                                <td>午餐：重庆小面 <span class="budget-highlight">(20元)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>14:30</td>
+                                <td>重庆光环购物中心</td>
+                                <td>休闲购物 <span class="budget-highlight">(灵活)</span></td>
+                                <td>滴滴约25元</td>
+                                <td>25分钟</td>
+                            </tr>
+                            <tr>
+                                <td>17:30</td>
+                                <td>重庆北站</td>
+                                <td>乘坐高铁前往成都 <span class="budget-highlight">(150元)</span></td>
+                                <td>轻轨3号线</td>
+                                <td>30分钟</td>
+                            </tr>
+                            <tr>
+                                <td>19:30</td>
+                                <td>成都东站</td>
+                                <td>抵达成都 <span class="budget-highlight">(免费)</span></td>
+                                <td>地铁1号线</td>
+                                <td>25分钟</td>
+                            </tr>
+                            <tr>
+                                <td>20:00</td>
+                                <td>梁家巷</td>
+                                <td>酒店办理入住 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>轻轨穿楼攻略：</strong> 鹅岭公园瞰胜楼是拍摄重庆全景最佳位置之一，从鹅岭二厂到李子坝是下坡路线，推荐步行。
+                    </div>
+                </div>
+                
+                <div class="section day-section" id="day3-section">
+                    <h2>🗓️ DAY3 行程表 - 成都漫步</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>08:00</td>
+                                <td>酒店</td>
+                                <td>早餐 <span class="budget-highlight">(免费)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>09:00</td>
+                                <td>IFS国金中心</td>
+                                <td>打卡爬墙大熊猫 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>10:00</td>
+                                <td>太古里</td>
+                                <td>打卡裸眼3D大屏、逛街 <span class="budget-highlight">(免费)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td>太古里附近</td>
+                                <td>午餐：四川特色菜 <span class="budget-highlight">(80元)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>14:00</td>
+                                <td>青羊宫</td>
+                                <td>参观道教宫观 <span class="budget-highlight">(10元)</span></td>
+                                <td>地铁2号线</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>15:30</td>
+                                <td>文殊院</td>
+                                <td>游览佛教寺院 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约12元</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>17:00</td>
+                                <td>武侯祠</td>
+                                <td>参观三国遗迹 <span class="budget-highlight">(50元)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>20分钟</td>
+            </tr>
+                            <tr>
+                                <td>19:00</td>
+                                <td>宽窄巷子</td>
+                                <td>逛特色街区、晚餐小吃 <span class="budget-highlight">(50元)</span></td>
+                                <td>滴滴约10元</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>21:00</td>
+                                <td>酒店</td>
+                                <td>休息、外卖老妈蹄花 <span class="budget-highlight">(30元)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>20分钟</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>宽窄巷子攻略：</strong> IFS大熊猫拍照点在商场7楼露天平台，太古里裸眼3D屏位于太古里东广场。武侯祠的红墙竹影是网红拍照点。
+                    </div>
+                </div>
+                
+                <div class="section day-section" id="day4-section">
+                    <h2>🗓️ DAY4 行程表 - 文化成都</h2>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>时间</th>
+                                <th>地点</th>
+                                <th>活动内容/预算</th>
+                                <th>交通方式/费用</th>
+                                <th>交通耗时</th>
+                            </tr>
+                            <tr>
+                                <td>12:00</td>
+                                <td>五岳宫</td>
+                                <td>午餐：川菜 <span class="budget-highlight">(80元)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>15分钟</td>
+                            </tr>
+                            <tr>
+                                <td>13:30</td>
+                                <td>成都博物馆</td>
+                                <td>参观历史文化展览 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约10元</td>
+                                <td>10分钟</td>
+                            </tr>
+                            <tr>
+                                <td>15:30</td>
+                                <td>博物馆咖啡厅</td>
+                                <td>下午茶休息 <span class="budget-highlight">(40元)</span></td>
+                                <td>步行</td>
+                                <td>2分钟</td>
+                            </tr>
+                            <tr>
+                                <td>17:00</td>
+                                <td>酒店</td>
+                                <td>取行李、短暂休息 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴约15元</td>
+                                <td>20分钟</td>
+                            </tr>
+                            <tr>
+                                <td>18:30</td>
+                                <td>酒店附近</td>
+                                <td>晚餐：成都火锅 <span class="budget-highlight">(100元)</span></td>
+                                <td>步行</td>
+                                <td>5分钟</td>
+                            </tr>
+                            <tr>
+                                <td>20:00</td>
+                                <td>成都市区</td>
+                                <td>自由活动/购买伴手礼 <span class="budget-highlight">(灵活)</span></td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>次日凌晨</td>
+                                <td>机场/车站</td>
+                                <td>返程 <span class="budget-highlight">(免费)</span></td>
+                                <td>滴滴/地铁</td>
+                                <td>根据地点而定</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="note">
+                        <strong>博物馆攻略：</strong> 成都博物馆建议从顶层往下参观，重点看2-3层。博物馆内皮影戏和木偶戏展区别错过，成都火锅与重庆火锅风味不同，推荐尝试。
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 重庆四川旅游攻略 | 感受山城魔幻与天府之国的独特魅力</p>
+            <p>温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准</p>
+            <p>巴山蜀水，美食之都，期待您的探索</p>
+        </footer>
+    </div>
+    
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 预约详情切换
+            const toggleLink = document.getElementById('reservation-toggle');
+            const details = document.getElementById('reservation-details');
+            const note = document.getElementById('preparation-note');
+            
+            if (toggleLink && details && note) {
+                toggleLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+                    note.style.display = details.style.display === 'block' ? 'none' : 'block';
+                });
+            }
+            
+            // 回到顶部功能
+            const backToTopBtn = document.getElementById('backToTop');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function() {
+                    backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+                });
+                
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            
+            // 移动端日期导航
+            const dayBtns = document.querySelectorAll('.day-btn');
+            const daySections = document.querySelectorAll('.day-section');
+            
+            if (dayBtns.length && daySections.length) {
+                dayBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 更新按钮状态
+                        dayBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 显示对应日期内容
+                        const day = this.dataset.day;
+                        daySections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === `day${day}-section`) {
+                                section.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
+            
+            // 滚动时隐藏返回首页按钮的文字
+            const backHomeBtn = document.getElementById('backHome');
+            let lastScrollY = 0;
+            
+            window.addEventListener('scroll', function() {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 50) {
+                    backHomeBtn.classList.add('scrolled');
+                } else {
+                    backHomeBtn.classList.remove('scrolled');
+                }
+                
+                lastScrollY = currentScrollY;
+            });
+        });
+    </script>
+</body>
+</html>
