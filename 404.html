@@ -6,7 +6,6 @@
     <title>旅途中的风景 | 旅行手记</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        /* ===== 原始 404 样式（从您最初提供的 404.txt 完整复制） ===== */
         * {
             margin: 0;
             padding: 0;
@@ -156,7 +155,7 @@
             font-weight: 500;
             font-size: 1.05rem;
         }
-        /* 模态框（省略，因为404没有用到，但保留原有样式以防万一） */
+        /* 模态框 */
         .modal {
             display: none;
             position: fixed;
@@ -237,6 +236,111 @@
             margin-top: 15px;
             font-style: italic;
         }
+        /* ===== 修改：输入框样式增强 ===== */
+        .form-input {
+            width: 100%;
+            padding: 16px 18px;          /* 增加内边距 */
+            font-size: 1rem;            /* 增大字号 */
+            min-height: 52px;           /* 固定最小高度 */
+            border: 1px solid #dce6ed;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: #f9fbfd;
+            color: #2c3e50;
+            user-select: text;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #0288d1;
+            box-shadow: 0 0 0 3px rgba(2, 136, 209, 0.15);
+            background: white;
+        }
+        .form-input::placeholder {
+            color: #95a5a6;
+            font-style: italic;
+        }
+        .suggestion-form {
+            margin: 30px 0 20px;
+            text-align: left;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a6572;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        .form-group label .required {
+            color: #e74c3c;
+            margin-left: 5px;
+            font-size: 1.1rem;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+        .submit-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .suggestion-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #bdc3c7, transparent);
+            margin: 20px 0;
+        }
         /* 动画 */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -263,6 +367,7 @@
             .support-title { font-size: 1.4rem; }
             .support-text { font-size: 0.95rem; }
             .qr-placeholder { width: 160px; height: 160px; }
+            .form-input { padding: 14px 16px; font-size: 0.95rem; min-height: 48px; }
         }
         @media (max-width: 480px) {
             .travel-icon { font-size: 4rem; }
@@ -279,6 +384,7 @@
             .support-title { font-size: 1.3rem; margin-bottom: 10px; }
             .support-text { font-size: 0.9rem; margin: 10px 0 15px; }
             .support-note { font-size: 0.8rem; }
+            .form-input { padding: 12px 14px; font-size: 0.9rem; min-height: 44px; }
         }
     </style>
 </head>
@@ -307,8 +413,7 @@
         </p>
         
         <div class="btn-group">
-            <!-- 关键修改：返回驿站链接改为 /index.html -->
-            <button class="travel-btn" onclick="window.location.href='/index.html'">
+            <button class="travel-btn" onclick="window.location.href='index.html'">
                 <i class="material-icons">home</i> 返回驿站
             </button>
             <button class="travel-btn btn-outline" id="exploreButton">
@@ -329,7 +434,7 @@
         </p>
     </div>
     
-    <!-- 模态框（与原始一致） -->
+    <!-- 支持模态框 -->
     <div class="modal" id="supportModal">
         <div class="modal-content">
             <span class="close-modal material-icons" id="closeModal">close</span>
@@ -349,6 +454,7 @@
         </div>
     </div>
 
+    <!-- 推荐模态框 -->
     <div class="modal" id="suggestionModal">
         <div class="modal-content">
             <span class="close-modal material-icons" id="closeSuggestionModal">close</span>
@@ -368,12 +474,16 @@
                            placeholder="中国台湾（Taiwan, China）" required>
                 </div>
                 <div class="form-group">
-                    <label for="reason">推荐理由(Reason for recommendatio)</label>
+                    <label for="reason">
+                        推荐理由(Reason for recommendatio)
+                    </label>
                     <input type="text" id="reason" class="form-input" 
                            placeholder="为什么应该去这个地方？(Why should I go to this place？)">
                 </div>
                 <div class="form-group">
-                    <label for="contact">您的联系方式(Your contact details)</label>
+                    <label for="contact">
+                        您的联系方式(Your contact details)
+                    </label>
                     <input type="text" id="contact" class="form-input" 
                            placeholder="电子邮箱或者电话号码(E-mail address or phone number)">
                 </div>
@@ -401,12 +511,137 @@
     </div>
 
     <script>
-        // ===== 原始 404 的 JavaScript，仅修改返回驿站链接（已在 HTML 中修改） =====
-        // 其他功能（探索已至之地、支持、推荐）保持不变
+        // ===== 修复后的目的地链接（带文件夹前缀） =====
         const travelDestinations = [
-            // 此处省略（与原始一致，不影响返回功能）
+            // 中国省份
+            // 华北地区
+            '/NorthChina/NorthChina-Beijing.html',        // 北京
+            //'/NorthChina/NorthChina-Tianjin.html',        // 天津（待解锁）
+            // '/NorthChina/NorthChina-Hebei.html',       // 河北（待解锁）
+            //'/NorthChina/NorthChina-Shanxi.html',      // 山西（待解锁）
+            // '/NorthChina/NorthChina-InnerMongolia.html' // 内蒙古（待解锁）
+            
+            // 东北地区
+            // '/NortheastChina/NortheastChina-Liaoning.html',
+            // '/NortheastChina/NortheastChina-Jilin.html',
+            // '/NortheastChina/NortheastChina-Heilongjiang.html',
+            
+            // 华东地区
+            //'/EastChina/EastChina-Shanghai.html',        // 上海（待解锁）
+            '/EastChina/EastChina-Jiangsu.html',         // 江苏
+            // '/EastChina/EastChina-Zhejiang.html',      // 浙江（待解锁）
+            // '/EastChina/EastChina-Anhui.html',         // 安徽（待解锁）
+            // '/EastChina/EastChina-Fujian.html',        // 福建（待解锁）
+            // '/EastChina/EastChina-Jiangxi.html',       // 江西（待解锁）
+            //'/EastChina/EastChina-Shandong.html',        // 山东（待解锁）
+            
+            // 华中地区
+            // '/CentralChina/CentralChina-Henan.html',      // 河南（待解锁）
+            // '/CentralChina/CentralChina-Hubei.html',      // 湖北（待解锁）
+            // '/CentralChina/CentralChina-Hunan.html',      // 湖南（待解锁）
+            
+            // 华南地区
+            // '/SouthChina/SouthChina-Guangdong.html',    // 广东（待解锁）
+            // '/SouthChina/SouthChina-Guangxi.html',       // 广西（待解锁）
+            // '/SouthChina/SouthChina-Hainan.html',        // 海南（待解锁）
+            
+            // 西南地区
+            //'/SouthwestChina/SouthwestChina-Chongqing.html',  // 重庆（待解锁）
+            // '/SouthwestChina/SouthwestChina-Sichuan.html',   // 四川（待解锁）
+            // '/SouthwestChina/SouthwestChina-Guizhou.html',   // 贵州（待解锁）
+            // '/SouthwestChina/SouthwestChina-Yunnan.html',    // 云南（待解锁）
+            // '/SouthwestChina/SouthwestChina-Tibet.html',     // 西藏（待解锁）
+            
+            // 西北地区
+            // '/NorthwestChina/NorthwestChina-Shaanxi.html',   // 陕西（待解锁）
+            // '/NorthwestChina/NorthwestChina-Gansu.html',     // 甘肃（待解锁）
+            // '/NorthwestChina/NorthwestChina-Qinghai.html',    // 青海（待解锁）
+            // '/NorthwestChina/NorthwestChina-Ningxia.html',   // 宁夏（待解锁）
+            // '/NorthwestChina/NorthwestChina-Xinjiang.html',  // 新疆（待解锁）
+            
+            // 港澳台地区
+            '/China/China-HongKong.html',            // 香港
+            // '/China/China-Macau.html',              // 澳门（待解锁）
+            // '/China/China-Taiwan.html',             // 台湾（待解锁）
+            
+            // 国际地区
+            // 亚洲
+            '/Asia/Asia-Japan.html',              // 日本
+            //'/Asia/Asia-South-Korea.html',          // 韩国（待解锁）
+            '/Asia/Asia-Vietnam.html',             // 越南
+            // '/Asia/Asia-Thailand.html',            // 泰国（待解锁）
+            // '/Asia/Asia-Singapore.html',           // 新加坡（待解锁）
+            // '/Asia/Asia-Malaysia.html',            // 马来西亚（待解锁）
+            // '/Asia/Asia-Indonesia.html',           // 印度尼西亚（待解锁）
+            // '/Asia/Asia-Philippines.html',         // 菲律宾（待解锁）
+            // '/Asia/Asia-Cambodia.html',            // 柬埔寨（待解锁）
+            // '/Asia/Asia-Laos.html',                // 老挝（待解锁）
+            // '/Asia/Asia-Myanmar.html',             // 缅甸（待解锁）
+            // '/Asia/Asia-India.html',               // 印度（待解锁）
+            // '/Asia/Asia-Nepal.html',               // 尼泊尔（待解锁）
+            // '/Asia/Asia-Sri-Lanka.html',           // 斯里兰卡（待解锁）
+            // '/Asia/Asia-Maldives.html',            // 马尔代夫（待解锁）
+            // '/Asia/Asia-United-Arab-Emirates.html',// 阿联酋（待解锁）
+            // '/Asia/Asia-Turkey.html',              // 土耳其（待解锁）
+            
+            // 欧洲
+            // '/Europe/Europe-United-Kingdom.html',   // 英国（待解锁）
+            //'/Europe/Europe-France.html',             // 法国（待解锁）
+            // '/Europe/Europe-Germany.html',           // 德国（待解锁）
+            // '/Europe/Europe-Italy.html',             // 意大利（待解锁）
+            // '/Europe/Europe-Spain.html',             // 西班牙（待解锁）
+            // '/Europe/Europe-Portugal.html',          // 葡萄牙（待解锁）
+            // '/Europe/Europe-Netherlands.html',       // 荷兰（待解锁）
+            // '/Europe/Europe-Belgium.html',           // 比利时（待解锁）
+            // '/Europe/Europe-Switzerland.html',       // 瑞士（待解锁）
+            // '/Europe/Europe-Austria.html',           // 奥地利（待解锁）
+            // '/Europe/Europe-Greece.html',            // 希腊（待解锁）
+            // '/Europe/Europe-Iceland.html',           // 冰岛（待解锁）
+            // '/Europe/Europe-Norway.html',           // 挪威（待解锁）
+            // '/Europe/Europe-Sweden.html',            // 瑞典（待解锁）
+            // '/Europe/Europe-Denmark.html',           // 丹麦（待解锁）
+            // '/Europe/Europe-Finland.html',           // 芬兰（待解锁）
+            // '/Europe/Europe-Russia.html',            // 俄罗斯（待解锁）
+            // '/Europe/Europe-Czech-Republic.html',    // 捷克（待解锁）
+            // '/Europe/Europe-Hungary.html',           // 匈牙利（待解锁）
+            // '/Europe/Europe-Poland.html',            // 波兰（待解锁）
+            
+            // 北美洲
+            // '/NorthAmerica/NorthAmerica-United-States.html', // 美国（待解锁）
+            // '/NorthAmerica/NorthAmerica-Canada.html',       // 加拿大（待解锁）
+            // '/NorthAmerica/NorthAmerica-Mexico.html',      // 墨西哥（待解锁）
+            // '/NorthAmerica/NorthAmerica-Cuba.html',        // 古巴（待解锁）
+            // '/NorthAmerica/NorthAmerica-Costa-Rica.html',  // 哥斯达黎加（待解锁）
+            // '/NorthAmerica/NorthAmerica-Panama.html',      // 巴拿马（待解锁）
+            
+            // 南美洲
+            // '/SouthAmerica/SouthAmerica-Brazil.html',      // 巴西（待解锁）
+            // '/SouthAmerica/SouthAmerica-Argentina.html',   // 阿根廷（待解锁）
+            // '/SouthAmerica/SouthAmerica-Chile.html',       // 智利（待解锁）
+            // '/SouthAmerica/SouthAmerica-Peru.html',        // 秘鲁（待解锁）
+            // '/SouthAmerica/SouthAmerica-Colombia.html',    // 哥伦比亚（待解锁）
+            // '/SouthAmerica/SouthAmerica-Ecuador.html',     // 厄瓜多尔（待解锁）
+            // '/SouthAmerica/SouthAmerica-Bolivia.html',     // 玻利维亚（待解锁）
+            // '/SouthAmerica/SouthAmerica-Uruguay.html',     // 乌拉圭（待解锁）
+            // '/SouthAmerica/SouthAmerica-Paraguay.html',    // 巴拉圭（待解锁）
+            // '/SouthAmerica/SouthAmerica-Venezuela.html',   // 委内瑞拉（待解锁）
+            
+            // 大洋洲
+            // '/Oceania/Oceania-Australia.html',        // 澳大利亚（待解锁）
+            // '/Oceania/Oceania-New-Zealand.html',      // 新西兰（待解锁）
+            // '/Oceania/Oceania-Fiji.html',              // 斐济（待解锁）
+            // '/Oceania/Oceania-Samoa.html',             // 萨摩亚（待解锁）
+            // '/Oceania/Oceania-Tonga.html',             // 汤加（待解锁）
+            
+            // 非洲
+            // '/Africa/Africa-Egypt.html',              // 埃及（待解锁）
+            // '/Africa/Africa-South-Africa.html',       // 南非（待解锁）
+            // '/Africa/Africa-Kenya.html',              // 肯尼亚（待解锁）
+            // '/Africa/Africa-Morocco.html',            // 摩洛哥（待解锁）
+            // '/Africa/Africa-Tanzania.html'            // 坦桑尼亚（待解锁）
         ];
-        // 模态框交互（原始代码）
+        
+        // 模态框交互
         const supportModal = document.getElementById('supportModal');
         const suggestionModal = document.getElementById('suggestionModal');
         const supportButton = document.getElementById('supportButton');
@@ -420,6 +655,7 @@
             supportModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
+        
         suggestionButton.addEventListener('click', function() {
             document.getElementById('destination').value = '';
             document.getElementById('reason').value = '';
@@ -429,14 +665,17 @@
             suggestionModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         });
+        
         closeModal.addEventListener('click', function() {
             supportModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
+        
         closeSuggestionModal.addEventListener('click', function() {
             suggestionModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
+        
         window.addEventListener('click', function(event) {
             if (event.target === supportModal) {
                 supportModal.style.display = 'none';
@@ -447,6 +686,8 @@
                 document.body.style.overflow = 'auto';
             }
         });
+        
+        // 探索已至之地功能
         function exploreRandomDestination() {
             const unlocked = travelDestinations.filter(url => !url.startsWith('//'));
             if(unlocked.length > 0) {
@@ -456,8 +697,10 @@
                 alert('我的旅行地图正在绘制中，请先解锁任意目的地！');
             }
         }
+        
         document.getElementById('exploreButton').addEventListener('click', exploreRandomDestination);
         
+        // 提交建议功能
         submitSuggestion.addEventListener('click', function () {
             const destination = document.getElementById('destination').value;
             const reason = document.getElementById('reason').value;
@@ -493,7 +736,8 @@
                 submitSuggestion.innerHTML = '<i class="material-icons">send</i> 提交建议';
             });
         });
-        // 禁止复制和右键（原始功能）
+        
+        // 禁止复制和右键
         document.addEventListener('copy', function(e) {
             e.preventDefault();
             alert('内容受保护，请尊重原创');
