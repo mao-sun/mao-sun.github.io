@@ -7,9 +7,388 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ===== 原始样式完全保留，此处省略（与用户原文件一致） ===== */
-        /* 为避免过长，此处略去，实际使用时请复制用户的原始样式 */
-        /* 用户原 index.txt 中的 <style> 内容全部保留 */
+        /* ===== 原始样式（从您最初提供的 index.txt 完整复制） ===== */
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Noto Sans SC', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        input, button, textarea {
+            -webkit-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
+            font-size: 16px; /* 防止移动端缩放 */
+        }
+        body { 
+            background: linear-gradient(135deg, #e6f0ff 0%, #d9e7ff 100%); 
+            color: #333; line-height: 1.6; min-height: 100vh; 
+            padding-bottom: 100px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 10px; }
+        header { 
+            text-align: center; padding: 30px 15px; 
+            background: linear-gradient(135deg, #4b6cb7, #3a5795);
+            color: white; 
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 15px 15px;
+        }
+        h1 { 
+            font-size: 2.5rem; margin-bottom: 12px; 
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .subtitle { 
+            font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; 
+            font-weight: 300;
+        }
+        .search-container { 
+            max-width: 700px; margin: 25px auto; position: relative; 
+            display: flex; align-items: center; 
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+        }
+        .search-box { 
+            width: 100%; padding: 16px 80px 16px 55px; border: none; 
+            font-size: 1.1rem; transition: all 0.3s ease; 
+            background: white; height: 55px; 
+        }
+        .search-box:focus { 
+            outline: none; 
+            background: #f8faff;
+        }
+        .search-icon { 
+            position: absolute; left: 22px; top: 50%; transform: translateY(-50%); 
+            color: #4b6cb7; font-size: 1.3rem; 
+        }
+        .search-btn { 
+            position: absolute; right: 12px; background: #4b6cb7; color: white; border: none; 
+            border-radius: 50%; width: 42px; height: 42px; cursor: pointer; transition: all 0.3s ease; 
+            display: flex; align-items: center; justify-content: center; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .search-btn:hover { background: #3a5ba0; transform: scale(1.1); }
+        .clear-btn {
+            position: absolute;
+            right: 60px;
+            background: transparent;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: none;
+        }
+        .clear-btn.visible {
+            display: block;
+        }
+        .suggestions-container { 
+            position: absolute; top: calc(100% + 10px); left: 0; right: 0; background: white; 
+            border-radius: 15px; 
+            max-height: 300px; overflow-y: auto; z-index: 1000; display: none; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e0e9ff;
+        }
+        .suggestion-item { 
+            padding: 12px 20px; cursor: pointer; display: flex; justify-content: space-between; 
+            align-items: center; transition: background 0.2s; border-bottom: 1px solid #f0f0f0; 
+        }
+        .suggestion-item:hover { background-color: #f5f8ff; }
+        .suggestion-name { font-weight: 600; flex: 1; }
+        .suggestion-en { font-style: italic; color: #6c757d; font-size: 0.9rem; margin-left: 15px; }
+        .highlight-text { 
+            background-color: #ffeaa7; color: #d35400; padding: 0 2px; border-radius: 3px; 
+        }
+        .two-columns {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+            margin-top: 15px;
+        }
+        .two-columns > div {
+            flex: 1;
+        }
+        .region-section { 
+            background: white; border-radius: 15px; overflow: hidden; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
+            display: flex;
+            flex-direction: column;
+        }
+        .card-header { 
+            padding: 25px; color: white; text-align: center; 
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .card-header h2 { 
+            width: 100%; text-align: center; 
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-weight: 600;
+        }
+        .map-icon {
+            font-size: 2.2rem;
+            color: #ffd43b;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .china-header { 
+            background: linear-gradient(135deg, #3a5795, #2a5298); 
+        }
+        .international-header { 
+            background: linear-gradient(135deg, #2a5298, #1a4288); 
+        }
+        .card-content { padding: 25px 20px; flex: 1; }
+        h3 { 
+            margin-bottom: 20px; font-size: 1.4rem; color: #2c3e50; 
+            padding-bottom: 10px; display: flex; align-items: center; 
+            border-bottom: 2px solid #f0f3f5;
+            font-weight: 600;
+        }
+        h3 i { margin-right: 12px; color: #3498db; }
+        .area-grid, .region-content { 
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+            gap: 16px; 
+        }
+        .area-item { 
+            padding: 14px; 
+            background: #f8faff; 
+            border-radius: 8px; cursor: pointer; transition: all 0.25s ease; 
+            display: flex; flex-direction: column; 
+            border: 1px solid #e0e9ff; height: 100%; justify-content: center; align-items: center; 
+            text-align: center; min-height: 65px; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            position: relative;
+        }
+        .area-item:hover { 
+            background: #eef4ff; 
+            transform: translateY(-3px); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+        .area-item a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        .area-item span { font-size: 1.1rem; }
+        .country-name { font-weight: 700; color: #2a5298; }
+        .country-en { font-size: 0.9rem; color: #6c757d; font-style: italic; margin-top: 4px; }
+        .country-name, .country-en {
+            display: block;
+        }
+        .country-en {
+            margin-top: 5px;
+        }
+        .region-header { 
+            background: #f0f5ff; padding: 14px 18px; 
+            border-radius: 8px; margin-top: 20px; margin-bottom: 10px; font-weight: bold; 
+            display: flex; align-items: center; cursor: pointer; transition: all 0.25s ease; 
+            font-size: 1.2rem; 
+            border: 1px solid #d0e0ff;
+        }
+        .region-header:hover { 
+            background: #e6f0ff; 
+        }
+        .region-header i { margin-right: 12px; transition: transform 0.3s ease; color: #4b6cb7; }
+        .region-header.collapsed i { transform: rotate(-90deg); }
+        .region-content.collapsed { display: none; }
+        footer { 
+            text-align: center; padding: 25px; color: #6c757d; font-size: 0.95rem; 
+            background: white; border-radius: 10px; 
+            max-width: 1200px; margin: 25px auto; 
+            border: 1px solid #e0e9ff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .highlight { 
+            background: #fff8e1 !important; 
+            animation: pulse 1.5s 3; border: 2px solid #ffd43b !important; 
+        }
+        .match-highlight {
+            background: #e3f2fd !important;
+            border: 2px solid #3b82f6 !important;
+        }
+        @keyframes pulse { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.02); } 
+            100% { transform: scale(1); } 
+        }
+        .region-intro { 
+            text-align: center; max-width: 800px; margin: 0 auto 25px; 
+            font-size: 1rem; color: #495057; line-height: 1.7; 
+        }
+        .vertical-region-list { display: flex; flex-direction: column; gap: 12px; }
+        /* 浮动按钮 */
+        .floating-buttons {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 2000;
+        }
+        .floating-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+            font-size: 1.2rem;
+            position: relative;
+            background: linear-gradient(90deg, #006994, #bc2d29);
+            border: none;
+        }
+        .floating-btn:hover {
+            background: linear-gradient(90deg, #bc2d29, #006994);
+            transform: scale(1.1);
+        }
+        .completed-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(90deg, #006994, #bc2d29);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        .completed-badge i {
+            font-size: 0.9rem;
+        }
+        .hint-panel {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            right: 0;
+            background: linear-gradient(90deg, #006994, #bc2d29);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            z-index: 2001;
+            width: 250px;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            pointer-events: none;
+            border: none;
+        }
+        .hint-panel.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .hint-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-top: 12px solid #bc2d29;
+        }
+        .hint-line {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .hint-icon {
+            font-size: 1.3rem;
+            min-width: 25px;
+            text-align: center;
+            color: #ffd43b;
+            flex-shrink: 0;
+            padding-top: 3px;
+        }
+        .hint-text {
+            flex: 1;
+        }
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .container { padding: 0; }
+            header { padding: 20px 15px; border-radius: 0; box-shadow: none; margin-bottom: 0; }
+            .search-container { max-width: 100%; border-radius: 0; box-shadow: none; border-top: 1px solid #e0e9ff; border-bottom: 1px solid #e0e9ff; margin: 0; border-radius: 0; }
+            .search-box { border-radius: 0; padding: 14px 50px 14px 45px; font-size: 16px; }
+            .two-columns { flex-direction: column; gap: 0; margin-top: 0; margin-bottom: 0; }
+            .region-section { border-radius: 0; box-shadow: none; border-bottom: 1px solid #e0e9ff; border-top: none; }
+            .region-section:first-child { border-top: none; }
+            .region-section:last-child { border-bottom: none; }
+            .card-header { padding: 20px 15px; }
+            .card-content { padding: 20px 15px; }
+            h1 { font-size: 1.8rem; }
+            .subtitle { font-size: 1rem; padding: 0 10px; }
+            .search-box { height: 50px; }
+            .card-header h2 { font-size: 1.5rem; }
+            .map-icon { font-size: 1.8rem; }
+            .search-icon { left: 18px; font-size: 1.2rem; }
+            .search-btn { width: 38px; height: 38px; right: 8px; font-size: 0.9rem; }
+            h3 { font-size: 1.25rem; margin-bottom: 15px; }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+            .area-item { padding: 12px; min-height: 60px; }
+            .area-item span { font-size: 1rem; }
+            .country-name { font-size: 1rem; }
+            .country-en { font-size: 0.8rem; }
+            .region-header { padding: 12px 16px; font-size: 1.1rem; margin-top: 15px; margin-bottom: 8px; }
+            .region-intro { font-size: 0.95rem; margin-bottom: 20px; }
+            .floating-buttons { bottom: 15px; right: 15px; gap: 12px; }
+            .floating-btn { width: 42px; height: 42px; font-size: 1.1rem; }
+            .hint-panel { bottom: calc(100% + 12px); width: 220px; font-size: 0.95rem; padding: 12px 15px; }
+            .hint-panel::after { right: 15px; }
+            footer { padding: 20px 15px; font-size: 0.9rem; margin: 0; border-radius: 0; box-shadow: none; border-top: 1px solid #e0e9ff; }
+            .suggestion-item { padding: 10px 15px; }
+            .suggestion-en { margin-top: 5px; font-size: 0.85rem; }
+            .clear-btn { right: 55px; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 1.6rem; }
+            .subtitle { font-size: 0.95rem; }
+            .search-box { padding: 12px 45px 12px 40px; height: 48px; font-size: 16px; }
+            .card-header { padding: 18px 15px; }
+            .card-header h2 { font-size: 1.4rem; }
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+            .area-item { padding: 10px 8px; min-height: 55px; }
+            .area-item span { font-size: 0.95rem; }
+            .region-header { padding: 10px 14px; font-size: 1rem; margin-top: 12px; margin-bottom: 6px; }
+            h3 { font-size: 1.15rem; }
+            .country-name { font-size: 0.95rem; }
+            .country-en { font-size: 0.75rem; }
+            .region-intro { font-size: 0.9rem; margin-bottom: 15px; }
+            footer { padding: 15px; font-size: 0.85rem; }
+            .floating-buttons { gap: 10px; }
+            .floating-btn { width: 38px; height: 38px; font-size: 1rem; }
+            .hint-panel { bottom: calc(100% + 10px); right: 0; width: 200px; font-size: 0.9rem; padding: 10px 12px; }
+            .hint-panel::after { right: 10px; }
+            .hint-icon { font-size: 1.2rem; }
+            .clear-btn { right: 50px; }
+        }
+        @media (max-width: 360px) {
+            .area-grid, .region-content { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            .search-box { padding: 10px 40px 10px 35px; height: 46px; font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -197,24 +576,20 @@
     </div>
 
     <script>
-        // ===== 修改部分：删除所有硬编码数据，改为 fetch data.json =====
-        // 以下全局变量用于存储从 JSON 加载的数据
+        // ===== 修改部分：从 data.json 加载数据，并给链接加上 '/' 前缀 =====
         let allDestinations = [];
         let chinaRegionsData = {};
         let countriesData = {};
 
-        // 高亮匹配文本（辅助函数）
         function highlightMatch(text, query) {
             if (!query) return text;
             const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
             return text.replace(regex, '<span class="highlight-text">$1</span>');
         }
-
         function escapeRegExp(string) {
             return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         }
 
-        // 初始化页面（改为从 JSON 加载数据）
         function initPage() {
             fetch('data.json')
                 .then(response => {
@@ -222,7 +597,6 @@
                     return response.json();
                 })
                 .then(data => {
-                    // 存储数据到全局
                     chinaRegionsData = data.china.regions;
                     countriesData = data.international.continents;
 
@@ -235,10 +609,10 @@
                         region.provinces.forEach(prov => {
                             const item = document.createElement('div');
                             item.className = 'area-item';
-                            // 生成链接：文件夹/文件名，文件夹名为 regionPrefix，文件名为 regionPrefix-en.html
+                            // 关键修改：链接加上 '/' 根目录前缀
                             const folder = prov.regionPrefix;
                             const fileName = `${prov.regionPrefix}-${prov.en}.html`;
-                            const link = `${folder}/${fileName}`;
+                            const link = `/${folder}/${fileName}`;   // 加 /
                             item.innerHTML = `<a href="${link}" style="text-decoration: none; color: inherit;"><span>${prov.name}</span></a>`;
                             item.dataset.name = prov.name;
                             contentElement.appendChild(item);
@@ -270,12 +644,9 @@
                             const countryElement = document.createElement('div');
                             countryElement.className = 'area-item';
 
-                            // 生成链接：文件夹/文件名
-                            // 对于港澳台（name 包含 "中国"）特殊处理：使用 China 文件夹
                             let folder, fileName;
                             if (["中国香港", "中国澳门", "中国台湾"].includes(country.name)) {
                                 folder = 'China';
-                                // 根据名称映射 en 简写
                                 const map = {
                                     '中国香港': 'HongKong',
                                     '中国澳门': 'Macao',
@@ -284,12 +655,12 @@
                                 const enShort = map[country.name];
                                 fileName = `China-${enShort}.html`;
                             } else {
-                                folder = continentKey.charAt(0).toUpperCase() + continentKey.slice(1); // Asia, Europe, etc.
-                                // 处理 en 中的空格和逗号
+                                folder = continentKey.charAt(0).toUpperCase() + continentKey.slice(1);
                                 const enClean = country.en.replace(/,/g, '').replace(/\s+/g, '-');
                                 fileName = `${folder}-${enClean}.html`;
                             }
-                            const link = `${folder}/${fileName}`;
+                            // 关键修改：链接加上 '/' 根目录前缀
+                            const link = `/${folder}/${fileName}`;
 
                             const countryHtml = `
                                 <a href="${link}" style="text-decoration: none; color: inherit;">
@@ -318,11 +689,9 @@
                         });
                     }
 
-                    // 所有渲染完成后，绑定事件监听（与原来完全一致）
+                    // 原有事件绑定
                     addEventListeners();
-                    // 初始化折叠状态
                     initCollapseState();
-                    // 显示提示框（5秒后消失）
                     const hintPanel = document.getElementById('hintPanel');
                     hintPanel.classList.add('show');
                     setTimeout(() => {
@@ -335,8 +704,7 @@
                 });
         }
 
-        // ===== 以下为原有函数（完全保留，未做任何修改） =====
-        // 初始化折叠状态
+        // ===== 以下所有函数与原始代码完全一致（未做任何修改） =====
         function initCollapseState() {
             document.querySelectorAll('.region-header').forEach(header => {
                 header.classList.add('collapsed');
@@ -351,7 +719,6 @@
             });
         }
 
-        // 展开区域
         function expandRegion(element) {
             let regionContent = element.closest('.region-content');
             if (!regionContent) return;
@@ -365,17 +732,11 @@
             }
         }
 
-        // 清除所有高亮
         function clearAllHighlights() {
-            document.querySelectorAll('.highlight').forEach(el => {
-                el.classList.remove('highlight');
-            });
-            document.querySelectorAll('.match-highlight').forEach(el => {
-                el.classList.remove('match-highlight');
-            });
+            document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+            document.querySelectorAll('.match-highlight').forEach(el => el.classList.remove('match-highlight'));
         }
 
-        // 添加事件监听器（与原来完全一致）
         function addEventListeners() {
             const searchInput = document.getElementById('searchInput');
             const searchButton = document.getElementById('searchButton');
@@ -391,16 +752,12 @@
                 suggestionsContainer.innerHTML = '';
                 if (query.length === 0) {
                     suggestionsContainer.style.display = 'none';
-                    document.querySelectorAll('.match-highlight').forEach(el => {
-                        el.classList.remove('match-highlight');
-                    });
+                    document.querySelectorAll('.match-highlight').forEach(el => el.classList.remove('match-highlight'));
                     return;
                 }
                 const matches = allDestinations.filter(dest => {
-                    return (
-                        (dest.name && dest.name.toLowerCase().includes(query)) ||
-                        (dest.en && dest.en.toLowerCase().includes(query))
-                    );
+                    return (dest.name && dest.name.toLowerCase().includes(query)) ||
+                           (dest.en && dest.en.toLowerCase().includes(query));
                 });
                 if (matches.length > 0) {
                     matches.forEach(dest => {
@@ -408,9 +765,7 @@
                         suggestion.className = 'suggestion-item';
                         const highlightedName = highlightMatch(dest.name, query);
                         let highlightedEn = '';
-                        if (dest.en) {
-                            highlightedEn = highlightMatch(dest.en, query);
-                        }
+                        if (dest.en) highlightedEn = highlightMatch(dest.en, query);
                         suggestion.innerHTML = `
                             <div class="suggestion-name">${highlightedName}</div>
                             ${dest.en ? `<div class="suggestion-en">${highlightedEn}</div>` : ''}
@@ -421,9 +776,7 @@
                             dest.element.classList.add('highlight');
                             expandRegion(dest.element);
                             scrollToElement(dest.element);
-                            setTimeout(() => {
-                                dest.element.classList.remove('highlight');
-                            }, 3000);
+                            setTimeout(() => dest.element.classList.remove('highlight'), 3000);
                             suggestionsContainer.style.display = 'none';
                         });
                         suggestionsContainer.appendChild(suggestion);
@@ -432,12 +785,8 @@
                 } else {
                     suggestionsContainer.style.display = 'none';
                 }
-                document.querySelectorAll('.match-highlight').forEach(el => {
-                    el.classList.remove('match-highlight');
-                });
-                matches.forEach(dest => {
-                    dest.element.classList.add('match-highlight');
-                });
+                document.querySelectorAll('.match-highlight').forEach(el => el.classList.remove('match-highlight'));
+                matches.forEach(dest => dest.element.classList.add('match-highlight'));
             }
 
             searchInput.addEventListener('input', function() {
@@ -454,10 +803,8 @@
             });
 
             document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) && 
-                    !suggestionsContainer.contains(e.target) &&
-                    !searchButton.contains(e.target) &&
-                    !clearBtn.contains(e.target)) {
+                if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target) &&
+                    !searchButton.contains(e.target) && !clearBtn.contains(e.target)) {
                     suggestionsContainer.style.display = 'none';
                 }
             });
@@ -469,40 +816,30 @@
                     this.classList.toggle('collapsed');
                     content.classList.toggle('collapsed');
                     const icon = this.querySelector('i');
-                    if (this.classList.contains('collapsed')) {
-                        icon.style.transform = 'rotate(-90deg)';
-                    } else {
-                        icon.style.transform = 'rotate(0deg)';
-                    }
+                    icon.style.transform = this.classList.contains('collapsed') ? 'rotate(-90deg)' : 'rotate(0deg)';
                 });
             });
 
             searchButton.addEventListener('click', performSearch);
             searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
+                if (e.key === 'Enter') performSearch();
             });
 
             collapseExpandBtn.addEventListener('click', function() {
                 const headers = document.querySelectorAll('.region-header');
                 let allCollapsed = true;
-                headers.forEach(header => {
-                    if (!header.classList.contains('collapsed')) {
-                        allCollapsed = false;
-                    }
-                });
-                headers.forEach(header => {
-                    const content = document.getElementById(`${header.dataset.region}Content`);
+                headers.forEach(h => { if (!h.classList.contains('collapsed')) allCollapsed = false; });
+                headers.forEach(h => {
+                    const content = document.getElementById(`${h.dataset.region}Content`);
                     if (!content) return;
                     if (allCollapsed) {
-                        header.classList.remove('collapsed');
+                        h.classList.remove('collapsed');
                         content.classList.remove('collapsed');
-                        header.querySelector('i').style.transform = 'rotate(0deg)';
+                        h.querySelector('i').style.transform = 'rotate(0deg)';
                     } else {
-                        header.classList.add('collapsed');
+                        h.classList.add('collapsed');
                         content.classList.add('collapsed');
-                        header.querySelector('i').style.transform = 'rotate(-90deg)';
+                        h.querySelector('i').style.transform = 'rotate(-90deg)';
                     }
                 });
                 this.querySelector('i').className = allCollapsed ? 'fas fa-compress-alt' : 'fas fa-expand-alt';
@@ -513,20 +850,14 @@
             hintBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 hintPanel.classList.toggle('show');
-                if (hintTimeout) {
-                    clearTimeout(hintTimeout);
-                }
+                if (hintTimeout) clearTimeout(hintTimeout);
                 if (hintPanel.classList.contains('show')) {
-                    hintTimeout = setTimeout(() => {
-                        hintPanel.classList.remove('show');
-                    }, 5000);
+                    hintTimeout = setTimeout(() => hintPanel.classList.remove('show'), 5000);
                 }
             });
 
             document.addEventListener('click', function(e) {
-                if (!hintBtn.contains(e.target) && 
-                    !hintPanel.contains(e.target) && 
-                    hintPanel.classList.contains('show')) {
+                if (!hintBtn.contains(e.target) && !hintPanel.contains(e.target) && hintPanel.classList.contains('show')) {
                     hintPanel.classList.remove('show');
                 }
             });
@@ -536,47 +867,31 @@
             const query = document.getElementById('searchInput').value.trim();
             if (!query) return;
             document.getElementById('suggestionsContainer').style.display = 'none';
-            const keywordMap = {
-                "香港": "中国香港",
-                "澳门": "中国澳门",
-                "台湾": "中国台湾"
-            };
+            const keywordMap = { "香港": "中国香港", "澳门": "中国澳门", "台湾": "中国台湾" };
             const searchQuery = keywordMap[query] || query;
             const match = allDestinations.find(dest => {
-                return (
-                    (dest.name && dest.name.toLowerCase() === searchQuery.toLowerCase()) ||
-                    (dest.en && dest.en.toLowerCase() === searchQuery.toLowerCase())
-                );
+                return (dest.name && dest.name.toLowerCase() === searchQuery.toLowerCase()) ||
+                       (dest.en && dest.en.toLowerCase() === searchQuery.toLowerCase());
             });
             if (match) {
                 clearAllHighlights();
                 match.element.classList.add('highlight');
                 expandRegion(match.element);
                 scrollToElement(match.element);
-                setTimeout(() => {
-                    match.element.classList.remove('highlight');
-                }, 3000);
+                setTimeout(() => match.element.classList.remove('highlight'), 3000);
             } else {
                 alert(`没有找到与 "${query}" 匹配的目的地。请尝试从下拉列表中选择一个目的地。`);
             }
         }
 
         function scrollToElement(element) {
-            element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center',
-                inline: 'nearest'
-            });
+            element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
         }
 
         function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 页面加载后执行 initPage
         document.addEventListener('DOMContentLoaded', initPage);
     </script>
 </body>
