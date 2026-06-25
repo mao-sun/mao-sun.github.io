@@ -390,6 +390,10 @@
             .search-box { padding: 10px 40px 10px 35px; height: 46px; font-size: 16px; }
         }
     </style>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <body>
     <div class="container">
@@ -893,6 +897,18 @@
         }
 
         document.addEventListener('DOMContentLoaded', initPage);
+                // ===== 新增：PWA Service Worker 注册 =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('Service Worker 注册成功:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('Service Worker 注册失败:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
