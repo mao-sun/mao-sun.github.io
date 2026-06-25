@@ -1,6 +1,6 @@
 {
   "name": "Mao的旅行攻略",
-  "short_name": "旅行攻略",
+  "short_name": "MAO'S旅行",
   "description": "记录生活，定格与你的每段旅程",
   "start_url": "/index.html",
   "display": "standalone",
