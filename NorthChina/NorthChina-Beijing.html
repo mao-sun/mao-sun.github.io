@@ -167,3 +167,53 @@ main{padding:clamp(44px,7vw,76px) 0 clamp(48px,7vw,88px)}
   font-size:.86rem;color:var(--ink);line-height:1.4;transition:border-color .2s,transform .2s}
 .chips li:hover{border-color:var(--rule-strong);transform:translateY(-1px)}
 .chips .ic{width:15px;height:15px;flex:none;color:var(--brick)}
+
+/* ============================================================
+   行李清单 · 三级 + 图标 + 北京专属理由
+   ============================================================ */
+.kit{margin-top:22px}
+.kit .lvl{margin-top:24px}
+.kit .lvl:first-child{margin-top:0}
+.kit .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.kit .lvl-h .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.kit .lvl-h b{font-family:var(--font-title);font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:.08em}
+.kit .lvl-h span{font-size:11px;letter-spacing:.12em;color:var(--ink-faint)}
+.kit .lvl-h::after{content:"";flex:1;height:1px;background:var(--rule)}
+.kit .lv1 .dot{background:var(--wall)}
+.kit .lv2 .dot{background:var(--glaze)}
+.kit .lv3 .dot{background:var(--brick)}
+
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:10px}
+.item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--rule);
+  border-radius:10px;padding:13px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
+.item:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
+.item .ic{font-size:20px;margin-top:2px;color:var(--wall)}
+.item.lv2 .ic{color:var(--glaze)}
+.item.lv3 .ic{color:var(--brick)}
+.item .tx{flex:1;min-width:0}
+.item .tx b{display:block;font-size:.95rem;font-weight:600;color:var(--ink)}
+.item .tx small{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.6;margin-top:2px}
+/* 北京专属理由 —— 这是"有北京特色"的关键 */
+.item .tx em{display:inline-block;font-style:normal;font-size:.78rem;color:var(--wall-deep);
+  background:rgba(168,53,42,.08);border-radius:2px;padding:1px 7px;margin-top:5px;letter-spacing:.03em}
+.item .tx em::before{content:"京 · "}
+
+/* 提示条 */
+.note{display:flex;gap:13px;align-items:flex-start;background:#FBF3DF;border-left:3px solid var(--glaze);
+  border-radius:0 8px 8px 0;padding:13px 17px;margin:20px 0;font-size:.93rem;line-height:1.7}
+.note b{color:#8A6D2F;font-weight:600}
+.note.red{background:rgba(168,53,42,.07);border-left-color:var(--wall)}
+.note.red b{color:var(--wall-deep)}
+
+/* ============================================================
+   DAY 导航
+   ============================================================ */
+.days{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.93);
+  backdrop-filter:blur(10px);padding:11px 0;margin-bottom:8px;border-bottom:1px solid var(--rule)}
+.days .row{display:flex;gap:8px;overflow-x:auto}
+.day-btn{flex:0 0 auto;min-height:40px;padding:0 20px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--rule-strong);background:transparent;color:var(--ink-soft);
+  font-family:var(--font-title);font-size:.9rem;font-weight:600;letter-spacing:.12em;
+  transition:all .22s ease}
+.day-btn:hover{border-color:var(--wall);color:var(--wall)}
+.day-btn[aria-selected="true"]{background:var(--wall);border-color:var(--wall);color:#fff}
