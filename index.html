@@ -1,1200 +1,519 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mao的旅行攻略</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/icon-192.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <style>
-        /* ===== 全局重置 ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>去过的地方和想去的地方 · 旷野版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   主题 · 晨光（默认）/ 星夜
+   ============================================================ */
+:root{
+  --sky-0:#0B2740;   /* 天顶 */
+  --sky-1:#1F4E78;
+  --sky-2:#4C82AC;
+  --sky-3:#8FB6CE;
+  --sky-4:#CFE0E6;   /* 近地平线 */
+  --glow:#F2E2C0;    /* 地平线暖光 */
+  --land:#F5F2EA;    /* 大地 / 纸 */
+  --ink:#1C2320;
+  --ink-soft:#6A7169;
+  --ink-faint:#9AA196;
+  --seal:#C0422F;    /* 朱砂 · 已抵达 */
+  --wish:#7C8781;    /* 在路上 */
+  --on-sky:#FFFFFF;
+  --on-sky-soft:rgba(255,255,255,.72);
+  --rule:rgba(28,35,32,.13);
+  --rule-strong:rgba(28,35,32,.28);
+  --haze:rgba(255,255,255,.9);
+  --font-title:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',serif;
+  --font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
+  --gut:clamp(20px,5vw,64px);
+  --wrap:1240px;
+}
+[data-theme="night"]{
+  --sky-0:#05080F; --sky-1:#0B1626; --sky-2:#152C42; --sky-3:#22415A;
+  --sky-4:#33566F; --glow:#6E7F88; --land:#0D1319;
+  --ink:#E6E3D9; --ink-soft:#8A928C; --ink-faint:#5B6660;
+  --seal:#E0A94A; --wish:#5F7078;
+  --on-sky:#FFFFFF; --on-sky-soft:rgba(255,255,255,.66);
+  --rule:rgba(230,227,217,.13); --rule-strong:rgba(230,227,217,.3);
+  --haze:rgba(10,16,24,.85);
+}
 
-        body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(170deg, #4A8C9C 0%, #8CBECD 35%, #B5D8E8 65%, #D4EAF2 100%);
-            min-height: 100vh;
-            color: #2C4A5A;
-            padding: 0;
-            position: relative;
-            overflow-x: hidden;
-        }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--land);color:var(--ink);font-family:var(--font-body);
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  transition:background .5s ease,color .5s ease;overflow-x:hidden}
+:where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--seal);outline-offset:3px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
 
-        /* ===== 背景远山剪影 ===== */
-        .mountains-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .mountains-bg .mountain {
-            position: absolute;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50% 50% 0 0;
-            animation: driftSlow 12s ease-in-out infinite alternate;
-        }
-        .mountains-bg .mountain:nth-child(1) {
-            width: 80%;
-            height: 45%;
-            left: -10%;
-            border-radius: 60% 40% 0 0;
-            animation-delay: 0s;
-        }
-        .mountains-bg .mountain:nth-child(2) {
-            width: 60%;
-            height: 30%;
-            right: -5%;
-            bottom: 0;
-            border-radius: 40% 60% 0 0;
-            background: rgba(255, 255, 255, 0.04);
-            animation-delay: -4s;
-        }
-        .mountains-bg .mountain:nth-child(3) {
-            width: 50%;
-            height: 20%;
-            left: 30%;
-            bottom: 0;
-            border-radius: 50% 50% 0 0;
-            background: rgba(255, 255, 255, 0.035);
-            animation-delay: -8s;
-        }
+/* ============================================================
+   HERO · 天空（固定的一整片天）
+   ============================================================ */
+.sky{
+  position:fixed;inset:0;height:100vh;z-index:0;
+  background:linear-gradient(180deg,
+    var(--sky-0) 0%, var(--sky-1) 20%, var(--sky-2) 42%,
+    var(--sky-3) 62%, var(--sky-4) 76%, var(--glow) 82%, var(--land) 88%);
+  transition:opacity .2s linear;
+}
 
-        @keyframes driftSlow {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-12px) scale(1.02); }
-        }
+/* --- 极高的薄云，慢到几乎察觉不到 --- */
+.cloud{position:absolute;border-radius:50%;filter:blur(28px);opacity:.5;will-change:transform}
+.c1{width:340px;height:52px;top:14%;left:-20%;background:rgba(255,255,255,.5); animation:drift 190s linear infinite}
+.c2{width:220px;height:36px;top:26%;left:-15%;background:rgba(255,255,255,.34);animation:drift 260s linear infinite 40s}
+.c3{width:460px;height:64px;top:8%; left:-30%;background:rgba(255,255,255,.22);animation:drift 340s linear infinite 90s}
+.c4{width:180px;height:30px;top:38%;left:-10%;background:rgba(255,255,255,.28);animation:drift 210s linear infinite 15s}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(180vw)}}
+[data-theme="night"] .cloud{background:rgba(190,215,235,.16);filter:blur(34px)}
 
-        /* ===== 主容器 ===== */
-        .main-container {
-            position: relative;
-            z-index: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px 30px;
-        }
+/* --- 星（仅夜航） --- */
+.stars{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+[data-theme="night"] .stars{opacity:1}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+  animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.22}50%{opacity:.95}}
 
-        /* ===== 顶部标题 ===== */
-        .site-header {
-            text-align: center;
-            margin-bottom: 32px;
-            animation: fadeInDown 0.6s ease both;
-        }
-        .site-header h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 20px rgba(44, 74, 90, 0.15);
-            letter-spacing: 2px;
-        }
-        .site-header h1::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            margin: 10px auto 0;
-            background: linear-gradient(90deg, transparent, #D4C5A0, transparent);
-            border-radius: 4px;
-        }
-        .site-header .subtitle {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 300;
-            margin-top: 8px;
-            letter-spacing: 1px;
-        }
+/* --- 远山 · 三层大气透视（越远越淡越蓝） --- */
+.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;pointer-events:none}
+.ridge svg{width:100%;height:100%;display:block}
+.ridge.r3{bottom:0;height:26vh;opacity:.30}   /* 最远 */
+.ridge.r2{bottom:0;height:19vh;opacity:.52}
+.ridge.r1{bottom:0;height:12vh;opacity:.85}   /* 最近 */
+.ridge path{fill:var(--ridge-fill)}
+.ridge.r3{--ridge-fill:#2F5678}
+.ridge.r2{--ridge-fill:#1E405C}
+.ridge.r1{--ridge-fill:#122A3C}
+[data-theme="night"] .ridge.r3{--ridge-fill:#1B3040}
+[data-theme="night"] .ridge.r2{--ridge-fill:#111F2B}
+[data-theme="night"] .ridge.r1{--ridge-fill:#080F16}
 
-        /* ===== 搜索框 ===== */
-        .search-container {
-            max-width: 700px;
-            margin: 0 auto 32px;
-            position: relative;
-            overflow: visible !important;
-            z-index: 100;
-            animation: fadeInDown 0.6s ease both 0.1s;
-        }
+/* --- 航迹：一条划向远方的虚线弧 + 沿轨迹飞行的剪影 --- */
+.track{position:absolute;left:0;right:0;top:0;height:100vh;pointer-events:none}
+.track svg{width:100%;height:100%}
+.track path{fill:none;stroke:rgba(255,255,255,.34);stroke-width:1.2;stroke-dasharray:3 9}
+.flyer{opacity:.85}
 
-        .search-wrapper {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 50px;
-            padding: 0 6px 0 22px;
-            box-shadow: 0 4px 24px rgba(74, 140, 156, 0.12);
-            transition: box-shadow 0.3s ease, background 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .search-wrapper:focus-within {
-            box-shadow: 0 8px 32px rgba(74, 140, 156, 0.20);
-            background: rgba(255, 255, 255, 0.85);
-        }
-        .search-wrapper .search-icon {
-            color: #D4C5A0;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-        .search-wrapper input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            padding: 16px 14px;
-            font-size: 1rem;
-            color: #2C4A5A;
-            outline: none;
-            min-width: 0;
-        }
-        .search-wrapper input::placeholder {
-            color: #9AB0BC;
-            font-weight: 300;
-        }
-        .search-wrapper .clear-btn {
-            background: transparent;
-            border: none;
-            color: #9AB0BC;
-            cursor: pointer;
-            padding: 6px 8px;
-            border-radius: 50%;
-            display: none;
-            font-size: 1rem;
-            transition: background 0.2s;
-        }
-        .search-wrapper .clear-btn.visible {
-            display: block;
-        }
-        .search-wrapper .clear-btn:hover {
-            background: rgba(0,0,0,0.05);
-        }
-        .search-wrapper .search-btn {
-            background: linear-gradient(135deg, #D4C5A0, #C2B088);
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .search-wrapper .search-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 16px rgba(212, 197, 160, 0.4);
-        }
+/* --- Hero 内容 --- */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;padding:0 var(--gut)}
+.hero h1{color:var(--on-sky);font-family:var(--font-title);font-weight:700;
+  font-size:clamp(2.6rem,10.5vw,8.5rem);line-height:1.02;letter-spacing:.02em;
+  text-shadow:0 2px 40px rgba(0,0,0,.18);max-width:14ch}
+.hero h1 .thin{display:block;font-weight:300;font-size:.34em;letter-spacing:.34em;
+  margin-top:.55em;opacity:.82;max-width:none}
+.hero .sub{margin-top:clamp(24px,4vw,44px);color:var(--on-sky-soft);font-weight:200;
+  font-size:clamp(.95rem,1.8vw,1.2rem);max-width:34ch;line-height:1.9;
+  letter-spacing:.04em}
+.hero .scrollcue{margin-top:clamp(40px,7vw,88px);display:flex;align-items:center;gap:14px;
+  color:var(--on-sky-soft);font-size:11px;letter-spacing:.26em;text-transform:uppercase}
+.hero .scrollcue .ln{width:52px;height:1px;background:currentColor;transform-origin:left;
+  animation:cue 2.6s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleX(.35);opacity:.5}50%{transform:scaleX(1);opacity:1}}
 
-        /* ===== 搜索建议下拉 ===== */
-        .suggestions-container {
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            max-height: 280px;
-            overflow-y: auto;
-            z-index: 9999;
-            display: none;
-            box-shadow: 0 12px 40px rgba(44, 74, 90, 0.18);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        .suggestions-container.show {
-            display: block;
-        }
-        .suggestion-item {
-            padding: 12px 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-            transition: background 0.15s;
-        }
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-        .suggestion-item:hover {
-            background: rgba(74, 140, 156, 0.06);
-        }
-        .suggestion-item .name {
-            font-weight: 500;
-            color: #2C4A5A;
-        }
-        .suggestion-item .en {
-            font-size: 0.85rem;
-            color: #9AB0BC;
-            font-style: italic;
-        }
-        .highlight-text {
-            background: #E8F0E8;
-            color: #4A8C9C;
-            padding: 0 3px;
-            border-radius: 3px;
-        }
+/* ============================================================
+   地面 · 内容区（滚动上来，覆盖天空）
+   ============================================================ */
+.ground{position:relative;z-index:3;background:var(--land);
+  border-radius:26px 26px 0 0;
+  box-shadow:0 -30px 80px rgba(0,0,0,.10);
+  margin-top:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+main{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px)}
 
-        /* ===== 双栏布局 ===== */
-        .columns-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            animation: fadeInUp 0.5s ease both 0.2s;
-        }
-        @media (max-width: 1024px) {
-            .columns-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-        }
+/* --- 进度：数字要有重量 --- */
+.tally{display:flex;align-items:flex-end;gap:clamp(24px,5vw,64px);flex-wrap:wrap}
+.tally .fig{display:flex;flex-direction:column;gap:6px}
+.tally .n{font-family:var(--font-title);font-size:clamp(3.4rem,9vw,7rem);font-weight:700;
+  line-height:.86;letter-spacing:-.03em}
+.tally .n.seal{color:var(--seal)}
+.tally .n.mute{color:var(--ink-faint)}
+.tally .cap{font-size:11px;letter-spacing:.24em;color:var(--ink-faint);text-transform:uppercase}
+.tally .note{margin-left:auto;max-width:26ch;font-family:var(--font-title);font-weight:300;
+  font-size:clamp(.95rem,1.7vw,1.15rem);color:var(--ink-soft);line-height:1.75}
+.rail{margin-top:clamp(24px,4vw,40px);height:1px;background:var(--rule);position:relative}
+.rail i{position:absolute;inset:0 auto 0 0;background:var(--seal);height:1px;width:7.8%}
+.rail b{position:absolute;top:-4px;left:7.8%;width:9px;height:9px;border-radius:50%;
+  background:var(--seal);transform:translateX(-50%)}
 
-        /* ===== 区域卡片 ===== */
-        .region-column {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 24px rgba(74, 140, 156, 0.08);
-            transition: box-shadow 0.3s ease;
-        }
-        .region-column:hover {
-            box-shadow: 0 8px 32px rgba(74, 140, 156, 0.14);
-        }
+/* --- 搜索 --- */
+.find{max-width:560px;margin:clamp(40px,6vw,76px) 0 0}
+.find form{display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--rule-strong);
+  padding-bottom:11px;transition:border-color .25s}
+.find form:focus-within{border-color:var(--seal)}
+.find svg{color:var(--ink-faint);flex:none}
+.find form:focus-within svg{color:var(--seal)}
+.find input{flex:1;border:0;background:transparent;outline:none;font-family:var(--font-title);
+  font-size:1.05rem;color:var(--ink);min-width:0}
+.find input::placeholder{color:var(--ink-faint)}
+.find .clear{border:0;background:transparent;color:var(--ink-faint);cursor:pointer;display:none;font-size:1rem}
+.find .clear.on{display:block}
+.find .count{font-size:12px;color:var(--ink-faint);margin-top:11px;letter-spacing:.06em;min-height:18px}
+.find .count b{color:var(--seal)}
 
-        .region-column .region-head {
-            padding: 22px 24px;
-            color: #fff;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .region-column .region-head.china {
-            background: #2C4A5A;
-        }
-        .region-column .region-head.abroad {
-            background: #4A7A8A;
-        }
-        .region-column .region-head i {
-            font-size: 1.2rem;
-        }
-        .region-column .region-head h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
+/* --- 区块 --- */
+.sec{margin-top:clamp(64px,11vw,140px)}
+.sec-h{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+  padding-bottom:16px;border-bottom:1px solid var(--rule);margin-bottom:clamp(26px,4.5vw,48px)}
+.sec-h h2{font-family:var(--font-title);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;letter-spacing:.03em}
+.sec-h .n{font-family:var(--font-title);color:var(--ink-faint);font-weight:300}
+.sec-h .d{margin-left:auto;font-size:12.5px;color:var(--ink-faint);font-weight:300;letter-spacing:.05em}
 
-        .region-column .region-desc {
-            padding: 18px 24px 4px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #5A7A8A;
-            line-height: 1.7;
-        }
+/* --- 地名流：带一点点风的不规则 --- */
+.flow{font-family:var(--font-title);font-size:clamp(1.05rem,2.2vw,1.5rem);
+  line-height:2.5;display:flex;flex-wrap:wrap;column-gap:1em}
+.flow .sep{color:var(--ink-faint);font-size:.72em;transform:translateY(-.1em);opacity:.5}
 
-        .region-column .categories-wrap {
-            padding: 16px 20px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+.reached .pl{position:relative;display:inline-flex;align-items:baseline;gap:.4em;
+  color:var(--ink);text-decoration:none;transition:color .3s ease}
+.reached .pl .dot{width:.4em;height:.4em;border-radius:50%;background:var(--seal);flex:none;
+  transform:translateY(-.18em)}
+.reached .pl::after{content:"";position:absolute;left:0;right:0;bottom:.22em;height:1px;
+  background:var(--seal);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.reached .pl:hover{color:var(--seal)}
+.reached .pl:hover::after{transform:scaleX(1)}
 
-        /* ===== 分类标题 ===== */
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(240, 245, 250, 0.6);
-            padding: 14px 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.2s;
-            user-select: none;
-        }
-        .category-header:hover {
-            background: rgba(240, 245, 250, 0.9);
-        }
-        .category-header .arrow {
-            transition: transform 0.3s ease;
-            color: #D4C5A0;
-            font-size: 0.9rem;
-        }
-        .category-header .arrow.collapsed {
-            transform: rotate(-90deg);
-        }
-        .category-header .cat-title {
-            flex: 1;
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #2C4A5A;
-        }
-        .category-header .cat-count {
-            font-size: 0.8rem;
-            color: #9AB0BC;
-        }
+/* 在路上：散落、被风吹过 —— 每个都有微小的垂直偏移（--dy 由内联注入） */
+.wish .pl{color:var(--wish);font-weight:300;position:relative;cursor:default;
+  display:inline-block;font-size:var(--fs,1em);transform:translateY(var(--dy,0px));
+  transition:color .35s ease,transform .35s ease}
+.wish .pl:hover{color:var(--seal);transform:translateY(calc(var(--dy,0px) - 3px))}
+.wish .pl::after{content:"";position:absolute;left:0;right:0;bottom:.24em;height:1px;
+  background:currentColor;opacity:.4;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.wish .pl:hover::after{transform:scaleX(1)}
 
-        /* ===== 分类内容网格 ===== */
-        .category-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 10px;
-            padding: 10px 4px 4px;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-            max-height: 0;
-            opacity: 0;
-        }
-        .category-content.open {
-            max-height: 2000px;
-            opacity: 1;
-        }
+.flow .pl.dim{opacity:.13;transition:opacity .35s ease}
+.flow .pl.hit{color:var(--seal);opacity:1}
+.flow .pl.hit::after{transform:scaleX(1)}
 
-        .category-content .dest-item {
-            background: white;
-            border-radius: 10px;
-            padding: 12px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: 1px solid rgba(0,0,0,0.04);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-            position: relative;
-            min-height: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .category-content .dest-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(74, 140, 156, 0.10);
-            border-color: rgba(212, 197, 160, 0.3);
-        }
-        .category-content .dest-item .name {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #2C4A5A;
-        }
-        .category-content .dest-item .en {
-            font-size: 0.75rem;
-            color: #9AB0BC;
-            font-style: italic;
-            margin-top: 2px;
-        }
-        .category-content .dest-item .done-badge {
-            position: absolute;
-            top: 4px;
-            right: 6px;
-            font-size: 0.7rem;
-            color: #D4C5A0;
-            animation: pulseSoft 2s ease-in-out infinite;
-        }
-        .category-content .dest-item.match-highlight {
-            background: rgba(74, 140, 156, 0.08);
-            border-color: #4A8C9C;
-        }
-        .category-content .dest-item.highlighted {
-            background: #E8F0E8 !important;
-            border-color: #D4C5A0 !important;
-            box-shadow: 0 0 0 3px rgba(212, 197, 160, 0.25);
-            animation: pulseHighlight 1.5s 3;
-        }
-        @keyframes pulseHighlight {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
+/* 联程：一趟走完的几个地方，用「+」合并，虚线框住表示同一篇 */
+.trip{display:inline-flex;align-items:baseline;padding-bottom:3px;
+  border-bottom:1px dashed var(--rule-strong)}
+.plus{color:var(--seal);font-size:.72em;font-weight:400;margin:0 .2em;transform:translateY(-.06em)}
 
-        /* ===== 页脚 ===== */
-        .site-footer {
-            margin-top: 32px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 20px 24px;
-            text-align: center;
-        }
-        .site-footer .divider {
-            width: 160px;
-            height: 1px;
-            margin: 0 auto 16px;
-            background: linear-gradient(90deg, transparent, #D4C5A0, transparent);
-        }
-        .site-footer p {
-            font-size: 0.9rem;
-            color: #5A7A8A;
-            line-height: 1.8;
-        }
-        .site-footer .heart {
-            color: #D4C5A0;
-            display: inline-block;
-            margin: 0 2px;
-        }
+/* --- 分区 --- */
+.grp{margin-top:clamp(30px,4.5vw,52px)}
+.grp:first-child{margin-top:0}
+.grp-h{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;
+  padding:8px 0;cursor:pointer;font-family:var(--font-body);font-size:11.5px;letter-spacing:.2em;
+  color:var(--ink-faint);text-transform:uppercase;text-align:left;transition:color .25s;min-height:34px}
+.grp-h:hover{color:var(--ink)}
+.grp-h .idx{font-family:var(--font-title);letter-spacing:0;font-size:12px;color:var(--seal);min-width:1.8em}
+.grp-h .t{flex:1}
+.grp-h .c{font-size:10.5px;letter-spacing:.1em}
+.grp-h .arw{transition:transform .3s ease}
+.grp-h[aria-expanded="false"] .arw{transform:rotate(-90deg)}
+.grp-b{display:grid;grid-template-rows:1fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.3,1)}
+.grp-b>.in{overflow:hidden;min-height:0}
+.grp-b.collapsed{grid-template-rows:0fr}
+.grp-b.collapsed>.in{visibility:hidden;transition:visibility 0s linear .34s}
 
-        /* ===== 浮动按钮 ===== */
-        .floating-buttons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            animation: fadeInRight 0.4s ease both 1s;
-        }
-        @media (max-width: 480px) {
-            .floating-buttons {
-                bottom: 18px;
-                right: 18px;
-                gap: 10px;
-            }
-        }
+/* --- Footer --- */
+footer{margin-top:clamp(64px,10vw,120px);padding-top:clamp(28px,4vw,44px);
+  border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:20px;
+  flex-wrap:wrap;font-size:12px;color:var(--ink-faint);letter-spacing:.06em}
 
-        .floating-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            box-shadow: 0 4px 16px rgba(74, 140, 156, 0.18);
-            color: #D4C5A0;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            line-height: 1;
-        }
-        .floating-btn:hover {
-            transform: translateY(-2px);
-            color: #C2B088;
-            box-shadow: 0 6px 20px rgba(74, 140, 156, 0.25);
-        }
-        @media (max-width: 480px) {
-            .floating-btn {
-                width: 42px;
-                height: 42px;
-                font-size: 1.1rem;
-            }
-        }
+/* --- 控件 --- */
+.tools{position:fixed;right:clamp(14px,2.5vw,28px);bottom:clamp(14px,2.5vw,28px);
+  display:flex;flex-direction:column;gap:9px;z-index:40}
+.tools button{width:40px;height:40px;border-radius:50%;border:1px solid var(--rule-strong);
+  background:var(--land);color:var(--ink-soft);cursor:pointer;display:grid;place-items:center;
+  font-size:15px;font-family:var(--font-title);transition:all .22s ease}
+.tools button:hover{color:var(--seal);border-color:var(--seal);transform:translateY(-2px)}
+.tools button:active{transform:scale(.93)}
+.tools button[hidden]{display:none}
 
-        /* ===== 提示面板 ===== */
-        .hint-panel {
-            position: absolute;
-            bottom: calc(100% + 14px);
-            right: 0;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 16px 20px;
-            width: 220px;
-            box-shadow: 0 8px 30px rgba(44, 74, 90, 0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            font-size: 0.9rem;
-            color: #5A7A8A;
-            line-height: 1.6;
-        }
-        .hint-panel.show {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .hint-panel .hint-line {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .hint-panel .hint-line + .hint-line {
-            margin-top: 10px;
-        }
-        .hint-panel .hint-icon {
-            color: #D4C5A0;
-            font-size: 1rem;
-            margin-top: 2px;
-            min-width: 20px;
-        }
-
-        /* ===== 动画 ===== */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes pulseSoft {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-        }
-
-        /* ===== 响应式微调 ===== */
-        @media (max-width: 600px) {
-            .main-container {
-                padding: 20px 12px 20px;
-            }
-            .site-header h1 {
-                font-size: 1.8rem;
-            }
-            .category-content {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-            }
-            .search-wrapper {
-                padding: 0 4px 0 16px;
-            }
-            .search-wrapper input {
-                padding: 12px 10px;
-                font-size: 0.95rem;
-            }
-            .search-wrapper .search-btn {
-                width: 38px;
-                height: 38px;
-                font-size: 0.9rem;
-            }
-            .region-column .region-head {
-                padding: 16px 18px;
-            }
-            .region-column .region-head h2 {
-                font-size: 1.05rem;
-            }
-            .category-header {
-                padding: 12px 14px;
-            }
-            .category-header .cat-title {
-                font-size: 0.95rem;
-            }
-        }
-
-        /* ===== 滚动条美化 ===== */
-        .suggestions-container::-webkit-scrollbar {
-            width: 4px;
-        }
-        .suggestions-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .suggestions-container::-webkit-scrollbar-thumb {
-            background: #D4C5A0;
-            border-radius: 4px;
-        }
-        .suggestions-container::-webkit-scrollbar-thumb:hover {
-            background: #C2B088;
-        }
-    </style>
+.switcher{position:fixed;left:clamp(14px,2.5vw,28px);bottom:clamp(14px,2.5vw,28px);z-index:40;
+  background:var(--land);border:1px solid var(--rule-strong);border-radius:999px;padding:5px;
+  display:flex;gap:2px}
+.switcher button{border:0;background:transparent;color:var(--ink-faint);cursor:pointer;
+  font-family:var(--font-body);font-size:11.5px;letter-spacing:.06em;padding:7px 14px;border-radius:999px;
+  transition:background .22s,color .22s}
+.switcher button:hover{color:var(--ink)}
+.switcher button.on{background:var(--ink);color:var(--land)}
+@media (max-width:720px){
+  .switcher{left:50%;transform:translateX(-50%);bottom:12px}
+  .tools{bottom:66px}
+}
+</style>
 </head>
-<body>
+<body data-theme="dawn">
 
-    <!-- ===== 背景远山 ===== -->
-    <div class="mountains-bg" aria-hidden="true">
-        <div class="mountain"></div>
-        <div class="mountain"></div>
-        <div class="mountain"></div>
+<!-- ============ 天空 ============ -->
+<div class="sky" id="sky" aria-hidden="true">
+  <div class="stars" id="stars"></div>
+  <div class="cloud c1"></div><div class="cloud c2"></div>
+  <div class="cloud c3"></div><div class="cloud c4"></div>
+
+  <div class="track">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <path id="flightPath" d="M-40,700 C 260,560 420,300 760,236 C 1000,190 1180,120 1500,26"/>
+      <g class="flyer">
+        <path d="M0,0 l13,-4 l-4,4 l4,4 z" fill="rgba(255,255,255,.9)"/>
+        <animateMotion dur="26s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#flightPath" xlink:href="#flightPath"/>
+        </animateMotion>
+      </g>
+    </svg>
+  </div>
+
+  <div class="ridge r3"><svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path d="M0,168 Q96,120 190,150 T382,116 T574,152 T766,108 T958,146 T1150,112 T1342,150 L1440,132 L1440,260 L0,260 Z"/></svg></div>
+  <div class="ridge r2"><svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0,140 Q70,96 142,124 T286,92 T430,128 T574,84 T718,120 T862,88 T1006,124 T1150,92 T1294,126 L1440,104 L1440,200 L0,200 Z"/></svg></div>
+  <div class="ridge r1"><svg viewBox="0 0 1440 140" preserveAspectRatio="none"><path d="M0,104 L54,72 L104,96 L162,58 L218,92 L280,64 L338,98 L400,70 L458,100 L520,74 L578,104 L640,78 L700,102 L762,68 L820,96 L882,72 L940,100 L1000,76 L1060,102 L1120,74 L1180,98 L1240,70 L1300,96 L1360,76 L1440,100 L1440,140 L0,140 Z"/></svg></div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <h1>去过的地方<span class="thin">和想去的地方</span></h1>
+  <p class="sub">天空底下没有边界。走过的路留下了字，剩下的路留给以后的风。</p>
+  <div class="scrollcue"><span class="ln"></span><span>往下 · 落地</span></div>
+</header>
+
+<!-- ============ 地面 ============ -->
+<div class="ground">
+<div class="wrap">
+<main>
+
+  <section class="tally" aria-label="进度">
+    <div class="fig"><span class="n seal" data-count="7">0</span><span class="cap">已抵达</span></div>
+    <div class="fig"><span class="n mute" data-count="83">0</span><span class="cap">在路上</span></div>
+    <p class="note">九十个地方，走过七个，写成六篇。剩下的不急，反正都在。</p>
+    <div class="rail"><i></i><b></b></div>
+  </section>
+
+  <div class="find">
+    <form role="search" onsubmit="return false">
+      <label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">搜索想去的地方</label>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="想找哪个地方？" autocomplete="off" aria-describedby="qc">
+      <button class="clear" id="clr" type="button" aria-label="清除">✕</button>
+    </form>
+    <p class="count" id="qc" role="status" aria-live="polite"></p>
+  </div>
+
+  <section class="sec reached">
+    <div class="sec-h">
+      <h2>已抵达</h2><span class="n">7</span>
+      <span class="d">朱砂点是走过的印记 · 「+」表示一趟走完 · 点地名看攻略</span>
     </div>
+    <div class="flow" id="flowReached"></div>
+  </section>
 
-    <!-- ===== 主容器 ===== -->
-    <div class="main-container">
-
-        <!-- ===== 顶部标题 ===== -->
-        <header class="site-header">
-            <h1>Mao的旅行攻略</h1>
-            <p class="subtitle">记录生活 · 定格与你的每段旅程</p>
-        </header>
-
-        <!-- ===== 搜索框 ===== -->
-        <div class="search-container" id="searchContainer">
-            <div class="search-wrapper">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="搜索省份、国家或地区..." autocomplete="off">
-                <button class="clear-btn" id="clearBtn" aria-label="清除搜索">
-                    <i class="fas fa-times"></i>
-                </button>
-                <button class="search-btn" id="searchBtn" aria-label="搜索">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-            <div class="suggestions-container" id="suggestionsContainer"></div>
-        </div>
-
-        <!-- ===== 双栏内容 ===== -->
-        <div class="columns-grid" id="columnsGrid">
-            <!-- 中国区域 -->
-            <div class="region-column" id="regionChina">
-                <div class="region-head china">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <h2>中国</h2>
-                </div>
-                <div class="region-desc">
-                    中国拥有丰富的自然景观和悠久的历史文化，从壮丽山河到现代都市，从古老文明到多元风情，探索这片神奇的土地，开启一段难忘的旅程。
-                </div>
-                <div class="categories-wrap" id="chinaCategories"></div>
-            </div>
-
-            <!-- 境外区域 -->
-            <div class="region-column" id="regionAbroad">
-                <div class="region-head abroad">
-                    <i class="fas fa-passport"></i>
-                    <h2>境外及港澳台</h2>
-                </div>
-                <div class="region-desc">
-                    探索世界各地的异国风情，从古老的历史遗迹到现代都市风光，从热带雨林到极地冰川，让每一次旅行都成为一次难忘的冒险。
-                </div>
-                <div class="categories-wrap" id="abroadCategories"></div>
-            </div>
-        </div>
-
-        <!-- ===== 页脚 ===== -->
-        <footer class="site-footer">
-            <div class="divider"></div>
-            <p>© 2025 环球旅行攻略 | 探索世界，分享旅程</p>
-            <p>数据由个人整理 · <span class="heart"><i class="fas fa-heart"></i></span> 让旅行改变生活</p>
-            <p>本站所有内容均来自网络 | 如有侵权电邮 mao.sun@foxmail.com</p>
-        </footer>
-
+  <section class="sec wish">
+    <div class="sec-h">
+      <h2>在路上</h2><span class="n">83</span>
+      <span class="d">还没去，但一直占着位置 · 悬停可点亮</span>
     </div>
+    <div id="wishGroups"></div>
+  </section>
 
-    <!-- ===== 浮动按钮 ===== -->
-    <div class="floating-buttons" id="floatingButtons">
-        <!-- 提示面板 -->
-        <div class="hint-panel" id="hintPanel">
-            <div class="hint-line">
-                <span class="hint-icon"><i class="fas fa-check-circle"></i></span>
-                <span>打勾为攻略已完成</span>
-            </div>
-            <div class="hint-line">
-                <span class="hint-icon"><i class="fas fa-lightbulb"></i></span>
-                <span>其他地区也有惊喜哦</span>
-            </div>
-        </div>
+  <footer>
+    <span>© 2026 · 旅途中的每一刻都值得被记录</span>
+    <span>90 个地方 · 7 处已抵达 · 6 篇攻略</span>
+  </footer>
 
-        <!-- 提示按钮 -->
-        <button class="floating-btn" id="hintBtn" aria-label="提示信息">
-            <i class="fas fa-info"></i>
-        </button>
+</main>
+</div>
+</div>
 
-        <!-- 折叠/展开按钮（使用纯文本符号，不依赖外部图标） -->
-        <button class="floating-btn" id="toggleAllBtn" aria-label="展开或收起所有分类">
-            <span id="toggleIcon">−</span>
-        </button>
+<div class="switcher" role="group" aria-label="时段切换">
+  <button data-t="dawn" class="on" aria-pressed="true">晨光</button>
+  <button data-t="night" aria-pressed="false">星夜</button>
+</div>
+<div class="tools">
+  <button id="foldBtn" aria-label="收起或展开所有分区" title="收起/展开">−</button>
+  <button id="topBtn" aria-label="回到顶部" hidden>↑</button>
+</div>
 
-        <!-- 回到顶部 -->
-        <button class="floating-btn" id="backTopBtn" aria-label="回到顶部" style="display:none;">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-    </div>
+<script>
+/* ============================================================
+   数据：1 = 已抵达，0 = 在路上
+   ============================================================ */
+var P=[
+['北京市','华北-东北','cn',1,'NorthChina/NorthChina-Beijing.html'],
+['天津市','华北-东北','cn',0],['河北省','华北-东北','cn',0],['山西省','华北-东北','cn',0],
+['内蒙古自治区','华北-东北','cn',0],['辽宁省','华北-东北','cn',0],['吉林省','华北-东北','cn',0],['黑龙江省','华北-东北','cn',0],
+['上海市','华东','cn',0],['江苏省','华东','cn',1,'EastChina/EastChina-Jiangsu.html'],
+['浙江省','华东','cn',0],['安徽省','华东','cn',0],['福建省','华东','cn',0],['江西省','华东','cn',0],['山东省','华东','cn',0],
+['河南省','华中-华南','cn',0],['湖北省','华中-华南','cn',0],['湖南省','华中-华南','cn',0],
+['广东省','华中-华南','cn',0],['广西壮族自治区','华中-华南','cn',0],['海南省','华中-华南','cn',0],
+['重庆市','西南','cn',1,'SouthwestChina/SouthwestChina-Chongqing.html','chuanyu'],
+['四川省','西南','cn',1,'SouthwestChina/SouthwestChina-Chongqing.html','chuanyu'],
+['贵州省','西南','cn',0],['云南省','西南','cn',0],['西藏自治区','西南','cn',0],
+['陕西省','西北','cn',0],['甘肃省','西北','cn',0],['青海省','西北','cn',0],
+['宁夏回族自治区','西北','cn',0],['新疆维吾尔自治区','西北','cn',0],
+['香港特别行政区','港澳台','cn',1,'China/China-HongKong.html'],
+['澳门特别行政区','港澳台','cn',0],['台湾省','港澳台','cn',0],
+['日本','亚洲','ab',1,'Asia/Asia-Japan.html'],['韩国','亚洲','ab',0],
+['越南','亚洲','ab',1,'Asia/Asia-Vietnam.html'],['泰国','亚洲','ab',0],['新加坡','亚洲','ab',0],
+['马来西亚','亚洲','ab',0],['印度尼西亚','亚洲','ab',0],['菲律宾','亚洲','ab',0],
+['柬埔寨','亚洲','ab',0],['老挝','亚洲','ab',0],['斯里兰卡','亚洲','ab',0],['马尔代夫','亚洲','ab',0],
+['阿联酋','亚洲','ab',0],['土耳其','亚洲','ab',0],
+['英国','欧洲','ab',0],['法国','欧洲','ab',0],['德国','欧洲','ab',0],['意大利','欧洲','ab',0],
+['西班牙','欧洲','ab',0],['葡萄牙','欧洲','ab',0],['荷兰','欧洲','ab',0],['比利时','欧洲','ab',0],
+['瑞士','欧洲','ab',0],['奥地利','欧洲','ab',0],['希腊','欧洲','ab',0],['冰岛','欧洲','ab',0],
+['挪威','欧洲','ab',0],['瑞典','欧洲','ab',0],['丹麦','欧洲','ab',0],['芬兰','欧洲','ab',0],
+['俄罗斯','欧洲','ab',0],['捷克','欧洲','ab',0],['匈牙利','欧洲','ab',0],['波兰','欧洲','ab',0],
+['美国','北美洲','ab',0],['加拿大','北美洲','ab',0],['墨西哥','北美洲','ab',0],
+['古巴','北美洲','ab',0],['哥斯达黎加','北美洲','ab',0],['巴拿马','北美洲','ab',0],
+['巴西','南美洲','ab',0],['阿根廷','南美洲','ab',0],['智利','南美洲','ab',0],
+['秘鲁','南美洲','ab',0],['哥伦比亚','南美洲','ab',0],
+['澳大利亚','大洋洲','ab',0],['新西兰','大洋洲','ab',0],['斐济','大洋洲','ab',0],
+['萨摩亚','大洋洲','ab',0],['汤加','大洋洲','ab',0],['法属波利尼西亚','大洋洲','ab',0],
+['埃及','非洲','ab',0],['南非','非洲','ab',0],['肯尼亚','非洲','ab',0],
+['摩洛哥','非洲','ab',0],['坦桑尼亚','非洲','ab',0]
+];
+var ORDER=['华北-东北','华东','华中-华南','西南','西北','港澳台','亚洲','欧洲','北美洲','南美洲','大洋洲','非洲'];
+function esc(s){return String(s).replace(/[&<>"']/g,function(m){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
 
-    <script>
-        // ============================================================
-        // 数据
-        // ============================================================
-        const regionsData = [{
-            key: 'china',
-            title: '中国',
-            description: '中国拥有丰富的自然景观和悠久的历史文化，从壮丽山河到现代都市，从古老文明到多元风情，探索这片神奇的土地，开启一段难忘的旅程。',
-            categories: [{
-                title: '华北-东北地区',
-                items: [
-                    { name: '北京市', done: true, link: '/NorthChina/NorthChina-Beijing.html' },
-                    { name: '天津市', link: '/NorthChina/NorthChina-Tianjin.html' },
-                    { name: '河北省', link: '/NorthChina/NorthChina-Hebei.html' },
-                    { name: '山西省', link: '/NorthChina/NorthChina-Shanxi.html' },
-                    { name: '内蒙古自治区', link: '/NorthChina/NorthChina-InnerMongolia.html' },
-                    { name: '辽宁省', link: '/NortheastChina/NortheastChina-Liaoning.html' },
-                    { name: '吉林省', link: '/NortheastChina/NortheastChina-Jilin.html' },
-                    { name: '黑龙江省', link: '/NortheastChina/NortheastChina-Heilongjiang.html' }
-                ]
-            }, {
-                title: '华东地区',
-                items: [
-                    { name: '上海市', link: '/EastChina/EastChina-Shanghai.html' },
-                    { name: '江苏省', done: true, link: '/EastChina/EastChina-Jiangsu.html' },
-                    { name: '浙江省', link: '/EastChina/EastChina-Zhejiang.html' },
-                    { name: '安徽省', link: '/EastChina/EastChina-Anhui.html' },
-                    { name: '福建省', link: '/EastChina/EastChina-Fujian.html' },
-                    { name: '江西省', link: '/EastChina/EastChina-Jiangxi.html' },
-                    { name: '山东省', link: '/EastChina/EastChina-Shandong.html' }
-                ]
-            }, {
-                title: '华中-华南地区',
-                items: [
-                    { name: '河南省', link: '/CentralChina/CentralChina-Henan.html' },
-                    { name: '湖北省', link: '/CentralChina/CentralChina-Hubei.html' },
-                    { name: '湖南省', link: '/CentralChina/CentralChina-Hunan.html' },
-                    { name: '广东省', link: '/SouthChina/SouthChina-Guangdong.html' },
-                    { name: '广西壮族自治区', link: '/SouthChina/SouthChina-Guangxi.html' },
-                    { name: '海南省', link: '/SouthChina/SouthChina-Hainan.html' }
-                ]
-            }, {
-                title: '西南地区',
-                items: [
-                    { name: '重庆市', done: true, link: '/SouthwestChina/SouthwestChina-Chongqing.html' },
-                    { name: '四川省', done: true, link: '/SouthwestChina/SouthwestChina-Sichuan.html' },
-                    { name: '贵州省', link: '/SouthwestChina/SouthwestChina-Guizhou.html' },
-                    { name: '云南省', link: '/SouthwestChina/SouthwestChina-Yunnan.html' },
-                    { name: '西藏自治区', link: '/SouthwestChina/SouthwestChina-Tibet.html' }
-                ]
-            }, {
-                title: '西北地区',
-                items: [
-                    { name: '陕西省', link: '/NorthwestChina/NorthwestChina-Shaanxi.html' },
-                    { name: '甘肃省', link: '/NorthwestChina/NorthwestChina-Gansu.html' },
-                    { name: '青海省', link: '/NorthwestChina/NorthwestChina-Qinghai.html' },
-                    { name: '宁夏回族自治区', link: '/NorthwestChina/NorthwestChina-Ningxia.html' },
-                    { name: '新疆维吾尔自治区', link: '/NorthwestChina/NorthwestChina-Xinjiang.html' }
-                ]
-            }, {
-                title: '港澳台地区',
-                items: [
-                    { name: '香港特别行政区', done: true, link: '/China/China-HongKong.html' },
-                    { name: '澳门特别行政区', link: '/China/China-Macau.html' },
-                    { name: '台湾省', link: '/China/China-Taiwan.html' }
-                ]
-            }]
-        }, {
-            key: 'abroad',
-            title: '境外及港澳台',
-            description: '探索世界各地的异国风情，从古老的历史遗迹到现代都市风光，从热带雨林到极地冰川，让每一次旅行都成为一次难忘的冒险。',
-            categories: [{
-                title: '亚洲 (Asia)',
-                items: [
-                    { name: '日本', en: 'Japan', done: true, link: '/Asia/Asia-Japan.html' },
-                    { name: '韩国', en: 'South Korea', link: '/Asia/Asia-South-Korea.html' },
-                    { name: '越南', en: 'Vietnam', done: true, link: '/Asia/Asia-Vietnam.html' },
-                    { name: '泰国', en: 'Thailand', link: '/Asia/Asia-Thailand.html' },
-                    { name: '新加坡', en: 'Singapore', link: '/Asia/Asia-Singapore.html' },
-                    { name: '马来西亚', en: 'Malaysia', link: '/Asia/Asia-Malaysia.html' },
-                    { name: '印度尼西亚', en: 'Indonesia', link: '/Asia/Asia-Indonesia.html' },
-                    { name: '菲律宾', en: 'Philippines', link: '/Asia/Asia-Philippines.html' },
-                    { name: '柬埔寨', en: 'Cambodia', link: '/Asia/Asia-Cambodia.html' },
-                    { name: '老挝', en: 'Laos', link: '/Asia/Asia-Laos.html' },
-                    { name: '斯里兰卡', en: 'Sri Lanka', link: '/Asia/Asia-Sri-Lanka.html' },
-                    { name: '马尔代夫', en: 'Maldives', link: '/Asia/Asia-Maldives.html' },
-                    { name: '阿联酋', en: 'UAE', link: '/Asia/Asia-UAE.html' },
-                    { name: '土耳其', en: 'Turkey', link: '/Asia/Asia-Turkey.html' },
-                    { name: '中国香港', en: 'Hong Kong', done: true, link: '/China/China-HongKong.html' },
-                    { name: '中国澳门', en: 'Macao', link: '/China/China-Macau.html' },
-                    { name: '中国台湾', en: 'Taiwan', link: '/China/China-Taiwan.html' }
-                ]
-            }, {
-                title: '欧洲 (Europe)',
-                items: [
-                    { name: '英国', en: 'United Kingdom', link: '/Europe/Europe-UK.html' },
-                    { name: '法国', en: 'France', link: '/Europe/Europe-France.html' },
-                    { name: '德国', en: 'Germany', link: '/Europe/Europe-Germany.html' },
-                    { name: '意大利', en: 'Italy', link: '/Europe/Europe-Italy.html' },
-                    { name: '西班牙', en: 'Spain', link: '/Europe/Europe-Spain.html' },
-                    { name: '葡萄牙', en: 'Portugal', link: '/Europe/Europe-Portugal.html' },
-                    { name: '荷兰', en: 'Netherlands', link: '/Europe/Europe-Netherlands.html' },
-                    { name: '比利时', en: 'Belgium', link: '/Europe/Europe-Belgium.html' },
-                    { name: '瑞士', en: 'Switzerland', link: '/Europe/Europe-Switzerland.html' },
-                    { name: '奥地利', en: 'Austria', link: '/Europe/Europe-Austria.html' },
-                    { name: '希腊', en: 'Greece', link: '/Europe/Europe-Greece.html' },
-                    { name: '冰岛', en: 'Iceland', link: '/Europe/Europe-Iceland.html' },
-                    { name: '挪威', en: 'Norway', link: '/Europe/Europe-Norway.html' },
-                    { name: '瑞典', en: 'Sweden', link: '/Europe/Europe-Sweden.html' },
-                    { name: '丹麦', en: 'Denmark', link: '/Europe/Europe-Denmark.html' },
-                    { name: '芬兰', en: 'Finland', link: '/Europe/Europe-Finland.html' },
-                    { name: '俄罗斯', en: 'Russia', link: '/Europe/Europe-Russia.html' },
-                    { name: '捷克', en: 'Czechia', link: '/Europe/Europe-Czechia.html' },
-                    { name: '匈牙利', en: 'Hungary', link: '/Europe/Europe-Hungary.html' },
-                    { name: '波兰', en: 'Poland', link: '/Europe/Europe-Poland.html' }
-                ]
-            }, {
-                title: '北美洲 (North America)',
-                items: [
-                    { name: '美国', en: 'United States', link: '/NorthAmerica/NorthAmerica-USA.html' },
-                    { name: '加拿大', en: 'Canada', link: '/NorthAmerica/NorthAmerica-Canada.html' },
-                    { name: '墨西哥', en: 'Mexico', link: '/NorthAmerica/NorthAmerica-Mexico.html' },
-                    { name: '古巴', en: 'Cuba', link: '/NorthAmerica/NorthAmerica-Cuba.html' },
-                    { name: '哥斯达黎加', en: 'Costa Rica', link: '/NorthAmerica/NorthAmerica-CostaRica.html' },
-                    { name: '巴拿马', en: 'Panama', link: '/NorthAmerica/NorthAmerica-Panama.html' }
-                ]
-            }, {
-                title: '南美洲 (South America)',
-                items: [
-                    { name: '巴西', en: 'Brazil', link: '/SouthAmerica/SouthAmerica-Brazil.html' },
-                    { name: '阿根廷', en: 'Argentina', link: '/SouthAmerica/SouthAmerica-Argentina.html' },
-                    { name: '智利', en: 'Chile', link: '/SouthAmerica/SouthAmerica-Chile.html' },
-                    { name: '秘鲁', en: 'Peru', link: '/SouthAmerica/SouthAmerica-Peru.html' },
-                    { name: '哥伦比亚', en: 'Colombia', link: '/SouthAmerica/SouthAmerica-Colombia.html' }
-                ]
-            }, {
-                title: '大洋洲 (Oceania)',
-                items: [
-                    { name: '澳大利亚', en: 'Australia', link: '/Oceania/Oceania-Australia.html' },
-                    { name: '新西兰', en: 'New Zealand', link: '/Oceania/Oceania-NewZealand.html' },
-                    { name: '斐济', en: 'Fiji', link: '/Oceania/Oceania-Fiji.html' },
-                    { name: '萨摩亚', en: 'Samoa', link: '/Oceania/Oceania-Samoa.html' },
-                    { name: '汤加', en: 'Tonga', link: '/Oceania/Oceania-Tonga.html' },
-                    { name: '法属波利尼西亚', en: 'French Polynesia', link: '/Oceania/Oceania-FrenchPolynesia.html' }
-                ]
-            }, {
-                title: '非洲 (Africa)',
-                items: [
-                    { name: '埃及', en: 'Egypt', link: '/Africa/Africa-Egypt.html' },
-                    { name: '南非', en: 'South Africa', link: '/Africa/Africa-SouthAfrica.html' },
-                    { name: '肯尼亚', en: 'Kenya', link: '/Africa/Africa-Kenya.html' },
-                    { name: '摩洛哥', en: 'Morocco', link: '/Africa/Africa-Morocco.html' },
-                    { name: '坦桑尼亚', en: 'Tanzania', link: '/Africa/Africa-Tanzania.html' }
-                ]
-            }]
-        }];
+/* 已抵达 —— 同一趟旅程（trip 相同）的地名用「+」连成一组，
+   因为数据模型是「一次出行 = 一篇攻略」，不是「一个地名 = 一篇」 */
+document.getElementById('flowReached').innerHTML = (function(){
+  var groups=[], seen={};
+  P.filter(function(p){return p[3]===1}).forEach(function(p){
+    var k = p[5] || ('#'+p[0]);
+    if(!seen[k]){ seen[k]=[]; groups.push(seen[k]) }
+    seen[k].push(p);
+  });
+  return groups.map(function(g,gi){
+    var inner = g.map(function(p,i){
+      return (i?'<span class="plus" aria-hidden="true">+</span>':'')+
+        '<a class="pl" href="'+esc(p[4])+'" data-n="'+esc(p[0])+'"><i class="dot"></i>'+esc(p[0])+'</a>';
+    }).join('');
+    var html = g.length>1
+      ? '<span class="trip" title="一趟走完 · 同一篇攻略">'+inner+'</span>'
+      : inner;
+    return (gi?'<span class="sep">·</span>':'') + html;
+  }).join('');
+})();
 
-        // ============================================================
-        // 工具函数
-        // ============================================================
-        function escapeRegExp(str) {
-            return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        }
+/* 在路上 —— 每个给一点随机的垂直偏移与字号浮动，像被风吹散在原野上 */
+var seed=7;
+function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
+document.getElementById('wishGroups').innerHTML = (function(){
+  var gi=0, out=[];
+  ORDER.forEach(function(g){
+    var list=P.filter(function(p){return p[1]===g && p[3]===0});
+    if(!list.length) return;
+    var gone=P.filter(function(p){return p[1]===g && p[3]===1}).length;
+    gi++; var id='wg'+gi;
+    out.push('<div class="grp">'+
+      '<button class="grp-h" aria-expanded="true" aria-controls="'+id+'">'+
+        '<span class="idx">'+String(gi).padStart(2,'0')+'</span>'+
+        '<span class="t">'+esc(g)+'</span>'+
+        '<span class="c">'+list.length+' 处'+(gone?' · 已去 '+gone:'')+'</span>'+
+        '<svg class="arw" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>'+
+      '</button>'+
+      '<div class="grp-b" id="'+id+'"><div class="in"><div class="flow">'+
+      list.map(function(p,i){
+        var dy=((rnd()*2-1)*5).toFixed(1);      /* ±5px 垂直漂移 */
+        var fs=(0.94+rnd()*0.14).toFixed(3);    /* 0.94–1.08em 字号浮动 */
+        /* 用 CSS 变量注入，避免内联 transform 盖掉 hover 效果 */
+        return (i?'<span class="sep">·</span>':'')+
+          '<span class="pl" data-n="'+esc(p[0])+'" style="--dy:'+dy+'px;--fs:'+fs+'em">'+esc(p[0])+'</span>';
+      }).join('')+
+      '</div></div></div></div>');
+  });
+  return out.join('');
+})();
 
-        function highlightText(text, query) {
-            if (!query) return text;
-            const escaped = escapeRegExp(query);
-            const regex = new RegExp(`(${escaped})`, 'gi');
-            return text.replace(regex, '<span class="highlight-text">$1</span>');
-        }
+/* 星星（夜航模式） */
+(function(){
+  var s='';
+  for(var i=0;i<90;i++){
+    s+='<i style="left:'+(Math.random()*100).toFixed(2)+'%;top:'+(Math.random()*72).toFixed(2)+
+       '%;animation-delay:'+(Math.random()*4).toFixed(2)+'s"></i>';
+  }
+  document.getElementById('stars').innerHTML=s;
+})();
 
-        // ============================================================
-        // 状态
-        // ============================================================
-        let allDestinations = [];
-        const nameToCategory = new Map();
-        const openSet = new Set();
-        let highlighted = null;
-        let highlightTimer = null;
-        let allTitles = [];
+/* 搜索：不匹配的退到背景，不消失 */
+var q=document.getElementById('q'), clr=document.getElementById('clr'), qc=document.getElementById('qc');
+var nodes=[].slice.call(document.querySelectorAll('.pl'));
+q.addEventListener('input',function(){
+  var v=q.value.trim().toLowerCase();
+  clr.classList.toggle('on', !!v);
+  if(!v){ nodes.forEach(function(n){n.classList.remove('dim','hit')}); qc.textContent=''; return }
+  var hit=0;
+  nodes.forEach(function(n){
+    var m=n.dataset.n.toLowerCase().indexOf(v)>-1;
+    n.classList.toggle('hit',m); n.classList.toggle('dim',!m);
+    if(m) hit++;
+  });
+  qc.innerHTML = hit? '匹配到 <b>'+hit+'</b> 个地方' : '还没有这个地方 —— 要不要把它加进天空？';
+});
+q.addEventListener('keydown',function(e){if(e.key==='Escape'){q.value='';q.dispatchEvent(new Event('input'))}});
+clr.addEventListener('click',function(){q.value='';q.dispatchEvent(new Event('input'));q.focus()});
 
-        regionsData.forEach(region => {
-            region.categories.forEach(cat => {
-                allTitles.push(cat.title);
-                cat.items.forEach(item => {
-                    nameToCategory.set(item.name, cat.title);
-                    allDestinations.push({
-                        ...item,
-                        categoryTitle: cat.title,
-                        regionKey: region.key
-                    });
-                });
-            });
-        });
+/* 折叠 */
+document.addEventListener('click',function(e){
+  var h=e.target.closest('.grp-h'); if(!h) return;
+  var b=document.getElementById(h.getAttribute('aria-controls'));
+  var open=h.getAttribute('aria-expanded')==='true';
+  h.setAttribute('aria-expanded', !open);
+  b.classList.toggle('collapsed', open);
+  syncFold();
+});
+function syncFold(){
+  var any=[].slice.call(document.querySelectorAll('.grp-h')).some(function(h){return h.getAttribute('aria-expanded')==='true'});
+  document.getElementById('foldBtn').textContent = any?'−':'+';
+}
+document.getElementById('foldBtn').addEventListener('click',function(){
+  var hs=[].slice.call(document.querySelectorAll('.grp-h'));
+  var any=hs.some(function(h){return h.getAttribute('aria-expanded')==='true'});
+  hs.forEach(function(h){
+    h.setAttribute('aria-expanded', !any);
+    document.getElementById(h.getAttribute('aria-controls')).classList.toggle('collapsed', any);
+  });
+  syncFold();
+});
 
-        const keywordMap = {
-            '香港': '中国香港',
-            '澳门': '中国澳门',
-            '台湾': '中国台湾'
-        };
+/* 回到顶部 + 天空视差 */
+var tb=document.getElementById('topBtn'), sky=document.getElementById('sky');
+var ticking=false;
+addEventListener('scroll',function(){
+  if(!ticking){ ticking=true; requestAnimationFrame(function(){
+    var y=scrollY, vh=innerHeight;
+    tb.hidden = y < vh*0.5;
+    /* 天空比内容慢 —— 纵深感的来源 */
+    sky.style.transform = 'translateY(' + (y*0.28) + 'px)';
+    sky.style.opacity = Math.max(0, 1 - y/(vh*0.95));
+    ticking=false;
+  })}
+},{passive:true});
+tb.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
 
-        // ============================================================
-        // 渲染函数
-        // ============================================================
-        function renderCategories(containerId, regionKey) {
-            const container = document.getElementById(containerId);
-            const region = regionsData.find(r => r.key === regionKey);
-            if (!region) return;
+/* 时段切换 */
+[].slice.call(document.querySelectorAll('.switcher button')).forEach(function(b){
+  b.addEventListener('click',function(){
+    [].slice.call(document.querySelectorAll('.switcher button')).forEach(function(x){
+      x.classList.remove('on'); x.setAttribute('aria-pressed','false')});
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
+    document.body.setAttribute('data-theme', b.dataset.t);
+  });
+});
 
-            container.innerHTML = '';
-            region.categories.forEach((cat, idx) => {
-                const isOpen = openSet.has(cat.title);
-                const itemsHtml = cat.items.map(item => {
-                    const matchClass = matchSet.has(item.name) ? 'match-highlight' : '';
-                    const highlightClass = highlighted === item.name ? 'highlighted' : '';
-                    const doneHtml = item.done ? '<span class="done-badge"><i class="fas fa-check-circle"></i></span>' : '';
-                    const enHtml = item.en ? `<span class="en">${item.en}</span>` : '';
-                    const link = item.link || '#';
-                    return `
-                        <div class="dest-item ${matchClass} ${highlightClass}" data-name="${item.name}" data-link="${link}" onclick="navigateTo('${link}')">
-                            <span class="name">${item.name}</span>
-                            ${enHtml}
-                            ${doneHtml}
-                        </div>
-                    `;
-                }).join('');
-
-                const count = cat.items.length;
-                const arrowClass = isOpen ? '' : 'collapsed';
-                const contentClass = isOpen ? 'open' : '';
-
-                container.innerHTML += `
-                    <div class="category-wrap" data-category="${cat.title}">
-                        <div class="category-header" onclick="toggleCategory('${cat.title}')">
-                            <i class="fas fa-chevron-down arrow ${arrowClass}"></i>
-                            <span class="cat-title">${cat.title}</span>
-                            <span class="cat-count">${count}个目的地</span>
-                        </div>
-                        <div class="category-content ${contentClass}">
-                            ${itemsHtml}
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // ============================================================
-        // 交互函数
-        // ============================================================
-        let matchSet = new Set();
-
-        function toggleCategory(title) {
-            if (openSet.has(title)) {
-                openSet.delete(title);
-            } else {
-                openSet.add(title);
-            }
-            renderCategories('chinaCategories', 'china');
-            renderCategories('abroadCategories', 'abroad');
-            updateToggleIcon();
-        }
-
-        function toggleAll() {
-            // 检查是否有任何分类是展开的
-            let hasOpen = false;
-            const allTitles = [];
-            regionsData.forEach(r => r.categories.forEach(c => {
-                allTitles.push(c.title);
-                if (openSet.has(c.title)) hasOpen = true;
-            }));
-
-            if (hasOpen) {
-                // 如果有展开的，全部收起
-                openSet.clear();
-            } else {
-                // 如果全部收起，全部展开
-                allTitles.forEach(t => openSet.add(t));
-            }
-            renderCategories('chinaCategories', 'china');
-            renderCategories('abroadCategories', 'abroad');
-            updateToggleIcon();
-        }
-
-        function updateToggleIcon() {
-            const icon = document.getElementById('toggleIcon');
-            if (!icon) return;
-            // 检查是否有任何分类是展开的
-            let hasOpen = false;
-            regionsData.forEach(r => r.categories.forEach(c => {
-                if (openSet.has(c.title)) hasOpen = true;
-            }));
-            // 有展开 → 显示 − (点击后收起)，全收起 → 显示 + (点击后展开)
-            icon.textContent = hasOpen ? '−' : '+';
-        }
-
-        function focusDestination(dest) {
-            const title = nameToCategory.get(dest.name);
-            if (title) {
-                openSet.add(title);
-            }
-            highlighted = dest.name;
-            if (highlightTimer) clearTimeout(highlightTimer);
-            renderCategories('chinaCategories', 'china');
-            renderCategories('abroadCategories', 'abroad');
-            updateToggleIcon();
-            setTimeout(() => {
-                const el = document.querySelector(`.dest-item[data-name="${dest.name}"]`);
-                if (el) {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 100);
-            highlightTimer = setTimeout(() => {
-                highlighted = null;
-                renderCategories('chinaCategories', 'china');
-                renderCategories('abroadCategories', 'abroad');
-            }, 3000);
-        }
-
-        function navigateTo(link) {
-            if (link && link !== '#') {
-                window.location.href = link;
-            }
-        }
-
-        // ============================================================
-        // 搜索功能
-        // ============================================================
-        const searchInput = document.getElementById('searchInput');
-        const clearBtn = document.getElementById('clearBtn');
-        const searchBtn = document.getElementById('searchBtn');
-        const suggestionsContainer = document.getElementById('suggestionsContainer');
-
-        function updateSearch(query) {
-            const trimmed = query.trim().toLowerCase();
-            if (!trimmed) {
-                matchSet = new Set();
-                suggestionsContainer.classList.remove('show');
-                clearBtn.classList.remove('visible');
-                renderCategories('chinaCategories', 'china');
-                renderCategories('abroadCategories', 'abroad');
-                return;
-            }
-
-            clearBtn.classList.add('visible');
-            const matches = allDestinations.filter(d =>
-                d.name.toLowerCase().includes(trimmed) ||
-                (d.en && d.en.toLowerCase().includes(trimmed))
-            );
-            matchSet = new Set(matches.map(d => d.name));
-
-            if (matches.length > 0) {
-                suggestionsContainer.innerHTML = matches.map(d => `
-                    <div class="suggestion-item" onclick="selectDestination('${d.name}')">
-                        <span class="name">${highlightText(d.name, trimmed)}</span>
-                        ${d.en ? `<span class="en">${highlightText(d.en, trimmed)}</span>` : ''}
-                    </div>
-                `).join('');
-                suggestionsContainer.classList.add('show');
-            } else {
-                suggestionsContainer.classList.remove('show');
-            }
-
-            renderCategories('chinaCategories', 'china');
-            renderCategories('abroadCategories', 'abroad');
-        }
-
-        function selectDestination(name) {
-            const dest = allDestinations.find(d => d.name === name);
-            if (dest) {
-                searchInput.value = name;
-                suggestionsContainer.classList.remove('show');
-                focusDestination(dest);
-                matchSet = new Set([name]);
-                renderCategories('chinaCategories', 'china');
-                renderCategories('abroadCategories', 'abroad');
-            }
-        }
-
-        function performSearch() {
-            const raw = searchInput.value.trim();
-            if (!raw) return;
-            suggestionsContainer.classList.remove('show');
-            const target = keywordMap[raw] || raw;
-            const match = allDestinations.find(d =>
-                d.name.toLowerCase() === target.toLowerCase() ||
-                (d.en && d.en.toLowerCase() === target.toLowerCase())
-            );
-            if (match) {
-                focusDestination(match);
-            } else {
-                alert(`没有找到与 "${raw}" 匹配的目的地，请尝试从下拉列表中选择。`);
-            }
-        }
-
-        searchInput.addEventListener('input', function() {
-            updateSearch(this.value);
-        });
-
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                suggestionsContainer.classList.remove('show');
-                performSearch();
-            }
-        });
-
-        clearBtn.addEventListener('click', function() {
-            searchInput.value = '';
-            updateSearch('');
-            searchInput.focus();
-        });
-
-        searchBtn.addEventListener('click', performSearch);
-
-        document.addEventListener('click', function(e) {
-            const container = document.getElementById('searchContainer');
-            if (!container.contains(e.target)) {
-                suggestionsContainer.classList.remove('show');
-            }
-        });
-
-        // ============================================================
-        // 浮动按钮
-        // ============================================================
-        const hintBtn = document.getElementById('hintBtn');
-        const hintPanel = document.getElementById('hintPanel');
-        const toggleAllBtn = document.getElementById('toggleAllBtn');
-        const backTopBtn = document.getElementById('backTopBtn');
-        let hintTimer = null;
-
-        hintPanel.classList.add('show');
-        hintTimer = setTimeout(() => hintPanel.classList.remove('show'), 5000);
-
-        hintBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            hintPanel.classList.toggle('show');
-            if (hintTimer) clearTimeout(hintTimer);
-            if (hintPanel.classList.contains('show')) {
-                hintTimer = setTimeout(() => hintPanel.classList.remove('show'), 5000);
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!hintBtn.contains(e.target) && !hintPanel.contains(e.target)) {
-                hintPanel.classList.remove('show');
-            }
-        });
-
-        toggleAllBtn.addEventListener('click', toggleAll);
-
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                backTopBtn.style.display = 'flex';
-            } else {
-                backTopBtn.style.display = 'none';
-            }
-        });
-
-        backTopBtn.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // ============================================================
-        // Service Worker 注册（PWA）
-        // ============================================================
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(function(reg) {
-                        console.log('Service Worker 注册成功:', reg.scope);
-                    })
-                    .catch(function(err) {
-                        console.log('Service Worker 注册失败:', err);
-                    });
-            });
-        }
-
-        // ============================================================
-        // 初始化
-        // ============================================================
-        renderCategories('chinaCategories', 'china');
-        renderCategories('abroadCategories', 'abroad');
-        updateToggleIcon();
-
-        console.log('✅ 旅行攻略已加载，共 ' + allDestinations.length + ' 个目的地');
-    </script>
+/* 数字滚动 */
+requestAnimationFrame(function(){
+  [].slice.call(document.querySelectorAll('[data-count]')).forEach(function(el){
+    var t=+el.dataset.count, s=performance.now(), d=1100;
+    (function step(now){
+      var k=Math.min(1,(now-s)/d), e=1-Math.pow(1-k,3);
+      el.textContent=Math.round(t*e);
+      if(k<1) requestAnimationFrame(step);
+    })(s);
+  });
+});
+</script>
 </body>
 </html>
