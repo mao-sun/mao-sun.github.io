@@ -1,729 +1,711 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>北京旅游攻略</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      background: #f8f9fa;
-      color: #333;
-      padding: 20px;
-      line-height: 1.6;
-      position: relative;
-      font-family: 'Noto Sans SC', sans-serif;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      overflow: hidden;
-      position: relative;
-    }
-        
-    header {
-        background: linear-gradient(90deg, #c53030, #b71c1c);
-        color: white;
-        text-align: center;
-        padding: 30px 20px;
-        position: relative;
-    }
-    
-    h1 {
-        font-size: clamp(1.8rem, 3vw, 2.5rem);
-        margin-bottom: 10px;
-    }
-    
-    h2 {
-        color: #c53030;
-        margin: 25px 0 15px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #ffcdd2;
-        font-size: clamp(1.3rem, 2vw, 1.6rem);
-    }
-    
-    .section {
-        padding: 20px;
-    }
-    
-    .table-container {
-        overflow-x: auto;
-        margin: 20px 0;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        border-radius: 5px;
-    }
-    
-    table {
-        width: 100%;
-        min-width: 700px;
-        border-collapse: collapse;
-    }
-    
-    th, td {
-        padding: 12px 15px;
-        text-align: left;
-        border-bottom: 1px solid #eee;
-        font-size: clamp(0.9rem, 1.5vw, 1rem);
-    }
-    
-    th {
-        background: #f1f1f1;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-    
-    tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
-    
-    tr:hover {
-        background-color: #fff3f3;
-    }
-    
-    .note {
-        background: #fff8e1;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        margin: 20px 0;
-        border-radius: 0 5px 5px 0;
-    }
-    
-    .highlight {
-        background: #ffebee;
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-weight: bold;
-        color: #c53030;
-    }
-    
-    footer {
-        text-align: center;
-        padding: 20px;
-        background: #f1f1f1;
-        color: #666;
-        font-size: 0.9rem;
-    }
-    
-    .reservation-link {
-        color: #c53030;
-        text-decoration: none;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    
-    .reservation-link:hover {
-        text-decoration: underline;
-    }
-    
-    .reservation-details {
-        display: none;
-        margin-top: 20px;
-        border: 1px solid #eee;
-        border-radius: 5px;
-        padding: 15px;
-        background-color: #f9f9f9;
-    }
-    
-    .back-to-home {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        background: rgba(255, 255, 255, 0.95);
-        color: #c53030;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        text-decoration: none;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .back-to-home:hover {
-        background: white;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-    
-    .back-to-home i {
-        margin-right: 5px;
-    }
-    
-    .back-to-top {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background: #c53030;
-        color: white;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        opacity: 0;
-        transform: translateY(100px);
-        border: none;
-    }
-    
-    .back-to-top.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .back-to-top:hover {
-        background: #b71c1c;
-        transform: scale(1.1);
-    }
-    
-    .mobile-day-nav {
-        display: none;
-        justify-content: space-between;
-        margin: 15px 0;
-    }
-    
-    .day-btn {
-        flex: 1;
-        padding: 10px;
-        margin: 0 5px;
-        background: #f1f1f1;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-    
-    .day-btn.active {
-        background: #c53030;
-        color: white;
-    }
-    
-    @media (max-width: 900px) {
-        .mobile-day-nav {
-            display: flex;
-        }
-        
-        .day-section {
-            display: none;
-        }
-        
-        .day-section.active {
-            display: block;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        body {
-            padding: 10px;
-        }
-        
-        header {
-            padding: 25px 15px;
-        }
-        
-        .section {
-            padding: 15px;
-        }
-        
-        th, td {
-            padding: 10px 12px;
-        }
-        
-        .back-to-home {
-            top: 10px;
-            left: 10px;
-            padding: 6px 12px;
-            font-size: 0.9rem;
-        }
-        
-        .back-to-top {
-            bottom: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .back-to-home span {
-            display: none;
-        }
-        
-        .back-to-home i {
-            margin-right: 0;
-        }
-    }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>北京4天3晚旅游攻略 · Mao 的旅行攻略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   北京 · 地域设计系统
+   母题：中轴线 / 宫墙 / 琉璃瓦 / 窗棂 / 银杏
+   ============================================================ */
+:root{
+  --sky-0:#0B2740; --sky-1:#1F4E78; --sky-2:#4C82AC; --sky-3:#8FB6CE;
+  --sky-4:#CFE0E6; --glow:#F2E2C0;
+  --paper:#F5F2EA;
+  --ink:#1C2320; --ink-soft:#6A7169; --ink-faint:#9AA196;
+
+  --wall:#A8352A;        /* 宫墙红 */
+  --wall-deep:#7E241C;
+  --glaze:#B8892B;       /* 琉璃瓦金 */
+  --brick:#6B6157;       /* 青砖灰 */
+  --ginkgo:#D9A441;      /* 银杏 */
+
+  --rule:rgba(28,35,32,.12);
+  --rule-strong:rgba(28,35,32,.26);
+  --font-title:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',serif;
+  --font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  --gut:clamp(20px,5vw,56px);
+  --wrap:1080px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--wall);outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+.ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ============================================================
+   HERO · 北京天际线（左：宫檐 / 右：现代楼群）
+   ============================================================ */
+.hero{position:relative;min-height:clamp(360px,56vh,560px);display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 var(--gut) clamp(30px,5vw,52px);overflow:hidden;
+  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 26%,var(--sky-2) 52%,
+    var(--sky-3) 74%,var(--sky-4) 88%,var(--glow) 96%,var(--paper) 100%)}
+.sky-orn{position:absolute;inset:0;width:100%;height:100%}
+.sky-orn .far{fill:#2F5678;opacity:.3}
+.sky-orn .mid{fill:#1E405C;opacity:.5}
+.sky-orn .palace{fill:#122A3C;opacity:.9}
+.sky-orn .tower{fill:#122A3C;opacity:.78}
+.sky-orn .win{fill:var(--glow);opacity:.5}
+
+/* 印章 */
+.seal{position:absolute;right:var(--gut);top:clamp(64px,10vw,96px);width:76px;height:76px;
+  border:2.5px solid rgba(255,255,255,.85);border-radius:8px;display:grid;place-items:center;
+  color:#fff;font-family:var(--font-title);font-size:2.1rem;font-weight:700;letter-spacing:0;
+  opacity:.92;transform:rotate(4deg)}
+.seal::after{content:"北 京";position:absolute;bottom:-26px;right:2px;font-size:11px;
+  letter-spacing:.34em;font-family:var(--font-body);font-weight:400;opacity:.8}
+
+.hero .back{position:absolute;top:clamp(16px,3vw,28px);left:var(--gut);z-index:5;
+  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;
+  text-decoration:none;font-size:13px;letter-spacing:.05em;backdrop-filter:blur(8px);
+  transition:background .25s ease,transform .25s ease}
+.hero .back:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
+
+.hero .inner{position:relative;z-index:3;max-width:var(--wrap);margin:0 auto;width:100%}
+.hero .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.68);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.hero .eyebrow::after{content:"";width:46px;height:1px;background:rgba(255,255,255,.45)}
+.hero h1{font-family:var(--font-title);font-weight:700;color:#fff;
+  font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.04;letter-spacing:.04em;
+  text-shadow:0 2px 32px rgba(0,0,0,.22)}
+.hero .sub{margin-top:14px;color:rgba(255,255,255,.82);font-weight:300;
+  font-size:clamp(.95rem,1.8vw,1.12rem);max-width:38ch;letter-spacing:.03em}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,3vw,26px)}
+.hero .meta span{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.92);
+  padding:5px 13px;border-radius:2px;background:rgba(168,53,42,.42);
+  border:1px solid rgba(255,255,255,.26)}
+
+/* ============================================================
+   地面
+   ============================================================ */
+.ground{position:relative;z-index:3;background:var(--paper);border-radius:22px 22px 0 0;
+  margin-top:-1px;box-shadow:0 -20px 60px rgba(0,0,0,.08)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+main{padding:clamp(44px,7vw,76px) 0 clamp(48px,7vw,88px)}
+
+.sec{margin-top:clamp(48px,8vw,88px);scroll-margin-top:20px}
+.sec:first-child{margin-top:0}
+.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:14px;
+  border-bottom:1px solid var(--rule);margin-bottom:clamp(22px,4vw,34px)}
+.sec-h h2{font-family:var(--font-title);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;letter-spacing:.04em}
+.sec-h .n{font-family:var(--font-title);color:var(--ink-faint);font-size:.92rem;font-weight:300}
+.sec-h .d{margin-left:auto;font-size:12px;color:var(--ink-faint);letter-spacing:.05em}
+
+/* 中式分隔（替代普通 hr） */
+.part{display:flex;align-items:center;gap:12px;margin:clamp(34px,6vw,56px) 0;color:var(--glaze)}
+.part::before,.part::after{content:"";flex:1;height:1px;background:var(--rule)}
+.part i{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
+.part i+i{margin-left:-6px;opacity:.5}
+
+/* ============================================================
+   预约 · 北京的头等大事
+   ============================================================ */
+.book{position:relative;border:1px solid rgba(168,53,42,.28);border-radius:14px;
+  background:linear-gradient(180deg,rgba(168,53,42,.05),rgba(168,53,42,.015));
+  padding:clamp(20px,3.4vw,32px);overflow:hidden}
+/* 窗棂纹理 */
+.book::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    linear-gradient(var(--rule) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%);
+  -webkit-mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%)}
+.book .hd{position:relative;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.book .hd .tag{background:var(--wall);color:#fff;font-size:11px;font-weight:600;letter-spacing:.14em;
+  padding:5px 11px;border-radius:2px;flex:none;margin-top:4px}
+.book .hd h3{font-family:var(--font-title);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;color:var(--wall-deep)}
+.book .lead{position:relative;font-size:.94rem;color:var(--ink-soft);margin:8px 0 18px;max-width:56ch;line-height:1.8}
+.book .lead b{color:var(--wall-deep);font-weight:600}
+
+/* 抢票倒计时条 */
+.rush{position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:#fff;border:1px solid rgba(184,137,43,.4);border-left:3px solid var(--glaze);
+  border-radius:0 8px 8px 0;padding:13px 16px;margin-bottom:18px}
+.rush .k{font-family:var(--font-title);font-weight:700;color:var(--glaze);font-size:1rem;flex:none}
+.rush .v{font-size:.9rem;color:var(--ink)}
+.rush .v b{color:var(--wall-deep)}
+.rush .clock{margin-left:auto;font-size:11px;letter-spacing:.1em;color:var(--ink-faint);
+  border:1px solid var(--rule-strong);border-radius:2px;padding:4px 9px}
+
+/* 预约卡片（替代 5 列表格 —— 手机上不再横滑，双列网格自适应） */
+.bk{position:relative;background:#fff;border:1px solid var(--rule);border-radius:10px;
+  padding:14px 16px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
+.bk:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
+.bk-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:4px}
+.bk-t h4{font-family:var(--font-title);font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:.04em}
+/* 抢票关键行：唯一需要一眼看到的信息 */
+.bk-when{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:9px;
+  padding:6px 11px;border-radius:6px;background:rgba(184,137,43,.10)}
+.bk-when .d{font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em}
+.bk-when .d b{font-family:var(--font-title);font-size:1.1rem;color:var(--glaze);font-weight:700;padding:0 1px}
+.bk-when .t{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--wall-deep);letter-spacing:.04em}
+.bk-m{margin:10px 0 0;font-size:.8rem;line-height:1.72}
+.bk-m .row{display:flex;gap:8px}
+.bk-m dt{flex:none;color:var(--ink-faint);letter-spacing:.06em;min-width:2.4em}
+.bk-m dd{margin:0;flex:1;min-width:0;color:var(--ink-soft)}
+.bk.urgent{border-color:rgba(184,137,43,.45);background:#FDFAF2}
+.bk.urgent::before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;
+  border-radius:0 3px 3px 0;background:var(--glaze)}
+.badge{display:inline-block;font-size:10.5px;letter-spacing:.08em;padding:2px 7px;border-radius:2px;
+  background:var(--glaze);color:#fff;font-weight:600;vertical-align:2px}
+
+/* 常规物品 chips —— 轻量层级，区别于上面带理由的卡片 */
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.chips li{display:inline-flex;align-items:center;gap:7px;background:#fff;
+  border:1px solid var(--rule);border-radius:999px;padding:7px 14px 7px 11px;
+  font-size:.86rem;color:var(--ink);line-height:1.4;transition:border-color .2s,transform .2s}
+.chips li:hover{border-color:var(--rule-strong);transform:translateY(-1px)}
+.chips .ic{width:15px;height:15px;flex:none;color:var(--brick)}
+
+/* ============================================================
+   行李清单 · 三级 + 图标 + 北京专属理由
+   ============================================================ */
+.kit{margin-top:22px}
+.kit .lvl{margin-top:24px}
+.kit .lvl:first-child{margin-top:0}
+.kit .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.kit .lvl-h .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.kit .lvl-h b{font-family:var(--font-title);font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:.08em}
+.kit .lvl-h span{font-size:11px;letter-spacing:.12em;color:var(--ink-faint)}
+.kit .lvl-h::after{content:"";flex:1;height:1px;background:var(--rule)}
+.kit .lv1 .dot{background:var(--wall)}
+.kit .lv2 .dot{background:var(--glaze)}
+.kit .lv3 .dot{background:var(--brick)}
+
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:10px}
+.item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--rule);
+  border-radius:10px;padding:13px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
+.item:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
+.item .ic{font-size:20px;margin-top:2px;color:var(--wall)}
+.item.lv2 .ic{color:var(--glaze)}
+.item.lv3 .ic{color:var(--brick)}
+.item .tx{flex:1;min-width:0}
+.item .tx b{display:block;font-size:.95rem;font-weight:600;color:var(--ink)}
+.item .tx small{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.6;margin-top:2px}
+/* 北京专属理由 —— 这是"有北京特色"的关键 */
+.item .tx em{display:inline-block;font-style:normal;font-size:.78rem;color:var(--wall-deep);
+  background:rgba(168,53,42,.08);border-radius:2px;padding:1px 7px;margin-top:5px;letter-spacing:.03em}
+.item .tx em::before{content:"京 · "}
+
+/* 提示条 */
+.note{display:flex;gap:13px;align-items:flex-start;background:#FBF3DF;border-left:3px solid var(--glaze);
+  border-radius:0 8px 8px 0;padding:13px 17px;margin:20px 0;font-size:.93rem;line-height:1.7}
+.note b{color:#8A6D2F;font-weight:600}
+.note.red{background:rgba(168,53,42,.07);border-left-color:var(--wall)}
+.note.red b{color:var(--wall-deep)}
+
+/* ============================================================
+   DAY 导航
+   ============================================================ */
+.days{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.93);
+  backdrop-filter:blur(10px);padding:11px 0;margin-bottom:8px;border-bottom:1px solid var(--rule)}
+.days .row{display:flex;gap:8px;overflow-x:auto}
+.day-btn{flex:0 0 auto;min-height:40px;padding:0 20px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--rule-strong);background:transparent;color:var(--ink-soft);
+  font-family:var(--font-title);font-size:.9rem;font-weight:600;letter-spacing:.12em;
+  transition:all .22s ease}
+.day-btn:hover{border-color:var(--wall);color:var(--wall)}
+.day-btn[aria-selected="true"]{background:var(--wall);border-color:var(--wall);color:#fff}
+
+/* ============================================================
+   行程 · 中轴线（北京独有的城市母题）
+   ============================================================ */
+.axis-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.16em;
+  color:var(--glaze);margin-bottom:16px}
+.axis-tag::before{content:"";width:22px;height:1px;background:var(--glaze)}
+
+.tl{list-style:none;position:relative}
+/* 这条竖线不是普通时间轴，是北京的中轴线 */
+.tl::before{content:"";position:absolute;left:74px;top:14px;bottom:14px;width:2px;
+  background:linear-gradient(180deg,var(--glaze),rgba(184,137,43,.25))}
+.stop{position:relative;display:grid;grid-template-columns:74px 1fr;gap:0 26px;padding:13px 0}
+.stop .t{font-family:var(--font-title);font-size:.95rem;font-weight:700;color:var(--wall);
+  text-align:right;padding-top:1px}
+.stop .t small{display:block;font-weight:400;color:var(--ink-faint);font-size:.72rem;margin-top:2px}
+.stop .b{position:relative}
+/* 节点 = 门钉 */
+.stop .b::before{content:"";position:absolute;left:-30px;top:8px;width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:2.5px solid var(--glaze);z-index:2}
+.stop .b h3{font-family:var(--font-title);font-size:1.05rem;font-weight:700;color:var(--ink);line-height:1.4}
+.stop .b p{margin-top:3px;font-size:.92rem;color:var(--ink-soft);line-height:1.65}
+.stop .b .go{margin-top:6px;display:flex;flex-wrap:wrap;gap:5px 14px;
+  font-size:.79rem;color:var(--ink-faint);letter-spacing:.03em}
+.stop .b .go b{color:var(--ink-soft);font-weight:500}
+@media (max-width:640px){
+  .tl::before{left:5px}
+  .stop{grid-template-columns:1fr;gap:2px;padding-left:28px}
+  .stop .t{text-align:left;padding-top:0}
+  .stop .b::before{left:-28px;top:7px}
+}
+
+footer{margin-top:clamp(52px,9vw,100px);padding-top:clamp(22px,4vw,34px);border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12px;color:var(--ink-faint);letter-spacing:.05em;line-height:1.9}
+.tools{position:fixed;right:clamp(14px,2.5vw,28px);bottom:clamp(14px,2.5vw,28px);
+  display:flex;flex-direction:column;gap:9px;z-index:40}
+.tools button,.tools .home{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink-soft);
+  text-decoration:none;cursor:pointer;transition:all .22s ease}
+.tools button:hover,.tools .home:hover{color:var(--wall);border-color:var(--wall);transform:translateY(-2px)}
+.tools button:active{transform:scale(.93)}
+.tools button[hidden]{display:none}
+
+@media print{
+  .hero{background:#fff!important;min-height:auto;padding:24px 0}
+  .hero h1,.hero .sub,.hero .eyebrow,.seal{color:#000!important;text-shadow:none;border-color:#999}
+  .hero .meta span{color:#000!important;background:none;border-color:#999}
+  .hero .back,.tools,.days,.sky-orn{display:none!important}
+  .ground{box-shadow:none;border-radius:0}
+  .sec{break-inside:avoid;margin-top:22px}
+  .stop{break-inside:avoid}
+  .bk{break-inside:avoid;box-shadow:none}
+  table{min-width:0;font-size:10pt}
+  .book::before{display:none}
+}
+
+/* ---- 预约：其余景点紧凑列表（替代 9 张等权卡片，压缩纵向长度） ---- */
+.bkr{margin-top:14px}
+.bkr-h{font-size:11px;letter-spacing:.14em;color:var(--ink-faint);margin-bottom:4px}
+.bklist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.bklist li{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:3px 12px;
+  padding:10px 2px;border-bottom:1px solid var(--rule)}
+.bklist li[hidden]{display:none}
+.bklist .nm{font-weight:600;font-size:.92rem;color:var(--ink);letter-spacing:.02em}
+.bklist .lead{font-size:.78rem;font-weight:600;color:var(--wall-deep);white-space:nowrap;letter-spacing:.02em}
+.bklist .mt{grid-column:1/-1;font-size:.76rem;color:var(--ink-faint);line-height:1.65}
+.bklist li:hover .nm{color:var(--wall-deep)}
+.bkr .lnk{margin-top:10px}
+
+/* ---- 北京元素 1：窗棂底纹（只在留白处隐约可见，卡片会盖住它） ---- */
+.ground::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(90deg,rgba(107,97,87,.05) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(107,97,87,.05) 1px,transparent 1px);
+  background-size:54px 54px;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
+main{position:relative;z-index:1}
+
+
+/* ---- 北京元素 3：DAY 小印章 ---- */
+.seal-mini{display:inline-grid;place-items:center;width:24px;height:24px;flex:none;align-self:center;
+  border:1.5px solid var(--wall);color:var(--wall);border-radius:3px;
+  font-family:var(--font-title);font-size:.8rem;font-weight:700;
+  transform:rotate(-3deg);opacity:.8}
+
+/* ---- 北京元素 4：页脚天际线（左故宫 / 右中国尊，与首屏呼应） ---- */
+.foot-sky{display:block;width:100%;height:50px;color:var(--brick);opacity:.15;margin-bottom:16px}
+</style>
 </head>
 <body>
-    <a href="/index.html" class="back-to-home">
-        <i class="fas fa-home"></i> <span>返回首页</span>
-    </a>
-    
-    <div class="container">
-        <header>
-            <h1>北京4天3晚旅游攻略</h1>
-            <p>地铁+网约车高效交通方案 | 每日步行＜3km | 景点间交通＜40分钟</p>
-        </header>
-        
-        <div class="section">
-            <h2>📋 准备事项</h2>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>类别</th>
-                        <th>事项</th>
-                        <th>说明/注意事项</th>
-                    </tr>
-                    <tr>
-                        <td>背包</td>
-                        <td>双肩包</td>
-                        <td>轻便出行，装随身物品</td>
-                    </tr>
-                    <tr>
-                        <td>行李箱</td>
-                        <td>20寸登机箱</td>
-                        <td>符合航空尺寸要求</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="2">证件类</td>
-                        <td>身份证</td>
-                        <td>必备</td>
-                    </tr>
-                    <tr>
-                        <td>银行卡</td>
-                        <td>带银联信用卡</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="3">电子类</td>
-                        <td>充电宝</td>
-                        <td>≤100Wh（民航规定）</td>
-                    </tr>
-                    <tr>
-                        <td>充电器</td>
-                        <td>带Type-C接口</td>
-                    </tr>
-                    <tr>
-                        <td>耳机</td>
-                        <td>地铁/博物馆使用</td>
-                    </tr>
-                    <tr>
-                        <td rowspan="4">日用类</td>
-                        <td>薄外套</td>
-                        <td>9-10月北京早晚温差大</td>
-                    </tr>
-                    <tr>
-                        <td>折叠伞</td>
-                        <td>防雨防晒</td>
-                    </tr>
-                    <tr>
-                        <td>运动鞋</td>
-                        <td>日均步数1.5万+</td>
-                    </tr>
-                    <tr>
-                        <td>现金</td>
-                        <td>300-500元（小额支付）</td>
-                    </tr>
-                    <tr>
-                        <td>预约类</td>
-                        <td>景点预约</td>
-                        <td><a id="reservation-toggle" class="reservation-link">详情</a></td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div id="preparation-note" class="note">
-                <strong>注意：</strong> 所有景点需提前1-7天预约
-            </div>
-            
-            <div id="reservation-details" class="reservation-details">
-                <h2>景点预约详情</h2>
-                <div class="table-container">
-                    <table>
-                        <tr>
-                            <th>景点名称</th>
-                            <th>门票价格</th>
-                            <th>预约要求</th>
-                            <th>预约路径</th>
-                            <th>闭馆/闭园时间</th>
-                        </tr>
-                        <tr>
-                            <td>天安门广场</td>
-                            <td>免费</td>
-                            <td>提前1天预约</td>
-                            <td>"天安门广场预约参观"小程序</td>
-                            <td>无闭馆时间</td>
-                        </tr>
-                        <tr>
-                            <td>天安门城楼</td>
-                            <td>15元</td>
-                            <td>提前1-7天预约</td>
-                            <td>"天安门城楼参观预约"公众号</td>
-                            <td>周一闭馆</td>
-                        </tr>
-                        <tr>
-                            <td>毛主席纪念堂</td>
-                            <td>免费</td>
-                            <td>提前1-6天预约</td>
-                            <td>"毛主席纪念堂"公众号</td>
-                            <td>周一闭馆，且仅上午开放</td>
-                        </tr>
-                        <tr>
-                            <td>故宫博物院</td>
-                            <td>旺季60元<br>淡季40元<br>珍宝馆10元</td>
-                            <td>提前7天20:00开放预约</td>
-                            <td>"故宫博物院"公众号/官网</td>
-                            <td>周一闭馆</td>
-                        </tr>
-                        <tr>
-                            <td>中国国家博物馆</td>
-                            <td>免费</td>
-                            <td>提前1-7天预约</td>
-                            <td>"国家博物馆"公众号/官网</td>
-                            <td>周一闭馆</td>
-                        </tr>
-                        <tr>
-                            <td>天坛公园</td>
-                            <td>大门票10元<br>联票28元</td>
-                            <td>提前1-7天预约</td>
-                            <td>"天坛公园官方购票平台"公众号</td>
-                            <td>园中园17:30关闭</td>
-                        </tr>
-                        <tr>
-                            <td>雍和宫</td>
-                            <td>25元</td>
-                            <td>提前1-7天预约</td>
-                            <td>"雍和宫游客信众服务"公众号</td>
-                            <td>16:30停止入场</td>
-                        </tr>
-                        <tr>
-                            <td>颐和园</td>
-                            <td>旺季30元<br>淡季20元</td>
-                            <td>提前1-7天预约</td>
-                            <td>"颐和园"公众号</td>
-                            <td>园中园17:00关闭</td>
-                        </tr>
-                        <tr>
-                            <td>孔庙和国子监</td>
-                            <td>30元</td>
-                            <td>提前1-7天预约</td>
-                            <td>"孔庙和国子监博物馆"公众号</td>
-                            <td>周一闭馆</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mobile-day-nav">
-            <button class="day-btn active" data-day="1">DAY 1</button>
-            <button class="day-btn" data-day="2">DAY 2</button>
-            <button class="day-btn" data-day="3">DAY 3</button>
-            <button class="day-btn" data-day="4">DAY 4</button>
-        </div>
-        
-        <div class="section day-section active" id="day1-section">
-            <h2>🗓️ DAY1 行程表</h2>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>时间</th>
-                        <th>地点</th>
-                        <th>活动内容</th>
-                        <th>交通方式/费用</th>
-                        <th>交通耗时</th>
-                    </tr>
-                    <tr>
-                        <td>19:36（DAY-1）</td>
-                        <td>杭州站</td>
-                        <td>乘坐D12次列车前往北京</td>
-                        <td>D12次高铁</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>10:30</td>
-                        <td>北京站</td>
-                        <td>抵达北京</td>
-                        <td>地铁2号线(北京站→王府井) 3元</td>
-                        <td>20分钟</td>
-                    </tr>
-                    <tr>
-                        <td>11:30</td>
-                        <td>酒店(初定王府井)</td>
-                        <td>寄存行李、外卖进行午餐</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>13:00</td>
-                        <td>天安门广场</td>
-                        <td>参观人民英雄纪念碑</td>
-                        <td>地铁2号线(北京站→王府井) 3元</td>
-                        <td>10分钟</td>
-                    </tr>
-                    <tr>
-                        <td>13:30</td>
-                        <td>天安门城楼</td>
-                        <td>登城楼参观（需提前预约）</td>
-                        <td>步行</td>
-                        <td>5分钟</td>
-                    </tr>
-                    <tr>
-                        <td>14:30</td>
-                        <td>故宫博物院</td>
-                        <td>中轴线+珍宝馆深度游（4小时）</td>
-                        <td>网约车(天安门→东华门) 12元</td>
-                        <td>8分钟</td>
-                    </tr>
-                    <tr>
-                        <td>18:30</td>
-                        <td>四季民福（故宫店）</td>
-                        <td>北京烤鸭晚餐</td>
-                        <td>地铁1号线(天安门东→王府井) 3元</td>
-                        <td>15分钟</td>
-                    </tr>
-                    <tr>
-                        <td>20:00</td>
-                        <td>王府井</td>
-                        <td>逛王府井</td>
-                        <td>步行</td>
-                        <td>7分钟</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        
-        <div class="section day-section" id="day2-section">
-            <h2>🗓️ DAY2 行程表</h2>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>时间</th>
-                        <th>地点</th>
-                        <th>活动内容</th>
-                        <th>交通方式/费用</th>
-                        <th>交通耗时</th>
-                    </tr>
-                    <tr>
-                        <td>09:00</td>
-                        <td>中国国家博物馆</td>
-                        <td>重点参观：B1《古代中国》、3F《盛世修典》</td>
-                        <td>地铁1号线(王府井→天安门东) 3元</td>
-                        <td>5分钟</td>
-                    </tr>
-                    <tr>
-                        <td>13:00</td>
-                        <td>国博咖啡厅</td>
-                        <td>午餐+航天主题甜品</td>
-                        <td>馆内步行</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>14:30</td>
-                        <td>天坛公园</td>
-                        <td>路线：东门→祈年殿→回音壁→圜丘</td>
-                        <td>地铁8号线(天安门东→天桥站) 4元</td>
-                        <td>20分钟</td>
-                    </tr>
-                    <tr>
-                        <td>17:00</td>
-                        <td>南门涮肉</td>
-                        <td>铜锅涮肉火烧晚餐</td>
-                        <td>天坛内步行</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>19:30</td>
-                        <td>前门大街</td>
-                        <td>采购伴手礼：张一元茶叶、六必居酱菜</td>
-                        <td>地铁8号线(天桥→前门站) 4元</td>
-                        <td>15分钟</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="note">
-                <strong>天坛路线：</strong> 东门进→祈年殿→丹陛桥→回音壁→圜丘→南门出（南门涮肉就在南门附近）
-            </div>
-        </div>
-        
-        <div class="section day-section" id="day3-section">
-            <h2>🗓️ DAY3 行程表</h2>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>时间</th>
-                        <th>地点</th>
-                        <th>活动内容</th>
-                        <th>交通方式/费用</th>
-                        <th>交通耗时</th>
-                    </tr>
-                    <tr>
-                        <td>09:30</td>
-                        <td>雍和宫</td>
-                        <td>参拜+请手串（1.5小时）</td>
-                        <td>地铁5号线(东单→雍和宫) 3元</td>
-                        <td>25分钟</td>
-                    </tr>
-                    <tr>
-                        <td>11:00</td>
-                        <td>吴裕泰茶庄</td>
-                        <td>花茶冰淇淋体验</td>
-                        <td>步行(雍和宫→国子监街)</td>
-                        <td>3分钟</td>
-                    </tr>
-                    <tr>
-                        <td>12:00</td>
-                        <td>五道营胡同</td>
-                        <td>午餐+文艺探店</td>
-                        <td>网约车(国子监→五道营) 8元</td>
-                        <td>6分钟</td>
-                    </tr>
-                    <tr>
-                        <td>14:00</td>
-                        <td>颐和园</td>
-                        <td>游湖+长廊</td>
-                        <td>地铁2号线(雍和宫→西直门)换4号线(北宫门站) 6元</td>
-                        <td>45分钟</td>
-                    </tr>
-                    <tr>
-                        <td>18:00</td>
-                        <td>小吊梨汤</td>
-                        <td>晚餐</td>
-                        <td>网约车(颐和园东门→新奥店) 25元</td>
-                        <td>20分钟</td>
-                    </tr>
-                </table>
-            </div>
-            
-            <div class="note">
-                <strong>颐和园建议：</strong> 从新建宫门进，乘船到石舫（单程船票40元/人），减少步行距离
-            </div>
-        </div>
-        
-        <div class="section day-section" id="day4-section">
-            <h2>🗓️ DAY4 行程表</h2>
-            <div class="table-container">
-                <table>
-                    <tr>
-                        <th>时间</th>
-                        <th>地点</th>
-                        <th>活动内容</th>
-                        <th>交通方式/费用</th>
-                        <th>交通耗时</th>
-                    </tr>
-                    <tr>
-                        <td>09:00</td>
-                        <td>孔庙和国子监</td>
-                        <td>参观进士碑林</td>
-                        <td>地铁5号线(东单→雍和宫) 3元</td>
-                        <td>25分钟</td>
-                    </tr>
-                    <tr>
-                        <td>11:00</td>
-                        <td>簋街</td>
-                        <td>采购特产</td>
-                        <td>网约车(国子监→簋街) 10元</td>
-                        <td>10分钟</td>
-                    </tr>
-                    <tr>
-                        <td>12:30</td>
-                        <td>酒店</td>
-                        <td>取行李</td>
-                        <td>地铁5号线(北新桥→东单) 3元</td>
-                        <td>20分钟</td>
-                    </tr>
-                    <tr>
-                        <td>13:00</td>
-                        <td>首都国际机场</td>
-                        <td>返程</td>
-                        <td>机场快线(东直门→T3航站楼) 25元</td>
-                        <td>-</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        
-        <footer>
-            <p>© 2025 北京旅游攻略 | 地铁+网约车高效交通方案</p>
-            <p>温馨提示：本站所有内容均来自网络 | 如有侵权电邮 mao.sun@foxmail.com</p>
-        </footer>
+
+<!-- ============ 图标库 ============ -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M6 16.4c.7-1.3 2-2 2.5-2s1.8.7 2.5 2M14 10h4M14 13.5h3"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2"/><path d="M21.5 10.5v3M6 10.5v3M9.5 10.5v3"/></symbol>
+  <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 16.5h11c3 0 5-1.4 5.4-3.6.4-2 1-3.4 2.6-3.9-.5 1.6-.3 3 .1 4.2.3 1 .8 1.8 1.9 1.8H21v4H3z"/><path d="M3 16.5v3"/></symbol>
+  <symbol id="i-coat" viewBox="0 0 24 24"><path d="M8 3 4 5.5 3 10l3 1v9h12v-9l3-1-1-4.5L16 3"/><path d="M8 3c0 1.7 1.8 2.5 4 2.5S16 4.7 16 3"/></symbol>
+  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2.5 2.5 0 0 1-5 0"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 10v4M18 10v4"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12.5H5.2z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/></symbol>
+  <symbol id="i-case" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M9 7V5a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 5v2M9 20v-5h6v5"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-head" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13.5" width="4.5" height="7" rx="2"/><rect x="17" y="13.5" width="4.5" height="7" rx="2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></symbol>
+</svg>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="sky-orn" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <!-- 远景楼群 -->
+    <g class="far">
+      <path d="M980,420 L980,246 L1016,246 L1016,420 Z"/>
+      <path d="M1040,420 L1040,208 L1072,208 L1072,420 Z"/>
+      <path d="M1120,420 L1120,266 L1168,266 L1168,420 Z"/>
+      <path d="M1236,420 L1236,232 L1264,232 L1264,420 Z"/>
+      <path d="M1320,420 L1320,272 L1380,272 L1380,420 Z"/>
+    </g>
+    <!-- 中景：央视 + 中国尊 -->
+    <g class="mid">
+      <path d="M1180,420 L1180,150 L1216,150 L1216,246 L1272,246 L1272,150 L1308,150 L1308,420 Z"/>
+      <path d="M1348,420 L1348,300 C1348,262 1362,232 1372,196 C1382,232 1396,262 1396,300 L1396,420 Z"/>
+    </g>
+    <!-- 近景：故宫角楼 + 宫殿屋檐 -->
+    <g class="palace">
+      <path d="M120,420 L120,300 L300,300 L300,420 Z"/>
+      <path d="M96,300 C110,300 124,296 138,288 C168,268 252,268 282,288 C296,296 310,300 324,300 L300,306 L120,306 Z"/>
+      <path d="M136,420 L136,352 L164,352 L164,420 Z"/>
+      <path d="M196,420 L196,352 L224,352 L224,420 Z"/>
+      <path d="M256,420 L256,352 L284,352 L284,420 Z"/>
+      <path d="M0,420 L0,318 L72,318 L72,420 Z"/>
+      <path d="M0,318 C10,318 20,314 30,306 C46,292 62,292 78,306 C86,314 94,318 100,318 L72,322 L0,322 Z"/>
+      <path d="M356,420 L356,336 L470,336 L470,420 Z"/>
+      <path d="M340,336 C352,336 362,332 372,326 C390,314 436,314 454,326 C464,332 474,336 486,336 L470,340 L356,340 Z"/>
+      <path d="M520,420 L520,368 L620,368 L620,420 Z"/>
+      <path d="M504,368 C514,368 522,364 530,358 C546,348 594,348 610,358 C618,364 626,368 636,368 L620,371 L520,371 Z"/>
+    </g>
+    <!-- 窗（灯光） -->
+    <g class="win">
+      <rect x="1000" y="262" width="6" height="8"/><rect x="1054" y="226" width="6" height="8"/>
+      <rect x="1132" y="284" width="6" height="8"/><rect x="1246" y="250" width="6" height="8"/>
+      <rect x="1340" y="290" width="6" height="8"/>
+    </g>
+  </svg>
+
+  <div class="seal">京</div>
+
+  <a class="back" href="/index.html">
+    <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    返回首页
+  </a>
+
+  <div class="inner">
+    <div class="eyebrow">华北 · 中轴线上的四天</div>
+    <h1>北京 4 天 3 晚</h1>
+    <p class="sub">从永定门到钟鼓楼的那条线，用四天慢慢走完。</p>
+    <div class="meta">
+      <span>4 天 3 晚</span><span>每日步行 ＜ 3 km</span><span>景点间 ＜ 40 分钟</span><span>9–10 月 · 银杏季</span>
     </div>
-    
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // 预约详情切换
-            const toggleLink = document.getElementById('reservation-toggle');
-            const details = document.getElementById('reservation-details');
-            const note = document.getElementById('preparation-note');
-            
-            if (toggleLink && details && note) {
-                toggleLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    details.style.display = details.style.display === 'block' ? 'none' : 'block';
-                    note.style.display = details.style.display === 'block' ? 'none' : 'block';
-                });
-            }
-            
-            // 回到顶部功能
-            const backToTopBtn = document.getElementById('backToTop');
-            if (backToTopBtn) {
-                window.addEventListener('scroll', function() {
-                    backToTopBtn.classList.toggle('visible', window.scrollY > 500);
-                });
-                
-                backToTopBtn.addEventListener('click', function() {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-            
-            // 移动端日期导航
-            const dayBtns = document.querySelectorAll('.day-btn');
-            const daySections = document.querySelectorAll('.day-section');
-            
-            if (dayBtns.length && daySections.length) {
-                dayBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 更新按钮状态
-                        dayBtns.forEach(b => b.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // 显示对应日期内容
-                        const day = this.dataset.day;
-                        daySections.forEach(section => {
-                            section.classList.remove('active');
-                            if (section.id === `day${day}-section`) {
-                                section.classList.add('active');
-                            }
-                        });
-                    });
-                });
-            }
-        });
-    </script>
+  </div>
+</header>
+
+<!-- ============ 内容 ============ -->
+<div class="ground">
+<div class="wrap">
+<main>
+
+  <!-- ===== 预约 · 北京的头等大事 ===== -->
+  <section class="sec" id="prep">
+    <div class="sec-h"><h2>预约</h2><span class="n">出发前 · 最重要的一步</span>
+      <span class="d">在北京，没预约等于没去 · 9 处需提前约</span></div>
+
+    <div class="book">
+      <div class="hd">
+        <span class="tag">头等大事</span>
+        <h3>几乎所有景点都要提前预约</h3>
+      </div>
+      <p class="lead">北京和其他城市最大的不同：景点不是到了买票就行。<b>故宫提前 7 天、晚上 20:00 整点放票</b>，晚几分钟就没了。天安门广场、国博、天坛、颐和园亦然。下面按抢票难度排序，建议<b>设闹钟</b>。</p>
+
+      <div class="rush">
+        <span class="k">最紧的一张</span>
+        <span class="v"><b>故宫博物院</b> · 提前 7 天 <b>20:00</b> 开放预约 · 周一闭馆</span>
+        <span class="clock">设 19:55 的闹钟</span>
+      </div>
+
+      <article class="bk urgent">
+        <div class="bk-t"><h4>故宫博物院</h4><span class="badge">最难抢</span></div>
+        <div class="bk-when"><span class="d">提前 <b>7</b> 天</span><span class="t">20:00 开抢</span></div>
+        <dl class="bk-m">
+          <div class="row"><dt>门票</dt><dd>旺季 60 元 · 淡季 40 元 · 珍宝馆 10 元</dd></div>
+          <div class="row"><dt>闭馆</dt><dd>周一</dd></div>
+          <div class="row"><dt>路径</dt><dd>“故宫博物院”公众号 / 官网</dd></div>
+        </dl>
+      </article>
+
+      <div class="bkr">
+        <div class="bkr-h">其余 8 处 · 提前约即可</div>
+        <ul class="bklist" id="bklist">
+          <li>
+            <span class="nm">毛主席纪念堂</span><span class="lead">提前 1–6 天</span>
+            <span class="mt">免费 · 周一闭馆，仅上午开放 · “毛主席纪念堂”公众号</span>
+          </li>
+          <li>
+            <span class="nm">中国国家博物馆</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">免费 · 周一闭馆 · “国家博物馆”公众号 / 官网</span>
+          </li>
+          <li>
+            <span class="nm">天安门城楼</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">15 元 · 周一闭馆 · “天安门城楼参观预约”公众号</span>
+          </li>
+          <li>
+            <span class="nm">天安门广场</span><span class="lead">提前 1 天</span>
+            <span class="mt">免费 · 无闭馆时间 · “天安门广场预约参观”小程序</span>
+          </li>
+          <li class="more" hidden>
+            <span class="nm">天坛公园</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">大门票 10 元 / 联票 28 元 · 园中园 17:30 关闭 · “天坛公园官方购票平台”公众号</span>
+          </li>
+          <li class="more" hidden>
+            <span class="nm">雍和宫</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">25 元 · 16:30 停止入场 · “雍和宫游客信众服务”公众号</span>
+          </li>
+          <li class="more" hidden>
+            <span class="nm">颐和园</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">旺季 30 元 / 淡季 20 元 · 园中园 17:00 关闭 · “颐和园”公众号</span>
+          </li>
+          <li class="more" hidden>
+            <span class="nm">孔庙和国子监</span><span class="lead">提前 1–7 天</span>
+            <span class="mt">30 元 · 周一闭馆 · “孔庙和国子监博物馆”公众号</span>
+          </li>
+        </ul>
+        <button class="lnk" id="bkMore" aria-expanded="false" aria-controls="bklist">展开其余 4 处</button>
+      </div>
+    </div>
+
+    <div class="note red"><b>提醒</b>故宫、国博、天坛等都在<b>周一闭馆</b>（天安门广场除外），排行程时避开周一。</div>
+
+    <!-- ===== 行李清单 ===== -->
+    <div class="kit">
+      <div class="lvl lv1">
+        <div class="lvl-h"><span class="dot"></span><b>必带</b><span>少了会很难受</span></div>
+        <div class="items">
+          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-id"/></svg>
+            <div class="tx"><b>身份证</b><small>原件，不接受电子身份证</small>
+              <em>天安门安检、故宫、国博全程要刷，一天刷十几次</em></div></div>
+          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-battery"/></svg>
+            <div class="tx"><b>充电宝 ≤ 100Wh</b><small>民航规定上限</small>
+              <em>抢票 + 导航 + 刷码 + 拍照，手机撑不到下午</em></div></div>
+          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-shoe"/></svg>
+            <div class="tx"><b>运动鞋</b><small>日均步数 1.5 万+</small>
+              <em>故宫和颐和园是大片硬砖地，比普通景区费鞋</em></div></div>
+        </div>
+      </div>
+
+      <div class="lvl lv2">
+        <div class="lvl-h"><span class="dot"></span><b>北京特别提醒</b><span>这趟独有的</span></div>
+        <div class="items">
+          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-coat"/></svg>
+            <div class="tx"><b>薄外套</b><small>9–10 月早晚温差大</small>
+              <em>十月白天 22°，清晨看升旗接近 10°</em></div></div>
+          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-cash"/></svg>
+            <div class="tx"><b>现金 300–500 元</b><small>小额支付备用</small>
+              <em>胡同小店、雍和宫香火、老字号有时只收现金</em></div></div>
+          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-umbrella"/></svg>
+            <div class="tx"><b>折叠伞</b><small>防雨防晒</small>
+              <em>秋天北京干且晒，天坛、颐和园遮阴少</em></div></div>
+        </div>
+      </div>
+
+            <div class="lvl lv3">
+        <div class="lvl-h"><span class="dot"></span><b>常规</b><span>按习惯带</span></div>
+        <ul class="chips">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg>双肩包</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-case"/></svg>20 寸登机箱</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg>银联信用卡</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-plug"/></svg>Type-C 充电器</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-head"/></svg>耳机</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note"><b>顺带</b>下载"亿通行"或开通手机 NFC 刷地铁，比每次买票快很多。</div>
+  </section>
+
+  <div class="part"><i></i><i></i></div>
+
+  <!-- ===== DAY 导航 ===== -->
+  <nav class="days" aria-label="行程日期">
+    <div class="row" role="tablist">
+      <button class="day-btn" id="day1-btn" role="tab" aria-controls="day1-section" aria-selected="true"  data-day="1">DAY 1</button>
+      <button class="day-btn" id="day2-btn" role="tab" aria-controls="day2-section" aria-selected="false" data-day="2">DAY 2</button>
+      <button class="day-btn" id="day3-btn" role="tab" aria-controls="day3-section" aria-selected="false" data-day="3">DAY 3</button>
+      <button class="day-btn" id="day4-btn" role="tab" aria-controls="day4-section" aria-selected="false" data-day="4">DAY 4</button>
+    </div>
+  </nav>
+
+  <!-- DAY 1 -->
+  <section class="sec day-sec" id="day1-section" role="tabpanel" aria-labelledby="day1-btn">
+    <div class="sec-h"><span class="seal-mini">壹</span><h2>DAY 1</h2><span class="n">中轴线</span>
+      <span class="d">天安门 → 故宫 → 王府井</span></div>
+    <div class="axis-tag">今日基本沿北京中轴线行进</div>
+    <ol class="tl">
+      <li class="stop"><div class="t">19:36<small>DAY&nbsp;-1</small></div><div class="b">
+        <h3>杭州站</h3><p>乘坐 D12 次列车前往北京</p>
+        <div class="go"><span>D12 次高铁</span></div></div></li>
+      <li class="stop"><div class="t">10:30</div><div class="b">
+        <h3>北京站</h3><p>抵达北京</p>
+        <div class="go"><span>地铁 2 号线（北京站 → 王府井）<b>3 元</b></span><span>约 <b>20 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">11:30</div><div class="b">
+        <h3>酒店（初定王府井）</h3><p>寄存行李、外卖进行午餐</p></div></li>
+      <li class="stop"><div class="t">13:00</div><div class="b">
+        <h3>天安门广场</h3><p>参观人民英雄纪念碑</p>
+        <div class="go"><span>地铁 2 号线（北京站 → 王府井）<b>3 元</b></span><span>约 <b>10 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">13:30</div><div class="b">
+        <h3>天安门城楼</h3><p>登城楼参观（需提前预约）</p>
+        <div class="go"><span>步行</span><span>约 <b>5 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">14:30</div><div class="b">
+        <h3>故宫博物院</h3><p>中轴线 + 珍宝馆深度游（4 小时）</p>
+        <div class="go"><span>网约车（天安门 → 东华门）<b>12 元</b></span><span>约 <b>8 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">18:30</div><div class="b">
+        <h3>四季民福（故宫店）</h3><p>北京烤鸭晚餐</p>
+        <div class="go"><span>地铁 1 号线（天安门东 → 王府井）<b>3 元</b></span><span>约 <b>15 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">20:00</div><div class="b">
+        <h3>王府井</h3><p>逛王府井</p>
+        <div class="go"><span>步行</span><span>约 <b>7 分钟</b></span></div></div></li>
+    </ol>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="sec day-sec" id="day2-section" role="tabpanel" aria-labelledby="day2-btn" hidden>
+    <div class="sec-h"><span class="seal-mini">贰</span><h2>DAY 2</h2><span class="n">国博 · 天坛</span>
+      <span class="d">国家博物馆 → 天坛 → 前门</span></div>
+    <ol class="tl">
+      <li class="stop"><div class="t">09:00</div><div class="b">
+        <h3>中国国家博物馆</h3><p>重点参观：B1《古代中国》、3F《盛世修典》</p>
+        <div class="go"><span>地铁 1 号线（王府井 → 天安门东）<b>3 元</b></span><span>约 <b>5 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">13:00</div><div class="b">
+        <h3>国博咖啡厅</h3><p>午餐 + 航天主题甜品</p>
+        <div class="go"><span>馆内步行</span></div></div></li>
+      <li class="stop"><div class="t">14:30</div><div class="b">
+        <h3>天坛公园</h3><p>路线：东门 → 祈年殿 → 回音壁 → 圜丘</p>
+        <div class="go"><span>地铁 8 号线（天安门东 → 天桥站）<b>4 元</b></span><span>约 <b>20 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">17:00</div><div class="b">
+        <h3>南门涮肉</h3><p>铜锅涮肉火烧晚餐</p>
+        <div class="go"><span>天坛内步行</span></div></div></li>
+      <li class="stop"><div class="t">19:30</div><div class="b">
+        <h3>前门大街</h3><p>采购伴手礼：张一元茶叶、六必居酱菜</p>
+        <div class="go"><span>地铁 8 号线（天桥 → 前门站）<b>4 元</b></span><span>约 <b>15 分钟</b></span></div></div></li>
+    </ol>
+    <div class="note"><b>天坛路线</b>东门进 → 祈年殿 → 丹陛桥 → 回音壁 → 圜丘 → 南门出（南门涮肉就在南门附近）</div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="sec day-sec" id="day3-section" role="tabpanel" aria-labelledby="day3-btn" hidden>
+    <div class="sec-h"><span class="seal-mini">叁</span><h2>DAY 3</h2><span class="n">雍和宫 · 颐和园</span>
+      <span class="d">烧香 → 胡同 → 游湖</span></div>
+    <ol class="tl">
+      <li class="stop"><div class="t">09:30</div><div class="b">
+        <h3>雍和宫</h3><p>参拜 + 请手串（1.5 小时）</p>
+        <div class="go"><span>地铁 5 号线（东单 → 雍和宫）<b>3 元</b></span><span>约 <b>25 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">11:00</div><div class="b">
+        <h3>吴裕泰茶庄</h3><p>花茶冰淇淋体验</p>
+        <div class="go"><span>步行（雍和宫 → 国子监街）</span><span>约 <b>3 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">12:00</div><div class="b">
+        <h3>五道营胡同</h3><p>午餐 + 文艺探店</p>
+        <div class="go"><span>网约车（国子监 → 五道营）<b>8 元</b></span><span>约 <b>6 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">14:00</div><div class="b">
+        <h3>颐和园</h3><p>游湖 + 长廊</p>
+        <div class="go"><span>地铁 2 号线（雍和宫 → 西直门）换 4 号线（北宫门站）<b>6 元</b></span><span>约 <b>45 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">18:00</div><div class="b">
+        <h3>小吊梨汤</h3><p>晚餐</p>
+        <div class="go"><span>网约车（颐和园东门 → 新奥店）<b>25 元</b></span><span>约 <b>20 分钟</b></span></div></div></li>
+    </ol>
+    <div class="note"><b>颐和园建议</b>从新建宫门进，乘船到石舫（单程船票 40 元/人），减少步行距离</div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="sec day-sec" id="day4-section" role="tabpanel" aria-labelledby="day4-btn" hidden>
+    <div class="sec-h"><span class="seal-mini">肆</span><h2>DAY 4</h2><span class="n">国子监 · 返程</span>
+      <span class="d">进士碑林 → 簋街 → 机场</span></div>
+    <ol class="tl">
+      <li class="stop"><div class="t">09:00</div><div class="b">
+        <h3>孔庙和国子监</h3><p>参观进士碑林</p>
+        <div class="go"><span>地铁 5 号线（东单 → 雍和宫）<b>3 元</b></span><span>约 <b>25 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">11:00</div><div class="b">
+        <h3>簋街</h3><p>采购特产</p>
+        <div class="go"><span>网约车（国子监 → 簋街）<b>10 元</b></span><span>约 <b>10 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">12:30</div><div class="b">
+        <h3>酒店</h3><p>取行李</p>
+        <div class="go"><span>地铁 5 号线（北新桥 → 东单）<b>3 元</b></span><span>约 <b>20 分钟</b></span></div></div></li>
+      <li class="stop"><div class="t">13:00</div><div class="b">
+        <h3>首都国际机场</h3><p>返程</p>
+        <div class="go"><span>机场快线（东直门 → T3 航站楼）<b>25 元</b></span></div></div></li>
+    </ol>
+  </section>
+
+  <footer>
+    <svg class="foot-sky" viewBox="0 0 1200 64" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <g fill="currentColor">
+        <path d="M150 64V46h180V64z"/>
+        <path d="M128 46l112-15 112 15z"/>
+        <path d="M232 31v-7h16v7z"/>
+        <path d="M340 64V53h70V64z"/>
+        <path d="M330 53l45-9 45 9z"/>
+        <path d="M430 64V56h54v8z"/>
+        <path d="M556 64V31h34v33z"/>
+        <path d="M598 64V22h30v42z"/>
+        <path d="M634 64V36h26v28z"/>
+        <path d="M700 64V26h14v38z"/>
+        <path d="M700 26h72v10h-72z"/>
+        <path d="M758 64V26h14v38z"/>
+        <path d="M840 64V35c0-8 6-13 14-13s14 5 14 13v29z"/>
+        <path d="M900 64V45h40v19z"/>
+        <path d="M950 64V52h46v12z"/>
+      </g>
+    </svg>
+    <span>© 2025 北京旅游攻略 · 地铁 + 网约车高效交通方案</span>
+    <span>本站所有内容均来自网络 · 如有侵权电邮 mao.sun@foxmail.com</span>
+  </footer>
+
+</main>
+</div>
+</div>
+
+<div class="tools">
+  <a href="/index.html" class="home" aria-label="返回首页" title="返回首页">
+    <svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+  </a>
+  <button id="topBtn" aria-label="回到顶部" hidden>
+    <svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.day-btn'));
+  var secs=[].slice.call(document.querySelectorAll('.day-sec'));
+  var narrow=window.matchMedia('(max-width:900px)');
+
+  function showDay(d){
+    btns.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.day===String(d)) });
+    if(narrow.matches){
+      secs.forEach(function(s){ s.hidden = s.id!=='day'+d+'-section' });
+    }
+    try{ localStorage.setItem('bj-day', d) }catch(e){}
+  }
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var d=+b.dataset.day; showDay(d);
+      var t = narrow.matches ? document.querySelector('.days')
+                             : document.getElementById('day'+d+'-section');
+      t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+  function sync(){
+    if(narrow.matches){
+      var cur=btns.filter(function(b){return b.getAttribute('aria-selected')==='true'})[0];
+      var d=cur? +cur.dataset.day : 1;
+      secs.forEach(function(s){ s.hidden = s.id!=='day'+d+'-section' });
+    }else{ secs.forEach(function(s){ s.hidden=false }) }
+  }
+  if(narrow.addEventListener) narrow.addEventListener('change',sync);
+  else if(narrow.addListener) narrow.addListener(sync);
+
+  var last=1; try{ last=+(localStorage.getItem('bj-day')||1) }catch(e){}
+  showDay(last); sync();
+
+  var tb=document.getElementById('topBtn'), ticking=false;
+  addEventListener('scroll',function(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){ tb.hidden = scrollY < 500; ticking=false });
+  },{passive:true});
+  tb.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}) });
+})();
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById('bkMore');
+  if(!btn) return;
+  var more=[].slice.call(document.querySelectorAll('.bklist li.more'));
+  btn.addEventListener('click',function(){
+    var open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',open?'false':'true');
+    more.forEach(function(el){el.hidden=open});
+    btn.textContent=open?'展开其余 4 处':'收起';
+  });
+})();
+</script>
 </body>
 </html>
