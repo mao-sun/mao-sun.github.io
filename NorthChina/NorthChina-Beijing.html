@@ -2,5 +2,64 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-</head>
-</html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>北京4天3晚旅游攻略 · Mao 的旅行攻略</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   北京 · 地域设计系统
+   母题：中轴线 / 宫墙 / 琉璃瓦 / 窗棂 / 银杏
+   ============================================================ */
+:root{
+  --sky-0:#0B2740; --sky-1:#1F4E78; --sky-2:#4C82AC; --sky-3:#8FB6CE;
+  --sky-4:#CFE0E6; --glow:#F2E2C0;
+  --paper:#F5F2EA;
+  --ink:#1C2320; --ink-soft:#6A7169; --ink-faint:#9AA196;
+
+  --wall:#A8352A;        /* 宫墙红 */
+  --wall-deep:#7E241C;
+  --glaze:#B8892B;       /* 琉璃瓦金 */
+  --brick:#6B6157;       /* 青砖灰 */
+  --ginkgo:#D9A441;      /* 银杏 */
+
+  --rule:rgba(28,35,32,.12);
+  --rule-strong:rgba(28,35,32,.26);
+  --font-title:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',serif;
+  --font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  --gut:clamp(20px,5vw,56px);
+  --wrap:1080px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+:where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--wall);outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+.ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ============================================================
+   HERO · 北京天际线（左：宫檐 / 右：现代楼群）
+   ============================================================ */
+.hero{position:relative;min-height:clamp(360px,56vh,560px);display:flex;flex-direction:column;
+  justify-content:flex-end;padding:0 var(--gut) clamp(30px,5vw,52px);overflow:hidden;
+  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 26%,var(--sky-2) 52%,
+    var(--sky-3) 74%,var(--sky-4) 88%,var(--glow) 96%,var(--paper) 100%)}
+.sky-orn{position:absolute;inset:0;width:100%;height:100%}
+.sky-orn .far{fill:#2F5678;opacity:.3}
+.sky-orn .mid{fill:#1E405C;opacity:.5}
+.sky-orn .palace{fill:#122A3C;opacity:.9}
+.sky-orn .tower{fill:#122A3C;opacity:.78}
+.sky-orn .win{fill:var(--glow);opacity:.5}
+
+/* 印章 */
+.seal{position:absolute;right:var(--gut);top:clamp(64px,10vw,96px);width:76px;height:76px;
+  border:2.5px solid rgba(255,255,255,.85);border-radius:8px;display:grid;place-items:center;
+  color:#fff;font-family:var(--font-title);font-size:2.1rem;font-weight:700;letter-spacing:0;
+  opacity:.92;transform:rotate(4deg)}
+.seal::after{content:"北 京";position:absolute;bottom:-26px;right:2px;font-size:11px;
+  letter-spacing:.34em;font-family:var(--font-body);font-weight:400;opacity:.8}
