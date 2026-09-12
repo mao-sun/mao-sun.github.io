@@ -63,3 +63,107 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
   opacity:.92;transform:rotate(4deg)}
 .seal::after{content:"北 京";position:absolute;bottom:-26px;right:2px;font-size:11px;
   letter-spacing:.34em;font-family:var(--font-body);font-weight:400;opacity:.8}
+
+.hero .back{position:absolute;top:clamp(16px,3vw,28px);left:var(--gut);z-index:5;
+  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;
+  text-decoration:none;font-size:13px;letter-spacing:.05em;backdrop-filter:blur(8px);
+  transition:background .25s ease,transform .25s ease}
+.hero .back:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
+
+.hero .inner{position:relative;z-index:3;max-width:var(--wrap);margin:0 auto;width:100%}
+.hero .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(255,255,255,.68);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.hero .eyebrow::after{content:"";width:46px;height:1px;background:rgba(255,255,255,.45)}
+.hero h1{font-family:var(--font-title);font-weight:700;color:#fff;
+  font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.04;letter-spacing:.04em;
+  text-shadow:0 2px 32px rgba(0,0,0,.22)}
+.hero .sub{margin-top:14px;color:rgba(255,255,255,.82);font-weight:300;
+  font-size:clamp(.95rem,1.8vw,1.12rem);max-width:38ch;letter-spacing:.03em}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,3vw,26px)}
+.hero .meta span{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.92);
+  padding:5px 13px;border-radius:2px;background:rgba(168,53,42,.42);
+  border:1px solid rgba(255,255,255,.26)}
+
+/* ============================================================
+   地面
+   ============================================================ */
+.ground{position:relative;z-index:3;background:var(--paper);border-radius:22px 22px 0 0;
+  margin-top:-1px;box-shadow:0 -20px 60px rgba(0,0,0,.08)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+main{padding:clamp(44px,7vw,76px) 0 clamp(48px,7vw,88px)}
+
+.sec{margin-top:clamp(48px,8vw,88px);scroll-margin-top:20px}
+.sec:first-child{margin-top:0}
+.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:14px;
+  border-bottom:1px solid var(--rule);margin-bottom:clamp(22px,4vw,34px)}
+.sec-h h2{font-family:var(--font-title);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;letter-spacing:.04em}
+.sec-h .n{font-family:var(--font-title);color:var(--ink-faint);font-size:.92rem;font-weight:300}
+.sec-h .d{margin-left:auto;font-size:12px;color:var(--ink-faint);letter-spacing:.05em}
+
+/* 中式分隔（替代普通 hr） */
+.part{display:flex;align-items:center;gap:12px;margin:clamp(34px,6vw,56px) 0;color:var(--glaze)}
+.part::before,.part::after{content:"";flex:1;height:1px;background:var(--rule)}
+.part i{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
+.part i+i{margin-left:-6px;opacity:.5}
+
+/* ============================================================
+   预约 · 北京的头等大事
+   ============================================================ */
+.book{position:relative;border:1px solid rgba(168,53,42,.28);border-radius:14px;
+  background:linear-gradient(180deg,rgba(168,53,42,.05),rgba(168,53,42,.015));
+  padding:clamp(20px,3.4vw,32px);overflow:hidden}
+/* 窗棂纹理 */
+.book::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:
+    linear-gradient(var(--rule) 1px,transparent 1px),
+    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%);
+  -webkit-mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%)}
+.book .hd{position:relative;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.book .hd .tag{background:var(--wall);color:#fff;font-size:11px;font-weight:600;letter-spacing:.14em;
+  padding:5px 11px;border-radius:2px;flex:none;margin-top:4px}
+.book .hd h3{font-family:var(--font-title);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;color:var(--wall-deep)}
+.book .lead{position:relative;font-size:.94rem;color:var(--ink-soft);margin:8px 0 18px;max-width:56ch;line-height:1.8}
+.book .lead b{color:var(--wall-deep);font-weight:600}
+
+/* 抢票倒计时条 */
+.rush{position:relative;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:#fff;border:1px solid rgba(184,137,43,.4);border-left:3px solid var(--glaze);
+  border-radius:0 8px 8px 0;padding:13px 16px;margin-bottom:18px}
+.rush .k{font-family:var(--font-title);font-weight:700;color:var(--glaze);font-size:1rem;flex:none}
+.rush .v{font-size:.9rem;color:var(--ink)}
+.rush .v b{color:var(--wall-deep)}
+.rush .clock{margin-left:auto;font-size:11px;letter-spacing:.1em;color:var(--ink-faint);
+  border:1px solid var(--rule-strong);border-radius:2px;padding:4px 9px}
+
+/* 预约卡片（替代 5 列表格 —— 手机上不再横滑，双列网格自适应） */
+.bk{position:relative;background:#fff;border:1px solid var(--rule);border-radius:10px;
+  padding:14px 16px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
+.bk:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
+.bk-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:4px}
+.bk-t h4{font-family:var(--font-title);font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:.04em}
+/* 抢票关键行：唯一需要一眼看到的信息 */
+.bk-when{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:9px;
+  padding:6px 11px;border-radius:6px;background:rgba(184,137,43,.10)}
+.bk-when .d{font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em}
+.bk-when .d b{font-family:var(--font-title);font-size:1.1rem;color:var(--glaze);font-weight:700;padding:0 1px}
+.bk-when .t{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--wall-deep);letter-spacing:.04em}
+.bk-m{margin:10px 0 0;font-size:.8rem;line-height:1.72}
+.bk-m .row{display:flex;gap:8px}
+.bk-m dt{flex:none;color:var(--ink-faint);letter-spacing:.06em;min-width:2.4em}
+.bk-m dd{margin:0;flex:1;min-width:0;color:var(--ink-soft)}
+.bk.urgent{border-color:rgba(184,137,43,.45);background:#FDFAF2}
+.bk.urgent::before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;
+  border-radius:0 3px 3px 0;background:var(--glaze)}
+.badge{display:inline-block;font-size:10.5px;letter-spacing:.08em;padding:2px 7px;border-radius:2px;
+  background:var(--glaze);color:#fff;font-weight:600;vertical-align:2px}
+
+/* 常规物品 chips —— 轻量层级，区别于上面带理由的卡片 */
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0}
+.chips li{display:inline-flex;align-items:center;gap:7px;background:#fff;
+  border:1px solid var(--rule);border-radius:999px;padding:7px 14px 7px 11px;
+  font-size:.86rem;color:var(--ink);line-height:1.4;transition:border-color .2s,transform .2s}
+.chips li:hover{border-color:var(--rule-strong);transform:translateY(-1px)}
+.chips .ic{width:15px;height:15px;flex:none;color:var(--brick)}
