@@ -63,7 +63,24 @@ body{background:var(--land);color:var(--ink);font-family:var(--font-body);
     var(--sky-0) 0%, var(--sky-1) 20%, var(--sky-2) 42%,
     var(--sky-3) 62%, var(--sky-4) 76%, var(--glow) 82%, var(--land) 88%);
   transition:opacity .2s linear;
+  overflow:hidden;
 }
+
+/* 远方的日轮与月色：给天空一个可以眺望的终点 */
+.sun{position:absolute;right:11vw;top:54vh;width:clamp(76px,10vw,150px);aspect-ratio:1;
+  border-radius:50%;background:var(--glow);opacity:.78;
+  box-shadow:0 0 70px 22px color-mix(in srgb,var(--glow) 32%,transparent);
+  transition:background .5s ease,box-shadow .5s ease}
+[data-theme="night"] .sun{top:17vh;right:14vw;width:clamp(52px,6vw,88px);opacity:.82;
+  box-shadow:0 0 55px 10px rgba(207,224,235,.12)}
+
+/* 风不是装饰物，而是一种方向 */
+.wind{position:absolute;left:-28vw;width:24vw;min-width:190px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+  animation:windPass 20s linear infinite;opacity:.6}
+.wind.w1{top:31%;animation-delay:-4s}.wind.w2{top:47%;animation-delay:-13s;animation-duration:27s}
+.wind.w3{top:63%;animation-delay:-8s;animation-duration:32s}
+@keyframes windPass{to{transform:translateX(155vw)}}
 
 /* --- 极高的薄云，慢到几乎察觉不到 --- */
 .cloud{position:absolute;border-radius:50%;filter:blur(28px);opacity:.5;will-change:transform}
@@ -117,6 +134,11 @@ body{background:var(--land);color:var(--ink);font-family:var(--font-body);
 .hero .scrollcue .ln{width:52px;height:1px;background:currentColor;transform-origin:left;
   animation:cue 2.6s ease-in-out infinite}
 @keyframes cue{0%,100%{transform:scaleX(.35);opacity:.5}50%{transform:scaleX(1);opacity:1}}
+.hero-meta{position:absolute;right:var(--gut);bottom:12vh;display:flex;align-items:center;gap:16px;
+  color:var(--on-sky-soft);font-size:10px;font-weight:300;letter-spacing:.24em;
+  writing-mode:vertical-rl;text-transform:uppercase}
+.hero-meta::before{content:"";width:1px;height:64px;background:currentColor;opacity:.55}
+.hero-meta b{font-weight:400;color:var(--on-sky)}
 
 /* ============================================================
    地面 · 内容区（滚动上来，覆盖天空）
@@ -124,8 +146,14 @@ body{background:var(--land);color:var(--ink);font-family:var(--font-body);
 .ground{position:relative;z-index:3;background:var(--land);
   border-radius:26px 26px 0 0;
   box-shadow:0 -30px 80px rgba(0,0,0,.10);
-  margin-top:2px}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+  margin-top:2px;overflow:hidden}
+/* 若隐若现的地表等高线，像摊开的一张旧地图 */
+.ground::before{content:"";position:absolute;z-index:0;right:-12vw;top:-90px;width:min(72vw,900px);height:620px;
+  pointer-events:none;opacity:.42;
+  background:repeating-radial-gradient(ellipse at 72% 18%,transparent 0 25px,var(--rule) 26px 27px);
+  border-radius:46%;transform:rotate(-13deg);
+  -webkit-mask-image:linear-gradient(135deg,#000,transparent 72%);mask-image:linear-gradient(135deg,#000,transparent 72%)}
+.wrap{position:relative;z-index:1;max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
 main{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px)}
 
 /* --- 进度：数字要有重量 --- */
@@ -153,6 +181,8 @@ main{padding:clamp(56px,9vw,120px) 0 clamp(48px,7vw,96px)}
 .find input{flex:1;border:0;background:transparent;outline:none;font-family:var(--font-title);
   font-size:1.05rem;color:var(--ink);min-width:0}
 .find input::placeholder{color:var(--ink-faint)}
+/* 隐藏浏览器自带的搜索清除按钮，只保留右侧自定义清除按钮 */
+.find input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}
 .find .clear{border:0;background:transparent;color:var(--ink-faint);cursor:pointer;display:none;font-size:1rem}
 .find .clear.on{display:block}
 .find .count{font-size:12px;color:var(--ink-faint);margin-top:11px;letter-spacing:.06em;min-height:18px}
@@ -241,6 +271,10 @@ footer{margin-top:clamp(64px,10vw,120px);padding-top:clamp(28px,4vw,44px);
 .switcher button:hover{color:var(--ink)}
 .switcher button.on{background:var(--ink);color:var(--land)}
 @media (max-width:720px){
+  .hero-meta{right:18px;bottom:15vh;font-size:9px;opacity:.7}
+  .sun{right:4vw;top:58vh}
+  [data-theme="night"] .sun{right:9vw}
+  .ground::before{width:110vw;right:-45vw;opacity:.28}
   .switcher{left:50%;transform:translateX(-50%);bottom:12px}
   .tools{bottom:66px}
 }
@@ -250,6 +284,8 @@ footer{margin-top:clamp(64px,10vw,120px);padding-top:clamp(28px,4vw,44px);
 
 <!-- ============ 天空 ============ -->
 <div class="sky" id="sky" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="wind w1"></div><div class="wind w2"></div><div class="wind w3"></div>
   <div class="stars" id="stars"></div>
   <div class="cloud c1"></div><div class="cloud c2"></div>
   <div class="cloud c3"></div><div class="cloud c4"></div>
@@ -276,6 +312,7 @@ footer{margin-top:clamp(64px,10vw,120px);padding-top:clamp(28px,4vw,44px);
   <h1>去过的地方<span class="thin">和想去的地方</span></h1>
   <p class="sub">天空底下没有边界。走过的路留下了字，剩下的路留给以后的风。</p>
   <div class="scrollcue"><span class="ln"></span><span>往下 · 落地</span></div>
+  <div class="hero-meta" aria-hidden="true"><span>Field notes · No. 090</span><b>向旷野，向自由</b></div>
 </header>
 
 <!-- ============ 地面 ============ -->
@@ -294,7 +331,7 @@ footer{margin-top:clamp(64px,10vw,120px);padding-top:clamp(28px,4vw,44px);
     <form role="search" onsubmit="return false">
       <label for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">搜索想去的地方</label>
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="想找哪个地方？" autocomplete="off" aria-describedby="qc">
+      <input id="q" type="search" placeholder="中文 / English / pinyin" autocomplete="off" aria-describedby="qc">
       <button class="clear" id="clr" type="button" aria-label="清除">✕</button>
     </form>
     <p class="count" id="qc" role="status" aria-live="polite"></p>
@@ -373,6 +410,43 @@ var P=[
 ['摩洛哥','非洲','ab',0],['坦桑尼亚','非洲','ab',0]
 ];
 var ORDER=['华北-东北','华东','华中-华南','西南','西北','港澳台','亚洲','欧洲','北美洲','南美洲','大洋洲','非洲'];
+/* 搜索别名：英文名与拼音；匹配时统一转为小写 */
+var ALIASES={
+  '北京市':['beijing','beijing'], '天津市':['tianjin'], '河北省':['hebei'],
+  '山西省':['shanxi'], '内蒙古自治区':['inner mongolia','neimenggu'],
+  '辽宁省':['liaoning'], '吉林省':['jilin'], '黑龙江省':['heilongjiang'],
+  '上海市':['shanghai'], '江苏省':['jiangsu'], '浙江省':['zhejiang'],
+  '安徽省':['anhui'], '福建省':['fujian'], '江西省':['jiangxi'], '山东省':['shandong'],
+  '河南省':['henan'], '湖北省':['hubei'], '湖南省':['hunan'], '广东省':['guangdong'],
+  '广西壮族自治区':['guangxi'], '海南省':['hainan'], '重庆市':['chongqing'],
+  '四川省':['sichuan'], '贵州省':['guizhou'], '云南省':['yunnan'], '西藏自治区':['tibet','xizang'],
+  '陕西省':['shaanxi','shanxi'], '甘肃省':['gansu'], '青海省':['qinghai'],
+  '宁夏回族自治区':['ningxia'], '新疆维吾尔自治区':['xinjiang'],
+  '香港特别行政区':['hong kong','xianggang'], '澳门特别行政区':['macao','macau','aomen'],
+  '台湾省':['taiwan'], '日本':['japan','riben'], '韩国':['south korea','korea','hanguo'],
+  '越南':['vietnam','yuenan'], '泰国':['thailand','taiguo'], '新加坡':['singapore','xinjiapo'],
+  '马来西亚':['malaysia','malaixiya'], '印度尼西亚':['indonesia','yindunixiya'],
+  '菲律宾':['philippines','feilvbin'], '柬埔寨':['cambodia','jianpuzhai'],
+  '老挝':['laos','laowo'], '斯里兰卡':['sri lanka','sililanka'],
+  '马尔代夫':['maldives','maerdaifu'], '阿联酋':['united arab emirates','uae','alianqiu'],
+  '土耳其':['turkey','turkiye','tuerqi'], '英国':['united kingdom','uk','britain','yingguo'],
+  '法国':['france','faguo'], '德国':['germany','deguo'], '意大利':['italy','yidali'],
+  '西班牙':['spain','xibanya'], '葡萄牙':['portugal','putaoya'], '荷兰':['netherlands','helan'],
+  '比利时':['belgium','bilishi'], '瑞士':['switzerland','ruishi'], '奥地利':['austria','aodili'],
+  '希腊':['greece','xila'], '冰岛':['iceland','bingdao'], '挪威':['norway','nuowei'],
+  '瑞典':['sweden','ruidian'], '丹麦':['denmark','danmai'], '芬兰':['finland','fenlan'],
+  '俄罗斯':['russia','eluosi'], '捷克':['czech republic','czechia','jieke'],
+  '匈牙利':['hungary','xiongyali'], '波兰':['poland','bolan'], '美国':['united states','usa','america','meiguo'],
+  '加拿大':['canada','jianada'], '墨西哥':['mexico','moxige'], '古巴':['cuba','guba'],
+  '哥斯达黎加':['costa rica','gesidalijia'], '巴拿马':['panama','banama'],
+  '巴西':['brazil','baxi'], '阿根廷':['argentina','agenting'], '智利':['chile','zhili'],
+  '秘鲁':['peru','bilu'], '哥伦比亚':['colombia','gelunbiya'],
+  '澳大利亚':['australia','aodaliya'], '新西兰':['new zealand','xinxilan'],
+  '斐济':['fiji','feiji'], '萨摩亚':['samoa','samoya'], '汤加':['tonga','tangjia'],
+  '法属波利尼西亚':['french polynesia','fashu bolinixiya'], '埃及':['egypt','aiji'],
+  '南非':['south africa','nanfei'], '肯尼亚':['kenya','kenniya'],
+  '摩洛哥':['morocco','moluoge'], '坦桑尼亚':['tanzania','tansangniya']
+};
 function esc(s){return String(s).replace(/[&<>"']/g,function(m){
   return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
 
@@ -437,16 +511,19 @@ document.getElementById('wishGroups').innerHTML = (function(){
   document.getElementById('stars').innerHTML=s;
 })();
 
-/* 搜索：不匹配的退到背景，不消失 */
+/* 搜索：中文、英文和拼音均可匹配，英文不区分大小写；不匹配的退到背景 */
 var q=document.getElementById('q'), clr=document.getElementById('clr'), qc=document.getElementById('qc');
 var nodes=[].slice.call(document.querySelectorAll('.pl'));
+function normalizeSearch(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ')}
 q.addEventListener('input',function(){
-  var v=q.value.trim().toLowerCase();
+  var v=normalizeSearch(q.value);
   clr.classList.toggle('on', !!v);
   if(!v){ nodes.forEach(function(n){n.classList.remove('dim','hit')}); qc.textContent=''; return }
   var hit=0;
   nodes.forEach(function(n){
-    var m=n.dataset.n.toLowerCase().indexOf(v)>-1;
+    var name=n.dataset.n;
+    var searchable=[name].concat(ALIASES[name]||[]).map(normalizeSearch);
+    var m=searchable.some(function(text){return text.indexOf(v)>-1});
     n.classList.toggle('hit',m); n.classList.toggle('dim',!m);
     if(m) hit++;
   });
