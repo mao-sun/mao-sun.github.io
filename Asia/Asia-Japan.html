@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本关西4天3晚旅游攻略 - 优化版</title>
+    <title>关西，风过千年｜日本4天3晚旅行手记</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -708,6 +708,527 @@
             from { opacity: 0.5; }
             to { opacity: 1; }
         }
+
+        /* ============================================================
+           旷野版 · 关西地方志
+           与主页共享天空、纸张、朱砂和留白，以鸟居与青海波标记日本
+           ============================================================ */
+        :root {
+            --sky-0: #0B2740;
+            --sky-1: #1F4E78;
+            --sky-2: #4C82AC;
+            --sky-3: #8FB6CE;
+            --glow: #F2E2C0;
+            --land: #F5F2EA;
+            --ink: #1C2320;
+            --ink-soft: #48524C;
+            --ink-faint: #68736B;
+            --seal: #C0422F;
+            --rule: rgba(28,35,32,.13);
+            --rule-strong: rgba(28,35,32,.28);
+            --font-title: 'Noto Serif SC','Songti SC','STSong',serif;
+            --font-body: 'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
+            --gut: clamp(22px,5vw,64px);
+            --border-radius: 2px;
+            --box-shadow: none;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--land);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+            opacity: .18;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+        }
+        .container {
+            max-width: 1440px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: visible;
+        }
+        header {
+            min-height: 78vh;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 120px var(--gut) 110px;
+            background: linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 33%,var(--sky-2) 65%,var(--sky-3) 83%,var(--glow) 100%);
+            isolation: isolate;
+        }
+        header::before {
+            z-index: -1;
+            opacity: .14;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cg fill='none' stroke='%23fff' stroke-width='.7'%3E%3Cpath d='M0 30a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 60a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 120px 60px;
+            -webkit-mask-image: linear-gradient(180deg,transparent,#000 70%,transparent);
+            mask-image: linear-gradient(180deg,transparent,#000 70%,transparent);
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 31%;
+            background: linear-gradient(168deg,transparent 0 42%,rgba(11,39,64,.24) 43% 55%,transparent 56%),
+                        linear-gradient(12deg,transparent 0 52%,rgba(11,39,64,.34) 53% 66%,transparent 67%);
+            opacity: .7;
+        }
+        .hero-content { position: relative; z-index: 3; max-width: 850px; }
+        .hero-kicker {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+            color: rgba(255,255,255,.7);
+            font-size: 10px;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+        }
+        .hero-kicker::before { content: ""; width: 44px; height: 1px; background: currentColor; }
+        h1 {
+            max-width: 9ch;
+            margin: 0 0 28px;
+            color: #fff;
+            font-family: var(--font-title);
+            font-size: clamp(3rem,8vw,7.2rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: .04em;
+            text-shadow: 0 2px 40px rgba(0,0,0,.15);
+        }
+        .subtitle {
+            max-width: 38ch;
+            margin: 0;
+            color: rgba(255,255,255,.9);
+            font-family: var(--font-title);
+            font-size: clamp(1rem,1.5vw,1.2rem);
+            font-weight: 400;
+            text-shadow: 0 1px 12px rgba(11,39,64,.35);
+            line-height: 2;
+            letter-spacing: .08em;
+        }
+        .intro-toggle {
+            margin-top: 36px;
+            padding: 10px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255,255,255,.5);
+            border-radius: 0;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: .16em;
+        }
+        .intro-toggle::after { content: "  →"; }
+        .intro-toggle:hover { background: transparent; border-color: #fff; transform: translateX(4px); }
+        .hero-sun {
+            position: absolute;
+            z-index: -1;
+            right: 12vw;
+            top: 23%;
+            width: clamp(90px,12vw,170px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #E9B8A4;
+            box-shadow: 0 0 80px rgba(242,226,192,.2);
+            opacity: .85;
+        }
+        .hero-torii {
+            position: absolute;
+            z-index: 1;
+            right: 9vw;
+            bottom: 8%;
+            width: clamp(140px,22vw,310px);
+            height: clamp(130px,20vw,280px);
+            color: rgba(64,35,30,.72);
+            border-top: clamp(9px,1.2vw,17px) solid currentColor;
+            transform: perspective(500px) rotateY(-7deg);
+        }
+        .hero-torii::before {
+            content: "";
+            position: absolute;
+            left: -8%;
+            top: 20%;
+            width: 116%;
+            height: 7%;
+            background: currentColor;
+        }
+        .hero-torii i {
+            position: absolute;
+            top: 20%;
+            bottom: 0;
+            width: 7%;
+            background: currentColor;
+        }
+        .hero-torii i:first-child { left: 17%; transform: rotate(2deg); }
+        .hero-torii i:last-child { right: 17%; transform: rotate(-2deg); }
+        .hero-jp {
+            position: absolute;
+            z-index: 2;
+            right: var(--gut);
+            top: 15%;
+            color: rgba(255,255,255,.6);
+            font-family: var(--font-title);
+            font-size: 12px;
+            letter-spacing: .45em;
+            writing-mode: vertical-rl;
+        }
+        .back-home {
+            left: var(--gut);
+            top: 28px;
+            z-index: 12;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,.4);
+            border-radius: 0;
+            background: transparent;
+            color: rgba(255,255,255,.85);
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: .12em;
+        }
+        .back-home:hover { background: transparent; border-color: #fff; transform: translateX(-3px); }
+
+        /* 内容像一册摊开的旅行志，而不是一组悬浮卡片 */
+        .section { max-width: 1160px; margin: 0 auto; padding: clamp(50px,8vw,100px) var(--gut) 0; }
+        .section + .section { border-top: 1px solid var(--rule); }
+        .section-header { gap: 18px; margin-bottom: 32px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+        .section-header h2, .transport-section h3, .modal-body h3 { font-family: var(--font-title); color: var(--ink); }
+        .section-header h2 { font-size: clamp(1.5rem,3vw,2.25rem); font-weight: 700; letter-spacing: .04em; }
+        .section-header .icon {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: var(--seal);
+            font-size: 1.25rem;
+        }
+        .transport-section h3 { font-size: 1.1rem; font-weight: 400; }
+        .transport-section h3 i { color: var(--seal); margin-right: 8px; }
+        .card-container { gap: 0; margin-top: 24px; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
+        .transport-card-lg {
+            min-width: 240px;
+            padding: 30px;
+            border: 0;
+            border-right: 1px solid var(--rule);
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        .transport-card-lg:last-child { border-right: 0; }
+        .card-header { border-color: var(--rule); }
+        .card-title { font-family: var(--font-title); font-size: 1.2rem; }
+        .card-icon { width: 32px; height: 32px; background: transparent; color: var(--seal); font-size: 17px; }
+        .card-content { color: var(--ink-soft); font-size: 1rem; font-weight: 400; line-height: 1.85; }
+        .card-footer { border-color: var(--rule); color: var(--ink-soft); font-size: .9rem; font-weight: 400; }
+        .note, .important-note {
+            padding: 18px 22px;
+            border: 0;
+            border-left: 2px solid var(--seal);
+            border-radius: 0;
+            background: rgba(192,66,47,.045);
+            box-shadow: none;
+            color: var(--ink-soft);
+            font-size: .95rem;
+            font-weight: 400;
+        }
+        .note { border-left-color: #B39868; background: rgba(179,152,104,.07); }
+        .note strong, .important-note strong { color: var(--ink); font-family: var(--font-title); }
+        .highlight { border-radius: 0; background: rgba(192,66,47,.08); }
+        .prohibited-container { gap: 24px; }
+        .prohibited-box { padding: 24px; border: 1px solid var(--rule); border-radius: 0; background: transparent; box-shadow: none; }
+        .prohibited-title { border-bottom-width: 1px; border-color: var(--rule); font-family: var(--font-title); }
+        .prohibited-item { color: var(--ink-soft); font-size: 1rem; font-weight: 400; line-height: 1.8; }
+
+        /* 日程是旅途的轴线：朱砂编号、细分隔线、克制的表格 */
+        .day-header {
+            margin: 0 0 30px;
+            padding: 0 0 18px;
+            border: 0;
+            border-bottom: 1px solid var(--rule-strong);
+            border-radius: 0;
+            background: transparent;
+            color: var(--ink);
+        }
+        .day-icon { color: var(--seal); font-size: 1.15rem; }
+        .day-title { font-family: var(--font-title); font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 700; letter-spacing: .03em; }
+        .schedule-container { margin: 0; border-radius: 0; box-shadow: none; }
+        .schedule-table { min-width: 760px; border-collapse: collapse; border-radius: 0; box-shadow: none; font-size: .95rem; font-weight: 400; }
+        .schedule-table th, .schedule-table td { padding: 16px 14px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-weight: 400; }
+        .schedule-table th {
+            position: static;
+            border-bottom-color: var(--rule-strong);
+            background: transparent;
+            color: var(--ink-faint);
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: .14em;
+        }
+        .schedule-table tr:nth-child(even) { background: transparent; }
+        .schedule-table tr:hover { background: rgba(192,66,47,.025); }
+        .schedule-table .time-cell { color: var(--seal); font-family: var(--font-title); font-size: .9rem; }
+        .schedule-table .location-cell { color: var(--ink); font-family: var(--font-title); font-weight: 500; }
+        .schedule-table .budget-cell { padding: 2px 7px; border: 1px solid rgba(192,66,47,.25); border-radius: 0; background: transparent; font-size: .82rem; font-weight: 500; }
+        .budget { border-radius: 0; background: transparent; color: var(--seal); }
+        .section-divider { height: 1px; background: var(--rule); }
+        .mobile-day-nav {
+            top: 0;
+            margin: 0;
+            padding: 8px var(--gut);
+            border-radius: 0;
+            border-bottom: 1px solid var(--rule);
+            background: rgba(245,242,234,.92);
+            backdrop-filter: blur(12px);
+        }
+        .day-btn { margin: 0 4px; border-radius: 0; background: transparent; color: var(--ink-faint); font-size: 10px; letter-spacing: .12em; }
+        .day-btn.active { background: transparent; color: var(--seal); box-shadow: inset 0 -1px var(--seal); }
+
+        /* 短内容不做松散居中，而以票券、档案卡的方式组织视觉层次 */
+        .card-container { gap: 18px; border: 0; }
+        .transport-card-lg {
+            position: relative;
+            overflow: hidden;
+            padding: 30px 28px 24px;
+            border: 1px solid var(--rule);
+            background:
+                linear-gradient(145deg,rgba(255,255,255,.7),rgba(255,255,255,.18)),
+                repeating-radial-gradient(circle at 100% 0,transparent 0 23px,rgba(192,66,47,.055) 24px 25px);
+        }
+        .transport-card-lg::before {
+            content: attr(data-code);
+            position: absolute;
+            z-index: 2;
+            top: 25px;
+            right: 24px;
+            color: var(--ink-faint);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: .18em;
+        }
+        .transport-card-lg::after {
+            content: attr(data-mark);
+            position: absolute;
+            right: -5px;
+            bottom: 44px;
+            color: rgba(192,66,47,.06);
+            font-family: var(--font-title);
+            font-size: clamp(3.2rem,5vw,5.2rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -.06em;
+            pointer-events: none;
+        }
+        .transport-card-lg > * { position: relative; z-index: 1; }
+        .transport-card-lg .card-header { padding-right: 74px; }
+        .transport-card-lg .card-content { max-width: 34ch; }
+        .transport-card-lg .card-content ul { padding-left: 18px; }
+        .transport-card-lg .card-content li { padding-left: 3px; }
+        .transport-card-lg .card-content li::marker { color: var(--seal); }
+        .transport-card-lg .card-footer {
+            margin-top: 22px;
+            margin-right: -28px;
+            margin-left: -28px;
+            margin-bottom: -24px;
+            padding: 14px 28px;
+            border-top: 1px solid var(--rule);
+            background: rgba(179,152,104,.06);
+        }
+        .prohibited-container { gap: 20px; }
+        .prohibited-box {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            background:
+                linear-gradient(120deg,rgba(255,255,255,.64),rgba(255,255,255,.12)),
+                repeating-linear-gradient(135deg,transparent 0 14px,rgba(28,35,32,.025) 15px 16px);
+        }
+        .prohibited-box::before {
+            content: attr(data-code);
+            position: absolute;
+            top: 25px;
+            right: 26px;
+            color: var(--seal);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .16em;
+        }
+        .prohibited-box::after {
+            content: attr(data-mark);
+            position: absolute;
+            right: 12px;
+            bottom: -36px;
+            color: rgba(192,66,47,.045);
+            font-family: var(--font-title);
+            font-size: 9rem;
+            font-weight: 700;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .prohibited-box > * { position: relative; z-index: 1; }
+        .prohibited-title { padding-right: 92px; letter-spacing: .03em; }
+        .prohibited-item { margin: 0; padding: 10px 0 10px 22px; border-bottom: 1px solid var(--rule); }
+        .prohibited-item:last-child { border-bottom: 0; }
+        .prohibited-item::before { top: 10px; }
+
+        footer {
+            margin-top: clamp(60px,9vw,110px);
+            padding: 50px var(--gut);
+            border: 0;
+            background: var(--sky-0);
+            color: rgba(255,255,255,.72);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 2.2;
+            letter-spacing: .05em;
+        }
+        .modal { backdrop-filter: blur(8px); background: rgba(11,39,64,.76); }
+        .modal-content { border-radius: 0; background: var(--land); box-shadow: 0 24px 80px rgba(0,0,0,.25); }
+        .modal-header { padding: 24px; background: var(--sky-0); }
+        .modal-header h2 { font-family: var(--font-title); }
+        .modal-body { padding: clamp(24px,5vw,48px); color: var(--ink-soft); }
+        .back-to-top { width: 42px; height: 42px; border: 1px solid var(--rule-strong); border-radius: 50%; background: var(--land); color: var(--seal); box-shadow: none; }
+        .back-to-top:hover { background: var(--land); border-color: var(--seal); box-shadow: none; }
+        .close-btn { border-radius: 0; background: transparent; font-weight: 300; }
+        :where(a,button,.close-btn):focus-visible { outline: 2px solid var(--seal); outline-offset: 4px; }
+        /* ============================================================
+           v3 · 关西地域辨识：土墙、苔庭、柿涩与暖帘
+           不再沿用北京页的蓝色天空，而以侘寂色系建立独立气质
+           ============================================================ */
+        :root {
+            --sky-0: #203C35;
+            --land: #F2EEE5;
+            --ink: #252C28;
+            --ink-soft: #48544C;
+            --ink-faint: #6D776E;
+            --seal: #A94E3C;
+            --moss: #496458;
+            --moss-pale: #DCE1D5;
+            --clay: #C9B7A3;
+            --rule: rgba(37,44,40,.15);
+            --rule-strong: rgba(37,44,40,.3);
+        }
+        body { background-color: var(--land); }
+        header {
+            background:
+                linear-gradient(90deg,rgba(242,238,229,.12),transparent 55%),
+                linear-gradient(155deg,#E7DED0 0%,#D8C9B8 47%,#B9A18C 100%);
+        }
+        header::before {
+            opacity: .13;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cg fill='none' stroke='%23203c35' stroke-width='.8'%3E%3Cpath d='M0 30a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 60a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0'/%3E%3C/g%3E%3C/svg%3E");
+            -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 55%,#000 100%);
+            mask-image: linear-gradient(90deg,transparent 0,#000 55%,#000 100%);
+        }
+        header::after {
+            height: 28%;
+            background:
+                linear-gradient(90deg,transparent 0 68%,rgba(32,60,53,.15) 68% 69%,transparent 69% 73%,rgba(32,60,53,.15) 73% 74%,transparent 74%),
+                linear-gradient(174deg,transparent 0 46%,rgba(32,60,53,.2) 47% 66%,transparent 67%),
+                linear-gradient(6deg,transparent 0 54%,rgba(32,60,53,.28) 55% 72%,transparent 73%);
+            opacity: .8;
+        }
+        h1 { color: var(--ink); text-shadow: none; letter-spacing: .08em; }
+        .hero-kicker { color: #53665B; }
+        .subtitle { color: #3F4D45; text-shadow: none; }
+        .intro-toggle { color: var(--ink); border-bottom-color: rgba(37,44,40,.45); }
+        .intro-toggle:hover { color: var(--seal); border-color: var(--seal); }
+        .hero-sun { background: var(--seal); box-shadow: 0 0 70px rgba(169,78,60,.14); opacity: .84; }
+        .hero-torii { color: rgba(32,60,53,.78); }
+        .hero-jp {
+            color: rgba(32,60,53,.56);
+            font-size: clamp(12px,1.4vw,17px);
+            letter-spacing: .55em;
+            border-left: 1px solid rgba(32,60,53,.25);
+            padding-left: 16px;
+        }
+        .back-home { color: #344A40; border-bottom-color: rgba(32,60,53,.4); }
+        .back-home:hover { color: var(--seal); border-color: var(--seal); }
+        .section-header { position: relative; }
+        .section-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 58px;
+            height: 2px;
+            background: var(--seal);
+        }
+        .section-header .icon, .transport-section h3 i { color: var(--moss); }
+        .card-icon { color: var(--seal); }
+        .transport-card-lg {
+            border-top: 3px solid var(--moss);
+            background:
+                linear-gradient(145deg,rgba(255,255,255,.65),rgba(220,225,213,.38)),
+                repeating-radial-gradient(circle at 100% 0,transparent 0 23px,rgba(73,100,88,.09) 24px 25px);
+        }
+        .transport-card-lg::before { color: var(--moss); }
+        .transport-card-lg::after { color: rgba(73,100,88,.09); }
+        .transport-card-lg .card-footer { background: rgba(73,100,88,.07); }
+        .prohibited-box { border-top: 3px solid var(--clay); }
+        .prohibited-box::before, .prohibited-title { color: var(--seal); }
+        .day-header {
+            padding: 22px 24px;
+            border-left: 3px solid var(--seal);
+            background: linear-gradient(90deg,rgba(73,100,88,.08),transparent 82%);
+        }
+        .day-icon { color: var(--moss); }
+        .schedule-table th { color: var(--moss); }
+        .schedule-table .time-cell { color: var(--seal); }
+        .note { border-left-color: var(--moss); background: rgba(73,100,88,.07); }
+        .important-note { border-left-color: var(--seal); }
+        .day-btn.active { color: var(--seal); box-shadow: inset 0 -2px var(--seal); }
+        footer, .modal-header { background: #203C35; }
+        .back-to-top { color: var(--moss); }
+        @media (max-width: 768px) {
+            body { padding: 0; font-size: 16px; }
+            header { min-height: 72vh; padding: 110px 24px 90px; }
+            .hero-sun { right: 7vw; top: 27%; }
+            .hero-torii { right: 3vw; bottom: 8%; opacity: .6; }
+            .hero-jp { display: none; }
+            .back-home { left: 24px; top: 18px; padding: 5px 0; font-size: 10px; }
+            .section { padding: 52px 20px 0; }
+            .section-header { gap: 10px; }
+            .section-header .icon { width: auto; height: auto; font-size: 1.1rem; }
+            .day-header { margin: 0 0 22px; padding: 18px 16px; }
+            .card-container, .prohibited-container { display: grid; grid-template-columns: minmax(0,1fr); width: 100%; gap: 16px; }
+            .transport-card-lg { width: 100%; min-width: 0; max-width: none; padding: 26px 24px 22px; border: 1px solid var(--rule); }
+            .transport-card-lg::before { top: 22px; right: 20px; font-size: 8px; }
+            .transport-card-lg::after { right: 8px; bottom: 64px; font-size: 4rem; }
+            .transport-card-lg .card-header { padding-right: 58px; }
+            .transport-card-lg .card-content { max-width: none; padding-right: 12px; }
+            .transport-card-lg .card-footer { margin: 20px -24px -22px; padding: 14px 24px; }
+            .schedule-table th, .schedule-table td { padding: 12px 10px; }
+            .prohibited-container { gap: 18px; }
+            .prohibited-box { width: 100%; min-width: 0; max-width: none; padding: 26px 24px; }
+            .prohibited-box::before { top: 24px; right: 20px; }
+            .prohibited-title { padding-right: 74px; font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: clamp(2.8rem,15vw,4.5rem); }
+            .hero-torii { width: 150px; height: 140px; right: -18px; }
+            .hero-sun { width: 92px; }
+            .subtitle { max-width: 26ch; }
+            .section-header .icon { width: auto; height: auto; }
+            .schedule-table { min-width: 600px; }
+            .schedule-table th, .schedule-table td { font-size: .88rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+        }
     </style>
 </head>
 <body>
@@ -787,11 +1308,17 @@
     <div class="container">
         <header>
             <a href="../index.html" class="back-home">
-                <i class="fas fa-home"></i> <span>返回首页</span>
+                <i class="fas fa-arrow-left"></i> <span>返回旷野</span>
             </a>
-            <h1>日本关西4天3晚旅游攻略</h1>
-            <p class="subtitle">千年古都京都 | 美食之都大阪 | 深度文化体验</p>
-            <div class="intro-toggle" id="introBtn">点击了解关西</div>
+            <div class="hero-sun" aria-hidden="true"></div>
+            <div class="hero-jp" aria-hidden="true">関西地方 · 旅の記録</div>
+            <div class="hero-torii" aria-hidden="true"><i></i><i></i></div>
+            <div class="hero-content">
+                <div class="hero-kicker">Japan · Kansai field notes · 04 days</div>
+                <h1>关西，<br>风过千年</h1>
+                <p class="subtitle">日本关西 4 天 3 晚<br>从京都的晨钟，到大阪的灯火。</p>
+                <button class="intro-toggle" id="introBtn" type="button">翻开关西手记</button>
+            </div>
         </header>
         
         <!-- 交通卡部分 -->
@@ -804,7 +1331,7 @@
             <div class="transport-section">
                 <h3><i class="fas fa-ticket-alt"></i> 推荐交通卡</h3>
                 <div class="card-container">
-                    <div class="transport-card-lg kyoto-card-lg">
+                    <div class="transport-card-lg kyoto-card-lg" data-code="01 / KANSAI" data-mark="IC">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-train"></i>
@@ -825,7 +1352,7 @@
                         </div>
                     </div>
                     
-                    <div class="transport-card-lg osaka-card-lg">
+                    <div class="transport-card-lg osaka-card-lg" data-code="02 / KYOTO" data-mark="BUS">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-bus"></i>
@@ -846,7 +1373,7 @@
                         </div>
                     </div>
                     
-                    <div class="transport-card-lg osaka-pass-card">
+                    <div class="transport-card-lg osaka-pass-card" data-code="03 / OSAKA" data-mark="PASS">
                         <div class="card-header">
                             <div class="card-icon">
                                 <i class="fas fa-subway"></i>
@@ -959,7 +1486,7 @@
             </div>
             
             <div class="prohibited-container">
-                <div class="prohibited-box">
+                <div class="prohibited-box" data-code="CN → JP" data-mark="01">
                     <div class="prohibited-title">中国→日本 禁止携带</div>
                     <div class="prohibited-item">生鲜食品及动物制品</div>
                     <div class="prohibited-item">处方药品（需医生证明）</div>
@@ -967,7 +1494,7 @@
                     <div class="prohibited-item">超过规定数量的烟酒</div>
                 </div>
                 
-                <div class="prohibited-box">
+                <div class="prohibited-box" data-code="JP → CN" data-mark="02">
                     <div class="prohibited-title">日本→中国 禁止携带</div>
                     <div class="prohibited-item">生鲜水果及动物制品</div>
                     <div class="prohibited-item">未申报的奢侈品（超过5000元需申报）</div>
