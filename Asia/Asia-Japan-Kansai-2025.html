@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关西，风过千年｜日本4天3晚旅行手记</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        /* 全局配色 */
+        :root {
+            --kyoto-deep-gray: rgb(74, 71, 68);
+            --kyoto-paper-white: rgb(245, 242, 235);
+            --kyoto-torii-red: rgb(188, 45, 41);
+            --osaka-night-blue: rgb(25, 35, 45);
+            --osaka-jr-red: rgb(230, 0, 18);
+            --osaka-gold: rgb(255, 215, 0);
+            --border-radius: 10px;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f9f5eb 0%, #f0e6d2 100%);
+            color: #333;
+            padding: 10px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            border: 1px solid rgba(74, 71, 68, 0.1);
+        }
+        
+        .back-home {
+            position: fixed;
+            left: 15px;
+            top: 15px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            z-index: 11;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .back-home:hover {
+            background: rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            background: linear-gradient(90deg, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 C40,0 60,0 80,20 C100,40 100,60 80,80 C60,100 40,100 20,80 C0,60 0,40 20,20 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 120px;
+            opacity: 0.3;
+        }
+        
+        h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin: 20px 0 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .intro-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            margin-top: 10px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .intro-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* 修复图标错位问题 */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            margin: 0;
+            padding: 0;
+            border-bottom: none;
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+        }
+        
+        .section-header h2::after {
+            display: none;
+        }
+        
+        .section-header .icon {
+            font-size: 2rem;
+            background: var(--kyoto-torii-red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .section {
+            padding: 20px;
+            position: relative;
+        }
+        
+        .day-header {
+            color: white;
+            padding: 12px 20px;
+            margin: 0 -20px 20px -20px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            display: flex;
+            align-items: center;
+        }
+        
+        .kyoto-day {
+            background: linear-gradient(to right, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+        }
+        
+        .osaka-day {
+            background: linear-gradient(to right, var(--osaka-night-blue), var(--osaka-jr-red));
+        }
+        
+        .day-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .day-title {
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            font-weight: bold;
+        }
+        
+        .budget {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-left: 8px;
+            font-weight: bold;
+        }
+        
+        .note, .important-note {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .note {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .important-note {
+            background: #ffebee;
+            border-left: 4px solid var(--kyoto-torii-red);
+        }
+        
+        .highlight {
+            background: #ffebee;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            display: inline-block;
+            margin: 2px 0;
+        }
+        
+        .prohibited-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .prohibited-box {
+            flex: 1;
+            min-width: 280px;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            padding: 15px;
+            background: white;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .prohibited-title {
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(188, 45, 41, 0.3);
+            font-size: 1.1rem;
+        }
+        
+        .prohibited-item {
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .prohibited-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--kyoto-torii-red);
+            font-weight: bold;
+        }
+        
+        /* 交通卡片 */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .transport-card-lg {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--kyoto-torii-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+        
+        .card-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .card-content {
+            flex-grow: 1;
+        }
+        
+        .card-content ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .card-content li {
+            margin-bottom: 8px;
+        }
+        
+        .card-footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .kyoto-card-lg {
+            border-top: 4px solid var(--kyoto-torii-red);
+        }
+        
+        .osaka-card-lg, .osaka-pass-card {
+            border-top: 4px solid var(--osaka-jr-red);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--osaka-night-blue);
+            color: #ddd;
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* ======== 表格样式优化 ======== */
+        .schedule-container {
+            margin: 20px 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .schedule-table th, 
+        .schedule-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+        
+        .schedule-table th {
+            background: #f1f1f1;
+            font-weight: bold;
+            color: #333;
+            position: sticky;
+            left: 0;
+        }
+        
+        .schedule-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .schedule-table tr:hover {
+            background-color: #fff3f3;
+            transition: background 0.3s ease;
+        }
+        
+        .schedule-table .time-cell {
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+            white-space: nowrap;
+        }
+        
+        .schedule-table .location-cell {
+            font-weight: 600;
+        }
+        
+        .schedule-table .budget-cell {
+            background: rgba(188, 45, 41, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: bold;
+            color: var(--kyoto-torii-red);
+        }
+        
+        /* ======== 响应式优化 ======== */
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                font-size: 15px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .note, .important-note {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 14px;
+            }
+            
+            .back-home {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+                left: 10px;
+                top: 10px;
+            }
+            
+            .day-header {
+                padding: 10px 15px;
+                margin: 0 -15px 15px -15px;
+            }
+            
+            /* 移动端表格优化 */
+            .schedule-table {
+                min-width: 600px;
+                font-size: 0.85rem;
+            }
+            
+            .schedule-table th, 
+            .schedule-table td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+            
+            .schedule-table .time-cell {
+                font-size: 0.9rem;
+            }
+            
+            .schedule-table .budget-cell {
+                font-size: 0.8rem;
+                padding: 2px 6px;
+            }
+            
+            /* 图标布局优化 */
+            .section-header {
+                gap: 10px;
+            }
+            
+            .section-header .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .back-home span {
+                display: none;
+            }
+            
+            .intro-toggle {
+                font-size: 0.9rem;
+                padding: 6px 15px;
+            }
+            
+            .card-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .schedule-table {
+                min-width: 500px;
+            }
+            
+            .schedule-table th, 
+            .schedule-table td {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .schedule-table .time-cell {
+                font-size: 0.85rem;
+            }
+            
+            .section-header .icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* ======== 模态框和返回顶部按钮 ======== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 700px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            animation: modalopen 0.4s;
+        }
+        
+        @keyframes modalopen {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background: linear-gradient(90deg, var(--kyoto-deep-gray), var(--kyoto-torii-red));
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-header h2 {
+            color: white;
+            border: none;
+            margin: 0;
+            padding: 0;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--kyoto-torii-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(188, 45, 41, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #c62828;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(188, 45, 41, 0.6);
+        }
+        
+        /* 移动端日期导航 */
+        .mobile-day-nav {
+            display: none;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 0 10px;
+            position: sticky;
+            top: 10px;
+            z-index: 5;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border-radius: var(--border-radius);
+        }
+        
+        .day-btn {
+            flex: 1;
+            padding: 10px;
+            margin: 0 5px;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .day-btn.active {
+            background: var(--kyoto-torii-red);
+            color: white;
+        }
+        
+        .day-section {
+            display: block;
+        }
+        
+        /* 在窄屏时隐藏所有日程，只显示当前激活的日程 */
+        @media (max-width: 900px) {
+            .mobile-day-nav {
+                display: flex;
+            }
+            
+            .day-section {
+                display: none;
+            }
+            
+            .day-section.active {
+                display: block;
+            }
+            
+            .preparation-section {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .day-btn {
+                font-size: 0.8rem;
+                padding: 8px 5px;
+            }
+        }
+        
+        /* 页面标题动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1, .subtitle {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* 页面分割线 */
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--kyoto-torii-red), transparent);
+            margin: 30px 0;
+            border: none;
+        }
+        
+        /* 切换动画 */
+        .day-section {
+            animation: fadeInSection 0.5s ease;
+        }
+        
+        @keyframes fadeInSection {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        /* ============================================================
+           旷野版 · 关西地方志
+           与主页共享天空、纸张、朱砂和留白，以鸟居与青海波标记日本
+           ============================================================ */
+        :root {
+            --sky-0: #0B2740;
+            --sky-1: #1F4E78;
+            --sky-2: #4C82AC;
+            --sky-3: #8FB6CE;
+            --glow: #F2E2C0;
+            --land: #F5F2EA;
+            --ink: #1C2320;
+            --ink-soft: #48524C;
+            --ink-faint: #68736B;
+            --seal: #C0422F;
+            --rule: rgba(28,35,32,.13);
+            --rule-strong: rgba(28,35,32,.28);
+            --font-title: 'Noto Serif SC','Songti SC','STSong',serif;
+            --font-body: 'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;
+            --gut: clamp(22px,5vw,64px);
+            --border-radius: 2px;
+            --box-shadow: none;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--land);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.85;
+            -webkit-font-smoothing: antialiased;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+            opacity: .18;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+        }
+        .container {
+            max-width: 1440px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: visible;
+        }
+        header {
+            min-height: 78vh;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 120px var(--gut) 110px;
+            background: linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 33%,var(--sky-2) 65%,var(--sky-3) 83%,var(--glow) 100%);
+            isolation: isolate;
+        }
+        header::before {
+            z-index: -1;
+            opacity: .14;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cg fill='none' stroke='%23fff' stroke-width='.7'%3E%3Cpath d='M0 30a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 60a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 120px 60px;
+            -webkit-mask-image: linear-gradient(180deg,transparent,#000 70%,transparent);
+            mask-image: linear-gradient(180deg,transparent,#000 70%,transparent);
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            bottom: -1px;
+            height: 31%;
+            background: linear-gradient(168deg,transparent 0 42%,rgba(11,39,64,.24) 43% 55%,transparent 56%),
+                        linear-gradient(12deg,transparent 0 52%,rgba(11,39,64,.34) 53% 66%,transparent 67%);
+            opacity: .7;
+        }
+        .hero-content { position: relative; z-index: 3; max-width: 850px; }
+        .hero-kicker {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+            color: rgba(255,255,255,.7);
+            font-size: 10px;
+            letter-spacing: .32em;
+            text-transform: uppercase;
+        }
+        .hero-kicker::before { content: ""; width: 44px; height: 1px; background: currentColor; }
+        h1 {
+            max-width: 9ch;
+            margin: 0 0 28px;
+            color: #fff;
+            font-family: var(--font-title);
+            font-size: clamp(3rem,8vw,7.2rem);
+            font-weight: 700;
+            line-height: 1.12;
+            letter-spacing: .04em;
+            text-shadow: 0 2px 40px rgba(0,0,0,.15);
+        }
+        .subtitle {
+            max-width: 38ch;
+            margin: 0;
+            color: rgba(255,255,255,.9);
+            font-family: var(--font-title);
+            font-size: clamp(1rem,1.5vw,1.2rem);
+            font-weight: 400;
+            text-shadow: 0 1px 12px rgba(11,39,64,.35);
+            line-height: 2;
+            letter-spacing: .08em;
+        }
+        .intro-toggle {
+            margin-top: 36px;
+            padding: 10px 0;
+            border: 0;
+            border-bottom: 1px solid rgba(255,255,255,.5);
+            border-radius: 0;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: .16em;
+        }
+        .intro-toggle::after { content: "  →"; }
+        .intro-toggle:hover { background: transparent; border-color: #fff; transform: translateX(4px); }
+        .hero-sun {
+            position: absolute;
+            z-index: -1;
+            right: 12vw;
+            top: 23%;
+            width: clamp(90px,12vw,170px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #E9B8A4;
+            box-shadow: 0 0 80px rgba(242,226,192,.2);
+            opacity: .85;
+        }
+        .hero-torii {
+            position: absolute;
+            z-index: 1;
+            right: 9vw;
+            bottom: 8%;
+            width: clamp(140px,22vw,310px);
+            height: clamp(130px,20vw,280px);
+            color: rgba(64,35,30,.72);
+            border-top: clamp(9px,1.2vw,17px) solid currentColor;
+            transform: perspective(500px) rotateY(-7deg);
+        }
+        .hero-torii::before {
+            content: "";
+            position: absolute;
+            left: -8%;
+            top: 20%;
+            width: 116%;
+            height: 7%;
+            background: currentColor;
+        }
+        .hero-torii i {
+            position: absolute;
+            top: 20%;
+            bottom: 0;
+            width: 7%;
+            background: currentColor;
+        }
+        .hero-torii i:first-child { left: 17%; transform: rotate(2deg); }
+        .hero-torii i:last-child { right: 17%; transform: rotate(-2deg); }
+        .hero-jp {
+            position: absolute;
+            z-index: 2;
+            right: var(--gut);
+            top: 15%;
+            color: rgba(255,255,255,.6);
+            font-family: var(--font-title);
+            font-size: 12px;
+            letter-spacing: .45em;
+            writing-mode: vertical-rl;
+        }
+        .back-home {
+            left: var(--gut);
+            top: 28px;
+            z-index: 12;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,.4);
+            border-radius: 0;
+            background: transparent;
+            color: rgba(255,255,255,.85);
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: .12em;
+        }
+        .back-home:hover { background: transparent; border-color: #fff; transform: translateX(-3px); }
+
+        /* 内容像一册摊开的旅行志，而不是一组悬浮卡片 */
+        .section { max-width: 1160px; margin: 0 auto; padding: clamp(50px,8vw,100px) var(--gut) 0; }
+        .section + .section { border-top: 1px solid var(--rule); }
+        .section-header { gap: 18px; margin-bottom: 32px; padding-bottom: 18px; border-bottom: 1px solid var(--rule); }
+        .section-header h2, .transport-section h3, .modal-body h3 { font-family: var(--font-title); color: var(--ink); }
+        .section-header h2 { font-size: clamp(1.5rem,3vw,2.25rem); font-weight: 700; letter-spacing: .04em; }
+        .section-header .icon {
+            width: auto;
+            height: auto;
+            background: transparent;
+            color: var(--seal);
+            font-size: 1.25rem;
+        }
+        .transport-section h3 { font-size: 1.1rem; font-weight: 400; }
+        .transport-section h3 i { color: var(--seal); margin-right: 8px; }
+        .card-container { gap: 0; margin-top: 24px; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
+        .transport-card-lg {
+            min-width: 240px;
+            padding: 30px;
+            border: 0;
+            border-right: 1px solid var(--rule);
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+        }
+        .transport-card-lg:last-child { border-right: 0; }
+        .card-header { border-color: var(--rule); }
+        .card-title { font-family: var(--font-title); font-size: 1.2rem; }
+        .card-icon { width: 32px; height: 32px; background: transparent; color: var(--seal); font-size: 17px; }
+        .card-content { color: var(--ink-soft); font-size: 1rem; font-weight: 400; line-height: 1.85; }
+        .card-footer { border-color: var(--rule); color: var(--ink-soft); font-size: .9rem; font-weight: 400; }
+        .note, .important-note {
+            padding: 18px 22px;
+            border: 0;
+            border-left: 2px solid var(--seal);
+            border-radius: 0;
+            background: rgba(192,66,47,.045);
+            box-shadow: none;
+            color: var(--ink-soft);
+            font-size: .95rem;
+            font-weight: 400;
+        }
+        .note { border-left-color: #B39868; background: rgba(179,152,104,.07); }
+        .note strong, .important-note strong { color: var(--ink); font-family: var(--font-title); }
+        .highlight { border-radius: 0; background: rgba(192,66,47,.08); }
+        .prohibited-container { gap: 24px; }
+        .prohibited-box { padding: 24px; border: 1px solid var(--rule); border-radius: 0; background: transparent; box-shadow: none; }
+        .prohibited-title { border-bottom-width: 1px; border-color: var(--rule); font-family: var(--font-title); }
+        .prohibited-item { color: var(--ink-soft); font-size: 1rem; font-weight: 400; line-height: 1.8; }
+
+        /* 日程是旅途的轴线：朱砂编号、细分隔线、克制的表格 */
+        .day-header {
+            margin: 0 0 30px;
+            padding: 0 0 18px;
+            border: 0;
+            border-bottom: 1px solid var(--rule-strong);
+            border-radius: 0;
+            background: transparent;
+            color: var(--ink);
+        }
+        .day-icon { color: var(--seal); font-size: 1.15rem; }
+        .day-title { font-family: var(--font-title); font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 700; letter-spacing: .03em; }
+        .schedule-container { margin: 0; border-radius: 0; box-shadow: none; }
+        .schedule-table { min-width: 760px; border-collapse: collapse; border-radius: 0; box-shadow: none; font-size: .95rem; font-weight: 400; }
+        .schedule-table th, .schedule-table td { padding: 16px 14px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-weight: 400; }
+        .schedule-table th {
+            position: static;
+            border-bottom-color: var(--rule-strong);
+            background: transparent;
+            color: var(--ink-faint);
+            font-size: 11.5px;
+            font-weight: 500;
+            letter-spacing: .14em;
+        }
+        .schedule-table tr:nth-child(even) { background: transparent; }
+        .schedule-table tr:hover { background: rgba(192,66,47,.025); }
+        .schedule-table .time-cell { color: var(--seal); font-family: var(--font-title); font-size: .9rem; }
+        .schedule-table .location-cell { color: var(--ink); font-family: var(--font-title); font-weight: 500; }
+        .schedule-table .budget-cell { padding: 2px 7px; border: 1px solid rgba(192,66,47,.25); border-radius: 0; background: transparent; font-size: .82rem; font-weight: 500; }
+        .budget { border-radius: 0; background: transparent; color: var(--seal); }
+        .section-divider { height: 1px; background: var(--rule); }
+        .mobile-day-nav {
+            top: 0;
+            margin: 0;
+            padding: 8px var(--gut);
+            border-radius: 0;
+            border-bottom: 1px solid var(--rule);
+            background: rgba(245,242,234,.92);
+            backdrop-filter: blur(12px);
+        }
+        .day-btn { margin: 0 4px; border-radius: 0; background: transparent; color: var(--ink-faint); font-size: 10px; letter-spacing: .12em; }
+        .day-btn.active { background: transparent; color: var(--seal); box-shadow: inset 0 -1px var(--seal); }
+
+        /* 短内容不做松散居中，而以票券、档案卡的方式组织视觉层次 */
+        .card-container { gap: 18px; border: 0; }
+        .transport-card-lg {
+            position: relative;
+            overflow: hidden;
+            padding: 30px 28px 24px;
+            border: 1px solid var(--rule);
+            background:
+                linear-gradient(145deg,rgba(255,255,255,.7),rgba(255,255,255,.18)),
+                repeating-radial-gradient(circle at 100% 0,transparent 0 23px,rgba(192,66,47,.055) 24px 25px);
+        }
+        .transport-card-lg::before {
+            content: attr(data-code);
+            position: absolute;
+            z-index: 2;
+            top: 25px;
+            right: 24px;
+            color: var(--ink-faint);
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: .18em;
+        }
+        .transport-card-lg::after {
+            content: attr(data-mark);
+            position: absolute;
+            right: -5px;
+            bottom: 44px;
+            color: rgba(192,66,47,.06);
+            font-family: var(--font-title);
+            font-size: clamp(3.2rem,5vw,5.2rem);
+            font-weight: 700;
+            line-height: 1;
+            letter-spacing: -.06em;
+            pointer-events: none;
+        }
+        .transport-card-lg > * { position: relative; z-index: 1; }
+        .transport-card-lg .card-header { padding-right: 74px; }
+        .transport-card-lg .card-content { max-width: 34ch; }
+        .transport-card-lg .card-content ul { padding-left: 18px; }
+        .transport-card-lg .card-content li { padding-left: 3px; }
+        .transport-card-lg .card-content li::marker { color: var(--seal); }
+        .transport-card-lg .card-footer {
+            margin-top: 22px;
+            margin-right: -28px;
+            margin-left: -28px;
+            margin-bottom: -24px;
+            padding: 14px 28px;
+            border-top: 1px solid var(--rule);
+            background: rgba(179,152,104,.06);
+        }
+        .prohibited-container { gap: 20px; }
+        .prohibited-box {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            background:
+                linear-gradient(120deg,rgba(255,255,255,.64),rgba(255,255,255,.12)),
+                repeating-linear-gradient(135deg,transparent 0 14px,rgba(28,35,32,.025) 15px 16px);
+        }
+        .prohibited-box::before {
+            content: attr(data-code);
+            position: absolute;
+            top: 25px;
+            right: 26px;
+            color: var(--seal);
+            font-size: 10px;
+            font-weight: 500;
+            letter-spacing: .16em;
+        }
+        .prohibited-box::after {
+            content: attr(data-mark);
+            position: absolute;
+            right: 12px;
+            bottom: -36px;
+            color: rgba(192,66,47,.045);
+            font-family: var(--font-title);
+            font-size: 9rem;
+            font-weight: 700;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .prohibited-box > * { position: relative; z-index: 1; }
+        .prohibited-title { padding-right: 92px; letter-spacing: .03em; }
+        .prohibited-item { margin: 0; padding: 10px 0 10px 22px; border-bottom: 1px solid var(--rule); }
+        .prohibited-item:last-child { border-bottom: 0; }
+        .prohibited-item::before { top: 10px; }
+
+        footer {
+            margin-top: clamp(60px,9vw,110px);
+            padding: 50px var(--gut);
+            border: 0;
+            background: var(--sky-0);
+            color: rgba(255,255,255,.72);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 2.2;
+            letter-spacing: .05em;
+        }
+        .modal { backdrop-filter: blur(8px); background: rgba(11,39,64,.76); }
+        .modal-content { border-radius: 0; background: var(--land); box-shadow: 0 24px 80px rgba(0,0,0,.25); }
+        .modal-header { padding: 24px; background: var(--sky-0); }
+        .modal-header h2 { font-family: var(--font-title); }
+        .modal-body { padding: clamp(24px,5vw,48px); color: var(--ink-soft); }
+        .back-to-top { width: 42px; height: 42px; border: 1px solid var(--rule-strong); border-radius: 50%; background: var(--land); color: var(--seal); box-shadow: none; }
+        .back-to-top:hover { background: var(--land); border-color: var(--seal); box-shadow: none; }
+        .close-btn { border-radius: 0; background: transparent; font-weight: 300; }
+        :where(a,button,.close-btn):focus-visible { outline: 2px solid var(--seal); outline-offset: 4px; }
+        /* ============================================================
+           v3 · 关西地域辨识：土墙、苔庭、柿涩与暖帘
+           不再沿用北京页的蓝色天空，而以侘寂色系建立独立气质
+           ============================================================ */
+        :root {
+            --sky-0: #203C35;
+            --land: #F2EEE5;
+            --ink: #252C28;
+            --ink-soft: #48544C;
+            --ink-faint: #6D776E;
+            --seal: #A94E3C;
+            --moss: #496458;
+            --moss-pale: #DCE1D5;
+            --clay: #C9B7A3;
+            --rule: rgba(37,44,40,.15);
+            --rule-strong: rgba(37,44,40,.3);
+        }
+        body { background-color: var(--land); }
+        header {
+            background:
+                linear-gradient(90deg,rgba(242,238,229,.12),transparent 55%),
+                linear-gradient(155deg,#E7DED0 0%,#D8C9B8 47%,#B9A18C 100%);
+        }
+        header::before {
+            opacity: .13;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'%3E%3Cg fill='none' stroke='%23203c35' stroke-width='.8'%3E%3Cpath d='M0 30a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 60a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0M-30 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0a30 30 0 0 1 60 0'/%3E%3C/g%3E%3C/svg%3E");
+            -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 55%,#000 100%);
+            mask-image: linear-gradient(90deg,transparent 0,#000 55%,#000 100%);
+        }
+        header::after {
+            height: 28%;
+            background:
+                linear-gradient(90deg,transparent 0 68%,rgba(32,60,53,.15) 68% 69%,transparent 69% 73%,rgba(32,60,53,.15) 73% 74%,transparent 74%),
+                linear-gradient(174deg,transparent 0 46%,rgba(32,60,53,.2) 47% 66%,transparent 67%),
+                linear-gradient(6deg,transparent 0 54%,rgba(32,60,53,.28) 55% 72%,transparent 73%);
+            opacity: .8;
+        }
+        h1 { color: var(--ink); text-shadow: none; letter-spacing: .08em; }
+        .hero-kicker { color: #53665B; }
+        .subtitle { color: #3F4D45; text-shadow: none; }
+        .intro-toggle { color: var(--ink); border-bottom-color: rgba(37,44,40,.45); }
+        .intro-toggle:hover { color: var(--seal); border-color: var(--seal); }
+        .hero-sun { background: var(--seal); box-shadow: 0 0 70px rgba(169,78,60,.14); opacity: .84; }
+        .hero-torii { color: rgba(32,60,53,.78); }
+        .hero-jp {
+            color: rgba(32,60,53,.56);
+            font-size: clamp(12px,1.4vw,17px);
+            letter-spacing: .55em;
+            border-left: 1px solid rgba(32,60,53,.25);
+            padding-left: 16px;
+        }
+        .back-home { color: #344A40; border-bottom-color: rgba(32,60,53,.4); }
+        .back-home:hover { color: var(--seal); border-color: var(--seal); }
+        .section-header { position: relative; }
+        .section-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+            width: 58px;
+            height: 2px;
+            background: var(--seal);
+        }
+        .section-header .icon, .transport-section h3 i { color: var(--moss); }
+        .card-icon { color: var(--seal); }
+        .transport-card-lg {
+            border-top: 3px solid var(--moss);
+            background:
+                linear-gradient(145deg,rgba(255,255,255,.65),rgba(220,225,213,.38)),
+                repeating-radial-gradient(circle at 100% 0,transparent 0 23px,rgba(73,100,88,.09) 24px 25px);
+        }
+        .transport-card-lg::before { color: var(--moss); }
+        .transport-card-lg::after { color: rgba(73,100,88,.09); }
+        .transport-card-lg .card-footer { background: rgba(73,100,88,.07); }
+        .prohibited-box { border-top: 3px solid var(--clay); }
+        .prohibited-box::before, .prohibited-title { color: var(--seal); }
+        .day-header {
+            padding: 22px 24px;
+            border-left: 3px solid var(--seal);
+            background: linear-gradient(90deg,rgba(73,100,88,.08),transparent 82%);
+        }
+        .day-icon { color: var(--moss); }
+        .schedule-table th { color: var(--moss); }
+        .schedule-table .time-cell { color: var(--seal); }
+        .note { border-left-color: var(--moss); background: rgba(73,100,88,.07); }
+        .important-note { border-left-color: var(--seal); }
+        .day-btn.active { color: var(--seal); box-shadow: inset 0 -2px var(--seal); }
+        footer, .modal-header { background: #203C35; }
+        .back-to-top { color: var(--moss); }
+        @media (max-width: 768px) {
+            body { padding: 0; font-size: 16px; }
+            header { min-height: 72vh; padding: 110px 24px 90px; }
+            .hero-sun { right: 7vw; top: 27%; }
+            .hero-torii { right: 3vw; bottom: 8%; opacity: .6; }
+            .hero-jp { display: none; }
+            .back-home { left: 24px; top: 18px; padding: 5px 0; font-size: 10px; }
+            .section { padding: 52px 20px 0; }
+            .section-header { gap: 10px; }
+            .section-header .icon { width: auto; height: auto; font-size: 1.1rem; }
+            .day-header { margin: 0 0 22px; padding: 18px 16px; }
+            .card-container, .prohibited-container { display: grid; grid-template-columns: minmax(0,1fr); width: 100%; gap: 16px; }
+            .transport-card-lg { width: 100%; min-width: 0; max-width: none; padding: 26px 24px 22px; border: 1px solid var(--rule); }
+            .transport-card-lg::before { top: 22px; right: 20px; font-size: 8px; }
+            .transport-card-lg::after { right: 8px; bottom: 64px; font-size: 4rem; }
+            .transport-card-lg .card-header { padding-right: 58px; }
+            .transport-card-lg .card-content { max-width: none; padding-right: 12px; }
+            .transport-card-lg .card-footer { margin: 20px -24px -22px; padding: 14px 24px; }
+            .schedule-table th, .schedule-table td { padding: 12px 10px; }
+            .prohibited-container { gap: 18px; }
+            .prohibited-box { width: 100%; min-width: 0; max-width: none; padding: 26px 24px; }
+            .prohibited-box::before { top: 24px; right: 20px; }
+            .prohibited-title { padding-right: 74px; font-size: 1rem; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: clamp(2.8rem,15vw,4.5rem); }
+            .hero-torii { width: 150px; height: 140px; right: -18px; }
+            .hero-sun { width: 92px; }
+            .subtitle { max-width: 26ch; }
+            .section-header .icon { width: auto; height: auto; }
+            .schedule-table { min-width: 600px; }
+            .schedule-table th, .schedule-table td { font-size: .88rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,*::before,*::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 关西介绍模态框 -->
+    <div id="kansaiModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>日本关西地区介绍</h2>
+                <div class="close-btn">&times;</div>
+            </div>
+            <div class="modal-body">
+                <p>关西地区位于日本本州岛中部，是日本历史与现代交融的核心区域，包括京都、大阪、奈良、神户等著名城市。这里是日本文化的发源地，也是现代商业和美食的天堂。</p>
+                
+                <div style="margin: 20px 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                    <div style="background: #f8f8f8; padding: 15px; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--kyoto-torii-red);">1400年</div>
+                        <div style="font-weight: bold; margin-top: 5px;">京都历史</div>
+                        <div>日本千年古都</div>
+                    </div>
+                    <div style="background: #f8f8f8; padding: 15px; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--kyoto-torii-red);">17处</div>
+                        <div style="font-weight: bold; margin-top: 5px;">世界遗产</div>
+                        <div>京都拥有17处联合国世界遗产</div>
+                    </div>
+                    <div style="background: #f8f8f8; padding: 15px; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--kyoto-torii-red);">270万</div>
+                        <div style="font-weight: bold; margin-top: 5px;">大阪人口</div>
+                        <div>日本第三大城市</div>
+                    </div>
+                    <div style="background: #f8f8f8; padding: 15px; border-radius: var(--border-radius); text-align: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: var(--kyoto-torii-red);">1600+</div>
+                        <div style="font-weight: bold; margin-top: 5px;">神社寺庙</div>
+                        <div>关西地区神社寺庙数量</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 30px 0;">
+                    <h3>关西必游景点</h3>
+                    <p>关西地区拥有众多世界级景点：</p>
+                    <ul style="padding-left: 25px; margin-bottom: 20px;">
+                        <li><strong>京都</strong>：伏见稻荷大社千本鸟居、金阁寺、清水寺、岚山竹林</li>
+                        <li><strong>大阪</strong>：大阪城、环球影城、道顿堀、梅田蓝天大厦</li>
+                        <li><strong>奈良</strong>：东大寺、奈良公园（与鹿共游）</li>
+                        <li><strong>神户</strong>：神户港、有马温泉、北野异人馆</li>
+                    </ul>
+                    
+                    <h3>美食天堂</h3>
+                    <p>关西被誉为"日本的厨房"，必尝美食包括：</p>
+                    <ul style="padding-left: 25px; margin-bottom: 20px;">
+                        <li><span style="color: var(--kyoto-torii-red); font-weight: bold;">大阪烧</span> - 大阪的灵魂美食</li>
+                        <li>章鱼烧 - 大阪街头小吃代表</li>
+                        <li>京都怀石料理 - 精致的传统料理</li>
+                        <li>神户牛肉 - 世界顶级和牛</li>
+                        <li>宇治抹茶甜品 - 京都特色</li>
+                        <li>河豚料理 - 下关特产</li>
+                    </ul>
+                    
+                    <h3>特色体验</h3>
+                    <p>在关西不可错过的独特体验：</p>
+                    <ul style="padding-left: 25px;">
+                        <li>穿着和服漫步京都古街</li>
+                        <li>在伏见稻荷大社穿越千本鸟居</li>
+                        <li>大阪环球影城体验哈利波特魔法世界</li>
+                        <li>奈良公园喂食小鹿</li>
+                        <li>神户港夜景与温泉体验</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-home">
+                <i class="fas fa-arrow-left"></i> <span>返回旷野</span>
+            </a>
+            <div class="hero-sun" aria-hidden="true"></div>
+            <div class="hero-jp" aria-hidden="true">関西地方 · 旅の記録</div>
+            <div class="hero-torii" aria-hidden="true"><i></i><i></i></div>
+            <div class="hero-content">
+                <div class="hero-kicker">Japan · Kansai field notes · 04 days</div>
+                <h1>关西，<br>风过千年</h1>
+                <p class="subtitle">日本关西 4 天 3 晚<br>从京都的晨钟，到大阪的灯火。</p>
+                <button class="intro-toggle" id="introBtn" type="button">翻开关西手记</button>
+            </div>
+        </header>
+        
+        <!-- 交通卡部分 -->
+        <div class="section preparation-section">
+            <div class="section-header">
+                <div class="icon">🚆</div>
+                <h2>关西交通指南</h2>
+            </div>
+            
+            <div class="transport-section">
+                <h3><i class="fas fa-ticket-alt"></i> 推荐交通卡</h3>
+                <div class="card-container">
+                    <div class="transport-card-lg kyoto-card-lg" data-code="01 / KANSAI" data-mark="IC">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-train"></i>
+                            </div>
+                            <div class="card-title">ICOCA卡</div>
+                        </div>
+                        <div class="card-content">
+                            <p>关西地区通用的交通卡，适用于：</p>
+                            <ul>
+                                <li>JR西日本所有线路</li>
+                                <li>大阪地铁、京都巴士</li>
+                                <li>便利店、自动贩卖机</li>
+                                <li>部分餐厅和商店</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 2000JPY（含500押金和1500可用余额）
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card-lg osaka-card-lg" data-code="02 / KYOTO" data-mark="BUS">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-bus"></i>
+                            </div>
+                            <div class="card-title">京都巴士一日券</div>
+                        </div>
+                        <div class="card-content">
+                            <p>非常适合京都观光：</p>
+                            <ul>
+                                <li>无限次乘坐京都巴士</li>
+                                <li>覆盖所有主要景点</li>
+                                <li>可在巴士上直接购买</li>
+                                <li>经济实惠的选择</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 700JPY/天
+                        </div>
+                    </div>
+                    
+                    <div class="transport-card-lg osaka-pass-card" data-code="03 / OSAKA" data-mark="PASS">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-subway"></i>
+                            </div>
+                            <div class="card-title">大阪周游卡</div>
+                        </div>
+                        <div class="card-content">
+                            <p>大阪旅游最佳选择：</p>
+                            <ul>
+                                <li>无限次乘坐大阪地铁和巴士</li>
+                                <li>免费进入28个景点</li>
+                                <li>包含大阪城、通天阁等</li>
+                                <li>购物和餐饮折扣</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <strong>费用：</strong> 2700JPY（1日券）| 3600JPY（2日券）
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <strong>交通提示：</strong> 
+                <ul style="padding-left: 25px; margin-top: 10px;">
+                    <li>机场到市区：关西机场到京都推荐乘坐Haruka特急列车（约75分钟）</li>
+                    <li>京都到大阪：JR京都线快速列车约30分钟，费用560JPY</li>
+                    <li>地铁运营时间：5:30-24:00，末班车约23:30</li>
+                    <li>出租车：起步价约600JPY（2公里），之后每公里约300JPY</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 准备事项部分 -->
+        <div class="section preparation-section">
+            <div class="section-header">
+                <div class="icon">📋</div>
+                <h2>准备事项</h2>
+            </div>
+            
+            <div class="table-container">
+                <table class="schedule-table">
+                    <tr>
+                        <th>类别</th>
+                        <th>物品</th>
+                        <th>说明/注意事项</th>
+                    </tr>
+                    <tr>
+                        <td>背包</td>
+                        <td>双肩包、胸包</td>
+                        <td>轻便出行，防盗设计</td>
+                    </tr>
+                    <tr>
+                        <td>行李箱</td>
+                        <td>20寸登机箱</td>
+                        <td>符合航空尺寸要求</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">证件类</td>
+                        <td>护照</td>
+                        <td>含日本签证</td>
+                    </tr>
+                    <tr>
+                        <td>身份证</td>
+                        <td>大陆身份证明</td>
+                    </tr>
+                    <tr>
+                        <td>银行卡</td>
+                        <td>银联、VISA/万事达（需提前报备境外行程）</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">电子类</td>
+                        <td>充电宝</td>
+                        <td>≤100Wh（民航规定）</td>
+                    </tr>
+                    <tr>
+                        <td>转换插头</td>
+                        <td>日本双孔转换插头</td>
+                    </tr>
+                    <tr>
+                        <td>日本流量</td>
+                        <td>共享WIFI或日本电话卡</td>
+                    </tr>
+                    <tr>
+                        <td>充电器</td>
+                        <td>多设备充电线</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">日用类</td>
+                        <td>外套</td>
+                        <td>日本室内外温差大</td>
+                    </tr>
+                    <tr>
+                        <td>雨伞</td>
+                        <td>折叠伞</td>
+                    </tr>
+                    <tr>
+                        <td>水杯</td>
+                        <td>便携水杯</td>
+                    </tr>
+                    <tr>
+                        <td>现金</td>
+                        <td>10000-15000JPY</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="important-note">
+                <strong>重要提示：</strong> 日本和中国出入境有严格规定，请务必遵守以下要求
+            </div>
+            
+            <div class="prohibited-container">
+                <div class="prohibited-box" data-code="CN → JP" data-mark="01">
+                    <div class="prohibited-title">中国→日本 禁止携带</div>
+                    <div class="prohibited-item">生鲜食品及动物制品</div>
+                    <div class="prohibited-item">处方药品（需医生证明）</div>
+                    <div class="prohibited-item">名贵药材（如人参、鹿茸等）</div>
+                    <div class="prohibited-item">超过规定数量的烟酒</div>
+                </div>
+                
+                <div class="prohibited-box" data-code="JP → CN" data-mark="02">
+                    <div class="prohibited-title">日本→中国 禁止携带</div>
+                    <div class="prohibited-item">生鲜水果及动物制品</div>
+                    <div class="prohibited-item">未申报的奢侈品（超过5000元需申报）</div>
+                    <div class="prohibited-item">超过规定数量的烟酒</div>
+                    <div class="prohibited-item">超过限额的现金（超过2万需申报）</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 移动端日期导航 -->
+        <div class="mobile-day-nav">
+            <button class="day-btn active" data-day="1">DAY1</button>
+            <button class="day-btn" data-day="2">DAY2</button>
+            <button class="day-btn" data-day="3">DAY3</button>
+            <button class="day-btn" data-day="4">DAY4</button>
+        </div>
+        
+        <!-- DAY1 抵达京都 -->
+        <div class="section day-section active" id="day1-section">
+            <div class="day-header kyoto-day">
+                <div class="day-icon">✈️</div>
+                <div class="day-title">DAY1 抵达京都</div>
+            </div>
+            
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:20</td>
+                        <td class="location-cell">杭州萧山国际机场T4航站楼</td>
+                        <td>出发</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:20-16:30</td>
+                        <td class="location-cell">杭州→大阪</td>
+                        <td>飞行行程</td>
+                        <td>GJ8077航班</td>
+                        <td>约3小时</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">16:30</td>
+                        <td class="location-cell">大阪关西国际机场</td>
+                        <td>通关（约1小时）</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">17:30-18:00</td>
+                        <td class="location-cell">关西机场→京都站</td>
+                        <td>前往京都</td>
+                        <td>JR特急Haruka列车 <span class="budget-cell">3600JPY</span></td>
+                        <td>约75分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">18:10</td>
+                        <td class="location-cell">京都天妇罗 天天天</td>
+                        <td>晚餐<br><span class="budget-cell">预算3000JPY</span></td>
+                        <td>步行 300米</td>
+                        <td>5分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">19:00</td>
+                        <td class="location-cell">酒店</td>
+                        <td>办理入住<br>DoubleTree by Hilton</td>
+                        <td>京都地铁乌丸线 <span class="budget-cell">210JPY</span></td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">19:30</td>
+                        <td class="location-cell">伏见稻荷大社</td>
+                        <td>夜游千本鸟居<br><span class="budget-cell">免费</span></td>
+                        <td>JR奈良线 <span class="budget-cell">150JPY</span></td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">21:00</td>
+                        <td class="location-cell">酒店</td>
+                        <td>返回休息</td>
+                        <td>JR奈良线</td>
+                        <td>20分钟</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 从关西机场到京都最便捷的方式是乘坐Haruka特急列车，可使用ICOCA卡+Haruka折扣券
+            </div>
+        </div>
+        
+        <!-- DAY2 京都古都巡礼 -->
+        <div class="section day-section" id="day2-section">
+            <div class="day-header kyoto-day">
+                <div class="day-icon">🏯</div>
+                <div class="day-title">DAY2 京都古都巡礼</div>
+            </div>
+            
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:00</td>
+                        <td class="location-cell">酒店（京都站）</td>
+                        <td>起床+早餐</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:30</td>
+                        <td class="location-cell">金阁寺</td>
+                        <td>游览1小时<br><span class="budget-cell">门票400JPY</span></td>
+                        <td>京都巴士101路 <span class="budget-cell">230JPY</span></td>
+                        <td>40分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">11:40</td>
+                        <td class="location-cell">平安神宫</td>
+                        <td>游览1小时<br><span class="budget-cell">门票600JPY</span></td>
+                        <td>京都巴士102路</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">13:00</td>
+                        <td class="location-cell">清水寺</td>
+                        <td>游览1小时<br><span class="budget-cell">门票400JPY</span></td>
+                        <td>地铁东西线+巴士206路</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">14:30</td>
+                        <td class="location-cell">三年坂二年坂</td>
+                        <td>古街漫步、购物<br><span class="budget-cell">预算5000JPY</span></td>
+                        <td>步行</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">15:00</td>
+                        <td class="location-cell">八坂神社</td>
+                        <td>游览1小时<br><span class="budget-cell">免费</span></td>
+                        <td>步行</td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">16:30</td>
+                        <td class="location-cell">鸭川纳凉床</td>
+                        <td>休憩、下午茶</td>
+                        <td>步行</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">17:00</td>
+                        <td class="location-cell">河原町</td>
+                        <td>晚餐+购物<br>本格烧肉、优衣库<br><span class="budget-cell">预算8000JPY</span></td>
+                        <td>步行</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">21:00</td>
+                        <td class="location-cell">酒店</td>
+                        <td>返回休息</td>
+                        <td>地铁乌丸线</td>
+                        <td>25分钟</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 推荐购买京都巴士一日券(700JPY)，一天乘坐3次以上即划算
+            </div>
+        </div>
+        
+        <!-- DAY3 大阪都市探索 -->
+        <div class="section day-section" id="day3-section">
+            <div class="day-header osaka-day">
+                <div class="day-icon">🏙️</div>
+                <div class="day-title">DAY3 大阪都市探索</div>
+            </div>
+            
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:00</td>
+                        <td class="location-cell">京都酒店</td>
+                        <td>起床+早餐+退房</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">11:30</td>
+                        <td class="location-cell">大阪酒店（动物园前站）</td>
+                        <td>寄存行李</td>
+                        <td>JR京都线新快速 <span class="budget-cell">560JPY</span></td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">12:00</td>
+                        <td class="location-cell">大阪城天守阁</td>
+                        <td>游览1小时<br><span class="budget-cell">门票600JPY</span></td>
+                        <td>大阪地铁中央线</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">12:30</td>
+                        <td class="location-cell">梅田</td>
+                        <td>购物：阪急百货、友都八喜<br><span class="budget-cell">限时优惠 电器免税+折扣</span></td>
+                        <td>大阪地铁谷町线</td>
+                        <td>30分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">18:00</td>
+                        <td class="location-cell">道顿堀</td>
+                        <td>格力高广告牌拍照<br>美食探索：章鱼烧、大阪烧</td>
+                        <td>大阪地铁御堂筋线</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">19:00</td>
+                        <td class="location-cell">难波</td>
+                        <td>晚餐+药妆店购物<br><span class="budget-cell">预算10000JPY</span></td>
+                        <td>步行</td>
+                        <td>10分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">21:00</td>
+                        <td class="location-cell">酒店</td>
+                        <td>返回休息</td>
+                        <td>大阪地铁堺筋线</td>
+                        <td>30分钟</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 大阪市内推荐购买大阪周游卡，包含无限次地铁和多个景点门票
+            </div>
+        </div>
+        
+        <!-- DAY4 奥特莱斯与返程 -->
+        <div class="section day-section" id="day4-section">
+            <div class="day-header osaka-day">
+                <div class="day-icon">🛍️</div>
+                <div class="day-title">DAY4 奥特莱斯与返程</div>
+            </div>
+            
+            <div class="schedule-container">
+                <table class="schedule-table">
+                    <tr>
+                        <th>时间</th>
+                        <th>地点</th>
+                        <th>活动内容/预算</th>
+                        <th>交通方式/费用</th>
+                        <th>交通耗时</th>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:00</td>
+                        <td class="location-cell">酒店</td>
+                        <td>起床+早餐+退房</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">10:30</td>
+                        <td class="location-cell">临空奥特莱斯</td>
+                        <td>购物：NIKE、北面等品牌<br>午餐<br><span class="budget-cell">预算20000JPY</span></td>
+                        <td>JR关空快速线 <span class="budget-cell">480JPY</span></td>
+                        <td>25分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">17:00</td>
+                        <td class="location-cell">关西国际机场</td>
+                        <td>办理登机手续</td>
+                        <td>机场穿梭巴士 <span class="budget-cell">200JPY</span></td>
+                        <td>20分钟</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">17:30</td>
+                        <td class="location-cell">机场免税店</td>
+                        <td>购物：生巧、白色恋人、烟酒<br><span class="budget-cell">预算15000JPY</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td class="time-cell">19:50</td>
+                        <td class="location-cell">杭州萧山机场</td>
+                        <td>抵达</td>
+                        <td>GJ8078航班</td>
+                        <td>约3小时</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note">
+                <strong>交通提示：</strong> 从临空奥特莱斯到机场有免费穿梭巴士，约10分钟一班
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer>
+            <p>© 2025 日本关西旅游攻略 | 千年古都与现代都市的完美融合</p>
+            <p>公共交通复杂，请注意站台与车次</p>
+            <p>©攻略均为旅游后整理，具体请以实际为准 | 如有侵权电邮 mao.sun@foxmail.com</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 关西介绍模态框控制
+            const modal = document.getElementById('kansaiModal');
+            const introBtn = document.getElementById('introBtn');
+            const closeBtn = document.querySelector('.close-btn');
+            
+            // 打开模态框
+            if (introBtn) {
+                introBtn.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // 关闭模态框
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // 点击模态框背景关闭
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // 返回顶部按钮功能
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', function() {
+                backToTopBtn.classList.toggle('show', window.scrollY > 300);
+            });
+            
+            // 返回顶部功能
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 移动端日期导航功能
+            const dayBtns = document.querySelectorAll('.day-btn');
+            const daySections = document.querySelectorAll('.day-section');
+            
+            if (dayBtns.length && daySections.length) {
+                dayBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 更新按钮状态
+                        dayBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // 显示对应日期内容
+                        const day = this.dataset.day;
+                        daySections.forEach(section => {
+                            section.classList.remove('active');
+                            if (section.id === `day${day}-section`) {
+                                section.classList.add('active');
+                            }
+                        });
+                        
+                        // 不再自动滚动到该部分
+                        // 保留页面当前位置
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
