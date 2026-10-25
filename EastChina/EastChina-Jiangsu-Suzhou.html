@@ -2,41 +2,46 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>苏州3天2晚旅游攻略</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@600;700;900&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    苏州 · 地域设计系统
-   母题：园林 / 运河 / 水巷 / 粉墙黛瓦
-   （与北京页同一体系：天光蓝渐变 / 纸色 / 墨色 / 印章红）
+   母题：运河 / 水巷 / 园林窗 / 粉墙黛瓦 / 泊船
+   版式：一条运河贯穿行程区，站点如泊船沿水线左右停靠；
+         每一天框在一扇园林窗里，疏朗透气。
    ============================================================ */
 :root{
-  --sky-0:#0B2740; --sky-1:#1F4E78; --sky-2:#4C82AC; --sky-3:#8FB6CE;
-  --sky-4:#CFE0E6; --glow:#F2E2C0;
-  --paper:#F5F2EA; --paper-hi:#FDFAF2;
-  --ink:#1C2320; --ink-soft:#6A7169; --ink-faint:#9AA196;
-
-  --garden:#2F5D50;       /* 园林黛绿 */
-  --garden-deep:#1E4034;
-  --glaze:#B8892B;        /* 桂花金 */
-  --tile:#5C665F;         /* 黛瓦灰 */
-  --seal:#C0422F;         /* 印章红 */
-  --seal-deep:#8E2B1E;
-
-  --rule:rgba(28,35,32,.12);
-  --rule-strong:rgba(28,35,32,.26);
+  --deep-0:#0F2C22;
+  --deep:#1C463A;
+  --pine:#2F5D50;          /* 黛绿 · 主色 */
+  --pine-soft:#477C6B;
+  --water:#6FA294;
+  --water-soft:#A9C9BC;
+  --mist:#DCE9E1;
+  --fog:#EDF2EC;
+  --paper:#F5F2EA;
+  --paper-hi:#FDFAF1;
+  --ink:#22302A;
+  --ink-soft:#5C6B62;
+  --ink-faint:#93A198;
+  --gold:#B8892B;           /* 桂花金 · 小点缀 */
+  --seal:#C0422F;
+  --line:rgba(47,93,80,.22);
+  --line-soft:rgba(47,93,80,.13);
   --font-title:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',serif;
   --font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   --gut:clamp(20px,5vw,56px);
-  --wrap:1080px;
+  --wrap:1060px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
   font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-:where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--garden);outline-offset:3px;border-radius:3px}
+:where(a,button,[tabindex]):focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:3px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}
@@ -44,687 +49,741 @@ body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
 .ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;
   stroke-linecap:round;stroke-linejoin:round}
 
-/* ============================================================
-   HERO · 姑苏水巷天际线（左：北寺塔 / 中：临水粉墙 / 右：拱桥）
-   ============================================================ */
-.hero{position:relative;min-height:clamp(360px,56vh,560px);display:flex;flex-direction:column;
-  justify-content:flex-end;padding:0 var(--gut) clamp(30px,5vw,52px);overflow:hidden;
-  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 26%,var(--sky-2) 52%,
-    var(--sky-3) 74%,var(--sky-4) 88%,var(--glow) 96%,var(--paper) 100%)}
-.sky-orn{position:absolute;inset:0;width:100%;height:100%}
-.sky-orn .far{fill:#2F5678;opacity:.3}
-.sky-orn .mid{fill:#1E405C;opacity:.5}
-.sky-orn .near{fill:#122A3C;opacity:.9}
-.sky-orn .win{fill:var(--glow);opacity:.5}
-
-/* 印章 */
-.seal{position:absolute;right:var(--gut);top:clamp(64px,10vw,96px);width:76px;height:76px;
-  border:2.5px solid rgba(255,255,255,.85);border-radius:8px;display:grid;place-items:center;
-  color:#fff;font-family:var(--font-title);font-size:2.1rem;font-weight:700;letter-spacing:0;
-  opacity:.92;transform:rotate(4deg)}
-.seal::after{content:"苏 州";position:absolute;bottom:-26px;right:2px;font-size:11px;
-  letter-spacing:.34em;font-family:var(--font-body);font-weight:400;opacity:.8}
-
-.hero .back{position:absolute;top:clamp(16px,3vw,28px);left:var(--gut);z-index:5;
-  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
-  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;
-  text-decoration:none;font-size:13px;letter-spacing:.05em;backdrop-filter:blur(8px);
-  transition:background .25s ease,transform .25s ease}
-.hero .back:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
-
-.hero .inner{position:relative;z-index:3;max-width:var(--wrap);margin:0 auto;width:100%}
-.hero .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:rgba(255,255,255,.68);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.hero .eyebrow::after{content:"";width:46px;height:1px;background:rgba(255,255,255,.45)}
-.hero h1{font-family:var(--font-title);font-weight:700;color:#fff;
-  font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.04;letter-spacing:.04em;
-  text-shadow:0 2px 32px rgba(0,0,0,.22)}
-.hero .sub{margin-top:14px;color:rgba(255,255,255,.82);font-weight:300;
-  font-size:clamp(.95rem,1.8vw,1.12rem);max-width:38ch;letter-spacing:.03em}
-.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,3vw,26px)}
-.hero .meta span{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.92);
-  padding:5px 13px;border-radius:2px;background:rgba(47,93,80,.42);
-  border:1px solid rgba(255,255,255,.26)}
+/* ---------- 返回 / 回顶 ---------- */
+.back-home{position:fixed;top:16px;left:16px;z-index:200;display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px;border-radius:999px;background:rgba(253,250,241,.94);
+  border:1.5px solid var(--pine);color:var(--pine);font-weight:600;font-size:.86rem;
+  text-decoration:none;box-shadow:0 3px 12px rgba(15,44,34,.16);transition:.25s}
+.back-home:hover{background:var(--pine);color:#fff;transform:translateY(-2px)}
+.back-top{position:fixed;right:20px;bottom:22px;z-index:200;width:46px;height:46px;border:none;border-radius:50%;
+  background:var(--pine);color:#fff;cursor:pointer;display:grid;place-items:center;font-size:1.15rem;
+  box-shadow:0 4px 14px rgba(15,44,34,.3);opacity:0;transform:translateY(80px);transition:.35s}
+.back-top.visible{opacity:1;transform:none}
+.back-top:hover{background:var(--deep)}
 
 /* ============================================================
-   地面
+   HERO · 清晨的水巷（深黛绿 → 水绿 → 雾白 → 纸色）
    ============================================================ */
-.ground{position:relative;z-index:3;background:var(--paper);border-radius:22px 22px 0 0;
-  margin-top:-1px;box-shadow:0 -20px 60px rgba(0,0,0,.08)}
+.hero{position:relative;overflow:hidden;color:#fff;
+  padding:clamp(76px,11vw,118px) var(--gut) 0;
+  background:linear-gradient(180deg,var(--deep-0) 0%,var(--deep) 30%,var(--pine) 52%,
+    var(--water) 74%,#C4DAD0 90%,var(--paper) 100%)}
+.hero .inner{position:relative;z-index:3;max-width:var(--wrap);margin:0 auto;text-align:center}
+.hero .eyebrow{font-size:11px;letter-spacing:.42em;color:rgba(255,255,255,.66);margin-bottom:16px}
+.hero h1{font-family:var(--font-title);font-weight:900;line-height:1.05;letter-spacing:.08em;
+  font-size:clamp(3.2rem,10vw,5.6rem);text-shadow:0 3px 34px rgba(10,30,22,.35);
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,26px)}
+.hero h1 .seal{flex:none;width:clamp(52px,8vw,72px);height:clamp(52px,8vw,72px);
+  display:grid;place-items:center;background:var(--seal);color:#fff;border-radius:9px;
+  font-size:clamp(.95rem,2.2vw,1.3rem);font-weight:700;letter-spacing:.14em;line-height:1.25;
+  transform:rotate(4deg);box-shadow:0 6px 20px rgba(10,30,22,.35);padding:.2em}
+.hero .days-line{margin-top:16px;font-family:var(--font-title);font-size:clamp(1rem,2.4vw,1.3rem);
+  letter-spacing:.5em;color:var(--mist)}
+.hero .sub{margin:16px auto 0;max-width:600px;font-weight:300;
+  font-size:clamp(.95rem,1.9vw,1.08rem);color:rgba(255,255,255,.88);letter-spacing:.04em}
+.hero .scene{display:block;width:100%;height:clamp(120px,17vw,210px);margin-top:clamp(20px,4vw,38px)}
+
+/* ---------- 通用版心 / 章节题 ---------- */
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
-main{padding:clamp(44px,7vw,76px) 0 clamp(48px,7vw,88px)}
-
-.sec{margin-top:clamp(48px,8vw,88px);scroll-margin-top:20px}
+main{padding:clamp(40px,6vw,64px) 0 10px}
+.sec{margin-top:clamp(52px,8vw,84px)}
 .sec:first-child{margin-top:0}
-.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:14px;
-  border-bottom:1px solid var(--rule);margin-bottom:clamp(22px,4vw,34px)}
-.sec-h h2{font-family:var(--font-title);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;letter-spacing:.04em}
-.sec-h .n{font-family:var(--font-title);color:var(--ink-faint);font-size:.92rem;font-weight:300}
-.sec-h .d{margin-left:auto;font-size:12px;color:var(--ink-faint);letter-spacing:.05em}
-
-/* 中式分隔（替代普通 hr） */
-.part{display:flex;align-items:center;gap:12px;margin:clamp(34px,6vw,56px) 0;color:var(--glaze)}
-.part::before,.part::after{content:"";flex:1;height:1px;background:var(--rule)}
-.part i{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.part i+i{margin-left:-6px;opacity:.5}
-
-/* 提示条 */
-.note{display:flex;gap:13px;align-items:flex-start;background:#FBF3DF;border-left:3px solid var(--glaze);
-  border-radius:0 8px 8px 0;padding:13px 17px;margin:20px 0;font-size:.93rem;line-height:1.7}
-.note b{color:#8A6D2F;font-weight:600;flex:none}
-.note.red{background:rgba(192,66,47,.07);border-left-color:var(--seal)}
-.note.red b{color:var(--seal-deep)}
+.sec-h{display:flex;align-items:center;gap:14px;margin-bottom:clamp(20px,3.4vw,30px)}
+.sec-h .rip{flex:none;color:var(--water)}
+.sec-h h2{font-family:var(--font-title);font-weight:700;letter-spacing:.14em;
+  font-size:clamp(1.35rem,3vw,1.8rem);color:var(--deep)}
+.sec-h .tail{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
 
 /* ============================================================
-   准备事项 · 按类别分组的物品卡（沿用原表类别）
+   准备事项 · 临水行囊（类别为系船柱签，条目以点线相连）
    ============================================================ */
-.kit{margin-top:6px}
-.kit .lvl{margin-top:24px}
-.kit .lvl:first-child{margin-top:0}
-.kit .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.kit .lvl-h .dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--garden)}
-.kit .lvl-h b{font-family:var(--font-title);font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:.08em}
-.kit .lvl-h span{font-size:11px;letter-spacing:.12em;color:var(--ink-faint)}
-.kit .lvl-h::after{content:"";flex:1;height:1px;background:var(--rule)}
+.prep{border:1px solid var(--line-soft);border-radius:18px;background:rgba(253,250,241,.72);
+  padding:clamp(8px,2vw,18px) clamp(16px,3.4vw,30px)}
+.prep-row{display:flex;gap:clamp(14px,3vw,26px);padding:15px 0;border-bottom:1px dashed var(--line-soft)}
+.prep-row:last-child{border-bottom:none}
+.prep-cat{flex:none;width:86px;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:2px}
+.prep-cat .post{width:11px;height:11px;border-radius:50%;background:var(--paper-hi);
+  border:3px solid var(--pine);box-shadow:0 0 0 4px rgba(111,162,148,.22)}
+.prep-cat .cat-name{font-family:var(--font-title);font-weight:700;letter-spacing:.22em;
+  font-size:.98rem;color:var(--pine);text-align:center}
+.prep-items{flex:1;min-width:0}
+.prep-item{display:flex;align-items:baseline;gap:10px;padding:5px 0;flex-wrap:wrap}
+.prep-item .what{font-weight:600;color:var(--ink);white-space:nowrap}
+.prep-item .leader{flex:1;min-width:24px;border-bottom:2px dotted rgba(47,93,80,.3);transform:translateY(-3px)}
+.prep-item .note-t{color:var(--ink-soft);font-size:.93rem;font-weight:300}
+.res-link{color:var(--seal);font-weight:700;cursor:pointer;text-decoration:none;border-bottom:1px solid rgba(192,66,47,.4)}
+.res-link:hover{text-decoration:underline}
+.note-band{margin-top:18px;background:linear-gradient(90deg,rgba(111,162,148,.18),rgba(111,162,148,.06));
+  border-left:3px solid var(--water);border-radius:0 10px 10px 0;
+  padding:13px 18px;font-size:.95rem;color:var(--deep)}
+.note-band strong{color:var(--pine)}
 
-.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:10px}
-.item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--rule);
-  border-radius:10px;padding:13px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
-.item:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
-.item .ic{font-size:20px;margin-top:2px;color:var(--garden)}
-.item .tx{flex:1;min-width:0}
-.item .tx b{display:block;font-size:.95rem;font-weight:600;color:var(--ink)}
-.item .tx small{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.6;margin-top:2px}
-
-.reservation-link{color:var(--seal);text-decoration:none;font-weight:600;cursor:pointer;transition:all .3s}
-.reservation-link:hover{text-decoration:underline;color:var(--seal-deep)}
+/* 预约详情 · 小园林窗 */
+#reservation-details{display:none;margin-top:20px}
+.reswin{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--paper-hi);
+  padding:clamp(22px,3.6vw,32px)}
+.reswin::before{content:"";position:absolute;inset:6px;border:1px solid var(--line-soft);
+  border-radius:11px;pointer-events:none}
+.reswin h3{font-family:var(--font-title);font-weight:700;letter-spacing:.16em;color:var(--deep);
+  font-size:1.12rem;margin-bottom:8px;position:relative}
+.bk{display:flex;align-items:baseline;gap:8px 16px;flex-wrap:wrap;position:relative;
+  padding:12px 2px;border-bottom:1px dashed var(--line-soft)}
+.bk:last-child{border-bottom:none}
+.bk .bk-name{font-family:var(--font-title);font-weight:700;font-size:1.02rem;color:var(--ink);
+  min-width:104px;letter-spacing:.06em}
+.bk.adv .bk-name{box-shadow:inset 0 -6px 0 rgba(184,137,43,.35)}
+.bk .bk-f{font-size:.9rem;color:var(--ink-soft);font-weight:300;white-space:nowrap}
+.bk .bk-f em{font-style:normal;color:var(--water);font-weight:500;margin-right:5px;letter-spacing:.08em}
 
 /* ============================================================
-   景点预约详情 · 卡片（替代 5 列表格，手机上不再横滑）
+   园林横幅 · 水面倒影分隔带
    ============================================================ */
-.bks{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.bk{position:relative;background:#fff;border:1px solid var(--rule);border-radius:10px;
-  padding:14px 16px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
-.bk:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
-.bk-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:4px}
-.bk-t h4{font-family:var(--font-title);font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:.04em}
-.bk-when{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:9px;
-  padding:6px 11px;border-radius:6px;background:rgba(184,137,43,.10)}
-.bk-when .d{font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em}
-.bk-when .d b{font-family:var(--font-title);font-size:1.05rem;color:var(--glaze);font-weight:700;padding:0 1px}
-.bk-m{margin:10px 0 0;font-size:.8rem;line-height:1.72}
-.bk-m .row{display:flex;gap:8px}
-.bk-m dt{flex:none;color:var(--ink-faint);letter-spacing:.06em;min-width:4.8em}
-.bk-m dd{margin:0;flex:1;min-width:0;color:var(--ink-soft)}
-.bk.urgent{border-color:rgba(184,137,43,.45);background:var(--paper-hi)}
-.bk.urgent::before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;
-  border-radius:0 3px 3px 0;background:var(--glaze)}
+.reflect{margin:clamp(52px,8vw,80px) 0 0;text-align:center;position:relative;
+  padding:30px 16px 6px;border-top:1px solid var(--line-soft)}
+.reflect .rt{font-family:var(--font-title);font-weight:700;color:var(--pine);
+  font-size:clamp(1.25rem,3.6vw,1.8rem);letter-spacing:.34em;text-indent:.34em}
+.reflect .rf{display:block;transform:scaleY(-1);opacity:.26;filter:blur(.7px);
+  font-family:var(--font-title);font-weight:700;color:var(--pine);
+  font-size:clamp(1.25rem,3.6vw,1.8rem);letter-spacing:.34em;text-indent:.34em;line-height:1.15;
+  -webkit-mask-image:linear-gradient(180deg,transparent 22%,#000 78%,transparent);
+  mask-image:linear-gradient(180deg,transparent 22%,#000 78%,transparent)}
+.reflect .rwave{display:block;margin:2px auto 0;width:min(520px,86%)}
 
 /* ============================================================
-   母题横幅 · 苏州园林 · 世界文化遗产
+   临水铺面 · 美食 / 必游 / 交通（雨棚 + 瓦楞檐口 + 水纹底边）
    ============================================================ */
-.motif{display:flex;align-items:center;gap:16px;margin:clamp(30px,5vw,48px) 0 6px}
-.motif .ln{flex:1;height:1px;background:var(--rule)}
-.motif i{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.motif .tx{font-family:var(--font-title);font-weight:700;font-size:clamp(.98rem,2vw,1.12rem);
-  letter-spacing:.3em;color:var(--garden-deep);white-space:nowrap}
+.shops{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.6vw,26px)}
+.shop{border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;background:var(--paper-hi);
+  box-shadow:0 8px 22px rgba(28,70,58,.06);display:flex;flex-direction:column}
+.shop .awn{height:15px;flex:none;
+  background:repeating-linear-gradient(90deg,var(--pine) 0 15px,#E7EFE9 15px 30px)}
+.shop .awn-b{height:9px;flex:none;background:var(--pine);opacity:.9;
+  -webkit-mask-image:radial-gradient(circle at 10px -3px,transparent 10px,#000 11px);
+  -webkit-mask-size:20px 9px;-webkit-mask-repeat:repeat-x;
+  mask-image:radial-gradient(circle at 10px -3px,transparent 10px,#000 11px);
+  mask-size:20px 9px;mask-repeat:repeat-x}
+.shop .shop-t{padding:14px 18px 4px;font-family:var(--font-title);font-weight:700;
+  letter-spacing:.26em;font-size:1.08rem;color:var(--deep);display:flex;align-items:center;gap:10px}
+.shop .shop-t::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.shop .tiles{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 14px 16px;flex:1}
+.tile{position:relative;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;
+  background:linear-gradient(180deg,#fff,var(--paper));padding:10px 12px 17px;
+  font-size:.92rem;font-weight:400;color:var(--ink);line-height:1.55}
+.tile::after{content:"";position:absolute;left:0;right:0;bottom:0;height:11px;
+  background-image:radial-gradient(circle at 10px -3px,transparent 11px,rgba(111,162,148,.4) 12px);
+  background-size:20px 11px;background-repeat:repeat-x}
 
 /* ============================================================
-   食 · 游 · 行 三栏（美食推荐 / 必游景点 / 交通贴士）
+   运河行程 · 水线贯穿，泊船左右停靠；每日一扇园林窗
    ============================================================ */
-.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.mini{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:16px 18px 10px;
-  transition:border-color .22s,box-shadow .22s,transform .22s}
-.mini:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
-.mini h3{font-family:var(--font-title);font-size:1.02rem;font-weight:700;color:var(--ink);
-  letter-spacing:.06em;display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.mini h3 .dot{width:8px;height:8px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.mini ul{list-style:none;margin:0;padding:0}
-.mini li{position:relative;font-size:.9rem;color:var(--ink-soft);line-height:1.6;
-  padding:7px 0 7px 16px;border-bottom:1px solid var(--rule)}
-.mini li:last-child{border-bottom:0}
-.mini li::before{content:"";position:absolute;left:1px;top:15px;width:4px;height:4px;
-  background:var(--garden);opacity:.75;transform:rotate(45deg)}
+.day-nav{display:none;gap:8px;position:sticky;top:10px;z-index:80;
+  background:rgba(220,233,225,.92);backdrop-filter:blur(6px);
+  padding:8px;border-radius:999px;margin-bottom:26px}
+.day-btn{flex:1;padding:9px 4px;border:1.5px solid rgba(47,93,80,.35);border-radius:999px;
+  background:rgba(253,250,241,.8);color:var(--pine);font-weight:700;font-size:.86rem;
+  font-family:var(--font-body);cursor:pointer;transition:.25s}
+.day-btn.active{background:var(--pine);color:#fff;border-color:var(--deep)}
 
-/* ============================================================
-   DAY 导航
-   ============================================================ */
-.days{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.93);
-  backdrop-filter:blur(10px);padding:11px 0;margin-bottom:8px;border-bottom:1px solid var(--rule)}
-.days .row{display:flex;gap:8px;overflow-x:auto}
-.day-btn{flex:0 0 auto;min-height:40px;padding:0 20px;border-radius:2px;cursor:pointer;
-  border:1px solid var(--rule-strong);background:transparent;color:var(--ink-soft);
-  font-family:var(--font-title);font-size:.9rem;font-weight:600;letter-spacing:.12em;
-  transition:all .22s ease}
-.day-btn:hover{border-color:var(--garden);color:var(--garden)}
-.day-btn[aria-selected="true"]{background:var(--garden);border-color:var(--garden);color:#fff}
+.canal{position:relative;padding:6px 0 2px}
+.canal-svg{position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:min(230px,44vw);height:100%;z-index:0;pointer-events:none}
+.daywin{position:relative;z-index:1;margin-top:clamp(46px,7vw,72px);
+  border:1px solid var(--line);border-radius:22px;
+  background:linear-gradient(180deg,rgba(253,250,241,.6),rgba(253,250,241,.38));
+  padding:clamp(30px,4.6vw,48px) clamp(18px,4vw,42px) clamp(26px,4vw,40px)}
+.daywin:first-child{margin-top:6px}
+.daywin::before{content:"";position:absolute;inset:7px;border:1px solid var(--line-soft);
+  border-radius:16px;pointer-events:none}
+.wc{position:absolute;width:33px;height:33px;color:var(--pine);opacity:.5;pointer-events:none;z-index:2}
+.wc svg{width:100%;height:100%;display:block}
+.wc.tl{top:11px;left:11px}.wc.tr{top:11px;right:11px}
+.wc.bl{bottom:11px;left:11px}.wc.br{bottom:11px;right:11px}
+.win-h{text-align:center;position:relative;margin-bottom:clamp(24px,4vw,38px)}
+.win-h .d-no{display:inline-block;font-family:var(--font-title);font-weight:900;letter-spacing:.3em;
+  text-indent:.3em;color:var(--paper-hi);background:var(--pine);border-radius:6px;
+  padding:5px 14px 4px;font-size:.92rem;transform:rotate(-1.6deg);
+  box-shadow:0 4px 12px rgba(28,70,58,.25)}
+.win-h h3{display:inline;font-family:var(--font-title);font-weight:700;letter-spacing:.18em;
+  font-size:clamp(1.3rem,3vw,1.66rem);color:var(--deep);margin-left:12px;vertical-align:-3px}
+.win-h .route{margin-top:11px;font-size:.86rem;letter-spacing:.14em;color:var(--ink-faint);font-weight:300}
 
-/* DAY 小印章 */
-.seal-mini{display:inline-grid;place-items:center;width:24px;height:24px;flex:none;align-self:center;
-  border:1.5px solid var(--seal);color:var(--seal);border-radius:3px;
-  font-family:var(--font-title);font-size:.8rem;font-weight:700;
-  transform:rotate(-3deg);opacity:.85}
+.moors{position:relative}
+.moor{position:relative;width:calc(50% - 46px);margin-top:24px}
+.moor:first-child{margin-top:2px}
+.moor.l{margin-right:auto}
+.moor.r{margin-left:auto}
+.moor::before{content:"";position:absolute;top:34px;width:46px;
+  border-top:2px dotted rgba(47,93,80,.45);z-index:1}
+.moor.l::before{left:100%}
+.moor.r::before{right:100%}
+.node{position:absolute;top:22px;width:15px;height:15px;border-radius:50%;z-index:3;
+  background:var(--paper-hi);border:3px solid var(--pine);
+  box-shadow:0 0 0 5px rgba(169,201,188,.4)}
+.node::after{content:"";position:absolute;inset:-11px;border-radius:50%;
+  border:1.5px solid rgba(111,162,148,.55)}
+.moor.l .node{left:calc(100% + 46px);transform:translateX(-50%)}
+.moor.r .node{left:-46px;transform:translateX(-50%)}
+.boat{position:relative;background:var(--paper-hi);border:1px solid var(--line-soft);
+  border-radius:14px;padding:15px 17px 13px;box-shadow:0 7px 18px rgba(28,70,58,.07)}
+.boat::before{content:"";position:absolute;top:0;left:14px;right:14px;height:5px;
+  border-radius:0 0 5px 5px;background:linear-gradient(90deg,var(--water-soft),var(--water),var(--water-soft));opacity:.75}
+.boat-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.boat-top .time{font-family:var(--font-title);font-weight:900;color:var(--pine);
+  font-size:1.06rem;letter-spacing:.05em}
+.boat-top .place{font-family:var(--font-title);font-weight:700;font-size:1.06rem;letter-spacing:.06em}
+.boat-top .cost{margin-left:auto;flex:none;font-size:.8rem;font-weight:700;letter-spacing:.06em;
+  padding:2.5px 10px;border-radius:999px;color:#7A5A14;background:rgba(184,137,43,.16);
+  border:1px solid rgba(184,137,43,.4)}
+.boat-top .cost.free{color:var(--pine);background:rgba(111,162,148,.14);border-color:rgba(111,162,148,.45)}
+.boat .act{margin-top:5px;font-weight:300;color:var(--ink-soft);font-size:.95rem}
+.boat .meta{margin-top:7px;font-size:.83rem;color:var(--ink-faint);letter-spacing:.05em;
+  display:flex;align-items:center;gap:7px}
+.boat .meta .ic{color:var(--water)}
+.day-tip{position:relative;margin-top:clamp(24px,4vw,34px);
+  background:linear-gradient(90deg,rgba(111,162,148,.17),rgba(111,162,148,.05));
+  border-left:3px solid var(--water);border-radius:0 12px 12px 0;
+  padding:13px 18px;font-size:.94rem;color:var(--deep);font-weight:300}
+.day-tip strong{color:var(--pine)}
 
-/* ============================================================
-   行程 · 水巷时间线
-   ============================================================ */
-.tl{list-style:none;position:relative;display:flex;flex-direction:column;gap:10px}
-.stop{position:relative;z-index:1;display:grid;align-items:stretch;
-  grid-template-columns:56px minmax(0,1fr) minmax(210px,40%);
-  background:linear-gradient(180deg,#fff, #FDFBF6);
-  border:1px solid var(--rule);border-radius:12px;
-  box-shadow:0 1px 2px rgba(28,35,32,.04);
-  transition:border-color .22s,box-shadow .22s,transform .22s}
-.stop:hover{border-color:var(--rule-strong);box-shadow:0 6px 20px rgba(28,35,32,.07);transform:translateY(-1px)}
-.stop>.t{position:relative;padding:15px 0 15px 8px;font-family:var(--font-title);
-  font-size:.92rem;font-weight:700;color:var(--garden);letter-spacing:.02em;
-  border-right:1px solid var(--rule)}
-.stop>.t::before{content:"";position:absolute;right:-5px;top:20px;width:8px;height:8px;
-  border-radius:50%;background:var(--paper);border:2px solid var(--glaze)}
-.stop>.b{padding:15px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0}
-.stop .b h3{font-family:var(--font-title);font-size:1.04rem;font-weight:700;color:var(--ink);line-height:1.4}
-.stop .b p{margin-top:3px;font-size:.89rem;color:var(--ink-soft);line-height:1.6}
-.stop>.meta{position:relative;display:flex;flex-direction:column;justify-content:center;gap:7px;
-  padding:14px 18px 14px 20px}
-.stop>.meta::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:0;
-  border-left:1.5px dashed rgba(184,137,43,.7);
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
-.stop>.meta .mh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.stop>.meta .mh .cost{font-size:.75rem;font-weight:600;color:#8A6D2F;
-  background:rgba(184,137,43,.14);border-radius:3px;padding:2px 8px;letter-spacing:.02em}
-.stop>.meta .mb{display:flex;flex-direction:column;gap:3px}
-.stop>.meta .mv{font-size:.76rem;color:var(--ink-soft);letter-spacing:.02em;
-  display:flex;align-items:center;gap:6px}
-.stop>.meta .mv::before{content:"";width:4px;height:4px;background:var(--glaze);
-  opacity:.75;transform:rotate(45deg);flex:none}
-.stop>.meta .tp{font-size:.74rem;color:var(--ink-faint);letter-spacing:.02em;
-  line-height:1.5;padding-left:10px}
-@media (max-width:820px){
-  .stop{grid-template-columns:52px 1fr}
-  .stop>.meta{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;
-    justify-content:flex-start;gap:5px 14px;padding:2px 14px 12px}
-  .stop>.meta::before{display:none}
-  .stop>.meta .mh{gap:7px}
-  .stop>.meta .mb{border-top:0;padding-top:0;flex-direction:row;gap:5px 14px;
-    align-items:center}
-  .stop>.meta .mb::before{content:"";width:1px;height:14px;background:rgba(184,137,43,.4)}
-  .stop>.meta .mh+.mb::before{display:none}
-  .stop>.meta .tp{padding-left:0}
+.bridge{position:relative;z-index:1;text-align:center;margin-top:clamp(40px,6vw,60px);line-height:0}
+.bridge svg{width:min(190px,52vw);height:auto;color:var(--deep)}
+
+/* ---------- 页脚 ---------- */
+footer{margin-top:clamp(56px,8vw,84px);background:linear-gradient(180deg,var(--deep),var(--deep-0));
+  color:rgba(255,255,255,.85);text-align:center;padding:34px 20px 30px}
+footer p{font-size:.88rem;font-weight:300;letter-spacing:.05em;line-height:2}
+footer .fwave{display:block;margin:0 auto 14px;width:min(430px,84%)}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:1020px){
+  .shops{grid-template-columns:1fr 1fr}
+  .shop:last-child{grid-column:1/-1}
+  .shop:last-child .tiles{grid-template-columns:repeat(4,1fr)}
 }
-footer{margin-top:clamp(52px,9vw,100px);padding-top:clamp(22px,4vw,34px);border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;
-  font-size:12px;color:var(--ink-faint);letter-spacing:.05em;line-height:1.9}
-.tools{position:fixed;right:clamp(14px,2.5vw,28px);bottom:clamp(14px,2.5vw,28px);
-  display:flex;flex-direction:column;gap:9px;z-index:40}
-.tools button,.tools .home{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-  border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink-soft);
-  text-decoration:none;cursor:pointer;transition:all .22s ease}
-.tools button:hover,.tools .home:hover{color:var(--garden);border-color:var(--garden);transform:translateY(-2px)}
-.tools button:active{transform:scale(.93)}
-.tools button[hidden]{display:none}
-
-/* 页脚天际线 */
-.foot-sky{display:block;width:100%;height:50px;color:var(--tile);opacity:.16;margin-bottom:16px}
-
-/* 地面底纹：窗棂（只在留白处隐约可见，卡片会盖住它） */
-.ground::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(90deg,rgba(92,102,95,.05) 1px,transparent 1px),
-    linear-gradient(0deg,rgba(92,102,95,.05) 1px,transparent 1px);
-  background-size:54px 54px;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
-main{position:relative;z-index:1}
-
-@media print{
-  .hero{background:#fff!important;min-height:auto;padding:24px 0}
-  .hero h1,.hero .sub,.hero .eyebrow,.seal{color:#000!important;text-shadow:none;border-color:#999}
-  .hero .meta span{color:#000!important;background:none;border-color:#999}
-  .hero .back,.tools,.days,.sky-orn{display:none!important}
-  .ground{box-shadow:none;border-radius:0}
-  .sec{break-inside:avoid;margin-top:22px}
-  .stop{break-inside:avoid}
-  .bk,.mini,.item{break-inside:avoid;box-shadow:none}
-  .book::before{display:none}
+@media (max-width:820px){
+  .day-nav{display:flex}
+  .day-section{display:none}
+  .day-section.active{display:block}
+  .canal-svg{left:2px;transform:none;width:104px}
+  .moor,.moor.l,.moor.r{width:auto;margin-left:58px;margin-right:0}
+  .moor::before{left:auto;right:100%;width:26px}
+  .moor.l .node,.moor.r .node{left:-31px;transform:translateX(-50%)}
+  .wc{width:26px;height:26px}
+}
+@media (max-width:640px){
+  .shops{grid-template-columns:1fr}
+  .shop:last-child{grid-column:auto}
+  .shop:last-child .tiles{grid-template-columns:1fr 1fr}
+  .prep-cat{width:64px}
+  .prep-cat .cat-name{font-size:.9rem}
+  .bk .bk-name{min-width:88px}
+  .back-home span{display:none}
+  .hero h1 .seal{border-radius:7px}
 }
 </style>
 </head>
 <body>
 
-<!-- ============ 图标库 ============ -->
-<svg style="display:none" aria-hidden="true">
-  <symbol id="i-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M6 16.4c.7-1.3 2-2 2.5-2s1.8.7 2.5 2M14 10h4M14 13.5h3"/></symbol>
-  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2"/><path d="M21.5 10.5v3M6 10.5v3M9.5 10.5v3"/></symbol>
-  <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 16.5h11c3 0 5-1.4 5.4-3.6.4-2 1-3.4 2.6-3.9-.5 1.6-.3 3 .1 4.2.3 1 .8 1.8 1.9 1.8H21v4H3z"/><path d="M3 16.5v3"/></symbol>
-  <symbol id="i-coat" viewBox="0 0 24 24"><path d="M8 3 4 5.5 3 10l3 1v9h12v-9l3-1-1-4.5L16 3"/><path d="M8 3c0 1.7 1.8 2.5 4 2.5S16 4.7 16 3"/></symbol>
-  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2.5 2.5 0 0 1-5 0"/></symbol>
-  <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 10v4M18 10v4"/></symbol>
-  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12.5H5.2z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/></symbol>
-  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></symbol>
-  <symbol id="i-head" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13.5" width="4.5" height="7" rx="2"/><rect x="17" y="13.5" width="4.5" height="7" rx="2"/></symbol>
-  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19"/></symbol>
+<!-- 漏窗纹样（园林窗四角） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lattice" viewBox="0 0 40 40">
+    <g fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="34" height="34"/>
+      <path d="M14.3 3v34M25.6 3v34M3 14.3h34M3 25.6h34"/>
+    </g>
+  </symbol>
 </svg>
 
-<!-- ============ HERO ============ -->
+<a href="../EastChina/EastChina-Jiangsu.html" class="back-home">
+  <svg class="ic" viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/></svg>
+  <span>返回上页</span>
+</a>
+
 <header class="hero">
-  <svg class="sky-orn" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <!-- 远景：低山与远塔 -->
-    <g class="far">
-      <path d="M0,420 L0,362 Q240,318 480,350 T960,342 T1440,354 L1440,420 Z"/>
-      <path d="M1148,420 L1148,330 L1172,330 L1172,420 Z"/>
-      <path d="M1140,330 L1180,330 L1172,320 L1148,320 Z"/>
-      <path d="M1153,320 L1153,292 L1167,292 L1167,320 Z"/>
-      <path d="M1146,292 L1174,292 L1167,283 L1153,283 Z"/>
+  <div class="inner">
+    <div class="eyebrow">江 南 · 水 乡</div>
+    <h1>苏州<span class="seal">姑苏</span></h1>
+    <div class="days-line">3 天 2 晚</div>
+    <p class="sub">体验江南水乡的精致与优雅 | 品味千年姑苏文化</p>
+  </div>
+  <svg class="scene" viewBox="0 0 1440 230" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,152 L120,152 L120,130 L150,114 L180,130 L180,152 L330,152 L330,122 L370,102 L410,122 L410,152 L600,152 L600,134 L640,118 L680,134 L680,152 L1440,152 L1440,230 L0,230 Z" fill="#2F5D50" opacity=".32"/>
+    <g fill="#1C463A" opacity=".55">
+      <path d="M1170,152 L1176,86 L1184,86 L1190,152 Z"/>
+      <path d="M1160,94 L1200,94 L1188,79 L1172,79 Z"/>
+      <path d="M1155,71 L1205,71 L1191,57 L1169,57 Z"/>
+      <path d="M1179,57 L1181,57 L1180,44 Z"/>
     </g>
-    <!-- 中景：屋顶与小桥 -->
-    <g class="mid">
-      <path d="M520,420 L520,352 L640,352 L640,420 Z"/>
-      <path d="M504,352 C520,352 532,346 546,338 C570,326 610,326 634,338 C648,346 660,352 676,352 L640,358 L520,358 Z"/>
-      <path d="M60,420 L60,366 L160,366 L160,420 Z"/>
-      <path d="M46,366 C58,366 68,361 78,354 C94,344 126,344 142,354 C152,361 162,366 174,366 L160,371 L60,371 Z"/>
-      <path d="M740,420 L740,386 Q860,330 980,386 L980,420 L934,420 Q860,374 786,420 Z"/>
-    </g>
-    <!-- 近景：北寺塔 / 临水粉墙 / 拱桥 -->
-    <g class="near">
-      <!-- 北寺塔 -->
-      <path d="M150,420 L150,330 L212,330 L212,420 Z"/>
-      <path d="M136,330 L226,330 L212,317 L150,317 Z"/>
-      <path d="M158,317 L158,262 L204,262 L204,317 Z"/>
-      <path d="M145,262 L217,262 L204,250 L158,250 Z"/>
-      <path d="M165,250 L165,210 L197,210 L197,250 Z"/>
-      <path d="M154,210 L208,210 L197,199 L165,199 Z"/>
-      <path d="M171,199 L171,166 L191,166 L191,199 Z"/>
-      <path d="M162,166 L200,166 L191,156 L171,156 Z"/>
-      <path d="M178,156 L178,128 L184,128 L184,156 Z"/>
-      <circle cx="181" cy="120" r="6"/>
-      <!-- 临水粉墙 -->
-      <path d="M400,420 L400,340 L552,340 L552,420 Z"/>
-      <path d="M380,340 C400,340 414,332 430,322 C452,308 500,308 522,322 C538,332 552,340 572,340 L552,349 L400,349 Z"/>
-      <path d="M584,420 L584,362 L696,362 L696,420 Z"/>
-      <path d="M568,362 C582,362 592,357 602,350 C618,340 662,340 678,350 C688,357 698,362 712,362 L696,368 L584,368 Z"/>
-      <!-- 拱桥 -->
-      <path d="M900,420 L900,372 Q1100,290 1300,372 L1300,420 L1228,420 Q1100,358 972,420 Z"/>
-      <path d="M994,338 L1000,338 L1000,318 L994,318 Z"/>
-      <path d="M1097,318 L1103,318 L1103,298 L1097,298 Z"/>
-      <path d="M1200,338 L1206,338 L1206,318 L1200,318 Z"/>
-      <!-- 右侧小屋 -->
-      <path d="M1330,420 L1330,368 L1440,368 L1440,420 Z"/>
-      <path d="M1316,368 C1328,368 1338,363 1348,356 C1364,346 1406,346 1422,356 C1432,363 1440,367 1448,368 L1440,373 L1330,373 Z"/>
-    </g>
-    <!-- 灯光 -->
-    <g class="win">
-      <rect x="438" y="368" width="7" height="9"/><rect x="492" y="368" width="7" height="9"/>
-      <rect x="622" y="384" width="6" height="8"/><rect x="995" y="306" width="5" height="7"/>
-      <rect x="1098" y="286" width="5" height="7"/><rect x="1201" y="306" width="5" height="7"/>
-      <rect x="176" y="288" width="5" height="7"/><rect x="176" y="228" width="5" height="7"/>
+    <path d="M240,230 L240,170 Q420,98 600,170 L600,230 L546,230 L546,180 Q420,130 294,180 L294,230 Z" fill="#1C463A" opacity=".6"/>
+    <path d="M0,230 L0,198 L90,198 L90,180 L110,166 L130,180 L130,198 L260,198 L260,184 L300,184 L300,198 L520,198 L520,178 L545,162 L570,178 L570,198 L760,198 L760,186 L820,186 L820,198 L1010,198 L1010,180 L1035,164 L1060,180 L1060,198 L1440,198 L1440,230 Z" fill="#0F2C22" opacity=".92"/>
+    <g stroke="#F5F2EA" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".45">
+      <path d="M110,216 q18,-8 36,0 t36,0"/>
+      <path d="M872,221 q18,-8 36,0 t36,0"/>
+      <path d="M1176,213 q18,-8 36,0 t36,0"/>
     </g>
   </svg>
-
-  <div class="seal">苏</div>
-
-  <a class="back" href="../EastChina/EastChina-Jiangsu.html">
-    <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-    返回上页
-  </a>
-
-  <div class="inner">
-    <div class="eyebrow">华东 · 姑苏水巷的三天</div>
-    <h1>苏州 3 天 2 晚</h1>
-    <p class="sub">体验江南水乡的精致与优雅，品味千年姑苏文化。</p>
-    <div class="meta">
-      <span>3 天 2 晚</span><span>日均步数 1.2 万+</span><span>地铁 4 号线贯穿主要景点</span><span>品味千年姑苏</span>
-    </div>
-  </div>
 </header>
 
-<!-- ============ 内容 ============ -->
-<div class="ground">
-<div class="wrap">
 <main>
+  <div class="wrap">
 
-  <!-- ===== 准备事项 ===== -->
-  <section class="sec" id="prep">
-    <div class="sec-h"><h2>准备事项</h2><span class="n">出发前 · 照单打包</span>
-      <span class="d">背包 · 证件类 · 电子类 · 日用类 · 预约类</span></div>
+    <!-- 准备事项 -->
+    <section class="sec">
+      <div class="sec-h">
+        <svg class="rip" width="30" height="14" viewBox="0 0 30 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4q7-4 14 0t14 0M1 11q7-4 14 0t14 0"/></svg>
+        <h2>准备事项</h2>
+        <span class="tail"></span>
+      </div>
 
-    <div class="kit">
-      <div class="lvl">
-        <div class="lvl-h"><span class="dot"></span><b>背包</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg>
-            <div class="tx"><b>双肩包</b><small>轻便出行，装随身物品</small></div></div>
+      <div class="prep">
+        <div class="prep-row">
+          <div class="prep-cat"><span class="post"></span><span class="cat-name">背包</span></div>
+          <div class="prep-items">
+            <div class="prep-item"><span class="what">双肩包</span><span class="leader"></span><span class="note-t">轻便出行，装随身物品</span></div>
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-cat"><span class="post"></span><span class="cat-name">证件类</span></div>
+          <div class="prep-items">
+            <div class="prep-item"><span class="what">身份证</span><span class="leader"></span><span class="note-t">必备</span></div>
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-cat"><span class="post"></span><span class="cat-name">电子类</span></div>
+          <div class="prep-items">
+            <div class="prep-item"><span class="what">充电宝</span><span class="leader"></span><span class="note-t">≤100Wh（民航规定）</span></div>
+            <div class="prep-item"><span class="what">充电器</span><span class="leader"></span><span class="note-t">带Type-C接口</span></div>
+            <div class="prep-item"><span class="what">耳机</span><span class="leader"></span><span class="note-t">地铁/高铁使用</span></div>
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-cat"><span class="post"></span><span class="cat-name">日用类</span></div>
+          <div class="prep-items">
+            <div class="prep-item"><span class="what">薄外套</span><span class="leader"></span><span class="note-t">苏州昼夜温差较大</span></div>
+            <div class="prep-item"><span class="what">折叠伞</span><span class="leader"></span><span class="note-t">防雨防晒</span></div>
+            <div class="prep-item"><span class="what">舒适鞋</span><span class="leader"></span><span class="note-t">日均步数1.2万+</span></div>
+            <div class="prep-item"><span class="what">现金</span><span class="leader"></span><span class="note-t">200-300元（小额支付）</span></div>
+          </div>
+        </div>
+        <div class="prep-row">
+          <div class="prep-cat"><span class="post"></span><span class="cat-name">预约类</span></div>
+          <div class="prep-items">
+            <div class="prep-item"><span class="what">景点预约</span><span class="leader"></span><span class="note-t"><a id="reservation-toggle" class="res-link">详情</a></span></div>
+          </div>
         </div>
       </div>
 
-      <div class="lvl">
-        <div class="lvl-h"><span class="dot"></span><b>证件类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-id"/></svg>
-            <div class="tx"><b>身份证</b><small>必备</small></div></div>
-        </div>
+      <div id="preparation-note" class="note-band">
+        <strong>注意：</strong> 部分景点需提前预约，特别是苏州博物馆需提前1-7天预约
       </div>
 
-      <div class="lvl">
-        <div class="lvl-h"><span class="dot"></span><b>电子类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-battery"/></svg>
-            <div class="tx"><b>充电宝</b><small>≤100Wh（民航规定）</small></div></div>
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-plug"/></svg>
-            <div class="tx"><b>充电器</b><small>带Type-C接口</small></div></div>
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-head"/></svg>
-            <div class="tx"><b>耳机</b><small>地铁/高铁使用</small></div></div>
+      <div id="reservation-details">
+        <div class="reswin">
+          <h3>景点预约详情</h3>
+          <div class="bk">
+            <span class="bk-name">七里山塘</span>
+            <span class="bk-f"><em>门票价格</em>免费</span>
+            <span class="bk-f"><em>预约要求</em>无需预约</span>
+            <span class="bk-f"><em>预约路径</em>-</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>全天开放</span>
+          </div>
+          <div class="bk">
+            <span class="bk-name">西园寺</span>
+            <span class="bk-f"><em>门票价格</em>5元</span>
+            <span class="bk-f"><em>预约要求</em>无需预约</span>
+            <span class="bk-f"><em>预约路径</em>现场购票</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>17:00停止入场</span>
+          </div>
+          <div class="bk adv">
+            <span class="bk-name">留园</span>
+            <span class="bk-f"><em>门票价格</em>55元</span>
+            <span class="bk-f"><em>预约要求</em>提前1-7天预约</span>
+            <span class="bk-f"><em>预约路径</em>"苏州园林旅游"公众号</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>17:30停止售票</span>
+          </div>
+          <div class="bk adv">
+            <span class="bk-name">寒山寺</span>
+            <span class="bk-f"><em>门票价格</em>20元</span>
+            <span class="bk-f"><em>预约要求</em>提前1-7天预约</span>
+            <span class="bk-f"><em>预约路径</em>"寒山寺"公众号</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>17:00停止入场</span>
+          </div>
+          <div class="bk adv">
+            <span class="bk-name">苏州博物馆</span>
+            <span class="bk-f"><em>门票价格</em>免费</span>
+            <span class="bk-f"><em>预约要求</em>提前1-7天预约</span>
+            <span class="bk-f"><em>预约路径</em>"苏州博物馆"公众号/官网</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>周一闭馆</span>
+          </div>
+          <div class="bk">
+            <span class="bk-name">北塔寺</span>
+            <span class="bk-f"><em>门票价格</em>25元(登塔)</span>
+            <span class="bk-f"><em>预约要求</em>无需预约</span>
+            <span class="bk-f"><em>预约路径</em>现场购票</span>
+            <span class="bk-f"><em>闭馆/闭园时间</em>17:00停止售票</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="lvl">
-        <div class="lvl-h"><span class="dot"></span><b>日用类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-coat"/></svg>
-            <div class="tx"><b>薄外套</b><small>苏州昼夜温差较大</small></div></div>
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-umbrella"/></svg>
-            <div class="tx"><b>折叠伞</b><small>防雨防晒</small></div></div>
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-shoe"/></svg>
-            <div class="tx"><b>舒适鞋</b><small>日均步数1.2万+</small></div></div>
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-cash"/></svg>
-            <div class="tx"><b>现金</b><small>200-300元（小额支付）</small></div></div>
-        </div>
-      </div>
-
-      <div class="lvl">
-        <div class="lvl-h"><span class="dot"></span><b>预约类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-card"/></svg>
-            <div class="tx"><b>景点预约</b><small>各景点门票价格、预约要求、预约路径与闭馆时间见 <a id="reservation-toggle" class="reservation-link" href="#reservation-details" aria-expanded="false" aria-controls="reservation-details">详情</a></small></div></div>
-        </div>
-      </div>
+    <!-- 园林横幅 · 倒影 -->
+    <div class="reflect" aria-label="苏州园林 · 世界文化遗产">
+      <span class="rt">苏州园林 · 世界文化遗产</span>
+      <span class="rf" aria-hidden="true">苏州园林 · 世界文化遗产</span>
+      <svg class="rwave" viewBox="0 0 520 22" fill="none" stroke="#6FA294" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 7q16-7 32 0t32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0 32 0" opacity=".65"/>
+        <path d="M44 16q14-6 28 0t28 0 28 0 28 0 28 0 28 0 28 0 28 0 28 0 28 0 28 0" opacity=".35"/>
+      </svg>
     </div>
 
-    <div class="note red" id="preparation-note"><b>注意：</b><span>部分景点需提前预约，特别是苏州博物馆需提前1-7天预约</span></div>
-  </section>
-
-  <!-- ===== 景点预约详情（默认收起，点「详情」展开） ===== -->
-  <section class="sec" id="reservation-details" hidden>
-    <div class="sec-h"><h2>景点预约详情</h2><span class="n">RESERVATION</span>
-      <span class="d">门票价格 · 预约要求 · 预约路径 · 闭馆/闭园时间</span></div>
-
-    <div class="bks">
-      <article class="bk">
-        <div class="bk-t"><h4>七里山塘</h4></div>
-        <div class="bk-when"><span class="d">无需预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>免费</dd></div>
-          <div class="row"><dt>路径</dt><dd>-</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>全天开放</dd></div>
-        </dl>
-      </article>
-
-      <article class="bk">
-        <div class="bk-t"><h4>西园寺</h4></div>
-        <div class="bk-when"><span class="d">无需预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>5元</dd></div>
-          <div class="row"><dt>路径</dt><dd>现场购票</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>17:00停止入场</dd></div>
-        </dl>
-      </article>
-
-      <article class="bk urgent">
-        <div class="bk-t"><h4>留园</h4></div>
-        <div class="bk-when"><span class="d">提前 <b>1-7</b> 天预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>55元</dd></div>
-          <div class="row"><dt>路径</dt><dd>"苏州园林旅游"公众号</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>17:30停止售票</dd></div>
-        </dl>
-      </article>
-
-      <article class="bk urgent">
-        <div class="bk-t"><h4>寒山寺</h4></div>
-        <div class="bk-when"><span class="d">提前 <b>1-7</b> 天预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>20元</dd></div>
-          <div class="row"><dt>路径</dt><dd>"寒山寺"公众号</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>17:00停止入场</dd></div>
-        </dl>
-      </article>
-
-      <article class="bk urgent">
-        <div class="bk-t"><h4>苏州博物馆</h4></div>
-        <div class="bk-when"><span class="d">提前 <b>1-7</b> 天预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>免费</dd></div>
-          <div class="row"><dt>路径</dt><dd>"苏州博物馆"公众号/官网</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>周一闭馆</dd></div>
-        </dl>
-      </article>
-
-      <article class="bk">
-        <div class="bk-t"><h4>北塔寺</h4></div>
-        <div class="bk-when"><span class="d">无需预约</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>门票</dt><dd>25元(登塔)</dd></div>
-          <div class="row"><dt>路径</dt><dd>现场购票</dd></div>
-          <div class="row"><dt>闭馆/闭园</dt><dd>17:00停止售票</dd></div>
-        </dl>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===== 母题横幅 ===== -->
-  <div class="motif" aria-hidden="true"><span class="ln"></span><i></i><span class="tx">苏州园林 · 世界文化遗产</span><i></i><span class="ln"></span></div>
-
-  <!-- ===== 美食推荐 / 必游景点 / 交通贴士 ===== -->
-  <section class="sec">
-    <div class="trio">
-      <div class="mini">
-        <h3><span class="dot"></span>美食推荐</h3>
-        <ul>
-          <li>西园寺素面</li>
-          <li>松鼠桂鱼</li>
-          <li>苏式绿豆汤</li>
-          <li>爆鳝面</li>
-          <li>蟹黄面</li>
-          <li>苏式糕点</li>
-        </ul>
+    <!-- 临水铺面 -->
+    <section class="sec">
+      <div class="shops">
+        <div class="shop">
+          <div class="awn"></div><div class="awn-b"></div>
+          <div class="shop-t">美食推荐</div>
+          <div class="tiles">
+            <div class="tile">西园寺素面</div>
+            <div class="tile">松鼠桂鱼</div>
+            <div class="tile">苏式绿豆汤</div>
+            <div class="tile">爆鳝面</div>
+            <div class="tile">蟹黄面</div>
+            <div class="tile">苏式糕点</div>
+          </div>
+        </div>
+        <div class="shop">
+          <div class="awn"></div><div class="awn-b"></div>
+          <div class="shop-t">必游景点</div>
+          <div class="tiles">
+            <div class="tile">七里山塘夜景</div>
+            <div class="tile">西园寺素面与猫猫</div>
+            <div class="tile">留园精致园林</div>
+            <div class="tile">寒山寺钟声</div>
+            <div class="tile">平江路水乡风情</div>
+            <div class="tile">苏州博物馆建筑</div>
+          </div>
+        </div>
+        <div class="shop">
+          <div class="awn"></div><div class="awn-b"></div>
+          <div class="shop-t">交通贴士</div>
+          <div class="tiles">
+            <div class="tile">地铁4号线贯穿主要景点</div>
+            <div class="tile">网约车费用约10-25元/程</div>
+            <div class="tile">景点间距离较近，步行可达</div>
+            <div class="tile">山塘街游船约50元/人</div>
+          </div>
+        </div>
       </div>
-      <div class="mini">
-        <h3><span class="dot"></span>必游景点</h3>
-        <ul>
-          <li>七里山塘夜景</li>
-          <li>西园寺素面与猫猫</li>
-          <li>留园精致园林</li>
-          <li>寒山寺钟声</li>
-          <li>平江路水乡风情</li>
-          <li>苏州博物馆建筑</li>
-        </ul>
+    </section>
+
+    <!-- 运河行程 -->
+    <section class="sec">
+      <div class="sec-h">
+        <svg class="rip" width="30" height="14" viewBox="0 0 30 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4q7-4 14 0t14 0M1 11q7-4 14 0t14 0"/></svg>
+        <h2>沿运河 · 三日行程</h2>
+        <span class="tail"></span>
       </div>
-      <div class="mini">
-        <h3><span class="dot"></span>交通贴士</h3>
-        <ul>
-          <li>地铁4号线贯穿主要景点</li>
-          <li>网约车费用约10-25元/程</li>
-          <li>景点间距离较近，步行可达</li>
-          <li>山塘街游船约50元/人</li>
-        </ul>
+
+      <div class="day-nav">
+        <button class="day-btn active" data-day="1">DAY 1</button>
+        <button class="day-btn" data-day="2">DAY 2</button>
+        <button class="day-btn" data-day="3">DAY 3</button>
       </div>
-    </div>
-  </section>
 
-  <div class="part"><i></i><i></i></div>
+      <div class="canal">
+        <svg class="canal-svg" viewBox="0 0 200 3200" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#6FA294" stop-opacity=".5"/>
+              <stop offset=".5" stop-color="#477C6B" stop-opacity=".38"/>
+              <stop offset="1" stop-color="#6FA294" stop-opacity=".5"/>
+            </linearGradient>
+          </defs>
+          <path d="M56,0 C86,180 88,300 78,400 C60,560 40,640 34,800 C28,1000 44,1300 56,1600 C68,1900 84,2100 76,2400 C70,2700 60,2950 56,3200 L144,3200 C140,2950 150,2700 164,2400 C176,2100 132,1900 144,1600 C156,1300 172,1000 122,800 C112,640 140,560 166,400 C158,300 114,180 144,0 Z" fill="url(#waterGrad)"/>
+          <path d="M100,0 C140,400 60,800 100,1600 C140,2400 60,2800 100,3200" fill="none" stroke="#FDFAF1" stroke-width="3" stroke-dasharray="1 14" stroke-linecap="round" opacity=".55"/>
+        </svg>
 
-  <!-- ===== DAY 导航 ===== -->
-  <nav class="days" aria-label="行程日期">
-    <div class="row" role="tablist">
-      <button class="day-btn" id="day1-btn" role="tab" aria-controls="day1-section" aria-selected="true"  data-day="1">DAY 1</button>
-      <button class="day-btn" id="day2-btn" role="tab" aria-controls="day2-section" aria-selected="false" data-day="2">DAY 2</button>
-      <button class="day-btn" id="day3-btn" role="tab" aria-controls="day3-section" aria-selected="false" data-day="3">DAY 3</button>
-    </div>
-  </nav>
+        <!-- DAY 1 -->
+        <section class="daywin day-section active" id="day1-section">
+          <span class="wc tl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc tr"><svg><use href="#lattice"/></svg></span>
+          <span class="wc bl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc br"><svg><use href="#lattice"/></svg></span>
+          <div class="win-h">
+            <span class="d-no">DAY 1</span><h3>行程表</h3>
+            <div class="route">苏州站 — 七里山塘 — 山塘游船 — 酒店</div>
+          </div>
+          <div class="moors">
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">17:00</span><span class="place">苏州站</span><span class="cost free">免费</span></div>
+                <p class="act">抵达苏州</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁4号线 · 15分钟</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">17:30</span><span class="place">酒店</span><span class="cost free">免费</span></div>
+                <p class="act">办理入住</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">18:30</span><span class="place">七里山塘</span><span class="cost free">免费</span></div>
+                <p class="act">夜游体验</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁转线 · 20分钟</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">19:00</span><span class="place">山塘游船</span><span class="cost">50元</span></div>
+                <p class="act">坐船漫游</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行 · 5分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">20:00</span><span class="place">山塘街</span><span class="cost">50元</span></div>
+                <p class="act">品尝苏州小吃</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">21:30</span><span class="place">酒店</span><span class="cost free">免费</span></div>
+                <p class="act">返回休息</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁 · 25分钟</p>
+              </div>
+            </article>
+          </div>
+          <div class="day-tip">
+            <strong>七里山塘攻略：</strong> 建议购买夜游船票（约50元/人），欣赏灯光下的古运河风光。推荐品尝鑫震源生煎、赵元章肉骨烧、糖粥等特色小吃。
+          </div>
+        </section>
 
-  <!-- DAY 1 -->
-  <section class="sec day-sec" id="day1-section" role="tabpanel" aria-labelledby="day1-btn">
-    <div class="sec-h"><span class="seal-mini">壹</span><h2>DAY 1</h2><span class="n">抵达 · 夜游山塘</span>
-      <span class="d">苏州站 → 七里山塘 → 山塘街</span></div>
-    <ol class="tl">
-      <li class="stop"><div class="t">17:00</div><div class="b">
-        <h3>苏州站</h3><p>抵达苏州</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁4号线</div><div class="tp">交通耗时 · 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">17:30</div><div class="b">
-        <h3>酒店</h3><p>办理入住</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div></div></li>
-      <li class="stop"><div class="t">18:30</div><div class="b">
-        <h3>七里山塘</h3><p>夜游体验</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁转线</div><div class="tp">交通耗时 · 20 分钟</div></div></div></li>
-      <li class="stop"><div class="t">19:00</div><div class="b">
-        <h3>山塘游船</h3><p>坐船漫游</p></div><div class="meta"><div class="mh"><span class="cost">50 元</span></div><div class="mb"><div class="mv">步行</div><div class="tp">交通耗时 · 5 分钟</div></div></div></li>
-      <li class="stop"><div class="t">20:00</div><div class="b">
-        <h3>山塘街</h3><p>品尝苏州小吃</p></div><div class="meta"><div class="mh"><span class="cost">50 元</span></div><div class="mb"><div class="mv">步行</div></div></div></li>
-      <li class="stop"><div class="t">21:30</div><div class="b">
-        <h3>酒店</h3><p>返回休息</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁</div><div class="tp">交通耗时 · 25 分钟</div></div></div></li>
-    </ol>
-    <div class="note"><b>七里山塘攻略：</b><span>建议购买夜游船票（约50元/人），欣赏灯光下的古运河风光。推荐品尝鑫震源生煎、赵元章肉骨烧、糖粥等特色小吃。</span></div>
-  </section>
+        <div class="bridge" aria-hidden="true">
+          <svg viewBox="0 0 190 62" fill="currentColor"><path d="M6,62 L6,36 Q95,-16 184,36 L184,62 L152,62 L152,42 Q95,4 38,42 L38,62 Z"/></svg>
+        </div>
 
-  <!-- DAY 2 -->
-  <section class="sec day-sec" id="day2-section" role="tabpanel" aria-labelledby="day2-btn" hidden>
-    <div class="sec-h"><span class="seal-mini">贰</span><h2>DAY 2</h2><span class="n">园林 · 古寺 · 平江路</span>
-      <span class="d">西园寺 → 留园 → 寒山寺 → 平江路</span></div>
-    <ol class="tl">
-      <li class="stop"><div class="t">08:00</div><div class="b">
-        <h3>酒店</h3><p>早餐</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div></div></li>
-      <li class="stop"><div class="t">09:00</div><div class="b">
-        <h3>西园寺</h3><p>参观寺庙，品尝素面</p></div><div class="meta"><div class="mh"><span class="cost">15 元</span></div><div class="mb"><div class="mv">网约车</div><div class="tp">交通耗时 · 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">11:00</div><div class="b">
-        <h3>留园</h3><p>欣赏苏州园林</p></div><div class="meta"><div class="mh"><span class="cost">55 元</span></div><div class="mb"><div class="mv">步行</div><div class="tp">交通耗时 · 8 分钟</div></div></div></li>
-      <li class="stop"><div class="t">13:00</div><div class="b">
-        <h3>寒山寺</h3><p>游览古寺</p></div><div class="meta"><div class="mh"><span class="cost">20 元</span></div><div class="mb"><div class="mv">网约车</div><div class="tp">交通耗时 · 20 分钟</div></div></div></li>
-      <li class="stop"><div class="t">15:00</div><div class="b">
-        <h3>钟书阁</h3><p>打卡网红书店</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">网约车</div><div class="tp">交通耗时 · 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">16:30</div><div class="b">
-        <h3>平江路</h3><p>晚餐：苏帮菜</p></div><div class="meta"><div class="mh"><span class="cost">80 元</span></div><div class="mb"><div class="mv">网约车</div><div class="tp">交通耗时 · 18 分钟</div></div></div></li>
-      <li class="stop"><div class="t">18:00</div><div class="b">
-        <h3>平江路</h3><p>悠闲散步</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">步行</div></div></div></li>
-      <li class="stop"><div class="t">20:00</div><div class="b">
-        <h3>酒店</h3><p>返回休息</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁</div><div class="tp">交通耗时 · 25 分钟</div></div></div></li>
-    </ol>
-    <div class="note"><b>美食推荐：</b><span>西园寺素面不可错过，平江路推荐餐厅：松鹤楼、得月楼。松鼠桂鱼是苏帮菜代表，酸甜酥脆，必尝之选。</span></div>
-  </section>
+        <!-- DAY 2 -->
+        <section class="daywin day-section" id="day2-section">
+          <span class="wc tl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc tr"><svg><use href="#lattice"/></svg></span>
+          <span class="wc bl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc br"><svg><use href="#lattice"/></svg></span>
+          <div class="win-h">
+            <span class="d-no">DAY 2</span><h3>行程表</h3>
+            <div class="route">西园寺 — 留园 — 寒山寺 — 平江路</div>
+          </div>
+          <div class="moors">
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">08:00</span><span class="place">酒店</span><span class="cost free">免费</span></div>
+                <p class="act">早餐</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">09:00</span><span class="place">西园寺</span><span class="cost">15元</span></div>
+                <p class="act">参观寺庙，品尝素面</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 16v3M20 16v3M4 16l1.6-6.2A2 2 0 0 1 7.5 8.5h9a2 2 0 0 1 1.9 1.3L20 16"/><path d="M4 16h16"/><circle cx="7.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg>网约车 · 15分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">11:00</span><span class="place">留园</span><span class="cost">55元</span></div>
+                <p class="act">欣赏苏州园林</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行 · 8分钟</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">13:00</span><span class="place">寒山寺</span><span class="cost">20元</span></div>
+                <p class="act">游览古寺</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 16v3M20 16v3M4 16l1.6-6.2A2 2 0 0 1 7.5 8.5h9a2 2 0 0 1 1.9 1.3L20 16"/><path d="M4 16h16"/><circle cx="7.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg>网约车 · 20分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">15:00</span><span class="place">钟书阁</span><span class="cost free">免费</span></div>
+                <p class="act">打卡网红书店</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 16v3M20 16v3M4 16l1.6-6.2A2 2 0 0 1 7.5 8.5h9a2 2 0 0 1 1.9 1.3L20 16"/><path d="M4 16h16"/><circle cx="7.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg>网约车 · 15分钟</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">16:30</span><span class="place">平江路</span><span class="cost">80元</span></div>
+                <p class="act">晚餐：苏帮菜</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 16v3M20 16v3M4 16l1.6-6.2A2 2 0 0 1 7.5 8.5h9a2 2 0 0 1 1.9 1.3L20 16"/><path d="M4 16h16"/><circle cx="7.5" cy="19" r="1.4"/><circle cx="16.5" cy="19" r="1.4"/></svg>网约车 · 18分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">18:00</span><span class="place">平江路</span><span class="cost free">免费</span></div>
+                <p class="act">悠闲散步</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">20:00</span><span class="place">酒店</span><span class="cost free">免费</span></div>
+                <p class="act">返回休息</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁 · 25分钟</p>
+              </div>
+            </article>
+          </div>
+          <div class="day-tip">
+            <strong>美食推荐：</strong> 西园寺素面不可错过，平江路推荐餐厅：松鹤楼、得月楼。松鼠桂鱼是苏帮菜代表，酸甜酥脆，必尝之选。
+          </div>
+        </section>
 
-  <!-- DAY 3 -->
-  <section class="sec day-sec" id="day3-section" role="tabpanel" aria-labelledby="day3-btn" hidden>
-    <div class="sec-h"><span class="seal-mini">叁</span><h2>DAY 3</h2><span class="n">苏博 · 返程</span>
-      <span class="d">北塔寺站 → 苏州博物馆 → 苏州站</span></div>
-    <ol class="tl">
-      <li class="stop"><div class="t">08:30</div><div class="b">
-        <h3>酒店</h3><p>退房</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div></div></li>
-      <li class="stop"><div class="t">09:00</div><div class="b">
-        <h3>北塔寺站</h3><p>拍摄北寺塔</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁4号线</div><div class="tp">交通耗时 · 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">09:30</div><div class="b">
-        <h3>前往苏博</h3><p>品尝苏式美食</p></div><div class="meta"><div class="mh"><span class="cost">30 元</span></div><div class="mb"><div class="mv">步行</div><div class="tp">交通耗时 · 10 分钟</div></div></div></li>
-      <li class="stop"><div class="t">10:30</div><div class="b">
-        <h3>苏州博物馆</h3><p>参观建筑杰作</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">步行</div><div class="tp">交通耗时 · 5 分钟</div></div></div></li>
-      <li class="stop"><div class="t">13:00</div><div class="b">
-        <h3>苏博咖啡厅</h3><p>下午茶</p></div><div class="meta"><div class="mh"><span class="cost">40 元</span></div></div></li>
-      <li class="stop"><div class="t">14:30</div><div class="b">
-        <h3>苏州站</h3><p>返程</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁4号线</div><div class="tp">交通耗时 · 20 分钟</div></div></div></li>
-    </ol>
-    <div class="note"><b>苏博攻略：</b><span>苏州博物馆需提前预约（尤其是周末），馆内咖啡厅可欣赏庭院美景。附近面馆推荐：同得兴精品面馆、裕兴记面馆。</span></div>
-  </section>
+        <div class="bridge" aria-hidden="true">
+          <svg viewBox="0 0 190 62" fill="currentColor"><path d="M6,62 L6,36 Q95,-16 184,36 L184,62 L152,62 L152,42 Q95,4 38,42 L38,62 Z"/></svg>
+        </div>
 
-  <footer>
-    <svg class="foot-sky" viewBox="0 0 1200 64" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-      <g fill="currentColor">
-        <path d="M168 64V40h24v24z"/>
-        <path d="M162 40l18-8 18 8z"/>
-        <path d="M172 32v-8h16v8z"/>
-        <path d="M166 24l14-7 14 7z"/>
-        <path d="M179 17V9h2v8z"/>
-        <circle cx="320" cy="52" r="12"/>
-        <path d="M420 64V50Q480 24 540 50v14h-34Q480 50 454 64z"/>
-        <circle cx="620" cy="54" r="10"/>
-        <path d="M700 64V44h70v20z"/>
-        <path d="M692 44l43-12 43 12z"/>
-        <path d="M800 64V50h54v14z"/>
-        <path d="M794 50l33-9 33 9z"/>
-        <path d="M950 64V40h18v24z"/>
-        <path d="M944 40l12-6 12 6z"/>
-      </g>
-    </svg>
-    <span>© 2023 苏州旅游攻略 | 体验江南水乡的精致与优雅</span>
-    <span>温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准</span>
-    <span>如有侵权电邮 mao.sun@foxmail.com</span>
-  </footer>
+        <!-- DAY 3 -->
+        <section class="daywin day-section" id="day3-section">
+          <span class="wc tl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc tr"><svg><use href="#lattice"/></svg></span>
+          <span class="wc bl"><svg><use href="#lattice"/></svg></span>
+          <span class="wc br"><svg><use href="#lattice"/></svg></span>
+          <div class="win-h">
+            <span class="d-no">DAY 3</span><h3>行程表</h3>
+            <div class="route">北塔寺站 — 苏州博物馆 — 苏州站</div>
+          </div>
+          <div class="moors">
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">08:30</span><span class="place">酒店</span><span class="cost free">免费</span></div>
+                <p class="act">退房</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">09:00</span><span class="place">北塔寺站</span><span class="cost free">免费</span></div>
+                <p class="act">拍摄北寺塔</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁4号线 · 15分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">09:30</span><span class="place">前往苏博</span><span class="cost">30元</span></div>
+                <p class="act">品尝苏式美食</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行 · 10分钟</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">10:30</span><span class="place">苏州博物馆</span><span class="cost free">免费</span></div>
+                <p class="act">参观建筑杰作</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M13 4a1.6 1.6 0 1 1-1.6-1.6A1.6 1.6 0 0 1 13 4z"/><path d="M10 21l1.2-4.2L8.6 13l1-4.4L13 10l2 2.6 2.8 1"/><path d="M11.2 16.8 9 21"/></svg>步行 · 5分钟</p>
+              </div>
+            </article>
+            <article class="moor l">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">13:00</span><span class="place">苏博咖啡厅</span><span class="cost">40元</span></div>
+                <p class="act">下午茶</p>
+              </div>
+            </article>
+            <article class="moor r">
+              <span class="node"></span>
+              <div class="boat">
+                <div class="boat-top"><span class="time">14:30</span><span class="place">苏州站</span><span class="cost free">免费</span></div>
+                <p class="act">返程</p>
+                <p class="meta"><svg class="ic" viewBox="0 0 24 24"><path d="M4 15.5V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9.5"/><path d="M2 15.5h20l-2.5 4h-15z"/></svg>地铁4号线 · 20分钟</p>
+              </div>
+            </article>
+          </div>
+          <div class="day-tip">
+            <strong>苏博攻略：</strong> 苏州博物馆需提前预约（尤其是周末），馆内咖啡厅可欣赏庭院美景。附近面馆推荐：同得兴精品面馆、裕兴记面馆。
+          </div>
+        </section>
 
+      </div>
+    </section>
+
+  </div>
 </main>
-</div>
-</div>
 
-<div class="tools">
-  <a href="../EastChina/EastChina-Jiangsu.html" class="home" aria-label="返回上页" title="返回上页">
-    <svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 10v10h14V10"/></svg>
-  </a>
-  <button id="topBtn" aria-label="回到顶部" hidden>
-    <svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg>
-  </button>
-</div>
+<footer>
+  <svg class="fwave" viewBox="0 0 430 16" fill="none" stroke="#6FA294" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M4 8q13-7 27 0t27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0 27 0" opacity=".7"/>
+  </svg>
+  <p>© 2023 苏州旅游攻略 | 体验江南水乡的精致与优雅</p>
+  <p>温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准</p>
+  <p>如有侵权电邮 mao.sun@foxmail.com</p>
+</footer>
+
+<button class="back-top" id="backToTop" aria-label="回到顶部">
+  <svg class="ic" viewBox="0 0 24 24" style="stroke-width:2.2"><path d="M12 19V5"/><path d="M5.5 11.5 12 5l6.5 6.5"/></svg>
+</button>
 
 <script>
-(function(){
-  /* 预约详情切换：展开详情时收起准备事项提示，收起时恢复（与原页行为一致） */
-  var toggle=document.getElementById('reservation-toggle');
-  var details=document.getElementById('reservation-details');
-  var note=document.getElementById('preparation-note');
-  if(toggle&&details&&note){
-    toggle.addEventListener('click',function(e){
-      e.preventDefault();
-      var open=details.hidden;
-      details.hidden=!open;
-      note.hidden=open;
-      toggle.setAttribute('aria-expanded',open?'true':'false');
-      if(open) details.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  }
+document.addEventListener('DOMContentLoaded', function() {
+    // 预约详情切换（展开详情时收起提示，收起时恢复提示，与原页行为一致）
+    const toggleLink = document.getElementById('reservation-toggle');
+    const details = document.getElementById('reservation-details');
+    const note = document.getElementById('preparation-note');
 
-  /* DAY 导航：宽屏显示全部，窄屏按选项卡切换（与原页行为一致） */
-  var btns=[].slice.call(document.querySelectorAll('.day-btn'));
-  var secs=[].slice.call(document.querySelectorAll('.day-sec'));
-  var narrow=window.matchMedia('(max-width:900px)');
-
-  function showDay(d){
-    btns.forEach(function(b){ b.setAttribute('aria-selected', b.dataset.day===String(d)) });
-    if(narrow.matches){
-      secs.forEach(function(s){ s.hidden = s.id!=='day'+d+'-section' });
+    if (toggleLink && details && note) {
+        toggleLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            note.style.display = details.style.display === 'block' ? 'none' : 'block';
+        });
     }
-    try{ localStorage.setItem('sz-day', d) }catch(e){}
-  }
-  btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      var d=+b.dataset.day; showDay(d);
-      var t = narrow.matches ? document.querySelector('.days')
-                             : document.getElementById('day'+d+'-section');
-      t.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-  function sync(){
-    if(narrow.matches){
-      var cur=btns.filter(function(b){return b.getAttribute('aria-selected')==='true'})[0];
-      var d=cur? +cur.dataset.day : 1;
-      secs.forEach(function(s){ s.hidden = s.id!=='day'+d+'-section' });
-    }else{ secs.forEach(function(s){ s.hidden=false }) }
-  }
-  if(narrow.addEventListener) narrow.addEventListener('change',sync);
-  else if(narrow.addListener) narrow.addListener(sync);
 
-  var last=1; try{ last=+(localStorage.getItem('sz-day')||1) }catch(e){}
-  if(last<1||last>3) last=1;
-  showDay(last); sync();
+    // 回到顶部
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+        });
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-  /* 回到顶部 */
-  var tb=document.getElementById('topBtn'), ticking=false;
-  addEventListener('scroll',function(){
-    if(ticking) return; ticking=true;
-    requestAnimationFrame(function(){ tb.hidden = scrollY < 300; ticking=false });
-  },{passive:true});
-  tb.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}) });
-})();
+    // 移动端日期导航（窄屏切换单日，宽屏全展）
+    const dayBtns = document.querySelectorAll('.day-btn');
+    const daySections = document.querySelectorAll('.day-section');
+
+    if (dayBtns.length && daySections.length) {
+        dayBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                dayBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const day = this.dataset.day;
+                daySections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === `day${day}-section`) {
+                        section.classList.add('active');
+                    }
+                });
+            });
+        });
+    }
+});
 </script>
 </body>
 </html>
