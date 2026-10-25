@@ -26,25 +26,13 @@ body{font-family:var(--font-body);color:var(--ink);background:var(--paper);-webk
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
 
-/* ---------- HERO ---------- */
-.hero{position:relative;overflow:hidden;color:#fff;
-  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 52%,var(--sky-2) 100%)}
-.hero .sun{position:absolute;top:12%;right:14%;width:190px;height:190px;border-radius:50%;
-  background:radial-gradient(circle,var(--glow) 0%,rgba(242,226,192,.55) 34%,rgba(242,226,192,0) 68%);
-  opacity:.85;pointer-events:none}
-.hero .cloud{position:absolute;border-radius:999px;background:rgba(255,255,255,.14);filter:blur(2px);pointer-events:none}
-.hero .cloud.c1{top:16%;left:6%;width:220px;height:26px}
-.hero .cloud.c2{top:30%;left:58%;width:150px;height:18px;opacity:.7}
-.hero .cloud.c3{top:8%;left:38%;width:110px;height:14px;opacity:.5}
-/* 月洞门：门内是一方园林小景 */
-.moon-gate{position:absolute;top:46%;right:calc(var(--gut) + 6px);transform:translateY(-50%);
-  width:clamp(230px,29vw,350px);height:clamp(230px,29vw,350px);border-radius:50%;
-  border:2px solid rgba(255,255,255,.55);
-  box-shadow:0 0 0 10px rgba(255,255,255,.10),0 0 0 12px rgba(255,255,255,.28),0 24px 60px rgba(0,0,0,.28);
-  overflow:hidden;pointer-events:none}
-.moon-gate svg{width:100%;height:100%;display:block}
-.hero .wall{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:120px;pointer-events:none}
-.hero-inner{position:relative;max-width:var(--wrap);margin:0 auto;padding:104px var(--gut) 150px}
+/* ---------- HERO · 园林借景（整幅园子） ---------- */
+.hero{position:relative;overflow:hidden;color:#fff;min-height:640px;
+  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 46%,var(--sky-2) 78%,var(--sky-3) 100%)}
+.scene{position:absolute;left:0;right:0;bottom:0;width:100%;pointer-events:none}
+.scene-d{height:440px}
+.scene-m{display:none;height:340px}
+.hero-inner{position:relative;z-index:2;max-width:var(--wrap);margin:0 auto;padding:96px var(--gut) 300px}
 .home-link{position:absolute;top:26px;left:var(--gut);z-index:3;font-size:13px;letter-spacing:.14em;
   color:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:7px 16px;
   transition:.25s}
@@ -173,77 +161,244 @@ footer .fin{max-width:var(--wrap);margin:0 auto;padding:30px var(--gut) 44px;
   font-size:13px;font-weight:300;line-height:2;color:var(--ink-faint);letter-spacing:.06em}
 
 @media (max-width:900px){
-  .moon-gate{width:210px;height:210px;top:auto;bottom:96px;transform:none;opacity:.55}
+  .hero{min-height:580px}
+  .scene-d{height:390px}
   .hero .sub{max-width:480px}
 }
 @media (max-width:640px){
-  .hero-inner{padding:88px var(--gut) 130px}
+  .hero{min-height:0}
+  .scene-d{display:none}
+  .scene-m{display:block}
+  .hero-inner{padding:84px var(--gut) 356px}
   .home-link{left:20px}
-  .moon-gate{display:none}
   .entry .vtext{display:none}
   .entry .main{padding-right:0}
   .entry .ghost{right:6px}
   .entry .days{display:none}
   .entry .lat{display:none}
-  .entry.e-nanjing,.entry.e-suzhou{width:100%;margin-left:0;--tilt:0deg}
-  .entry.e-suzhou{margin-top:26px}
+  .entry.e-nanjing{width:97%;margin-right:auto;--tilt:-.5deg}
+  .entry.e-suzhou{width:86%;margin-left:auto;margin-top:30px;--tilt:.6deg}
 }
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <div class="sun"></div>
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="moon-gate" aria-hidden="true">
-    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="mg-sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#F3EBD3"/>
-          <stop offset=".55" stop-color="#DCE9E2"/>
-          <stop offset="1" stop-color="#B9D2DC"/>
-        </linearGradient>
-      </defs>
-      <rect width="400" height="400" fill="url(#mg-sky)"/>
-      <circle cx="292" cy="104" r="30" fill="#F2E2C0" opacity=".85"/>
-      <path d="M0,252 C80,214 150,238 220,218 C290,199 350,222 400,208 L400,400 L0,400 Z" fill="#496458" opacity=".30"/>
-      <!-- 竹 -->
-      <g stroke="#2F5D50" stroke-width="5" stroke-linecap="round" opacity=".8">
-        <path d="M56,400 L50,208"/>
-        <path d="M82,400 L80,238"/>
+  <svg class="scene scene-d" viewBox="0 0 1440 440" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="gateGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#E6EFE5"/>
+        <stop offset=".55" stop-color="#B9D0C8"/>
+        <stop offset="1" stop-color="#8FB0B4"/>
+      </linearGradient>
+      <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#41604F"/>
+        <stop offset="1" stop-color="#2C463C"/>
+      </linearGradient>
+      <radialGradient id="glowGrad" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#F2E2C0" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#F2E2C0" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="gateClip"><circle cx="1085" cy="265" r="80"/></clipPath>
+    </defs>
+    <circle cx="1235" cy="46" r="100" fill="url(#glowGrad)"/>
+    <g fill="#FFFFFF">
+      <rect x="90" y="34" width="240" height="22" rx="11" opacity=".10"/>
+      <rect x="500" y="62" width="150" height="16" rx="8" opacity=".07"/>
+      <rect x="760" y="26" width="110" height="13" rx="6" opacity=".06"/>
+    </g>
+    <path d="M0,150 L160,118 L340,142 L520,110 L720,140 L900,116 L1100,138 L1260,112 L1440,134 L1440,440 L0,440 Z" fill="#152C42" opacity=".30"/>
+    <g stroke="#2F5D50" stroke-width="6" opacity=".75">
+      <path d="M182,196 L178,104"/>
+      <path d="M210,196 L210,124"/>
+    </g>
+    <g fill="#496458" opacity=".8">
+      <ellipse cx="164" cy="112" rx="16" ry="6" transform="rotate(-28 164 112)"/>
+      <ellipse cx="196" cy="98" rx="15" ry="5" transform="rotate(22 196 98)"/>
+      <ellipse cx="226" cy="118" rx="14" ry="5" transform="rotate(-18 226 118)"/>
+    </g>
+    <!-- 粉墙 -->
+    <path d="M0,176 q18,-13 36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 t36,0 L1440,196 L0,196 Z" fill="#1B3448"/>
+    <rect x="0" y="196" width="1440" height="138" fill="#EDE6D4"/>
+    <g stroke="#1C2320" stroke-width="2" opacity=".05">
+      <path d="M0,238 H1440 M0,276 H1440 M0,314 H1440"/>
+    </g>
+    <rect x="0" y="334" width="1440" height="12" fill="#D8CFB9"/>
+    <!-- 月洞门 -->
+    <circle cx="1085" cy="265" r="88" fill="url(#gateGrad)" stroke="#B7AB90" stroke-width="7"/>
+    <g clip-path="url(#gateClip)">
+      <path d="M1005,306 C1042,278 1076,292 1106,278 C1134,265 1154,278 1165,272 L1165,345 L1005,345 Z" fill="#496458" opacity=".55"/>
+      <path d="M1036,345 C1030,322 1044,312 1042,296 C1058,288 1070,296 1076,284 C1092,282 1098,296 1102,308 C1112,316 1108,332 1112,345 Z" fill="#203C35" opacity=".9"/>
+      <g stroke="#2F5D50" stroke-width="4">
+        <path d="M1136,345 L1134,282"/>
+        <path d="M1152,345 L1152,296"/>
       </g>
-      <g fill="#496458" opacity=".85">
-        <ellipse cx="38" cy="216" rx="17" ry="6" transform="rotate(-32 38 216)"/>
-        <ellipse cx="66" cy="196" rx="16" ry="6" transform="rotate(24 66 196)"/>
-        <ellipse cx="94" cy="228" rx="15" ry="5" transform="rotate(-20 94 228)"/>
-        <ellipse cx="70" cy="252" rx="14" ry="5" transform="rotate(30 70 252)"/>
-      </g>
-      <!-- 太湖石 -->
-      <path d="M118,366 C104,326 128,306 121,276 C149,261 168,272 177,249 C206,242 216,265 228,286 C247,300 238,326 247,348 C238,367 211,373 189,366 C161,377 130,378 118,366 Z" fill="#203C35" opacity=".88"/>
-      <g fill="#F5F2EA" opacity=".28">
-        <circle cx="168" cy="300" r="9"/>
-        <circle cx="205" cy="326" r="6"/>
-        <circle cx="150" cy="334" r="5"/>
-      </g>
-      <!-- 红枫一枝 -->
-      <path d="M400,66 C356,84 330,104 306,138" stroke="#6B4A2F" stroke-width="5" fill="none" stroke-linecap="round"/>
       <g fill="#C0422F">
-        <circle cx="330" cy="98" r="11" opacity=".92"/>
-        <circle cx="356" cy="82" r="9" opacity=".85"/>
-        <circle cx="312" cy="122" r="8" opacity=".8"/>
-        <circle cx="344" cy="122" r="7" opacity=".75"/>
-        <circle cx="376" cy="102" r="7" opacity=".8"/>
+        <circle cx="1024" cy="238" r="8" opacity=".92"/>
+        <circle cx="1044" cy="226" r="6" opacity=".85"/>
+        <circle cx="1010" cy="254" r="5" opacity=".8"/>
       </g>
-      <!-- 水纹 -->
-      <g stroke="#4C82AC" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55">
-        <path d="M120,382 q14,-8 28,0 t28,0"/>
-        <path d="M238,388 q14,-8 28,0 t28,0"/>
-        <path d="M36,388 q12,-7 24,0 t24,0"/>
+    </g>
+    <circle cx="1085" cy="265" r="75" fill="none" stroke="#1C2320" stroke-opacity=".25" stroke-width="2"/>
+    <!-- 漏窗 · 方（十字海棠） -->
+    <g>
+      <rect x="268" y="222" width="96" height="96" fill="#F8F4E9" stroke="#39514A" stroke-width="6"/>
+      <g stroke="#39514A" stroke-width="3">
+        <path d="M292,222 V318 M316,222 V318 M340,222 V318 M268,246 H364 M268,270 H364 M268,294 H364"/>
+        <path d="M268,222 L364,318 M364,222 L268,318" opacity=".5"/>
       </g>
-    </svg>
-  </div>
+      <rect x="304" y="258" width="24" height="24" fill="none" stroke="#39514A" stroke-width="3"/>
+    </g>
+    <!-- 漏窗 · 长（回纹） -->
+    <g>
+      <rect x="520" y="232" width="132" height="76" fill="#F8F4E9" stroke="#39514A" stroke-width="6"/>
+      <rect x="538" y="246" width="96" height="48" fill="none" stroke="#39514A" stroke-width="3"/>
+      <rect x="556" y="258" width="60" height="24" fill="none" stroke="#39514A" stroke-width="2"/>
+      <rect x="580" y="266" width="12" height="8" fill="#39514A"/>
+    </g>
+    <!-- 漏窗 · 圆（梅花） -->
+    <g>
+      <circle cx="812" cy="268" r="34" fill="#F8F4E9" stroke="#39514A" stroke-width="6"/>
+      <g fill="#39514A">
+        <circle cx="812" cy="252" r="5"/>
+        <circle cx="827" cy="263" r="5"/>
+        <circle cx="822" cy="279" r="5"/>
+        <circle cx="802" cy="279" r="5"/>
+        <circle cx="797" cy="263" r="5"/>
+        <circle cx="812" cy="268" r="4"/>
+      </g>
+    </g>
+    <!-- 地面与池塘 -->
+    <rect x="0" y="346" width="1440" height="54" fill="url(#groundGrad)"/>
+    <g fill="#EDE6D4" opacity=".14">
+      <ellipse cx="180" cy="372" rx="46" ry="7"/>
+      <ellipse cx="660" cy="382" rx="38" ry="6"/>
+      <ellipse cx="1230" cy="370" rx="42" ry="7"/>
+    </g>
+    <rect x="0" y="400" width="1440" height="40" fill="#48748E" opacity=".9"/>
+    <g stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".35">
+      <path d="M120,418 q13,-7 26,0 t26,0"/>
+      <path d="M980,424 q13,-7 26,0 t26,0"/>
+      <path d="M1240,414 q12,-6 24,0 t24,0"/>
+    </g>
+    <ellipse cx="1085" cy="419" rx="62" ry="6" fill="#FFFFFF" opacity=".12"/>
+    <!-- 太湖石 -->
+    <path d="M352,428 C330,382 356,356 348,322 C376,300 402,312 414,288 C448,278 466,302 480,326 C502,342 494,372 506,398 C496,424 462,432 432,424 C398,436 366,438 352,428 Z" fill="#20382D"/>
+    <g fill="#F5F2EA" opacity=".22">
+      <circle cx="410" cy="344" r="10"/>
+      <circle cx="452" cy="382" r="7"/>
+      <circle cx="388" cy="392" r="6"/>
+    </g>
+    <path d="M520,428 C512,398 528,384 526,364 C548,356 562,370 570,386 C584,398 578,416 584,428 Z" fill="#29473A" opacity=".92"/>
+    <!-- 曲桥 -->
+    <g fill="#E8E1CE" stroke="#1C2320" stroke-opacity=".18">
+      <polygon points="600,404 716,398 722,412 606,418"/>
+      <polygon points="716,398 792,416 786,430 722,412"/>
+      <polygon points="792,416 916,408 920,422 786,430"/>
+    </g>
+    <g fill="#8A7F63">
+      <rect x="602" y="416" width="7" height="14"/>
+      <rect x="716" y="410" width="7" height="16"/>
+      <rect x="788" y="424" width="7" height="12"/>
+      <rect x="908" y="416" width="7" height="14"/>
+    </g>
+    <!-- 竹丛 -->
+    <g stroke="#2A5245" stroke-width="8" stroke-linecap="round">
+      <path d="M1310,440 L1304,128"/>
+      <path d="M1344,440 L1342,160"/>
+      <path d="M1376,440 L1380,190"/>
+    </g>
+    <g fill="#3E6B5A">
+      <ellipse cx="1288" cy="140" rx="18" ry="6" transform="rotate(-30 1288 140)"/>
+      <ellipse cx="1322" cy="118" rx="17" ry="6" transform="rotate(24 1322 118)"/>
+      <ellipse cx="1360" cy="150" rx="16" ry="6" transform="rotate(-22 1360 150)"/>
+      <ellipse cx="1394" cy="182" rx="15" ry="5" transform="rotate(28 1394 182)"/>
+      <ellipse cx="1330" cy="180" rx="15" ry="5" transform="rotate(-26 1330 180)"/>
+    </g>
+    <!-- 红枫一枝 -->
+    <path d="M1440,14 C1394,26 1360,48 1334,80" stroke="#6B4A2F" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <g fill="#C0422F">
+      <circle cx="1340" cy="62" r="10" opacity=".92"/>
+      <circle cx="1364" cy="46" r="8" opacity=".85"/>
+      <circle cx="1322" cy="84" r="7" opacity=".8"/>
+      <circle cx="1386" cy="66" r="6" opacity=".75"/>
+    </g>
+  </svg>
+  <svg class="scene scene-m" viewBox="0 0 800 340" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="gateGradM" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#E6EFE5"/>
+        <stop offset=".55" stop-color="#B9D0C8"/>
+        <stop offset="1" stop-color="#8FB0B4"/>
+      </linearGradient>
+      <linearGradient id="groundGradM" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#41604F"/>
+        <stop offset="1" stop-color="#2C463C"/>
+      </linearGradient>
+      <radialGradient id="glowGradM" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#F2E2C0" stop-opacity=".85"/>
+        <stop offset="1" stop-color="#F2E2C0" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="gateClipM"><circle cx="520" cy="178" r="52"/></clipPath>
+    </defs>
+    <circle cx="648" cy="26" r="62" fill="url(#glowGradM)"/>
+    <rect x="60" y="22" width="150" height="15" rx="7" fill="#FFFFFF" opacity=".09"/>
+    <path d="M0,96 L120,74 L260,92 L420,70 L580,90 L700,76 L800,88 L800,340 L0,340 Z" fill="#152C42" opacity=".30"/>
+    <!-- 粉墙 -->
+    <path d="M0,110 q15,-11 30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t30,0 t20,0 L800,124 L0,124 Z" fill="#1B3448"/>
+    <rect x="0" y="124" width="800" height="108" fill="#EDE6D4"/>
+    <rect x="0" y="232" width="800" height="9" fill="#D8CFB9"/>
+    <!-- 月洞门 -->
+    <circle cx="520" cy="178" r="58" fill="url(#gateGradM)" stroke="#B7AB90" stroke-width="6"/>
+    <g clip-path="url(#gateClipM)">
+      <path d="M468,206 C492,188 512,196 532,188 C550,180 562,190 572,186 L572,230 L468,230 Z" fill="#496458" opacity=".55"/>
+      <path d="M492,230 C488,212 498,206 497,194 C508,188 516,194 520,186 C532,186 536,196 538,204 C544,210 542,220 544,230 Z" fill="#203C35" opacity=".9"/>
+      <g fill="#C0422F">
+        <circle cx="486" cy="158" r="6" opacity=".92"/>
+        <circle cx="500" cy="150" r="4.5" opacity=".85"/>
+      </g>
+    </g>
+    <circle cx="520" cy="178" r="49" fill="none" stroke="#1C2320" stroke-opacity=".25" stroke-width="2"/>
+    <!-- 漏窗 · 方 -->
+    <g>
+      <rect x="96" y="140" width="72" height="72" fill="#F8F4E9" stroke="#39514A" stroke-width="5"/>
+      <g stroke="#39514A" stroke-width="2.5">
+        <path d="M120,140 V212 M144,140 V212 M96,164 H168 M96,188 H168"/>
+        <path d="M96,140 L168,212 M168,140 L96,212" opacity=".5"/>
+      </g>
+      <rect x="122" y="166" width="20" height="20" fill="none" stroke="#39514A" stroke-width="2.5"/>
+    </g>
+    <!-- 地面与池塘 -->
+    <rect x="0" y="241" width="800" height="51" fill="url(#groundGradM)"/>
+    <rect x="0" y="292" width="800" height="48" fill="#48748E" opacity=".9"/>
+    <g stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".35">
+      <path d="M90,318 q12,-6 24,0 t24,0"/>
+      <path d="M600,326 q12,-6 24,0 t24,0"/>
+    </g>
+    <ellipse cx="520" cy="314" rx="42" ry="5" fill="#FFFFFF" opacity=".12"/>
+    <!-- 太湖石 -->
+    <path d="M128,330 C114,296 134,278 128,252 C150,236 168,246 176,228 C202,220 214,238 224,256 C240,268 234,290 242,308 C234,326 208,332 186,326 C160,336 136,338 128,330 Z" fill="#20382D"/>
+    <g fill="#F5F2EA" opacity=".22">
+      <circle cx="172" cy="272" r="7"/>
+      <circle cx="200" cy="300" r="5"/>
+    </g>
+    <!-- 曲桥 -->
+    <g fill="#E8E1CE" stroke="#1C2320" stroke-opacity=".18">
+      <polygon points="330,298 404,294 408,306 336,310"/>
+      <polygon points="404,294 452,308 448,318 408,306"/>
+      <polygon points="452,308 548,302 550,312 448,318"/>
+    </g>
+    <!-- 竹 -->
+    <g stroke="#2A5245" stroke-width="7" stroke-linecap="round">
+      <path d="M726,340 L722,84"/>
+      <path d="M754,340 L754,116"/>
+    </g>
+    <g fill="#3E6B5A">
+      <ellipse cx="706" cy="96" rx="15" ry="5" transform="rotate(-28 706 96)"/>
+      <ellipse cx="736" cy="78" rx="14" ry="5" transform="rotate(22 736 78)"/>
+      <ellipse cx="766" cy="106" rx="13" ry="5" transform="rotate(-20 766 106)"/>
+    </g>
+  </svg>
   <a class="home-link" href="/index.html">← 返回首页</a>
   <div class="hero-inner">
     <div class="eyebrow">中国 · 华东</div>
@@ -255,18 +410,6 @@ footer .fin{max-width:var(--wrap);margin:0 auto;padding:30px var(--gut) 44px;
       <span>一省江南</span>
     </div>
   </div>
-  <svg class="wall" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0,120 L0,86 L180,60 L360,80 L560,48 L760,76 L960,54 L1160,74 L1320,58 L1440,70 L1440,120 Z" fill="#152C42" opacity="0.55"/>
-    <path d="M0,120 L0,98 L220,74 L430,96 L680,66 L920,94 L1150,70 L1330,90 L1440,78 L1440,120 Z" fill="#0B2740" opacity="0.88"/>
-    <g fill="none" stroke="#F5F2EA" stroke-opacity=".45" stroke-width="2">
-      <rect x="196" y="76" width="52" height="36"/>
-      <path d="M222,76 v36 M196,94 h52"/>
-      <rect x="692" y="80" width="52" height="34"/>
-      <path d="M718,80 v34 M692,97 h52"/>
-    </g>
-    <path d="M986,120 L986,92 A27,27 0 0 1 1040,92 L1040,120 Z" fill="#F5F2EA" opacity=".92"/>
-    <circle cx="1013" cy="86" r="4.5" fill="#C0422F"/>
-  </svg>
 </header>
 
 <main class="ground">
