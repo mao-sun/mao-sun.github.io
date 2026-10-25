@@ -63,25 +63,41 @@ a{color:inherit;text-decoration:none}
 .sec-h .sec-note{font-size:11px;letter-spacing:.34em;color:var(--ink-faint)}
 
 /* ---------- ENTRY ---------- */
-.entry{display:flex;gap:clamp(18px,3.4vw,40px);align-items:flex-start;
-  background:var(--paper-hi);border:1px solid var(--rule);border-radius:6px;
-  padding:clamp(22px,3.4vw,36px);margin-top:22px;transition:border-color .25s,transform .25s,box-shadow .25s}
-.entry:hover{border-color:var(--rule-strong);transform:translateY(-3px);box-shadow:0 14px 30px rgba(28,35,32,.08)}
-.entry .year{font-family:var(--font-title);font-weight:700;font-size:clamp(34px,4.6vw,52px);
-  line-height:1;color:var(--moss-deep);letter-spacing:.02em;white-space:nowrap}
-.entry .year small{display:block;margin-top:8px;font-family:var(--font-body);font-weight:300;
-  font-size:11px;letter-spacing:.3em;color:var(--ink-faint)}
-.entry .body{flex:1;min-width:0}
-.entry h3{font-family:var(--font-title);font-weight:700;font-size:clamp(20px,2.4vw,26px);letter-spacing:.06em}
-.entry .emeta{margin-top:8px;font-size:13px;letter-spacing:.14em;color:var(--moss);font-weight:400}
-.entry p{margin-top:12px;font-weight:300;font-size:15px;line-height:1.95;color:var(--ink-soft)}
-.entry .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.entry{--acc:#B3402A;position:relative;display:block;overflow:hidden;
+  background:var(--paper-hi);border:1px solid var(--rule);border-left:3px solid var(--acc);border-radius:6px;
+  padding:clamp(24px,3.4vw,38px);margin-top:26px;
+  transition:border-color .25s,transform .25s,box-shadow .25s}
+.entry:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(28,35,32,.10);border-color:var(--rule-strong);border-left-color:var(--acc)}
+.entry .ghost{position:absolute;top:-26px;right:52px;font-family:var(--font-title);font-weight:700;
+  font-size:clamp(110px,17vw,168px);line-height:1;color:rgba(32,60,53,.055);letter-spacing:.02em;
+  pointer-events:none;user-select:none}
+.entry .vtext{position:absolute;top:50%;right:16px;transform:translateY(-50%);
+  writing-mode:vertical-rl;font-family:var(--font-title);font-size:13px;letter-spacing:.5em;
+  color:var(--ink-faint);pointer-events:none;user-select:none}
+.entry .main{position:relative;padding-right:34px}
+.entry .top{display:flex;align-items:center;gap:14px}
+.entry .yr{font-family:var(--font-title);font-weight:700;font-size:15px;letter-spacing:.28em;color:var(--acc)}
+.entry .chip{font-family:var(--font-title);font-weight:700;font-size:11px;letter-spacing:.2em;color:#fff;
+  background:var(--acc);border-radius:4px;padding:4px 8px 3px;transform:rotate(-3deg)}
+.entry .days{margin-left:auto;font-size:12px;letter-spacing:.22em;color:var(--ink-faint)}
+.entry h3{margin-top:14px;font-family:var(--font-title);font-weight:700;
+  font-size:clamp(22px,2.6vw,28px);letter-spacing:.06em;display:flex;align-items:center;gap:10px}
+.entry h3 svg{flex:0 0 auto}
+.entry .route{display:flex;align-items:flex-start;margin-top:20px}
+.entry .stop{display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:12.5px;letter-spacing:.14em;color:var(--ink-soft);white-space:nowrap}
+.entry .stop i{width:9px;height:9px;border-radius:50%;background:var(--paper-hi);border:2px solid var(--acc)}
+.entry .stop.first i{background:var(--acc)}
+.entry .leg{flex:0 1 64px;min-width:26px;border-top:2px dotted rgba(28,35,32,.3);margin:4px 10px 0}
+.entry p{margin-top:18px;max-width:640px;font-weight:300;font-size:15px;line-height:1.95;color:var(--ink-soft)}
+.entry .foot{margin-top:20px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.entry .tags{display:flex;flex-wrap:wrap;gap:8px;flex:1}
 .entry .tags span{font-size:12px;letter-spacing:.12em;color:var(--ink-soft);
   border:1px solid var(--rule);border-radius:999px;padding:4px 12px;background:rgba(255,255,255,.5)}
-.entry .go{align-self:center;font-family:var(--font-title);font-size:15px;letter-spacing:.14em;
-  color:var(--seal);white-space:nowrap}
-.entry .go i{font-style:normal;transition:margin .25s}
-.entry:hover .go i{margin-left:5px}
+.entry .go{font-family:var(--font-title);font-size:15px;letter-spacing:.14em;color:var(--seal);white-space:nowrap}
+.entry .go i{font-style:normal;display:inline-block;transition:transform .25s}
+.entry:hover .go i{transform:translateX(5px)}
+.entry.e2026{--acc:#8E2F32}
 
 /* ---------- WISH ---------- */
 .wish-line{margin-top:20px;font-weight:300;font-size:15px;line-height:2;color:var(--ink-soft)}
@@ -94,9 +110,11 @@ footer .fin{max-width:var(--wrap);margin:0 auto;padding:30px var(--gut) 44px;
 
 @media (max-width:640px){
   .hero-inner{padding:88px var(--gut) 130px}
-  .entry{flex-direction:column;gap:14px}
-  .entry .go{align-self:flex-start}
   .home-link{left:20px}
+  .entry .vtext{display:none}
+  .entry .main{padding-right:0}
+  .entry .ghost{right:10px}
+  .entry .days{display:none}
 }
 </style>
 </head>
@@ -133,34 +151,68 @@ footer .fin{max-width:var(--wrap);margin:0 auto;padding:30px var(--gut) 44px;
         <span class="sec-note">JOURNALS</span>
       </div>
 
-      <a class="entry" href="Asia-Japan-Kansai-2025.html">
-        <div class="year">2025<small>初访</small></div>
-        <div class="body">
-          <h3>关西 · 风过千年</h3>
-          <div class="emeta">4 天 3 晚 · 大阪 — 京都 — 奈良</div>
-          <p>大阪、京都、奈良三城连走，千年古都与现代都市的完美融合，都收在这一册里。</p>
-          <div class="tags">
-            <span>千年古都</span>
-            <span>现代都市</span>
-            <span>三城连走</span>
+      <a class="entry e2025" href="Asia-Japan-Kansai-2025.html">
+        <div class="ghost">2025</div>
+        <div class="vtext">京都・大阪</div>
+        <div class="main">
+          <div class="top">
+            <span class="yr">2025</span>
+            <span class="chip">初访</span>
+            <span class="days">4 天 3 晚</span>
+          </div>
+          <h3>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 4.5h18M5.5 4.5v3M18.5 4.5v3M4 9.5h16M7 9.5V21M17 9.5V21M7 15h10" stroke="#B3402A" stroke-width="2" stroke-linecap="round"/></svg>
+            关西 · 风过千年
+          </h3>
+          <div class="route">
+            <span class="stop first"><i></i>京都</span>
+            <span class="leg"></span>
+            <span class="stop"><i></i>大阪</span>
+          </div>
+          <p>从杭州出发的关西四日。京都两日：抵达当晚夜游伏见稻荷的千本鸟居，走遍金阁寺、清水寺与三年坂，再沿鸭川逛到河原町；大阪一日：大阪城、梅田，最后在道顿堀的灯火里收尾。</p>
+          <div class="foot">
+            <div class="tags">
+              <span>千本鸟居</span>
+              <span>清水寺</span>
+              <span>道顿堀</span>
+            </div>
+            <div class="go">读手记 <i>→</i></div>
           </div>
         </div>
-        <div class="go">读手记 <i>→</i></div>
       </a>
 
-      <a class="entry" href="Asia-Japan-Kansai.html">
-        <div class="year">2026<small>再访</small></div>
-        <div class="body">
-          <h3>关西 · 红叶五日</h3>
-          <div class="emeta">2026.11.30 – 12.04 · 5 天 4 晚 · 大阪 — 京都 — 奈良</div>
-          <p>再访关西，正逢红叶季——岚山的枫、东寺的夜、奈良的鹿，一程追着秋色走的旅程。</p>
-          <div class="tags">
-            <span>岚山红叶</span>
-            <span>东寺夜枫</span>
-            <span>奈良小鹿</span>
+      <a class="entry e2026" href="Asia-Japan-Kansai.html">
+        <div class="ghost">2026</div>
+        <div class="vtext">関西紅葉</div>
+        <div class="main">
+          <div class="top">
+            <span class="yr">2026</span>
+            <span class="chip">再访</span>
+            <span class="days">2026.11.30 – 12.04 · 5 天 4 晚</span>
+          </div>
+          <h3>
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="#8E2F32" aria-hidden="true"><path d="M12 1.8l2.1 3.6 3.9-1.7-1 4 4.1.6-2.8 3.1 3 3-4.2.4 1.2 4-3.8-2-1.3 4-1.2-4-3.8 2 1.2-4-4.2-.4 3-3L1.9 8.3l4.1-.6-1-4 3.9 1.7L12 1.8z"/></svg>
+            关西 · 红叶五日
+          </h3>
+          <div class="route">
+            <span class="stop first"><i></i>大阪 · 临空</span>
+            <span class="leg"></span>
+            <span class="stop"><i></i>京都</span>
+            <span class="leg"></span>
+            <span class="stop"><i></i>奈良</span>
+            <span class="leg"></span>
+            <span class="stop"><i></i>大阪</span>
+          </div>
+          <p>再访关西，正逢红叶季：落地先在临空城的市场与奥莱松快半日，进京都看岚山的枫、东寺的夜，转去奈良穿过公园喂鹿，最后回大阪，在新世界与道顿堀给旅程收尾。</p>
+          <div class="foot">
+            <div class="tags">
+              <span>岚山红叶</span>
+              <span>东寺夜枫</span>
+              <span>奈良小鹿</span>
+            </div>
+            <div class="go">读手记 <i>→</i></div>
           </div>
         </div>
-        <div class="go">读手记 <i>→</i></div>
       </a>
     </section>
 
