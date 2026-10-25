@@ -9,724 +9,746 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   南京 · 地域设计系统
-   母题：梧桐 / 秦淮 / 城墙
+   南京 · 地域设计系统「过城门」
+   母题：城门 / 城墙砖 / 梧桐大道 / 黄昏
+   结构：两日 = 两道城门，行程沿一条竖直大道笔直行进
    ============================================================ */
 :root{
-  --sky-0:#0B2740; --sky-1:#1F4E78; --sky-2:#4C82AC; --sky-3:#8FB6CE;
-  --sky-4:#CFE0E6; --glow:#F2E2C0;
-  --paper:#F5F2EA; --paper-hi:#FDFAF2;
-  --ink:#1C2320; --ink-soft:#6A7169; --ink-faint:#9AA196;
+  --paper:#F5F2EA;
+  --paper-hi:#FDFAF1;
+  --card:#FFFDF6;
+  --ink:#262019;
+  --ink-soft:#6E6455;
+  --ink-faint:#A2937D;
 
-  --wall:#A8352A;        /* 金陵红 */
-  --wall-deep:#7E241C;
-  --glaze:#B8892B;       /* 金箔金 */
-  --brick:#6B6157;       /* 城墙灰 */
+  --brick:#6B6157;        /* 城墙砖灰 */
+  --brick-deep:#453B31;
+  --brick-ink:#2E2620;
+  --gold:#B8892B;         /* 梧桐金 */
+  --gold-hi:#D9A441;
+  --gold-deep:#8A6414;
+  --seal:#C0422F;         /* 朱砂，仅印章 */
 
-  --rule:rgba(28,35,32,.12);
-  --rule-strong:rgba(28,35,32,.26);
+  --rule:rgba(38,32,25,.14);
+  --rule-strong:rgba(38,32,25,.30);
   --font-title:'Noto Serif SC','Source Han Serif SC','Songti SC','STSong',serif;
   --font-body:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
   --gut:clamp(20px,5vw,56px);
   --wrap:1080px;
+  --axis-x:128px;         /* 大道轴线列宽 */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--font-body);
   font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-:where(a,button,input,[tabindex]):focus-visible{outline:2px solid var(--wall);outline-offset:3px;border-radius:3px}
+:where(a,button,[tabindex]):focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
-.ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;
+.ic{width:1em;height:1em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 
 /* ============================================================
-   HERO · 南京天际线（左：城墙门楼 / 中：梧桐与画舫 / 右：紫峰）
+   HERO · 黄昏的城（深棕墨 → 城砖褐 → 梧桐金余晖 → 纸色）
    ============================================================ */
-.hero{position:relative;min-height:clamp(360px,56vh,560px);display:flex;flex-direction:column;
-  justify-content:flex-end;padding:0 var(--gut) clamp(30px,5vw,52px);overflow:hidden;
-  background:linear-gradient(180deg,var(--sky-0) 0%,var(--sky-1) 26%,var(--sky-2) 52%,
-    var(--sky-3) 74%,var(--sky-4) 88%,var(--glow) 96%,var(--paper) 100%)}
-.sky-orn{position:absolute;inset:0;width:100%;height:100%}
-.sky-orn .far{fill:#2F5678;opacity:.3}
-.sky-orn .mid{fill:#1E405C;opacity:.5}
-.sky-orn .near{fill:#122A3C;opacity:.9}
-.sky-orn .win{fill:var(--glow);opacity:.5}
-
-/* 印章 */
-.seal{position:absolute;right:var(--gut);top:clamp(64px,10vw,96px);width:76px;height:76px;
-  border:2.5px solid rgba(255,255,255,.85);border-radius:8px;display:grid;place-items:center;
-  color:#fff;font-family:var(--font-title);font-size:2.1rem;font-weight:700;letter-spacing:0;
-  opacity:.92;transform:rotate(4deg)}
-.seal::after{content:"金 陵";position:absolute;bottom:-26px;right:2px;font-size:11px;
-  letter-spacing:.34em;font-family:var(--font-body);font-weight:400;opacity:.8}
-
-.hero .back{position:absolute;top:clamp(16px,3vw,28px);left:var(--gut);z-index:5;
-  display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;
-  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;
-  text-decoration:none;font-size:13px;letter-spacing:.05em;backdrop-filter:blur(8px);
-  transition:background .25s ease,transform .25s ease}
-.hero .back:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
-
-.hero .inner{position:relative;z-index:3;max-width:var(--wrap);margin:0 auto;width:100%}
-.hero .eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
-  color:rgba(255,255,255,.68);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.hero .eyebrow::after{content:"";width:46px;height:1px;background:rgba(255,255,255,.45)}
-.hero h1{font-family:var(--font-title);font-weight:700;color:#fff;
-  font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.04;letter-spacing:.04em;
-  text-shadow:0 2px 32px rgba(0,0,0,.22)}
-.hero .sub{margin-top:14px;color:rgba(255,255,255,.82);font-weight:300;
-  font-size:clamp(.95rem,1.8vw,1.12rem);max-width:38ch;letter-spacing:.03em}
+.hero{position:relative;overflow:hidden;color:#F7EFDC;
+  background:linear-gradient(180deg,#1D1409 0%,#332412 30%,#5C3E20 55%,#96702C 76%,#D9A441 90%,var(--paper) 100%)}
+.hero .back{position:absolute;top:clamp(16px,3vw,28px);left:var(--gut);z-index:6;
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:3px;
+  background:rgba(24,15,5,.32);border:1px solid rgba(247,239,220,.38);color:#F7EFDC;
+  text-decoration:none;font-size:13px;letter-spacing:.06em;transition:background .25s ease,transform .25s ease}
+.hero .back:hover{background:rgba(24,15,5,.52);transform:translateY(-2px)}
+/* 印章「金陵」 */
+.hero .seal{position:absolute;right:var(--gut);top:clamp(58px,9vw,88px);z-index:5;
+  width:74px;height:74px;background:var(--seal);border-radius:5px;
+  display:grid;place-items:center;transform:rotate(3deg);
+  box-shadow:0 6px 22px rgba(0,0,0,.35)}
+.hero .seal span{font-family:var(--font-title);font-weight:700;color:#FFF6E3;
+  font-size:1.72rem;line-height:1.08;writing-mode:vertical-rl;letter-spacing:.06em}
+.hero .inner{position:relative;z-index:4;max-width:var(--wrap);margin:0 auto;width:100%;
+  padding:clamp(86px,13vw,128px) var(--gut) clamp(120px,17vw,190px)}
+.hero .eyebrow{font-size:11px;letter-spacing:.34em;color:rgba(247,239,220,.72);
+  display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.hero .eyebrow::after{content:"";width:46px;height:1px;background:rgba(247,239,220,.45)}
+.hero h1{font-family:var(--font-title);font-weight:700;color:#FBF4E2;
+  font-size:clamp(2.3rem,7vw,4.4rem);line-height:1.06;letter-spacing:.05em;
+  text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero h1 .dur{font-size:.38em;font-weight:400;letter-spacing:.22em;color:var(--gold-hi);
+  margin-left:16px;white-space:nowrap}
+.hero .sub{margin-top:16px;color:rgba(247,239,220,.85);font-weight:300;
+  font-size:clamp(.98rem,1.9vw,1.14rem);max-width:34em;letter-spacing:.03em}
 .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,3vw,26px)}
-.hero .meta span{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.92);
-  padding:5px 13px;border-radius:2px;background:rgba(168,53,42,.42);
-  border:1px solid rgba(255,255,255,.26)}
+.hero .meta span{font-size:12px;letter-spacing:.08em;color:#F3E7C8;
+  padding:5px 13px;border-radius:2px;background:rgba(29,20,9,.34);
+  border:1px solid rgba(247,239,220,.30)}
+.hero .cityscape{position:absolute;left:0;right:0;bottom:-2px;width:100%;
+  height:clamp(150px,24vw,270px);z-index:2;pointer-events:none}
 
 /* ============================================================
-   地面
+   地面与章节
    ============================================================ */
-.ground{position:relative;z-index:3;background:var(--paper);border-radius:22px 22px 0 0;
-  margin-top:-1px;box-shadow:0 -20px 60px rgba(0,0,0,.08)}
+.ground{position:relative;z-index:3;background:var(--paper)}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
-main{padding:clamp(44px,7vw,76px) 0 clamp(48px,7vw,88px)}
+main{padding:clamp(10px,2vw,20px) 0 clamp(52px,7vw,88px)}
 
-.sec{margin-top:clamp(48px,8vw,88px);scroll-margin-top:20px}
-.sec:first-child{margin-top:0}
-.sec-h{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:14px;
-  border-bottom:1px solid var(--rule);margin-bottom:clamp(22px,4vw,34px)}
-.sec-h h2{font-family:var(--font-title);font-size:clamp(1.3rem,2.8vw,1.9rem);font-weight:700;letter-spacing:.04em}
-.sec-h .n{font-family:var(--font-title);color:var(--ink-faint);font-size:.92rem;font-weight:300}
-.sec-h .d{margin-left:auto;font-size:12px;color:var(--ink-faint);letter-spacing:.05em}
+/* 题字带 */
+.motto{display:flex;align-items:center;gap:18px;justify-content:center;
+  padding:clamp(22px,4vw,34px) 0 clamp(6px,1.5vw,12px)}
+.motto::before,.motto::after{content:"";flex:1;max-width:220px;height:1px;background:var(--rule-strong)}
+.motto i{width:7px;height:7px;background:var(--gold);transform:rotate(45deg);flex:none}
+.motto p{font-family:var(--font-title);font-weight:700;letter-spacing:.3em;
+  font-size:clamp(1.05rem,3vw,1.5rem);color:var(--brick-ink);white-space:nowrap}
 
-/* 中式分隔（替代普通 hr） */
-.part{display:flex;align-items:center;gap:12px;margin:clamp(34px,6vw,56px) 0;color:var(--glaze)}
-.part::before,.part::after{content:"";flex:1;height:1px;background:var(--rule)}
-.part i{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.part i+i{margin-left:-6px;opacity:.5}
-
-/* 题字带（原页的金陵题字横幅，改衬线题字呈现） */
-.motto{display:flex;align-items:center;gap:16px;margin:clamp(30px,5vw,48px) 0 0;color:var(--wall-deep)}
-.motto::before,.motto::after{content:"";flex:1;height:1px;
-  background:linear-gradient(to right,transparent,var(--rule-strong),transparent)}
-.motto .tx{font-family:var(--font-title);font-size:clamp(1.05rem,2.6vw,1.4rem);font-weight:700;letter-spacing:.22em;white-space:nowrap}
-.motto .dm{width:7px;height:7px;background:var(--glaze);transform:rotate(45deg);flex:none}
+.sec{margin-top:clamp(46px,7vw,80px);scroll-margin-top:20px}
+.sec-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding-bottom:14px;border-bottom:2px solid var(--brick-ink);margin-bottom:clamp(20px,3.5vw,30px)}
+.sec-h .no{width:34px;height:34px;flex:none;display:grid;place-items:center;
+  background:var(--brick-ink);color:#F3E7C8;font-family:var(--font-title);
+  font-weight:700;font-size:1rem;border-radius:2px}
+.sec-h h2{font-family:var(--font-title);font-size:clamp(1.3rem,2.8vw,1.85rem);
+  font-weight:700;letter-spacing:.05em}
+.sec-h .en{margin-left:auto;font-size:11px;letter-spacing:.3em;color:var(--ink-faint)}
 
 /* ============================================================
-   预约详情（点「详情」展开）
+   城门告示（准备事项 / 预约）——直角面板 · 砖线表头 · 门钉
    ============================================================ */
-.book{position:relative;border:1px solid rgba(168,53,42,.28);border-radius:14px;
-  background:linear-gradient(180deg,rgba(168,53,42,.05),rgba(168,53,42,.015));
-  padding:clamp(20px,3.4vw,32px);overflow:hidden;margin-top:22px}
-/* 城墙纹理 */
-.book::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
-  background-image:
-    linear-gradient(var(--rule) 1px,transparent 1px),
-    linear-gradient(90deg,var(--rule) 1px,transparent 1px);
-  background-size:32px 32px;
-  mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%);
-  -webkit-mask-image:radial-gradient(120% 90% at 100% 0%,#000 0%,transparent 72%)}
-.book .hd{position:relative;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
-.book .hd .tag{background:var(--wall);color:#fff;font-size:11px;font-weight:600;letter-spacing:.14em;
-  padding:5px 11px;border-radius:2px;flex:none;margin-top:4px}
-.book .hd h3{font-family:var(--font-title);font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;color:var(--wall-deep)}
-
-/* 预约卡片（替代 5 列表格 —— 手机上不再横滑） */
-.bk{position:relative;background:#fff;border:1px solid var(--rule);border-radius:10px;
-  padding:14px 16px 15px;transition:border-color .22s,box-shadow .22s,transform .22s;margin-top:14px}
-.bk:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
-.bk-t{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;padding-right:4px}
-.bk-t h4{font-family:var(--font-title);font-size:1.02rem;font-weight:700;color:var(--ink);letter-spacing:.04em}
-.bk-when{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:9px;
-  padding:6px 11px;border-radius:6px;background:rgba(184,137,43,.10)}
-.bk-when .d{font-size:.82rem;color:var(--ink-soft);letter-spacing:.02em}
-.bk-when .d b{font-family:var(--font-title);font-size:1.1rem;color:var(--glaze);font-weight:700;padding:0 1px}
-.bk-when .t{margin-left:auto;font-size:.8rem;font-weight:600;color:var(--wall-deep);letter-spacing:.04em}
-.bk-m{margin:10px 0 0;font-size:.8rem;line-height:1.72}
-.bk-m .row{display:flex;gap:8px}
-.bk-m dt{flex:none;color:var(--ink-faint);letter-spacing:.06em;min-width:2.4em}
-.bk-m dd{margin:0;flex:1;min-width:0;color:var(--ink-soft)}
-.bk.urgent{border-color:rgba(184,137,43,.45);background:#FDFAF2}
-.bk.urgent::before{content:"";position:absolute;left:0;top:13px;bottom:13px;width:3px;
-  border-radius:0 3px 3px 0;background:var(--glaze)}
-.badge{display:inline-block;font-size:10.5px;letter-spacing:.08em;padding:2px 7px;border-radius:2px;
-  background:var(--glaze);color:#fff;font-weight:600;vertical-align:2px}
-
-/* 预约：其余景点紧凑列表 */
-.bkr{position:relative;margin-top:14px}
-.bkr-h{font-size:11px;letter-spacing:.14em;color:var(--ink-faint);margin-bottom:4px}
-.bklist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
-.bklist li{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:3px 12px;
-  padding:10px 2px;border-bottom:1px solid var(--rule)}
-.bklist .nm{font-weight:600;font-size:.92rem;color:var(--ink);letter-spacing:.02em}
-.bklist .lead{font-size:.78rem;font-weight:600;color:var(--wall-deep);white-space:nowrap;letter-spacing:.02em}
-.bklist .mt{grid-column:1/-1;font-size:.76rem;color:var(--ink-faint);line-height:1.65}
-.bklist li:hover .nm{color:var(--wall-deep)}
+.board{border:2px solid var(--brick-ink);border-radius:3px;background:var(--paper-hi);
+  box-shadow:6px 6px 0 rgba(69,59,49,.14);overflow:hidden}
+.board-h{display:flex;align-items:center;gap:14px;background:var(--brick-ink);
+  color:#F3E7C8;padding:12px 20px}
+.board-h h3{font-family:var(--font-title);font-size:1.08rem;font-weight:700;letter-spacing:.14em}
+.studs{display:flex;gap:7px;margin-left:auto}
+.studs i{width:7px;height:7px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#F0DFB8,var(--gold) 70%)}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{border:1px solid var(--rule);padding:10px 14px;font-size:.94rem;text-align:left;vertical-align:top}
+thead th{background:rgba(107,97,87,.14);font-weight:600;letter-spacing:.06em;
+  border-bottom:2px solid var(--brick);white-space:nowrap}
+td.cat{background:rgba(184,137,43,.09);font-weight:600;text-align:center;
+  white-space:nowrap;width:88px;color:var(--brick-ink)}
+td.item{font-weight:500;white-space:nowrap;width:130px}
+td.note-c{color:var(--ink-soft);font-weight:300}
+.toggle-link{color:var(--gold-deep);font-weight:600;text-decoration:none;
+  border-bottom:1px solid var(--gold);padding-bottom:1px;cursor:pointer}
+.toggle-link:hover{color:var(--seal);border-color:var(--seal)}
+.note-strip{margin-top:16px;border:1px solid var(--gold);border-left:5px solid var(--gold);
+  background:rgba(184,137,43,.08);border-radius:2px;padding:13px 18px;
+  font-size:.95rem;font-weight:300}
+.note-strip b{font-weight:600;color:var(--gold-deep)}
+.resv{margin-top:16px}
+.resv td:first-child{font-weight:500}
+.resv .free{color:var(--gold-deep);font-weight:600}
 
 /* ============================================================
-   准备事项 · 按原表类别分组
+   特色四牌（美食 / 必游 / 伴手礼 / 文化体验）
    ============================================================ */
-.kit{margin-top:22px}
-.kit .lvl{margin-top:24px}
-.kit .lvl:first-child{margin-top:0}
-.kit .lvl-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.kit .lvl-h .dot{width:8px;height:8px;border-radius:50%;flex:none}
-.kit .lvl-h b{font-family:var(--font-title);font-size:1rem;font-weight:700;color:var(--ink);letter-spacing:.08em}
-.kit .lvl-h::after{content:"";flex:1;height:1px;background:var(--rule)}
-.kit .lv1 .dot{background:var(--wall)}
-.kit .lv2 .dot{background:var(--glaze)}
-.kit .lv3 .dot{background:var(--brick)}
-
-.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:10px}
-.item{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--rule);
-  border-radius:10px;padding:13px 15px;transition:border-color .22s,box-shadow .22s,transform .22s}
-.item:hover{border-color:var(--rule-strong);box-shadow:0 4px 14px rgba(28,35,32,.06);transform:translateY(-1px)}
-.item .ic{font-size:20px;margin-top:2px;color:var(--wall)}
-.item.lv2 .ic{color:var(--glaze)}
-.item.lv3 .ic{color:var(--brick)}
-.item .tx{flex:1;min-width:0}
-.item .tx b{display:block;font-size:.95rem;font-weight:600;color:var(--ink)}
-.item .tx small{display:block;font-size:.83rem;color:var(--ink-soft);line-height:1.6;margin-top:2px}
-.res-link{color:var(--wall-deep);font-weight:600;font-size:.9rem;text-decoration:none;
-  border-bottom:2px dotted var(--glaze);cursor:pointer}
-.res-link:hover{color:var(--wall)}
-
-/* 提示条 */
-.note{display:flex;gap:13px;align-items:flex-start;background:#FBF3DF;border-left:3px solid var(--glaze);
-  border-radius:0 8px 8px 0;padding:13px 17px;margin:20px 0;font-size:.93rem;line-height:1.7}
-.note b{color:#8A6D2F;font-weight:600;flex:none}
-.note.red{background:rgba(168,53,42,.07);border-left-color:var(--wall)}
-.note.red b{color:var(--wall-deep)}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.feat-card{border:1.5px solid var(--brick-ink);border-radius:3px;background:var(--card);
+  box-shadow:5px 5px 0 rgba(69,59,49,.12);overflow:hidden}
+.feat-card header{display:flex;align-items:center;gap:10px;
+  background:rgba(107,97,87,.12);border-bottom:2px solid var(--brick);
+  padding:11px 18px}
+.feat-card header .studs{margin-left:auto}
+.feat-card header .studs i{width:6px;height:6px}
+.feat-card h3{font-family:var(--font-title);font-size:1.12rem;font-weight:700;letter-spacing:.1em}
+.feat-card ul{list-style:none;padding:14px 18px 18px;display:grid;grid-template-columns:1fr 1fr;gap:9px 14px}
+.feat-card li{position:relative;padding-left:17px;font-weight:300;font-size:.97rem}
+.feat-card li::before{content:"";position:absolute;left:1px;top:.62em;
+  width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
 
 /* ============================================================
-   特色卡片（美食 / 必游 / 伴手礼 / 文化体验）
+   移动端 DAY 导航（仅小屏；两天始终可见，同原页行为）
    ============================================================ */
-.feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;
-  margin-top:clamp(22px,4vw,34px)}
-.feat{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:18px 20px 16px;
-  transition:border-color .22s,box-shadow .22s,transform .22s}
-.feat:hover{border-color:var(--rule-strong);box-shadow:0 6px 20px rgba(28,35,32,.07);transform:translateY(-2px)}
-.feat h3{font-family:var(--font-title);font-size:1.05rem;font-weight:700;letter-spacing:.1em;
-  color:var(--wall-deep);display:flex;align-items:center;gap:9px;margin-bottom:12px}
-.feat h3::before{content:"";width:6px;height:6px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.feat ul{list-style:none}
-.feat li{font-size:.9rem;color:var(--ink-soft);line-height:1.65;padding:5px 0 5px 14px;position:relative;
-  border-bottom:1px dashed rgba(28,35,32,.07)}
-.feat li:last-child{border-bottom:0}
-.feat li::before{content:"";position:absolute;left:0;top:13px;width:4px;height:4px;
-  background:var(--glaze);opacity:.75;transform:rotate(45deg)}
+.mobile-day-nav{display:none;gap:10px;justify-content:center;margin:0 0 8px}
+.day-btn{flex:1;max-width:220px;padding:12px 10px;cursor:pointer;border-radius:2px;
+  border:2px solid var(--brick-ink);background:var(--paper-hi);color:var(--brick-ink);
+  font-family:var(--font-title);font-weight:700;font-size:1rem;letter-spacing:.18em;
+  transition:background .25s ease,color .25s ease}
+.day-btn.active{background:var(--brick-ink);color:#F3E7C8}
+@media (max-width:768px){ .mobile-day-nav{display:flex} }
 
 /* ============================================================
-   DAY 导航
+   城门（每一天一道门）+ 大道（竖直中轴 · 时间牌 · 单侧站点卡）
    ============================================================ */
-.days{position:sticky;top:0;z-index:20;background:rgba(245,242,234,.93);
-  backdrop-filter:blur(10px);padding:11px 0;margin-bottom:8px;border-bottom:1px solid var(--rule)}
-.days .row{display:flex;gap:8px;overflow-x:auto}
-.day-btn{flex:0 0 auto;min-height:40px;padding:0 20px;border-radius:2px;cursor:pointer;
-  border:1px solid var(--rule-strong);background:transparent;color:var(--ink-soft);
-  font-family:var(--font-title);font-size:.9rem;font-weight:600;letter-spacing:.12em;
-  transition:all .22s ease}
-.day-btn:hover{border-color:var(--wall);color:var(--wall)}
-.day-btn[aria-selected="true"]{background:var(--wall);border-color:var(--wall);color:#fff}
+.day-section{margin-top:clamp(38px,6vw,64px)}
+.day-section:first-of-type{margin-top:8px}
+.gate{position:relative}
+.crenel{height:16px;
+  background:
+    linear-gradient(var(--brick-deep),var(--brick-deep)) left bottom/100% 7px no-repeat,
+    repeating-linear-gradient(90deg,var(--brick-deep) 0 18px,transparent 18px 32px) left top/100% 9px repeat-x}
+.beam{background:linear-gradient(180deg,#57493A,var(--brick-deep) 55%,#3B322A);
+  padding:24px 16px 26px;text-align:center;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.plaque{display:inline-block;background:var(--paper-hi);border:2px solid var(--gold);
+  outline:1px solid rgba(38,32,25,.35);outline-offset:4px;border-radius:2px;
+  padding:10px 34px 12px;min-width:min(430px,86%)}
+.plaque .p-day{display:block;font-size:11px;letter-spacing:.42em;color:var(--gold-deep);font-weight:600}
+.plaque .p-theme{display:block;font-family:var(--font-title);font-weight:700;
+  font-size:clamp(1.3rem,3.4vw,1.7rem);letter-spacing:.14em;color:var(--brick-ink);margin-top:3px}
+.arch{display:block;width:100%;height:42px;margin-top:2px}
+.route-line{text-align:center;font-size:.86rem;letter-spacing:.12em;color:var(--ink-soft);
+  margin-top:2px;font-weight:300}
+.route-line b{color:var(--gold-deep);font-weight:600}
+
+/* 大道：轴线 + 梧桐叶影点纹 */
+.road{position:relative;margin-top:clamp(20px,3.5vw,30px);
+  padding:8px 0 6px;
+  background-image:radial-gradient(rgba(184,137,43,.13) 2.2px,transparent 2.9px);
+  background-size:30px 30px;background-position:8px 4px}
+.road::before{content:"";position:absolute;top:0;bottom:0;left:calc(var(--axis-x) / 2);
+  width:3px;transform:translateX(-50%);
+  background:linear-gradient(180deg,var(--brick),var(--brick-deep));opacity:.55}
+.road::after{content:"";position:absolute;top:0;bottom:0;left:calc(var(--axis-x) / 2 + 7px);
+  width:1px;background:var(--gold);opacity:.35}
+.stop{display:flex;align-items:stretch;position:relative;padding:10px 0}
+.stop .timecell{flex:0 0 var(--axis-x);display:flex;justify-content:center;align-items:flex-start;
+  padding-top:14px;position:relative;z-index:1}
+.tp{display:inline-block;background:var(--brick-ink);color:#F3E7C8;border-radius:2px;
+  font-weight:600;font-size:.98rem;letter-spacing:.06em;padding:5px 13px;
+  box-shadow:0 0 0 6px var(--paper);font-variant-numeric:tabular-nums;white-space:nowrap}
+.scard{flex:1;margin-left:26px;background:var(--card);border:1px solid var(--rule-strong);
+  border-left:4px solid var(--gold);border-radius:2px;
+  padding:15px 20px 13px;box-shadow:4px 4px 0 rgba(69,59,49,.10)}
+.stop:last-child .scard{border-left-color:var(--brick)}
+.s-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.s-top h4{font-family:var(--font-title);font-size:1.18rem;font-weight:700;letter-spacing:.04em}
+.budget{font-size:.8rem;font-weight:600;letter-spacing:.05em;padding:2px 10px;border-radius:2px;
+  background:rgba(184,137,43,.15);color:var(--gold-deep);border:1px solid rgba(184,137,43,.4)}
+.budget.free{background:rgba(107,97,87,.10);color:var(--ink-soft);border-color:var(--rule)}
+.s-act{margin-top:5px;font-weight:300;color:var(--ink-soft);font-size:.97rem}
+.s-meta{margin-top:10px;padding-top:8px;border-top:1px dashed var(--rule-strong);
+  display:flex;flex-wrap:wrap;gap:6px 24px;font-size:.85rem;color:var(--ink-faint);letter-spacing:.04em}
+.s-meta b{font-weight:500;color:var(--ink-soft)}
+
+/* 当日小贴士（小告示） */
+.day-tips{margin-top:22px;margin-left:calc(var(--axis-x) + 26px);
+  border:1.5px solid var(--brick-ink);border-radius:2px;background:var(--paper-hi);
+  box-shadow:5px 5px 0 rgba(69,59,49,.12);padding:18px 22px 16px}
+.day-tips h5{font-family:var(--font-title);font-size:1.05rem;font-weight:700;
+  letter-spacing:.12em;color:var(--brick-ink);padding-bottom:9px;
+  border-bottom:2px solid var(--brick);margin-bottom:11px}
+.day-tips ul{list-style:none}
+.day-tips li{position:relative;padding-left:17px;font-weight:300;font-size:.95rem;margin-top:6px}
+.day-tips li::before{content:"";position:absolute;left:1px;top:.62em;
+  width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+.day-tips li b{font-weight:600}
+.guide{margin-top:13px;border-left:4px solid var(--brick);background:rgba(107,97,87,.07);
+  padding:11px 16px;font-weight:300;font-size:.95rem}
+.guide b{font-weight:600;color:var(--brick-ink)}
 
 /* ============================================================
-   行程 · 沿秦淮而行的时间线
+   收尾小贴士四牌
    ============================================================ */
-.tl{list-style:none;position:relative;display:flex;flex-direction:column;gap:10px}
-.stop{position:relative;z-index:1;display:grid;align-items:stretch;
-  grid-template-columns:56px minmax(0,1fr) minmax(210px,40%);
-  background:linear-gradient(180deg,#fff, #FDFBF6);
-  border:1px solid var(--rule);border-radius:12px;
-  box-shadow:0 1px 2px rgba(28,35,32,.04);
-  transition:border-color .22s,box-shadow .22s,transform .22s}
-.stop:hover{border-color:var(--rule-strong);box-shadow:0 6px 20px rgba(28,35,32,.07);transform:translateY(-1px)}
-.stop>.t{position:relative;padding:15px 0 15px 8px;font-family:var(--font-title);
-  font-size:.92rem;font-weight:700;color:var(--wall);letter-spacing:.02em;
-  border-right:1px solid var(--rule)}
-.stop>.t::before{content:"";position:absolute;right:-5px;top:20px;width:8px;height:8px;
-  border-radius:50%;background:var(--paper);border:2px solid var(--glaze)}
-.stop>.b{padding:15px 18px;display:flex;flex-direction:column;justify-content:center;min-width:0}
-.stop .b h3{font-family:var(--font-title);font-size:1.04rem;font-weight:700;color:var(--ink);line-height:1.4}
-.stop .b p{margin-top:3px;font-size:.89rem;color:var(--ink-soft);line-height:1.6}
-.stop>.meta{position:relative;display:flex;flex-direction:column;justify-content:center;gap:7px;
-  padding:14px 18px 14px 20px}
-.stop>.meta::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:0;
-  border-left:1.5px dashed rgba(184,137,43,.7);
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 86%,transparent 100%)}
-.stop>.meta .mh{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.stop>.meta .mh .cost{font-size:.75rem;font-weight:600;color:#8A6D2F;
-  background:rgba(184,137,43,.14);border-radius:3px;padding:2px 8px;letter-spacing:.02em}
-.stop>.meta .mb{display:flex;flex-direction:column;gap:3px}
-.stop>.meta .mv{font-size:.76rem;color:var(--ink-soft);letter-spacing:.02em;
-  display:flex;align-items:center;gap:6px}
-.stop>.meta .mv::before{content:"";width:4px;height:4px;background:var(--glaze);
-  opacity:.75;transform:rotate(45deg);flex:none}
-@media (max-width:820px){
-  .stop{grid-template-columns:52px 1fr}
-  .stop>.meta{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;
-    justify-content:flex-start;gap:5px 14px;padding:2px 14px 12px}
-  .stop>.meta::before{display:none}
-  .stop>.meta .mb{flex-direction:row;gap:5px 14px;align-items:center}
+.closing{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.close-card{border:1.5px solid var(--brick-ink);border-radius:2px;background:var(--card);
+  padding:18px 22px;box-shadow:5px 5px 0 rgba(69,59,49,.12)}
+.close-card h3{font-family:var(--font-title);font-size:1.08rem;font-weight:700;
+  letter-spacing:.1em;color:var(--brick-ink);display:flex;align-items:center;gap:10px}
+.close-card h3::after{content:"";flex:1;height:1px;background:var(--rule-strong)}
+.close-card p{margin-top:9px;font-weight:300;font-size:.96rem;color:var(--ink-soft)}
+.close-card p b{font-weight:600;color:var(--ink)}
+
+/* ============================================================
+   页脚 / 回顶
+   ============================================================ */
+footer{border-top:2px solid var(--brick-ink);margin-top:clamp(52px,8vw,84px)}
+footer .fin{max-width:var(--wrap);margin:0 auto;padding:28px var(--gut) 46px;
+  font-size:.88rem;font-weight:300;line-height:2.05;color:var(--ink-faint);letter-spacing:.04em}
+footer .fin .song{font-family:var(--font-title);color:var(--brick);letter-spacing:.24em}
+.back-to-top{position:fixed;right:22px;bottom:22px;z-index:50;width:46px;height:46px;
+  border-radius:2px;border:2px solid var(--brick-ink);background:var(--brick-ink);
+  color:#F3E7C8;cursor:pointer;display:grid;place-items:center;
+  opacity:0;pointer-events:none;transform:translateY(8px);
+  transition:opacity .3s ease,transform .3s ease;box-shadow:4px 4px 0 rgba(69,59,49,.25)}
+.back-to-top.visible{opacity:1;pointer-events:auto;transform:none}
+.back-to-top:hover{background:var(--gold-deep);border-color:var(--gold-deep)}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width:860px){
+  .feat,.closing{grid-template-columns:1fr}
 }
-
-/* DAY 小贴士 */
-.tips{background:#fff;border:1px solid var(--rule);border-radius:12px;
-  padding:18px 20px 14px;margin-top:16px}
-.tips h3{font-family:var(--font-title);font-size:1.02rem;font-weight:700;letter-spacing:.08em;
-  color:var(--wall-deep);display:flex;align-items:center;gap:9px;margin-bottom:10px}
-.tips h3::before{content:"";width:6px;height:6px;background:var(--glaze);transform:rotate(45deg);flex:none}
-.tips ul{list-style:none}
-.tips li{font-size:.9rem;color:var(--ink-soft);line-height:1.7;padding:5px 0 5px 14px;position:relative}
-.tips li::before{content:"";position:absolute;left:0;top:14px;width:4px;height:4px;
-  background:var(--glaze);opacity:.75;transform:rotate(45deg)}
-.tips li b{color:var(--ink);font-weight:600}
-
-/* ============================================================
-   收尾小贴士
-   ============================================================ */
-.fin-card{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:8px 22px}
-.fin-row{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--rule);font-size:.93rem;line-height:1.8}
-.fin-row:last-child{border-bottom:0}
-.fin-row b{flex:none;font-family:var(--font-title);font-weight:700;color:var(--wall-deep);letter-spacing:.04em}
-.fin-row p{color:var(--ink-soft)}
-.hl{background:rgba(184,137,43,.16);border-radius:3px;padding:1px 7px;font-weight:600;color:#8A6D2F}
-@media (max-width:640px){.fin-row{flex-direction:column;gap:2px}}
-
-footer{margin-top:clamp(52px,9vw,100px);padding-top:clamp(22px,4vw,34px);border-top:1px solid var(--rule);
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-size:12px;color:var(--ink-faint);letter-spacing:.05em;line-height:1.9}
-.foot-sky{display:block;width:100%;height:50px;color:var(--brick);opacity:.15;margin-bottom:16px}
-
-.tools{position:fixed;right:clamp(14px,2.5vw,28px);bottom:clamp(14px,2.5vw,28px);
-  display:flex;flex-direction:column;gap:9px;z-index:40}
-.tools button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-  border:1px solid var(--rule-strong);background:var(--paper);color:var(--ink-soft);
-  cursor:pointer;transition:all .22s ease}
-.tools button:hover{color:var(--wall);border-color:var(--wall);transform:translateY(-2px)}
-.tools button:active{transform:scale(.93)}
-.tools button[hidden]{display:none}
-
-/* 地面留白处隐约可见的城墙砖纹 */
-.ground::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(90deg,rgba(107,97,87,.05) 1px,transparent 1px),
-    linear-gradient(0deg,rgba(107,97,87,.05) 1px,transparent 1px);
-  background-size:54px 54px;
-  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);
-  mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
-main{position:relative;z-index:1}
-
-/* DAY 小印章 */
-.seal-mini{display:inline-grid;place-items:center;width:24px;height:24px;flex:none;align-self:center;
-  border:1.5px solid var(--wall);color:var(--wall);border-radius:3px;
-  font-family:var(--font-title);font-size:.8rem;font-weight:700;
-  transform:rotate(-3deg);opacity:.8}
-
-@media print{
-  .hero{background:#fff!important;min-height:auto;padding:24px 0}
-  .hero h1,.hero .sub,.hero .eyebrow,.seal{color:#000!important;text-shadow:none;border-color:#999}
-  .hero .meta span{color:#000!important;background:none;border-color:#999}
-  .hero .back,.tools,.days,.sky-orn{display:none!important}
-  .ground{box-shadow:none;border-radius:0}
-  .sec{break-inside:avoid;margin-top:22px}
-  .stop,.bk,.feat,.tips{break-inside:avoid;box-shadow:none}
-  .book::before{display:none}
+@media (max-width:640px){
+  :root{--axis-x:62px}
+  .hero .seal{width:56px;height:56px;top:64px}
+  .hero .seal span{font-size:1.28rem}
+  .hero h1 .dur{display:block;margin:10px 0 0}
+  .tp{font-size:.8rem;padding:4px 7px;box-shadow:0 0 0 5px var(--paper)}
+  .scard{margin-left:15px;padding:13px 15px 11px}
+  .s-top h4{font-size:1.05rem}
+  .day-tips{margin-left:0}
+  .plaque{padding:9px 18px 11px}
+  th,td{padding:8px 10px;font-size:.88rem}
+  .motto p{letter-spacing:.18em}
 }
 </style>
 </head>
 <body>
 
-<!-- ============ 图标库 ============ -->
-<svg style="display:none" aria-hidden="true">
-  <symbol id="i-id" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8.5" cy="11" r="2.2"/><path d="M6 16.4c.7-1.3 2-2 2.5-2s1.8.7 2.5 2M14 10h4M14 13.5h3"/></symbol>
-  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2.5" y="7" width="16" height="10" rx="2"/><path d="M21.5 10.5v3M6 10.5v3M9.5 10.5v3"/></symbol>
-  <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 16.5h11c3 0 5-1.4 5.4-3.6.4-2 1-3.4 2.6-3.9-.5 1.6-.3 3 .1 4.2.3 1 .8 1.8 1.9 1.8H21v4H3z"/><path d="M3 16.5v3"/></symbol>
-  <symbol id="i-coat" viewBox="0 0 24 24"><path d="M8 3 4 5.5 3 10l3 1v9h12v-9l3-1-1-4.5L16 3"/><path d="M8 3c0 1.7 1.8 2.5 4 2.5S16 4.7 16 3"/></symbol>
-  <symbol id="i-umbrella" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2.5 2.5 0 0 1-5 0"/></symbol>
-  <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 10v4M18 10v4"/></symbol>
-  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12.5H5.2z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/></symbol>
-  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v4"/></symbol>
-  <symbol id="i-head" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13.5" width="4.5" height="7" rx="2"/><rect x="17" y="13.5" width="4.5" height="7" rx="2"/></symbol>
-  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
-</svg>
-
-<!-- ============ HERO ============ -->
+<!-- ================= HERO · 黄昏的城 ================= -->
 <header class="hero">
-  <svg class="sky-orn" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <!-- 远景楼群 -->
-    <g class="far">
-      <path d="M1000,420 L1000,262 L1036,262 L1036,420 Z"/>
-      <path d="M1058,420 L1058,224 L1090,224 L1090,420 Z"/>
-      <path d="M1252,420 L1252,246 L1300,246 L1300,420 Z"/>
-      <path d="M1330,420 L1330,282 L1390,282 L1390,420 Z"/>
-    </g>
-    <!-- 中景：紫峰大厦（阶梯收分） -->
-    <g class="mid">
-      <path d="M1152,420 L1152,268 L1248,268 L1248,420 Z"/>
-      <path d="M1166,268 L1166,200 L1234,200 L1234,268 Z"/>
-      <path d="M1180,200 L1180,142 L1220,142 L1220,200 Z"/>
-      <path d="M1194,142 L1194,104 L1206,104 L1206,142 Z"/>
-      <path d="M1199,104 L1199,84 L1201,84 L1201,104 Z"/>
-      <path d="M906,420 L906,300 L966,300 L966,420 Z"/>
-    </g>
-    <!-- 近景：明城墙 + 门楼 / 梧桐 / 秦淮画舫 -->
-    <g class="near">
-      <!-- 城墙墙体与雉堞 -->
-      <path d="M0,420 L0,378 L700,378 L700,420 Z"/>
-      <path d="M0,378 L0,366 L16,366 L16,378 L34,378 L34,366 L50,366 L50,378 L68,378 L68,366 L84,366 L84,378 L102,378 L102,366 L118,366 L118,378 L136,378 L136,366 L152,366 L152,378 L700,378 L700,366 L716,366 L716,378 Z"/>
-      <!-- 门楼基座 -->
-      <path d="M196,378 L196,330 L404,330 L404,378 Z"/>
-      <!-- 门楼双层檐 -->
-      <path d="M182,330 C198,330 212,326 226,316 C252,296 348,296 374,316 C388,326 402,330 418,330 L396,338 L204,338 Z"/>
-      <path d="M238,300 L238,282 L362,282 L362,300 Z"/>
-      <path d="M226,282 C238,282 248,278 258,271 C276,258 324,258 342,271 C352,278 362,282 374,282 L360,287 L240,287 Z"/>
-      <path d="M292,258 L292,246 L308,246 L308,258 Z"/>
-      <!-- 梧桐 -->
-      <path d="M756,420 L756,382 L764,382 L764,420 Z"/>
-      <path d="M724,382 a36,30 0 1,1 72,0 a28,24 0 1,1 -72,0 Z"/>
-      <path d="M842,420 L842,388 L850,388 L850,420 Z"/>
-      <path d="M814,388 a32,27 0 1,1 64,0 a25,21 0 1,1 -64,0 Z"/>
-      <!-- 画舫 -->
-      <path d="M470,420 L478,398 L622,398 L614,420 Z"/>
-      <path d="M505,398 L505,372 L595,372 L595,398 Z"/>
-      <path d="M492,372 C508,356 592,356 608,372 L596,376 L504,376 Z"/>
-      <path d="M544,356 L544,342 L556,342 L556,356 Z"/>
-    </g>
-    <!-- 窗（灯光） -->
-    <g class="win">
-      <rect x="1012" y="280" width="6" height="8"/><rect x="1070" y="242" width="6" height="8"/>
-      <rect x="1196" y="222" width="6" height="8"/><rect x="1264" y="264" width="6" height="8"/>
-      <rect x="1352" y="298" width="6" height="8"/>
-    </g>
-  </svg>
-
-  <div class="seal">陵</div>
-
   <a class="back" href="../EastChina/EastChina-Jiangsu.html">
-    <svg class="ic" viewBox="0 0 24 24" style="width:14px;height:14px" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    <svg class="ic" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
     返回上页
   </a>
-
+  <div class="seal" aria-hidden="true"><span>金陵</span></div>
   <div class="inner">
-    <div class="eyebrow">华东 · 秦淮河畔的两日</div>
-    <h1>南京 2 天 1 晚</h1>
+    <p class="eyebrow">中国 · 华东 · 江苏</p>
+    <h1>南京<span class="dur">2 天 1 晚</span></h1>
     <p class="sub">六朝古都的历史沉淀与现代都市的完美融合</p>
     <div class="meta">
-      <span>2 天 1 晚</span><span>最佳季节 3–5 月 · 9–11 月</span><span>地铁一日票 18 元</span><span>秋日梧桐</span>
+      <span>最佳季节 3-5 月 · 9-11 月</span>
+      <span>地铁一日票 18 元</span>
+      <span>秋日梧桐</span>
     </div>
   </div>
+  <svg class="cityscape" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <!-- 落日 -->
+    <circle cx="330" cy="118" r="86" fill="#E9BC55" opacity=".16"/>
+    <circle cx="330" cy="118" r="50" fill="#E9BC55" opacity=".8"/>
+    <!-- 远山 -->
+    <path d="M0,300 L0,242 L210,200 L430,236 L690,192 L930,232 L1150,204 L1440,244 L1440,300 Z" fill="#3A2A17" opacity=".55"/>
+    <!-- 梧桐冠影（左） -->
+    <g fill="#17100A">
+      <rect x="118" y="196" width="9" height="66"/>
+      <circle cx="86" cy="182" r="42"/><circle cx="140" cy="168" r="48"/><circle cx="188" cy="188" r="36"/>
+    </g>
+    <!-- 梧桐冠影（右） -->
+    <g fill="#17100A">
+      <rect x="1276" y="200" width="9" height="62"/>
+      <circle cx="1248" cy="188" r="36"/><circle cx="1296" cy="174" r="44"/><circle cx="1340" cy="192" r="32"/>
+    </g>
+    <!-- 城墙：垛口 + 墙体 -->
+    <line x1="0" y1="252" x2="1440" y2="252" stroke="#17100A" stroke-width="15" stroke-dasharray="22 15"/>
+    <rect x="0" y="262" width="1440" height="38" fill="#17100A"/>
+    <!-- 城门楼 -->
+    <g fill="#17100A">
+      <rect x="856" y="222" width="248" height="40"/>
+      <rect x="892" y="164" width="176" height="60"/>
+      <polygon points="876,166 1084,166 1040,136 920,136"/>
+      <rect x="922" y="106" width="116" height="32"/>
+      <polygon points="906,108 1054,108 1022,82 938,82"/>
+    </g>
+    <!-- 门洞（透出的灯火） -->
+    <path d="M952,300 L952,272 A28,28 0 0 1 1008,272 L1008,300 Z" fill="#E9BC55" opacity=".92"/>
+  </svg>
 </header>
 
-<!-- ============ 内容 ============ -->
 <div class="ground">
-<div class="wrap">
-<main>
+  <div class="wrap">
+    <main>
 
-  <!-- ===== 准备事项 ===== -->
-  <section class="sec" id="prep">
-    <div class="sec-h"><h2>准备事项</h2><span class="n">出发前 · 先备齐</span>
-      <span class="d">南京博物院、纪念馆需提前预约</span></div>
+      <!-- 题字带 -->
+      <div class="motto"><i></i><p>金陵帝王州 · 江南佳丽地</p><i></i></div>
 
-    <div class="kit">
-      <div class="lvl lv3">
-        <div class="lvl-h"><span class="dot"></span><b>背包</b></div>
-        <div class="items">
-          <div class="item lv3"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg>
-            <div class="tx"><b>双肩包</b><small>轻便出行，装随身物品</small></div></div>
+      <!-- ================= 壹 · 准备事项（城门告示） ================= -->
+      <section class="sec" aria-label="准备事项">
+        <div class="sec-h">
+          <span class="no">壹</span>
+          <h2>准备事项</h2>
+          <span class="en">PREPARATION</span>
         </div>
-      </div>
 
-      <div class="lvl lv1">
-        <div class="lvl-h"><span class="dot"></span><b>证件类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-id"/></svg>
-            <div class="tx"><b>身份证</b><small>必备</small></div></div>
+        <div class="board">
+          <div class="board-h">
+            <h3>出行告示</h3>
+            <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr><th>类别</th><th>事项</th><th>说明/注意事项</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="cat">背包</td><td class="item">双肩包</td><td class="note-c">轻便出行，装随身物品</td></tr>
+                <tr><td class="cat">证件类</td><td class="item">身份证</td><td class="note-c">必备</td></tr>
+                <tr><td class="cat" rowspan="3">电子类</td><td class="item">充电宝</td><td class="note-c">≤100Wh（民航规定）</td></tr>
+                <tr><td class="item">充电器</td><td class="note-c">带Type-C接口</td></tr>
+                <tr><td class="item">耳机</td><td class="note-c">地铁/高铁使用</td></tr>
+                <tr><td class="cat" rowspan="4">日用类</td><td class="item">薄外套</td><td class="note-c">南京昼夜温差较大</td></tr>
+                <tr><td class="item">折叠伞</td><td class="note-c">防雨防晒</td></tr>
+                <tr><td class="item">舒适鞋</td><td class="note-c">日均步数1.5万+</td></tr>
+                <tr><td class="item">现金</td><td class="note-c">200-300元（小额支付）</td></tr>
+                <tr><td class="cat">预约类</td><td class="item">景点预约</td><td class="note-c"><a class="toggle-link" href="#" id="reservation-toggle">详情</a></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <div class="lvl lv2">
-        <div class="lvl-h"><span class="dot"></span><b>电子类</b></div>
-        <div class="items">
-          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-battery"/></svg>
-            <div class="tx"><b>充电宝</b><small>≤100Wh（民航规定）</small></div></div>
-          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-plug"/></svg>
-            <div class="tx"><b>充电器</b><small>带Type-C接口</small></div></div>
-          <div class="item lv2"><svg class="ic" aria-hidden="true"><use href="#i-head"/></svg>
-            <div class="tx"><b>耳机</b><small>地铁/高铁使用</small></div></div>
+        <p class="note-strip" id="preparation-note"><b>注意：</b>南京博物院和侵华日军南京大屠杀遇难同胞纪念馆需提前预约，特别是周末和节假日</p>
+
+        <div class="board resv" id="reservation-details" style="display:none">
+          <div class="board-h">
+            <h3>景点预约详情</h3>
+            <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr><th>景点名称</th><th>门票价格</th><th>预约要求</th><th>预约路径</th><th>闭馆/闭园时间</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>南京博物院</td><td class="free">免费</td><td>提前1-7天预约</td><td>"南京博物院"公众号</td><td>周一闭馆</td></tr>
+                <tr><td>侵华日军南京大屠杀遇难同胞纪念馆</td><td class="free">免费</td><td>提前1-7天预约</td><td>官网或公众号</td><td>周一闭馆</td></tr>
+                <tr><td>总统府</td><td>40元</td><td>提前1-3天预约</td><td>"南京总统府"公众号</td><td>17:00停止入场</td></tr>
+                <tr><td>秦淮河画舫</td><td>80元</td><td>当天预约</td><td>现场或在线平台</td><td>21:30末班船</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="lvl lv3">
-        <div class="lvl-h"><span class="dot"></span><b>日用类</b></div>
-        <div class="items">
-          <div class="item lv3"><svg class="ic" aria-hidden="true"><use href="#i-coat"/></svg>
-            <div class="tx"><b>薄外套</b><small>南京昼夜温差较大</small></div></div>
-          <div class="item lv3"><svg class="ic" aria-hidden="true"><use href="#i-umbrella"/></svg>
-            <div class="tx"><b>折叠伞</b><small>防雨防晒</small></div></div>
-          <div class="item lv3"><svg class="ic" aria-hidden="true"><use href="#i-shoe"/></svg>
-            <div class="tx"><b>舒适鞋</b><small>日均步数1.5万+</small></div></div>
-          <div class="item lv3"><svg class="ic" aria-hidden="true"><use href="#i-cash"/></svg>
-            <div class="tx"><b>现金</b><small>200-300元（小额支付）</small></div></div>
+      <!-- ================= 贰 · 南京特色 ================= -->
+      <section class="sec" aria-label="南京特色">
+        <div class="sec-h">
+          <span class="no">贰</span>
+          <h2>南京特色</h2>
+          <span class="en">HIGHLIGHTS</span>
         </div>
-      </div>
 
-      <div class="lvl lv1">
-        <div class="lvl-h"><span class="dot"></span><b>预约类</b></div>
-        <div class="items">
-          <div class="item"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg>
-            <div class="tx"><b>景点预约</b><small><a id="reservation-toggle" class="res-link" href="#">详情</a></small></div></div>
+        <div class="feat">
+          <div class="feat-card">
+            <header>
+              <h3>南京美食</h3>
+              <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </header>
+            <ul>
+              <li>鸭血粉丝汤</li>
+              <li>盐水鸭</li>
+              <li>蟹黄汤包</li>
+              <li>牛肉锅贴</li>
+              <li>桂花糖芋苗</li>
+              <li>赤豆元宵</li>
+            </ul>
+          </div>
+
+          <div class="feat-card">
+            <header>
+              <h3>必游景点</h3>
+              <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </header>
+            <ul>
+              <li>南京博物院</li>
+              <li>梧桐大道</li>
+              <li>夫子庙秦淮河</li>
+              <li>总统府</li>
+              <li>玄武湖</li>
+              <li>中山陵</li>
+            </ul>
+          </div>
+
+          <div class="feat-card">
+            <header>
+              <h3>特色伴手礼</h3>
+              <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </header>
+            <ul>
+              <li>盐水鸭真空包装</li>
+              <li>雨花石工艺品</li>
+              <li>云锦饰品</li>
+              <li>金陵金箔工艺品</li>
+              <li>南京剪纸</li>
+            </ul>
+          </div>
+
+          <div class="feat-card">
+            <header>
+              <h3>文化体验</h3>
+              <div class="studs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </header>
+            <ul>
+              <li>夫子庙科举博物馆</li>
+              <li>老门东传统手工艺</li>
+              <li>南京云锦研究所</li>
+              <li>甘熙故居民俗体验</li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div id="preparation-note" class="note red"><b>注意：</b><span>南京博物院和侵华日军南京大屠杀遇难同胞纪念馆需提前预约，特别是周末和节假日</span></div>
+      <!-- ================= 叁 · 两日行程（两道城门） ================= -->
+      <section class="sec" aria-label="两日行程">
+        <div class="sec-h">
+          <span class="no">叁</span>
+          <h2>两日行程</h2>
+          <span class="en">ITINERARY</span>
+        </div>
 
-    <!-- 景点预约详情（默认收起，点「详情」展开） -->
-    <div id="reservation-details" class="book" style="display:none">
-      <div class="hd">
-        <span class="tag">提前预约</span>
-        <h3>景点预约详情</h3>
-      </div>
+        <div class="mobile-day-nav">
+          <button class="day-btn active" data-day="1" type="button">DAY 1</button>
+          <button class="day-btn" data-day="2" type="button">DAY 2</button>
+        </div>
 
-      <article class="bk urgent">
-        <div class="bk-t"><h4>南京博物院</h4><span class="badge">提前预约</span></div>
-        <div class="bk-when"><span class="d">提前 <b>1-7</b> 天预约</span><span class="t">免费</span></div>
-        <dl class="bk-m">
-          <div class="row"><dt>路径</dt><dd>"南京博物院"公众号</dd></div>
-          <div class="row"><dt>闭馆</dt><dd>周一闭馆</dd></div>
-        </dl>
-      </article>
+        <!-- ===== 第一道门 · DAY 1 ===== -->
+        <div class="day-section" id="day1-section">
+          <div class="gate">
+            <div class="crenel" aria-hidden="true"></div>
+            <div class="beam">
+              <div class="plaque">
+                <span class="p-day">DAY 1</span>
+                <span class="p-theme">博览 · 梧桐 · 秦淮</span>
+              </div>
+            </div>
+            <svg class="arch" viewBox="0 0 600 44" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M8,42 L8,30 Q300,-18 592,30 L592,42" fill="none" stroke="#6B6157" stroke-width="2" opacity=".55"/>
+            </svg>
+            <p class="route-line">南京南站 <b>→</b> 南京博物院 <b>→</b> 梧桐大道 <b>→</b> 夫子庙 · 秦淮河</p>
+          </div>
 
-      <div class="bkr">
-        <div class="bkr-h">其余 3 处</div>
-        <ul class="bklist">
-          <li>
-            <span class="nm">侵华日军南京大屠杀遇难同胞纪念馆</span><span class="lead">提前 1-7 天预约</span>
-            <span class="mt">免费 · 官网或公众号 · 周一闭馆</span>
-          </li>
-          <li>
-            <span class="nm">总统府</span><span class="lead">提前 1-3 天预约</span>
-            <span class="mt">40 元 · "南京总统府"公众号 · 17:00 停止入场</span>
-          </li>
-          <li>
-            <span class="nm">秦淮河画舫</span><span class="lead">当天预约</span>
-            <span class="mt">80 元 · 现场或在线平台 · 21:30 末班船</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+          <div class="road">
+            <div class="stop">
+              <div class="timecell"><span class="tp">12:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>南京南站</h4><span class="budget free">免费</span></div>
+                <p class="s-act">抵达南京</p>
+                <div class="s-meta"><span><b>交通：</b>地铁1号线</span><span><b>耗时：</b>10分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">13:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>喜马拉雅购物中心</h4><span class="budget">80元</span></div>
+                <p class="s-act">午餐：南京大牌档</p>
+                <div class="s-meta"><span><b>交通：</b>步行</span><span><b>耗时：</b>5分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">14:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>酒店</h4><span class="budget free">免费</span></div>
+                <p class="s-act">办理入住</p>
+                <div class="s-meta"><span><b>交通：</b>地铁</span><span><b>耗时：</b>20分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">15:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>南京博物院</h4><span class="budget free">免费</span></div>
+                <p class="s-act">参观历史馆、特展馆</p>
+                <div class="s-meta"><span><b>交通：</b>地铁2号线</span><span><b>耗时：</b>25分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">17:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>梧桐大道</h4><span class="budget free">免费</span></div>
+                <p class="s-act">欣赏红叶日落</p>
+                <div class="s-meta"><span><b>交通：</b>步行</span><span><b>耗时：</b>15分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">19:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>德基广场</h4><span class="budget free">灵活</span></div>
+                <p class="s-act">购物休闲</p>
+                <div class="s-meta"><span><b>交通：</b>地铁2号线</span><span><b>耗时：</b>15分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">20:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>夫子庙</h4><span class="budget">50元</span></div>
+                <p class="s-act">晚餐：鸭血粉丝汤+蟹黄汤包</p>
+                <div class="s-meta"><span><b>交通：</b>地铁3号线</span><span><b>耗时：</b>20分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">21:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>秦淮河</h4><span class="budget">80元</span></div>
+                <p class="s-act">夜游画舫</p>
+                <div class="s-meta"><span><b>交通：</b>步行</span><span><b>耗时：</b>5分钟</span></div>
+              </article>
+            </div>
+          </div>
 
-    <!-- 题字 -->
-    <div class="motto"><span class="dm"></span><span class="tx">金陵帝王州 · 江南佳丽地</span><span class="dm"></span></div>
+          <div class="day-tips">
+            <h5>DAY1 小贴士</h5>
+            <ul>
+              <li><b>南京博物院</b>建议提前预约，重点参观历史馆和特展馆</li>
+              <li><b>梧桐大道</b>的最佳拍摄时间是日落前1小时，光线最美</li>
+              <li><b>秦淮河夜游</b>建议选择东线，灯光效果更佳</li>
+              <li>夫子庙附近小吃众多，推荐尝试<b>鸭血粉丝汤</b>和<b>蟹黄汤包</b></li>
+            </ul>
+            <p class="guide"><b>南京博物院攻略：</b>建议重点参观历史馆和特展馆，民国馆适合拍照。免费但需提前预约，周一闭馆。</p>
+          </div>
+        </div>
 
-    <!-- 南京特色 -->
-    <div class="feats">
-      <div class="feat">
-        <h3>南京美食</h3>
-        <ul>
-          <li>鸭血粉丝汤</li>
-          <li>盐水鸭</li>
-          <li>蟹黄汤包</li>
-          <li>牛肉锅贴</li>
-          <li>桂花糖芋苗</li>
-          <li>赤豆元宵</li>
-        </ul>
-      </div>
-      <div class="feat">
-        <h3>必游景点</h3>
-        <ul>
-          <li>南京博物院</li>
-          <li>梧桐大道</li>
-          <li>夫子庙秦淮河</li>
-          <li>总统府</li>
-          <li>玄武湖</li>
-          <li>中山陵</li>
-        </ul>
-      </div>
-      <div class="feat">
-        <h3>特色伴手礼</h3>
-        <ul>
-          <li>盐水鸭真空包装</li>
-          <li>雨花石工艺品</li>
-          <li>云锦饰品</li>
-          <li>金陵金箔工艺品</li>
-          <li>南京剪纸</li>
-        </ul>
-      </div>
-      <div class="feat">
-        <h3>文化体验</h3>
-        <ul>
-          <li>夫子庙科举博物馆</li>
-          <li>老门东传统手工艺</li>
-          <li>南京云锦研究所</li>
-          <li>甘熙故居民俗体验</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+        <!-- ===== 第二道门 · DAY 2 ===== -->
+        <div class="day-section" id="day2-section">
+          <div class="gate">
+            <div class="crenel" aria-hidden="true"></div>
+            <div class="beam">
+              <div class="plaque">
+                <span class="p-day">DAY 2</span>
+                <span class="p-theme">民国 · 铭记 · 返程</span>
+              </div>
+            </div>
+            <svg class="arch" viewBox="0 0 600 44" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M8,42 L8,30 Q300,-18 592,30 L592,42" fill="none" stroke="#6B6157" stroke-width="2" opacity=".55"/>
+            </svg>
+            <p class="route-line">总统府周边 <b>→</b> 纪念馆 <b>→</b> 南京南站</p>
+          </div>
 
-  <div class="part"><i></i><i></i></div>
+          <div class="road">
+            <div class="stop">
+              <div class="timecell"><span class="tp">08:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>酒店</h4><span class="budget free">免费</span></div>
+                <p class="s-act">早餐</p>
+                <div class="s-meta"><span><b>交通：</b>—</span><span><b>耗时：</b>—</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">09:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>总统府周边</h4><span class="budget free">免费</span></div>
+                <p class="s-act">漫步民国建筑群</p>
+                <div class="s-meta"><span><b>交通：</b>地铁3号线</span><span><b>耗时：</b>20分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">11:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>龙吟九品</h4><span class="budget">120元</span></div>
+                <p class="s-act">午餐：淮扬菜</p>
+                <div class="s-meta"><span><b>交通：</b>步行</span><span><b>耗时：</b>10分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">13:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>侵华日军南京大屠杀遇难同胞纪念馆</h4><span class="budget free">免费</span></div>
+                <p class="s-act">参观历史展览</p>
+                <div class="s-meta"><span><b>交通：</b>地铁2号线</span><span><b>耗时：</b>30分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">16:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>吾悦广场</h4><span class="budget free">灵活</span></div>
+                <p class="s-act">休闲购物</p>
+                <div class="s-meta"><span><b>交通：</b>步行</span><span><b>耗时：</b>8分钟</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">18:30</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>晚餐</h4><span class="budget">50元</span></div>
+                <p class="s-act">南京特色小吃</p>
+                <div class="s-meta"><span><b>交通：</b>—</span><span><b>耗时：</b>—</span></div>
+              </article>
+            </div>
+            <div class="stop">
+              <div class="timecell"><span class="tp">20:00</span></div>
+              <article class="scard">
+                <div class="s-top"><h4>南京南站</h4><span class="budget free">免费</span></div>
+                <p class="s-act">返程</p>
+                <div class="s-meta"><span><b>交通：</b>地铁</span><span><b>耗时：</b>25分钟</span></div>
+              </article>
+            </div>
+          </div>
 
-  <!-- ===== DAY 导航 ===== -->
-  <nav class="days" aria-label="行程日期">
-    <div class="row" role="tablist">
-      <button class="day-btn" id="day1-btn" role="tab" aria-controls="day1-section" aria-selected="true"  data-day="1">DAY 1</button>
-      <button class="day-btn" id="day2-btn" role="tab" aria-controls="day2-section" aria-selected="false" data-day="2">DAY 2</button>
-    </div>
-  </nav>
+          <div class="day-tips">
+            <h5>DAY2 小贴士</h5>
+            <ul>
+              <li><b>总统府</b>周边民国建筑群适合拍照，建议穿复古风格服装</li>
+              <li>参观<b>侵华日军南京大屠杀遇难同胞纪念馆</b>请保持肃穆，衣着得体</li>
+              <li><b>吾悦广场</b>有众多餐饮选择，推荐尝试南京本地特色菜</li>
+              <li>返程前可在南京南站购买<b>盐水鸭</b>作为伴手礼</li>
+            </ul>
+            <p class="guide"><b>纪念馆参观提醒：</b>请保持肃穆，衣着得体。馆内禁止拍照，建议预留2-3小时参观时间。</p>
+          </div>
+        </div>
+      </section>
 
-  <!-- DAY 1 -->
-  <section class="sec day-sec" id="day1-section" role="tabpanel" aria-labelledby="day1-btn">
-    <div class="sec-h"><span class="seal-mini">壹</span><h2>DAY 1</h2><span class="n">行程表</span>
-      <span class="d">南京南站 → 南京博物院 → 夫子庙 · 秦淮河</span></div>
-    <ol class="tl">
-      <li class="stop"><div class="t">12:30</div><div class="b">
-        <h3>南京南站</h3><p>抵达南京</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁1号线 · 耗时 10 分钟</div></div></div></li>
-      <li class="stop"><div class="t">13:00</div><div class="b">
-        <h3>喜马拉雅购物中心</h3><p>午餐：南京大牌档</p></div><div class="meta"><div class="mh"><span class="cost">80 元</span></div><div class="mb"><div class="mv">步行 · 耗时 5 分钟</div></div></div></li>
-      <li class="stop"><div class="t">14:30</div><div class="b">
-        <h3>酒店</h3><p>办理入住</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁 · 耗时 20 分钟</div></div></div></li>
-      <li class="stop"><div class="t">15:30</div><div class="b">
-        <h3>南京博物院</h3><p>参观历史馆、特展馆</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁2号线 · 耗时 25 分钟</div></div></div></li>
-      <li class="stop"><div class="t">17:30</div><div class="b">
-        <h3>梧桐大道</h3><p>欣赏红叶日落</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">步行 · 耗时 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">19:00</div><div class="b">
-        <h3>德基广场</h3><p>购物休闲</p></div><div class="meta"><div class="mh"><span class="cost">灵活</span></div><div class="mb"><div class="mv">地铁2号线 · 耗时 15 分钟</div></div></div></li>
-      <li class="stop"><div class="t">20:30</div><div class="b">
-        <h3>夫子庙</h3><p>晚餐：鸭血粉丝汤+蟹黄汤包</p></div><div class="meta"><div class="mh"><span class="cost">50 元</span></div><div class="mb"><div class="mv">地铁3号线 · 耗时 20 分钟</div></div></div></li>
-      <li class="stop"><div class="t">21:30</div><div class="b">
-        <h3>秦淮河</h3><p>夜游画舫</p></div><div class="meta"><div class="mh"><span class="cost">80 元</span></div><div class="mb"><div class="mv">步行 · 耗时 5 分钟</div></div></div></li>
-    </ol>
+      <!-- ================= 肆 · 收尾小贴士 ================= -->
+      <section class="sec" aria-label="南京旅行小贴士">
+        <div class="sec-h">
+          <span class="no">肆</span>
+          <h2>南京旅行小贴士</h2>
+          <span class="en">TIPS</span>
+        </div>
 
-    <div class="tips">
-      <h3>DAY1 小贴士</h3>
-      <ul>
-        <li><b>南京博物院</b>建议提前预约，重点参观历史馆和特展馆</li>
-        <li><b>梧桐大道</b>的最佳拍摄时间是日落前1小时，光线最美</li>
-        <li><b>秦淮河夜游</b>建议选择东线，灯光效果更佳</li>
-        <li>夫子庙附近小吃众多，推荐尝试<b>鸭血粉丝汤</b>和<b>蟹黄汤包</b></li>
-      </ul>
-    </div>
+        <div class="closing">
+          <div class="close-card">
+            <h3>最佳旅行时间</h3>
+            <p><b>3月-5月</b>和<b>9月-11月</b>是南京最佳旅游季节，气候宜人，秋日梧桐尤其美丽。</p>
+          </div>
+          <div class="close-card">
+            <h3>交通建议</h3>
+            <p>南京地铁网络发达，主要景点均可通过地铁到达，建议购买地铁一日票(18元)。</p>
+          </div>
+          <div class="close-card">
+            <h3>美食地图</h3>
+            <p>除了夫子庙，科巷、明瓦廊也是当地美食聚集地，推荐尝试<b>牛肉锅贴</b>和<b>鸭油烧饼</b>。</p>
+          </div>
+          <div class="close-card">
+            <h3>文化体验</h3>
+            <p>南京云锦博物馆可了解世界级非物质文化遗产，还可体验金箔制作工艺。</p>
+          </div>
+        </div>
+      </section>
 
-    <div class="note"><b>南京博物院攻略：</b><span>建议重点参观历史馆和特展馆，民国馆适合拍照。免费但需提前预约，周一闭馆。</span></div>
-  </section>
-
-  <!-- DAY 2 -->
-  <section class="sec day-sec" id="day2-section" role="tabpanel" aria-labelledby="day2-btn">
-    <div class="sec-h"><span class="seal-mini">贰</span><h2>DAY 2</h2><span class="n">行程表</span>
-      <span class="d">总统府 → 纪念馆 → 南京南站</span></div>
-    <ol class="tl">
-      <li class="stop"><div class="t">08:00</div><div class="b">
-        <h3>酒店</h3><p>早餐</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">-</div></div></div></li>
-      <li class="stop"><div class="t">09:00</div><div class="b">
-        <h3>总统府周边</h3><p>漫步民国建筑群</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁3号线 · 耗时 20 分钟</div></div></div></li>
-      <li class="stop"><div class="t">11:30</div><div class="b">
-        <h3>龙吟九品</h3><p>午餐：淮扬菜</p></div><div class="meta"><div class="mh"><span class="cost">120 元</span></div><div class="mb"><div class="mv">步行 · 耗时 10 分钟</div></div></div></li>
-      <li class="stop"><div class="t">13:30</div><div class="b">
-        <h3>侵华日军南京大屠杀遇难同胞纪念馆</h3><p>参观历史展览</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁2号线 · 耗时 30 分钟</div></div></div></li>
-      <li class="stop"><div class="t">16:00</div><div class="b">
-        <h3>吾悦广场</h3><p>休闲购物</p></div><div class="meta"><div class="mh"><span class="cost">灵活</span></div><div class="mb"><div class="mv">步行 · 耗时 8 分钟</div></div></div></li>
-      <li class="stop"><div class="t">18:30</div><div class="b">
-        <h3>晚餐</h3><p>南京特色小吃</p></div><div class="meta"><div class="mh"><span class="cost">50 元</span></div><div class="mb"><div class="mv">-</div></div></div></li>
-      <li class="stop"><div class="t">20:00</div><div class="b">
-        <h3>南京南站</h3><p>返程</p></div><div class="meta"><div class="mh"><span class="cost">免费</span></div><div class="mb"><div class="mv">地铁 · 耗时 25 分钟</div></div></div></li>
-    </ol>
-
-    <div class="tips">
-      <h3>DAY2 小贴士</h3>
-      <ul>
-        <li><b>总统府</b>周边民国建筑群适合拍照，建议穿复古风格服装</li>
-        <li>参观<b>侵华日军南京大屠杀遇难同胞纪念馆</b>请保持肃穆，衣着得体</li>
-        <li><b>吾悦广场</b>有众多餐饮选择，推荐尝试南京本地特色菜</li>
-        <li>返程前可在南京南站购买<b>盐水鸭</b>作为伴手礼</li>
-      </ul>
-    </div>
-
-    <div class="note red"><b>纪念馆参观提醒：</b><span>请保持肃穆，衣着得体。馆内禁止拍照，建议预留2-3小时参观时间。</span></div>
-  </section>
-
-  <div class="part"><i></i><i></i></div>
-
-  <!-- ===== 南京旅行小贴士 ===== -->
-  <section class="sec" id="tips">
-    <div class="sec-h"><h2>南京旅行小贴士</h2><span class="n">出行参考</span></div>
-    <div class="fin-card">
-      <div class="fin-row"><b>最佳旅行时间</b><p><span class="hl">3月-5月</span>和<span class="hl">9月-11月</span>是南京最佳旅游季节，气候宜人，秋日梧桐尤其美丽。</p></div>
-      <div class="fin-row"><b>交通建议</b><p>南京地铁网络发达，主要景点均可通过地铁到达，建议购买地铁一日票(18元)。</p></div>
-      <div class="fin-row"><b>美食地图</b><p>除了夫子庙，科巷、明瓦廊也是当地美食聚集地，推荐尝试牛肉锅贴和鸭油烧饼。</p></div>
-      <div class="fin-row"><b>文化体验</b><p>南京云锦博物馆可了解世界级非物质文化遗产，还可体验金箔制作工艺。</p></div>
-    </div>
-  </section>
+    </main>
+  </div>
 
   <footer>
-    <svg class="foot-sky" viewBox="0 0 1200 64" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-      <g fill="currentColor">
-        <path d="M60 64V50h420v14z"/>
-        <path d="M60 50v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6h20v-6h14v6z"/>
-        <path d="M196 50V36h128v14z"/>
-        <path d="M186 36l74-13 74 13z"/>
-        <path d="M252 23v-6h16v6z"/>
-        <path d="M560 64V44c14-8 30-8 44 0v20z"/>
-        <path d="M700 64V30h26v34z"/>
-        <path d="M706 30V16h14v14z"/>
-        <path d="M712 16V8h2v8z"/>
-        <path d="M790 64V48h90v16z"/>
-        <path d="M782 48l53-10 53 10z"/>
-        <path d="M960 64V52h150l-12 12z"/>
-        <path d="M990 52V40h90v12z"/>
-        <path d="M984 40l51-9 51 9z"/>
-      </g>
-    </svg>
-    <span>© 2023 南京旅游攻略 | 感受六朝古都的历史沉淀与现代活力</span>
-    <span>温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准</span>
-    <span>历史与现代交融，金陵风华永存</span>
+    <div class="fin">
+      © 2023 南京旅游攻略 | 感受六朝古都的历史沉淀与现代活力<br>
+      温馨提示：本攻略基于实际行程整理 | 具体开放时间以景区公告为准<br>
+      <span class="song">历史与现代交融，金陵风华永存</span>
+    </div>
   </footer>
-
-</main>
-</div>
 </div>
 
-<div class="tools">
-  <button id="topBtn" aria-label="回到顶部" hidden>
-    <svg class="ic" viewBox="0 0 24 24" style="width:17px;height:17px" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6"/></svg>
-  </button>
-</div>
+<button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部">
+  <svg class="ic" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M12 19V5M5 11l7-7 7 7"/></svg>
+</button>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // 预约详情切换（与原页逻辑一致：展开详情时收起注意条，反之亦然）
-  var toggleLink = document.getElementById('reservation-toggle');
-  var details = document.getElementById('reservation-details');
-  var note = document.getElementById('preparation-note');
+    // 预约详情切换（与注意条互斥显隐，同原页逻辑）
+    const toggleLink = document.getElementById('reservation-toggle');
+    const details = document.getElementById('reservation-details');
+    const note = document.getElementById('preparation-note');
 
-  if (toggleLink && details && note) {
-    toggleLink.addEventListener('click', function(e) {
-      e.preventDefault();
-      details.style.display = details.style.display === 'block' ? 'none' : 'block';
-      note.style.display = details.style.display === 'block' ? 'none' : 'flex';
-    });
-  }
+    if (toggleLink && details && note) {
+        toggleLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            note.style.display = details.style.display === 'block' ? 'none' : 'block';
+        });
+    }
 
-  // DAY 导航（与原页行为一致：两天内容始终可见，按钮只切换高亮并平滑滚动定位）
-  var dayBtns = document.querySelectorAll('.day-btn');
-  dayBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      dayBtns.forEach(function(b) { b.setAttribute('aria-selected', 'false'); });
-      this.setAttribute('aria-selected', 'true');
-      var target = document.getElementById('day' + this.dataset.day + '-section');
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+    // 回到顶部（滚动 >300px 出现，同原页阈值）
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+            backToTopBtn.classList.toggle('visible', window.scrollY > 300);
+        });
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-  // 回到顶部（滚动超过 300px 后出现，与原页一致）
-  var tb = document.getElementById('topBtn'), ticking = false;
-  addEventListener('scroll', function() {
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(function() { tb.hidden = scrollY <= 300; ticking = false; });
-  }, { passive: true });
-  tb.addEventListener('click', function() { scrollTo({ top: 0, behavior: 'smooth' }); });
+    // 移动端日期导航（高亮 + 平滑滚动，两天始终可见，同原页行为）
+    const dayBtns = document.querySelectorAll('.day-btn');
+    if (dayBtns.length) {
+        dayBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                dayBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const target = document.getElementById('day' + this.dataset.day + '-section');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    }
 });
 </script>
 </body>
